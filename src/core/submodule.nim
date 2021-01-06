@@ -1,1 +1,2 @@
-proc getWelcomeMessage*(): string = "Hello, World!"
+proc getWelcomeMessage*(): string =
+    "Hello, World!"
