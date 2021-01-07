@@ -7,6 +7,6 @@
 
 import unittest
 
-import core/submodule
+import komodo/core
 test "correct welcome":
   check getWelcomeMessage() == "Hello, World!"
