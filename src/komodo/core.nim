@@ -1,13 +1,13 @@
 import lib/private/raylib
 import options
 
-proc getWelcomeMessage*(): string =
+func getWelcomeMessage*(): string =
     "Hello, World!"
 
-proc getCenterOffset(text: cstring; fontSize: int32): int32 =
+func getCenterOffset(text: cstring; fontSize: int32): int32 =
     MeasureText(text, fontSize) div 2
 
-proc drawCenteredText(text: cstring; position: Vector2; fontSize: int32; color: Color) =
+func drawCenteredText(text: cstring; position: Vector2; fontSize: int32; color: Color) =
     DrawText(
         text,
         int32(position.x) - text.getCenterOffset(fontSize),
@@ -22,13 +22,26 @@ const DefaultScreenSize = Vector2(
 )
 const DefaultTitle = "Komodo Game Engine"
 
+import ecs/components/behavior_component
 type Game* = object
     isRunning: bool
     screenSize: Option[Vector2]
     clearColor: Option[Color]
     title: Option[string]
+    testBehavior: BehaviorComponent
 
-proc draw(game: Game) =
+type
+    TestBehavior = ref object of BehaviorComponent
+
+func newTestBehavior(isEnabled: bool = true): TestBehavior =
+    result = TestBehavior()
+    result.isEnabled = isEnabled
+
+func newGame*(): Game =
+    result = Game()
+    result.testBehavior = newTestBehavior()
+
+func draw(game: Game) =
     BeginDrawing()
     
     ClearBackground(game.clearColor.get())
@@ -44,7 +57,10 @@ proc draw(game: Game) =
 
     EndDrawing()
 
-proc initialize(game: var Game) =
+method update(self: TestBehavior; delta: float32) =
+    TraceLog(LOG_INFO, "Test")
+
+func initialize(game: var Game) =
     game.isRunning = true
     if game.clearColor.isNone():
         game.clearColor = some(RAYWHITE)
@@ -52,11 +68,13 @@ proc initialize(game: var Game) =
         game.screenSize = some(DefaultScreenSize)
     if game.title.isNone():
         game.title = some(DefaultTitle)
+    game.testBehavior.initialize()
 
-proc update(game: var Game) =
-    discard
+func update(game: var Game) =
+    if game.testBehavior.isEnabled and game.testBehavior.isInitialized:
+        game.testBehavior.update(GetFrameTime())
 
-proc run*(game: var Game) =
+func run*(game: var Game) =
     if not game.isRunning:
         game.initialize()
 
@@ -72,18 +90,18 @@ proc run*(game: var Game) =
             game.update()
             game.draw()
 
-proc setClearColor*(game: var Game; clearColor: Color) =
+func setClearColor*(game: var Game; clearColor: Color) =
     game.clearColor = some(clearColor)
 
-proc setScreenSize*(game: var Game; screenSize: Vector2) =
+func setScreenSize*(game: var Game; screenSize: Vector2) =
     if not game.isRunning:
         game.screenSize = some(screenSize)
 
-proc setTitle*(game: var Game; title: string) =
+func setTitle*(game: var Game; title: string) =
     if not game.isRunning:
         game.title = some(title)
 
-proc quit*(game: var Game) =
+func quit*(game: var Game) =
     if game.isRunning:
         game.isRunning = false
         CloseWindow()
