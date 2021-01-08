@@ -6,7 +6,6 @@ description   = "Port of Komodo game engine to Nim using raylib"
 license       = "MIT"
 srcDir        = "src"
 installExt    = @["nim"]
-bin           = @["desktop"]
 binDir        = "bin"
 
 # Dependencies
