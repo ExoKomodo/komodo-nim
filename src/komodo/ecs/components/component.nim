@@ -1,6 +1,6 @@
 {.used.}
 import options
-import ../entity
+import komodo/ecs/entity
 
 type
     ComponentId* = int

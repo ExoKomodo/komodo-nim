@@ -6,6 +6,7 @@ description   = "Desktop example for Komodo"
 license       = "MIT"
 srcDir        = "src"
 bin           = @["desktop"]
+binDir        = "bin"
 
 
 # Dependencies

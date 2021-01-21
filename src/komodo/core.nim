@@ -1,1 +1,1 @@
-include private/game
+include komodo/private/game

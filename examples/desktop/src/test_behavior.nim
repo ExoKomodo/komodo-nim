@@ -2,7 +2,6 @@ import komodo/core
 import komodo/ecs/[
     components,
     entity,
-    systems,
 ]
 
 type
