@@ -17,4 +17,8 @@ jobs:
         with:
           nim-version: 'stable'
       - run: nimble check -Y
-      # - run: nimble test -Y
+      - name: "Build examples"
+        run: |
+          nimble develop
+          cd examples/desktop
+          nimble build -Y
