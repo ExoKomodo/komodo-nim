@@ -2,12 +2,12 @@
 import options
 import tables
 
-import ../ecs/[
+import komodo/ecs/[
     components,
     entity,
     systems,
 ]
-import ../lib/private/raylib
+import komodo/lib/raylib
 
 
 const DefaultScreenSize = Vector2(

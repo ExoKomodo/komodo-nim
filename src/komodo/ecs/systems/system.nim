@@ -4,8 +4,8 @@ import sequtils
 import sets
 import tables
 
-import ../entity
-import ../components
+import komodo/ecs/components
+import komodo/ecs/entity
 
 type
     System* = ref object of RootObj

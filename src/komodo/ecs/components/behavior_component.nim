@@ -1,9 +1,9 @@
-import component
+import komodo/ecs/components/component
 
 type
     BehaviorComponent* = ref object of Component
 
-const BehaviorComponentTypeId* = "Component"
+const BehaviorComponentTypeId* = "BehaviorComponent"
 
 method initialize*(self: BehaviorComponent) =
     procCall self.Component.initialize()
