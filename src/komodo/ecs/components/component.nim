@@ -1,9 +1,9 @@
 {.used.}
 import options
 import komodo/ecs/entity
+import komodo/ecs/ids
 
 type
-    ComponentId* = int
     Component* = ref object of RootObj
         id*: ComponentId
         enabled: bool
@@ -11,11 +11,6 @@ type
         parentEntity: Option[Entity]
 
 const ComponentTypeId = "Component"
-
-proc nextComponentId*(): ComponentId {.inline.} =
-    var nextId {.global.}: ComponentId = 0
-    nextId.inc()
-    nextId
 
 func `isEnabled=`*(self: Component; value: bool) {.inline.} = self.enabled = value
 func isEnabled*(self: Component): bool {.inline.} = self.enabled

@@ -1,7 +1,7 @@
-import komodo/core
 import komodo/ecs/[
     components,
     entity,
+    ids,
 ]
 
 type

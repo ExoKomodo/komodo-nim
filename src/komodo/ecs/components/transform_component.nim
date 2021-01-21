@@ -1,4 +1,6 @@
 import komodo/ecs/components/component
+import komodo/ecs/entity
+import komodo/ecs/ids
 
 from komodo/lib/raylib import Vector3
 
@@ -7,6 +9,22 @@ type
         position: Vector3
         rotation: Vector3
         scale: Vector3
+
+proc newTransformComponent*(
+    parent: Entity;
+    position: Vector3;
+    rotation: Vector3;
+    scale: Vector3;
+    isEnabled: bool = true;
+): TransformComponent =
+    result = TransformComponent(
+        id: nextComponentId(),
+        position: position,
+        rotation: rotation,
+        scale: scale,
+    )
+    result.parent = parent
+    result.isEnabled = isEnabled
 
 func position*(self: TransformComponent): auto = self.position
 func `position=`*(self: TransformComponent; value: Vector3) = self.position = value
