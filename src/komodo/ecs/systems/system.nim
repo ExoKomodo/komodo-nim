@@ -6,6 +6,7 @@ import tables
 
 import komodo/ecs/components
 import komodo/ecs/entity
+import komodo/ecs/ids
 
 type
     System* = ref object of RootObj

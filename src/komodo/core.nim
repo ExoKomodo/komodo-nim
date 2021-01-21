@@ -1,1 +1,3 @@
-include komodo/private/game
+import komodo/private/game
+
+export game

@@ -4,7 +4,6 @@ import strformat
 import tables
 
 import test_behavior
-import komodo/core
 import komodo/ecs/systems
 import komodo/logging
 
