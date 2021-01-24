@@ -21,16 +21,20 @@ Copy the libraries found in the project's `lib/windows` directory to `C:\Windows
 
 ### Mac OS
 
-#### Install Homebrew
-Follow the install instructions found on [Homebrew's website](https://brew.sh), or run the following commands:
+#### Install choosenim
+Follow the install instructions found on [choosenim's repo](https://github.com/dom96/choosenim), or run the following commands:
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+```
+You will need to update your path in your `.bashrc`:
+```bash
+export PATH=~/.nimble/bin:$PATH
 ```
 
 #### Install Nim
 Install nim with
 ```bash
-brew install nim
+choosenim stable
 ```
 
 #### Raylib Setup
