@@ -1,7 +1,7 @@
-import komodo/ecs/components/component
-import komodo/ecs/entity
-import komodo/ecs/ids
-import komodo/lib/raylib
+import ./component
+import ../entity
+import ../ids
+import ../../lib/raylib
 
 type
     TextComponent* = ref object of Component

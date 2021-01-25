@@ -1,8 +1,8 @@
-import komodo/ecs/components/component
-import komodo/ecs/entity
-import komodo/ecs/ids
+import ./component
+import ../entity
+import ../ids
 
-from komodo/lib/raylib import Vector3
+from ../../lib/raylib import Vector3
 
 type
     TransformComponent* = ref object of Component

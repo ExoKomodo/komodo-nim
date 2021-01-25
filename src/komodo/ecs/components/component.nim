@@ -1,7 +1,7 @@
 {.used.}
 import options
-import komodo/ecs/entity
-import komodo/ecs/ids
+import ../entity
+import ../ids
 
 type
     Component* = ref object of RootObj

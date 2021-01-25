@@ -1,4 +1,4 @@
-import komodo/ecs/systems/[
+import ./systems/[
     system,
     behavior_system,
     render_text_system,

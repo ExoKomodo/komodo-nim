@@ -1,4 +1,4 @@
-import komodo/ecs/ids
+import ./ids
 
 type
     Entity* = ref object of RootObj

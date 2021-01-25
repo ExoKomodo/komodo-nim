@@ -1,4 +1,4 @@
-import komodo/ecs/systems/system
+import ./system
 
 type
     BehaviorSystem* = ref object of System

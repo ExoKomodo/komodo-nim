@@ -1,4 +1,4 @@
-import komodo/ecs/components/[
+import ./components/[
     component,
     behavior_component,
     text_component,

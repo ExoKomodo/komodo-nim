@@ -16,9 +16,31 @@ jobs:
         uses: jiro4989/setup-nim-action@v1
         with:
           nim-version: 'stable'
+      
+      # Run static analysis
       - run: nimble check -Y
+      
+      # Build examples
       - name: "Build examples"
         run: |
           nimble develop
           cd examples/desktop
           nimble build -Y
+      
+      # Generate the Docs
+      - name: Generate documentation
+        run: nimble doc --project --index:on --outdir:docs ./src/komodo/core.nim
+
+      # Publish the website
+      - name: GitHub Pages action
+        if: ${{ github.ref == 'refs/heads/master' }} # Publish only when the push is on master
+        uses: peaceiris/actions-gh-pages@v3.6.1
+        with:
+          github_token: ${{ secrets.PUBLISH_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: docs
+          allow_empty_commit: false
+          keep_files: false
+          force_orphan: true
+          # Custom Domain
+          # cname: somedomain.com

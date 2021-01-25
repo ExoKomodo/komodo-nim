@@ -1,3 +1,3 @@
-import komodo/private/game
+import ./private/game
 
 export game

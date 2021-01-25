@@ -1,4 +1,4 @@
-import komodo/ecs/components/component
+import ./component
 
 type
     BehaviorComponent* = ref object of Component

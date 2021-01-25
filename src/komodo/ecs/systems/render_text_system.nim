@@ -2,12 +2,12 @@ import options
 import sets
 import tables
 
-import komodo/ecs/systems/system
-import komodo/ecs/components/[
+import ./system
+import ../components/[
     text_component,
     transform_component,
 ]
-import komodo/lib/raylib
+import ../../lib/raylib
 
 func getCenterOffset(text: cstring; fontSize: int32): int32 =
     MeasureText(text, fontSize) div 2
