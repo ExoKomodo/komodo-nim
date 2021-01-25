@@ -19,36 +19,41 @@ const DefaultTitle = "Komodo Game Engine"
 const DefaultClearColor = RAYWHITE
 
 type Game* = ref object
-    clearColor: Option[Color]
-    componentStore: Table[ComponentId, Component]
-    entityStore: Table[EntityId, Entity]
-    isRunning: bool
-    screenSize: Option[Vector2]
+    clear_color: Option[Color]
+    component_store: Table[ComponentId, Component]
+    entity_store: Table[EntityId, Entity]
+    is_running: bool
+    screen_size: Option[Vector2]
     systems: seq[System]
     title: string
 
-func clearColor*(self: Game): Color {.inline.} =
-    if self.clearColor.isNone():
+func clear_color*(self: Game): Color {.inline.} =
+    if self.clear_color.isNone():
         return DefaultClearColor
-    return self.clearColor.get()
-func `clearColor=`*(self: Game; value: Color) {.inline.} = self.clearColor = some(value)
+    return self.clear_color.get()
+func `clear_color=`*(self: Game; value: Color) {.inline.} = self.clear_color = some(value)
 
-func isRunning*(self: Game): bool {.inline.} = self.isRunning
+func is_running*(self: Game): bool {.inline.} = self.is_running
 
 func title*(self: Game): string {.inline.} = self.title
 func `title=`*(self: Game; value: string) {.inline.} =
-    if self.isRunning:
+    if self.is_running:
         SetWindowTitle(value)
     self.title = value
 
-func screenSize*(self: Game): Vector2 {.inline.} =
-    if self.screenSize.isNone():
+func screen_size*(self: Game): Vector2 {.inline.} =
+    if self.screen_size.isNone():
         return DefaultScreenSize
-    return self.screenSize.get()
+    return self.screen_size.get()
 
-func newGame*(): Game =
+func new_game*(): Game =
     result = Game()
     result.systems = @[]
+    InitWindow(
+        int32(screen_size(result).x),
+        int32(screen_size(result).y),
+        result.title,
+    )
 
 func draw(self: Game) =
     BeginDrawing()
@@ -64,40 +69,40 @@ proc executeOnSystems(self: Game; predicate: proc (system: System)) =
     for system in self.systems:
         system.predicate()
 
-proc registerComponent*(self: Game; component: Component): bool =
-    if self.componentStore.hasKey(component.id):
+proc register_component*(self: Game; component: Component): bool =
+    if self.component_store.hasKey(component.id):
         return false
     if component.parent.isNone:
         return false
     let parent = component.parent.get()
-    self.componentStore[component.id] = component
+    self.component_store[component.id] = component
 
     self.executeOnSystems(
         proc (system: System) =
-            if system.registerComponent(component):
-                system.refreshEntityRegistration(parent)
+            if system.register_component(component):
+                system.refresh_entity_registration(parent)
     )
     true
 
-proc registerEntity*(self: Game; entity: Entity): bool =
-    if self.entityStore.hasKey(entity.id):
+proc register_entity*(self: Game; entity: Entity): bool =
+    if self.entity_store.hasKey(entity.id):
         return false
-    self.entityStore[entity.id] = entity
+    self.entity_store[entity.id] = entity
     self.executeOnSystems(
-        proc (system: System) = system.refreshEntityRegistration(entity)
+        proc (system: System) = system.refresh_entity_registration(entity)
     )
     true
 
-proc registerSystem*(self: Game; system: System): bool =
+proc register_system*(self: Game; system: System): bool =
     self.systems &= system
     return true
 
 proc initialize(self: Game) =
-    self.isRunning = true
+    self.is_running = true
     if self.clearColor.isNone():
         self.clearColor = some(DefaultClearColor)
-    if self.screenSize.isNone():
-        self.screenSize = some(DefaultScreenSize)
+    if self.screen_size.isNone():
+        self.screen_size = some(Defaultscreen_size)
     if self.title == "":
         self.title = DefaultTitle
     
@@ -110,15 +115,10 @@ func update(self: Game) =
         system.update(delta)
 
 proc run*(self: Game) =
-    if not self.isRunning:
+    if not self.is_running:
         self.initialize()
 
         TraceLog(LOG_INFO, "Starting...")
-        InitWindow(
-            int32(self.screenSize.get().x),
-            int32(self.screenSize.get().y),
-            self.title,
-        )
         SetTargetFPS(60)
 
         while not WindowShouldClose():
@@ -129,6 +129,6 @@ func setClearColor*(self: Game; clearColor: Color) =
     self.clearColor = some(clearColor)
 
 func quit*(self: Game) =
-    if self.isRunning:
-        self.isRunning = false
+    if self.is_running:
+        self.is_running = false
         CloseWindow()

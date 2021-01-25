@@ -10,7 +10,7 @@ type
         rotation: Vector3
         scale: Vector3
 
-proc newTransformComponent*(
+proc new_transform_component*(
     parent: Entity;
     position: Vector3;
     rotation: Vector3;
@@ -35,9 +35,5 @@ func `rotation=`*(self: TransformComponent; value: Vector3) = self.rotation = va
 func scale*(self: TransformComponent): auto = self.scale
 func `scale=`*(self: TransformComponent; value: Vector3) = self.scale = value
 
-const TransformComponentTypeId* = "TransformComponent"
-
 method initialize*(self: TransformComponent) =
     procCall self.Component.initialize()
-
-method typeId*(self: TransformComponent): auto = TransformComponentTypeId

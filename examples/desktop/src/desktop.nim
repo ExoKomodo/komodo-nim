@@ -13,30 +13,36 @@ when isMainModule:
     var game = newGame()
     game.title = "Desktop Example"
 
-    assert game.registerSystem(newTestBehaviorSystem())
-
-    assert game.registerSystem(newRenderTextSystem())
     
-    let parent = newEntity()
-    assert game.registerEntity(parent)
+    let parent = new_entity()
+    assert game.register_entity(parent)
     
-    let behavior = newTestBehavior(
+    assert game.register_system(new_test_behavior_system())
+    let behavior = new_test_behavior(
         parent,
     )
-    assert game.registerComponent(behavior)
+    assert game.register_component(behavior)
     
-    let text = newTextComponent(
+    assert game.register_system(new_render_sprite_system())
+    let sprite = new_sprite_component(
+        parent,
+        "img/brainlet.png",
+    )
+    assert game.register_component(sprite)
+    
+    assert game.register_system(new_render_text_system())
+    let text = new_text_component(
         parent,
         "Hello from desktop!"
     )
-    assert game.registerComponent(text)
+    assert game.register_component(text)
 
-    let screenSize = game.screenSize()
-    let transform = newTransformComponent(
+    let screen_size = game.screen_size()
+    let transform = new_transform_component(
         parent,
         position=Vector3(
-            x: screenSize.x / 2,
-            y: screenSize.y / 2,
+            x: screen_size.x / 2,
+            y: screen_size.y / 2,
             z: 0,
         ),
         rotation=Vector3(
@@ -45,11 +51,11 @@ when isMainModule:
             z: 0,
         ),
         scale=Vector3(
-            x: 0,
+            x: 0.5,
             y: 0,
             z: 0,
         ),
     )
-    assert game.registerComponent(transform)
+    assert game.register_component(transform)
 
     game.run()
