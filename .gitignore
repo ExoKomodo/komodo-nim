@@ -8,7 +8,6 @@
 nimcache/
 nimblecache/
 htmldocs/
-docs/
 
 *.exe
 bin/
