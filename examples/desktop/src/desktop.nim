@@ -1,4 +1,4 @@
-import komodo/core
+import komodo
 
 import komodo/ecs/components
 import komodo/ecs/entity

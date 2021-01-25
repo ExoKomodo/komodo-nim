@@ -2,13 +2,13 @@
 import options
 import tables
 
-import ../ecs/[
+import ./ecs/[
     components,
     entity,
     ids,
     systems,
 ]
-import ../lib/raylib
+import ./lib/raylib
 
 
 const DefaultScreenSize = Vector2(

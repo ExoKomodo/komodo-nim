@@ -11,3 +11,4 @@ htmldocs/
 
 *.exe
 bin/
+.DS_Store

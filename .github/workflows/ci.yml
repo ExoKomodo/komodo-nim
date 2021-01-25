@@ -33,12 +33,14 @@ jobs:
       # Generate the Docs
       - name: Generate documentation
         run: |
-          nimble doc --project --index:on ./src/komodo/core.nim
+          nimble doc --project --outdir:htmldocs --index:on ./src/komodo.nim --git.url:https://github.com/ExoKomodo/KomodoNim --git.commit:develop --git.devel:develop
+          cp htmldocs/theindex.html htmldocs/index.html
+          cp htmldocs/index.html htmldocs/404.html
           cp README.md ./htmldocs/README.md
 
       # Publish the website
       - name: GitHub Pages action
-        if: ${{ github.ref == 'refs/heads/develop' }} # Publish only when the push is on master
+        if: ${{ github.ref == 'refs/heads/develop' }} # Publish only when the push is on develop
         uses: peaceiris/actions-gh-pages@v3.6.1
         with:
           github_token: ${{ secrets.PUBLISH_TOKEN }}
