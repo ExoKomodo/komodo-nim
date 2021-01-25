@@ -9,7 +9,7 @@ type
         fontSize: int32
         color: Color
 
-proc newTextComponent*(
+proc new_text_component*(
     parent: Entity;
     text: string;
     fontSize: int32 = 20;
@@ -34,9 +34,5 @@ func `fontSize=`*(self: TextComponent; value: int32) = self.fontSize = value
 func color*(self: TextComponent): auto = self.color
 func `color=`*(self: TextComponent; value: Color) = self.color = value
 
-const TextComponentTypeId* = "TextComponent"
-
 method initialize*(self: TextComponent) =
     procCall self.Component.initialize()
-
-method typeId*(self: TextComponent): string = TextComponentTypeId

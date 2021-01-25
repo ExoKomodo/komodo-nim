@@ -1,7 +1,6 @@
 {.used.}
 import options
 import sequtils
-import sets
 import tables
 
 import ../components
@@ -11,12 +10,11 @@ import ../ids
 type
     System* = ref object of RootObj
         enabled: bool
-        entityToComponents: Table[EntityId, seq[Component]]
+        entity_to_components: Table[EntityId, seq[Component]]
         initialized: bool
-        registeredTypes*: HashSet[string]
         uninitializedComponents: seq[Component]
 
-func entityToComponents*(self: System): Table[EntityId, seq[Component]] {.inline.} = self.entityToComponents
+func entity_to_components*(self: System): Table[EntityId, seq[Component]] {.inline.} = self.entity_to_components
 
 func `isEnabled=`*(self: System; value: bool) {.inline.} = self.enabled = value
 func isEnabled*(self: System): bool {.inline.} = self.enabled
@@ -29,50 +27,45 @@ method initialize*(self: System) {.base.} =
     self.uninitializedComponents = @[]
     self.initialized = true
 
-func findComponentByParent*[T: Component](self: System; parentId: EntityId; registeredType: string): Option[T] =
-    if not self.entityToComponents.hasKey(parentId):
+func find_component_by_parent*[T: Component](self: System; parentId: EntityId): Option[T] =
+    if not self.entity_to_components.hasKey(parentId):
         return none[T]()
-    let components = self.entityToComponents[parentId]
+    let components = self.entity_to_components[parentId]
     for component in components:
-        if component.typeId() == registeredType:
+        if component of T:
             return some[T](T(component))
     return none[T]()
 
-func findComponentByParent*[T: Component](self: System; parent: Entity; registeredType: string): Option[T] =
-    self.findComponentByParent[:T](parent.id, registeredType)
+func find_component_by_parent*[T: Component](self: System; parent: Entity): Option[T] =
+    self.find_component_by_parent[:T](parent.id)
 
-func registerComponent*(self: System; component: Component): bool =
-    if not (component.typeId() in self.registeredTypes):
-        return false
+func register_component*(self: System; component: Component): bool =
     if component.parent.isNone():
         return false
     
     let parent = component.parent.get()
-    if not (parent.id in self.entityToComponents):
-        self.entityToComponents[parent.id] = @[]
+    if not (parent.id in self.entity_to_components):
+        self.entity_to_components[parent.id] = @[]
     
-    let components = self.entityToComponents[parent.id]
+    let components = self.entity_to_components[parent.id]
     if components.any(proc (c: Component): bool = return c == component):
         return false
 
-    self.entityToComponents[parent.id] &= component
+    self.entity_to_components[parent.id] &= component
     return true
 
-func refreshEntityRegistration*(self: System; entity: Entity) =
-    if not self.entityToComponents.hasKey(entity.id):
+method has_necessary_components*(self: System; entity: Entity; components: seq[Component]): bool {.base.} = false
+
+proc refresh_entity_registration*(self: System; entity: Entity) =
+    if not self.entity_to_components.hasKey(entity.id):
         return
-    let components = self.entityToComponents[entity.id]
-    var missingType = false
-    for registeredType in self.registeredTypes:
-        let foundComponent = self.findComponentByParent[:Component](entity, registeredType)
-        if foundComponent.isNone():
-            missingType = true
-    if missingType:
+    let components = self.entity_to_components[entity.id]
+    if not self.has_necessary_components(entity, components):
         return
-    self.entityToComponents.del(entity.id)
+    self.entity_to_components.del(entity.id)
 
     for component in components:
-        discard self.registerComponent(component)
+        discard self.register_component(component)
 
 method draw*(self: System) {.base.} =
     discard

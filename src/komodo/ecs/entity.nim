@@ -4,7 +4,7 @@ type
     Entity* = ref object of RootObj
         id*: EntityId
 
-proc newEntity*(): Entity =
+proc new_entity*(): Entity =
     Entity(
         id: nextEntityId(),
     )

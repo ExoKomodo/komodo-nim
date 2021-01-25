@@ -7,13 +7,9 @@ import komodo/ecs/[
 type
     TestBehavior* = ref object of BehaviorComponent
 
-const TestBehaviorTypeId* = "TestBehavior"
-
-proc newTestBehavior*(parent: Entity; isEnabled: bool = true): TestBehavior =
+proc new_test_behavior*(parent: Entity; isEnabled: bool = true): TestBehavior =
     result = TestBehavior(
         id: nextComponentId(),
     )
     result.parent = parent
     result.isEnabled = isEnabled
-
-method typeId*(self: TestBehavior): string = TestBehaviorTypeId

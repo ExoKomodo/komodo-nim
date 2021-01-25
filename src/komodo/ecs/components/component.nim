@@ -6,22 +6,18 @@ import ../ids
 type
     Component* = ref object of RootObj
         id*: ComponentId
-        enabled: bool
-        initialized: bool
-        parentEntity: Option[Entity]
+        is_enabled: bool
+        is_initialized: bool
+        parent: Option[Entity]
 
-const ComponentTypeId = "Component"
+func `is_enabled=`*(self: Component; value: bool) {.inline.} = self.is_enabled = value
+func is_enabled*(self: Component): bool {.inline.} = self.is_enabled
 
-func `isEnabled=`*(self: Component; value: bool) {.inline.} = self.enabled = value
-func isEnabled*(self: Component): bool {.inline.} = self.enabled
+func is_initialized*(self: Component): bool {.inline.} = self.is_initialized
 
-func isInitialized*(self: Component): bool {.inline.} = self.initialized
-
-func `parent=`*(self: Component; value: Entity) {.inline.} = self.parentEntity = some(value)
-func parent*(self: Component): Option[Entity] {.inline.} = self.parentEntity
+func `parent=`*(self: Component; value: Entity) {.inline.} = self.parent = some(value)
+func parent*(self: Component): Option[Entity] {.inline.} = self.parent
 
 method initialize*(self: Component) {.base.} =
-    if not self.isInitialized:
-        self.initialized = true
-
-method typeId*(self: Component): string {.base.} = ComponentTypeId
+    if not self.is_initialized:
+        self.is_initialized = true
