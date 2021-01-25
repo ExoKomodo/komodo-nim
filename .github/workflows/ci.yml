@@ -1,5 +1,8 @@
 name: 'Build Komodo'
-on: push
+on:
+  push:
+    branches-ignore:
+      - 'gh-pages'
 
 jobs:
   build:
