@@ -32,7 +32,9 @@ jobs:
       
       # Generate the Docs
       - name: Generate documentation
-        run: nimble doc --project --index:on --outdir:docs ./src/komodo/core.nim
+        run: |
+          nimble doc --project --index:on ./src/komodo/core.nim
+          cp README.md ./htmldocs/README.md
 
       # Publish the website
       - name: GitHub Pages action
@@ -41,7 +43,7 @@ jobs:
         with:
           github_token: ${{ secrets.PUBLISH_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: docs
+          publish_dir: htmldocs
           allow_empty_commit: false
           keep_files: false
           force_orphan: true
