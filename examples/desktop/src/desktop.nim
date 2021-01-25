@@ -6,7 +6,6 @@ import komodo/ecs/systems
 
 import komodo/lib/raylib
 
-import test_behavior_system
 import test_behavior
 
 when isMainModule:
@@ -14,35 +13,38 @@ when isMainModule:
     game.title = "Desktop Example"
 
     
-    let parent = new_entity()
-    assert game.register_entity(parent)
+    let parent = newEntity()
+    assert game.registerEntity(parent)
     
-    assert game.register_system(new_test_behavior_system())
-    let behavior = new_test_behavior(
+    assert game.registerSystem(newBehaviorSystem())
+    let behavior = newTestBehavior(
         parent,
     )
-    assert game.register_component(behavior)
+    assert game.registerComponent(behavior)
     
-    assert game.register_system(new_render_sprite_system())
-    let sprite = new_sprite_component(
+    assert game.registerSystem(newRenderSpriteSystem())
+    let sprite = newSpriteComponent(
         parent,
         "img/brainlet.png",
+        color=WHITE,
     )
-    assert game.register_component(sprite)
+    assert game.registerComponent(sprite)
     
-    assert game.register_system(new_render_text_system())
-    let text = new_text_component(
+    assert game.registerSystem(newRenderTextSystem())
+    let text = newTextComponent(
         parent,
-        "Hello from desktop!"
+        "Hello from desktop!",
+        fontSize=16,
+        color=BLACK,
     )
-    assert game.register_component(text)
+    assert game.registerComponent(text)
 
-    let screen_size = game.screen_size()
-    let transform = new_transform_component(
+    let screenSize = game.screenSize()
+    let transform = newTransformComponent(
         parent,
         position=Vector3(
-            x: screen_size.x / 2,
-            y: screen_size.y / 2,
+            x: screenSize.x / 2,
+            y: screenSize.y / 2,
             z: 0,
         ),
         rotation=Vector3(
@@ -56,6 +58,6 @@ when isMainModule:
             z: 0,
         ),
     )
-    assert game.register_component(transform)
+    assert game.registerComponent(transform)
 
     game.run()

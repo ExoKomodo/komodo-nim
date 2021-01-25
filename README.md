@@ -1,5 +1,5 @@
 # Komodo
-[Documentation](https://exokomodo.github.io/KomodoNim)
+[Documentation](https://exokomodo.github.io/KomodoNim/komodo.html)
 
 ## Setup
 

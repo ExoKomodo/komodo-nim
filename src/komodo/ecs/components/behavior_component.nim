@@ -1,10 +1,18 @@
-import ./component
+import ./component_macros
 
-type
-    BehaviorComponent* = ref object of Component
 
-method initialize*(self: BehaviorComponent) =
-    procCall self.Component.initialize()
+component BehaviorComponent:
+    fields:
+        discard
+    
+    create:
+        discard
+
+    init:
+        discard
+
+    final:
+        discard
 
 method update*(self: BehaviorComponent; delta: float32) {.base.} =
     discard

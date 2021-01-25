@@ -324,8 +324,8 @@ type Music* {.bycopy.} = object
 type VrDeviceInfo* {.bycopy.} = object
     hResolution*: int32 # HMD horizontal resolution in pixels
     vResolution*: int32 # HMD vertical resolution in pixels
-    hscreen_size*: float32 # HMD horizontal size in meters
-    vscreen_size*: float32 # HMD vertical size in meters
+    hscreenSize*: float32 # HMD horizontal size in meters
+    vscreenSize*: float32 # HMD vertical size in meters
     vScreenCenter*: float32 # HMD screen center in meters
     eyeToScreenDistance*: float32 # HMD distance between eye and display in meters
     lensSeparationDistance*: float32 # HMD lens separation distance in meters
