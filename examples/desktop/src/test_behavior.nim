@@ -1,15 +1,20 @@
-import komodo/ecs/[
-    components,
-    entity,
-    ids,
-]
+import strformat
 
-type
-    TestBehavior* = ref object of BehaviorComponent
+import komodo/ecs/components/behavior_macros
+import komodo/logging
 
-proc new_test_behavior*(parent: Entity; isEnabled: bool = true): TestBehavior =
-    result = TestBehavior(
-        id: nextComponentId(),
-    )
-    result.parent = parent
-    result.isEnabled = isEnabled
+behavior TestBehavior:
+    fields:
+        discard
+
+    create:
+        discard
+    
+    init:
+        discard
+
+    update:
+        logInfo(fmt"Hello from {self.id}")
+    
+    final:
+        discard

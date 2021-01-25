@@ -1,10 +1,25 @@
-import ./system
+import options
+import tables
 
-type
-    BehaviorSystem* = ref object of System
+import ../components/behavior_component
+import ./system_macros
 
-method initialize*(self: BehaviorSystem) =
-    procCall self.System.initialize()
+system BehaviorSystem:
+    fields:
+        discard
+    
+    create:
+        discard
 
-method update*(self: BehaviorSystem; delta: float32) =
-    discard
+    init:
+        discard
+
+    update:
+        for entityId, components in pairs(self.entityToComponents):
+            let behavior = self.findComponentByParent[:BehaviorComponent](entityId)
+            if behavior.isNone():
+                continue
+            behavior.get().update(delta)
+
+    final:
+        discard

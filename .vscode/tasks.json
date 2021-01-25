@@ -4,15 +4,12 @@
         {
             "label": "Komodo Desktop Example",
             "type": "shell",
-            "command": "nimble run",
+            "command": "./generate_docs.bash && cd examples/desktop && nimble run",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "options": {
-                "cwd": "examples/desktop"
-            }
         }
     ]
 }

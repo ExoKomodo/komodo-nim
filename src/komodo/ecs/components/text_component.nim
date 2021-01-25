@@ -1,29 +1,27 @@
-import ./component
-import ../entity
-import ../ids
 import ../../lib/raylib
 
-type
-    TextComponent* = ref object of Component
+import ./component_macros
+
+component TextComponent:
+    fields:
         text: string
         fontSize: int32
         color: Color
+    
+    create(
+        text: string,
+        fontSize: int32,
+        color: Color,
+    ):
+        result.text = text
+        result.fontSize = fontSize
+        result.color = color
 
-proc new_text_component*(
-    parent: Entity;
-    text: string;
-    fontSize: int32 = 20;
-    color: Color = BLACK;
-    isEnabled: bool = true;
-): TextComponent =
-    result = TextComponent(
-        id: nextComponentId(),
-        text: text,
-        fontSize: fontSize,
-        color: color,
-    )
-    result.parent = parent
-    result.isEnabled = isEnabled
+    init:
+        discard
+
+    final:
+        discard
 
 func text*(self: TextComponent): auto = self.text
 func `text=`*(self: TextComponent; value: string) = self.text = value
@@ -33,6 +31,3 @@ func `fontSize=`*(self: TextComponent; value: int32) = self.fontSize = value
 
 func color*(self: TextComponent): auto = self.color
 func `color=`*(self: TextComponent; value: Color) = self.color = value
-
-method initialize*(self: TextComponent) =
-    procCall self.Component.initialize()

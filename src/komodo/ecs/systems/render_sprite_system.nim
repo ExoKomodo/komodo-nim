@@ -1,7 +1,7 @@
 import options
 import tables
 
-import ./system
+import ./system_macros
 import ../components/[
     component,
     sprite_component,
@@ -10,10 +10,10 @@ import ../components/[
 import ../entity
 import ../../lib/raylib
 
-type
-    RenderSpriteSystem* = ref object of System
-
-func draw_components(self: RenderSpriteSystem; sprite: SpriteComponent; transform: TransformComponent) =
+func drawComponents(
+    sprite: SpriteComponent;
+    transform: TransformComponent;
+) =
     sprite.texture.DrawTextureEx(
         Vector2(
             x: transform.position.x,
@@ -24,28 +24,34 @@ func draw_components(self: RenderSpriteSystem; sprite: SpriteComponent; transfor
         sprite.color,
     )
 
-func new_render_sprite_system*(): RenderSpriteSystem =
-    result = RenderSpriteSystem()
-    result.isEnabled = true
+system RenderSpriteSystem:
+    fields:
+        discard
+    
+    create:
+        discard
 
-method has_necessary_components*(self: RenderSpriteSystem; entity: Entity; components: seq[Component]): bool =
+    init:
+        discard
+
+    draw:
+        for entityId, components in pairs(self.entityToComponents):
+            let sprite = self.findComponentByParent[:SpriteComponent](entityId)
+            let transform = self.findComponentByParent[:TransformComponent](entityId)
+            if sprite.isNone() or transform.isNone():
+                continue
+            drawComponents(
+                sprite.get(),
+                transform.get(),
+            )
+
+    final:
+        discard
+
+method hasNecessaryComponents*(self: RenderSpriteSystem; entity: Entity; components: seq[Component]): bool =
     if (
-        self.find_component_by_parent[:SpriteComponent](entity).isNone() or
-        self.find_component_by_parent[:TransformComponent](entity).isNone()
+        self.findComponentByParent[:SpriteComponent](entity).isNone() or
+        self.findComponentByParent[:TransformComponent](entity).isNone()
     ):
         return false
     true
-
-method initialize*(self: RenderSpriteSystem) =
-    procCall self.System.initialize()
-
-method draw*(self: RenderSpriteSystem) =
-    for entity_id, components in pairs(self.entity_to_components):
-        let sprite = self.find_component_by_parent[:SpriteComponent](entity_id)
-        let transform = self.find_component_by_parent[:TransformComponent](entity_id)
-        if sprite.isNone() or transform.isNone():
-            continue
-        self.draw_components(
-            sprite.get(),
-            transform.get(),
-        )

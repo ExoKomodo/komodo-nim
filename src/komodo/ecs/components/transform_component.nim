@@ -1,30 +1,28 @@
-import ./component
-import ../entity
-import ../ids
+import ../../lib/raylib
 
-from ../../lib/raylib import Vector3
+import ./component_macros
 
-type
-    TransformComponent* = ref object of Component
+
+component TransformComponent:
+    fields:
         position: Vector3
         rotation: Vector3
         scale: Vector3
+    
+    create(
+        position: Vector3,
+        rotation: Vector3,
+        scale: Vector3,
+    ):
+        result.position = position
+        result.rotation = rotation
+        result.scale = scale
 
-proc new_transform_component*(
-    parent: Entity;
-    position: Vector3;
-    rotation: Vector3;
-    scale: Vector3;
-    isEnabled: bool = true;
-): TransformComponent =
-    result = TransformComponent(
-        id: nextComponentId(),
-        position: position,
-        rotation: rotation,
-        scale: scale,
-    )
-    result.parent = parent
-    result.isEnabled = isEnabled
+    init:
+        discard
+
+    final:
+        discard
 
 func position*(self: TransformComponent): auto = self.position
 func `position=`*(self: TransformComponent; value: Vector3) = self.position = value
@@ -34,6 +32,3 @@ func `rotation=`*(self: TransformComponent; value: Vector3) = self.rotation = va
 
 func scale*(self: TransformComponent): auto = self.scale
 func `scale=`*(self: TransformComponent; value: Vector3) = self.scale = value
-
-method initialize*(self: TransformComponent) =
-    procCall self.Component.initialize()
