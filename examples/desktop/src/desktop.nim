@@ -4,7 +4,8 @@ import komodo/ecs/components
 import komodo/ecs/entity
 import komodo/ecs/systems
 
-import komodo/lib/raylib
+import komodo/lib/graphics/color
+import komodo/lib/math
 
 import test_behavior
 
@@ -26,7 +27,7 @@ when isMainModule:
     let sprite = newSpriteComponent(
         parent,
         "img/brainlet.png",
-        color=WHITE,
+        color=White,
     )
     assert game.registerComponent(sprite)
     
@@ -35,7 +36,7 @@ when isMainModule:
         parent,
         "Hello from desktop!",
         fontSize=16,
-        color=BLACK,
+        color=Black,
     )
     assert game.registerComponent(text)
 

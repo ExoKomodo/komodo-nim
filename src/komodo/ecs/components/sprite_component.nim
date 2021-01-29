@@ -1,26 +1,27 @@
-import ../../lib/raylib
+import ../../lib/graphics/[
+    color,
+    texture2d,
+]
 
 import ./component_macros
 
 component SpriteComponent:
     fields:
         color: Color
-        texture: Texture2D
+        texture: Texture2d
     
     create(
         texturePath: string,
         color: Color,
     ):
-        let image = LoadImage(texturePath)
+        result.texture = newTexture2d(texturePath)
         result.color = color
-        result.texture = LoadTextureFromImage(image)
-        image.UnloadImage()
 
     init:
         discard
 
-    final:
-        self.texture.UnloadTexture()
+    destroy:
+        self.texture.destroy()
 
 func `color=`*(self: SpriteComponent; value: Color): auto = self.color = value
 func color*(self: SpriteComponent): auto = self.color

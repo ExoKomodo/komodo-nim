@@ -1,4 +1,3 @@
-{.used.}
 import options
 import tables
 
@@ -8,7 +7,9 @@ import ./ecs/[
     ids,
     systems,
 ]
-import ./lib/raylib
+import ./lib/graphics
+import ./lib/math
+import ./logging
 
 
 const DefaultScreenSize = Vector2(
@@ -16,7 +17,7 @@ const DefaultScreenSize = Vector2(
     y: 600,
 )
 const DefaultTitle = "Komodo Game Engine"
-const DefaultClearColor = RAYWHITE
+const DefaultClearColor = White
 
 type Game* = ref object
     clearColor: Option[Color]
@@ -26,6 +27,8 @@ type Game* = ref object
     screenSize: Option[Vector2]
     systems: seq[System]
     title: string
+
+var instance* {.global.} = none[Game]()
 
 func clearColor*(self: Game): Color {.inline.} =
     if self.clearColor.isNone():
@@ -38,7 +41,7 @@ func isRunning*(self: Game): bool {.inline.} = self.isRunning
 func title*(self: Game): string {.inline.} = self.title
 func `title=`*(self: Game; value: string) {.inline.} =
     if self.isRunning:
-        SetWindowTitle(value)
+        setWindowTitle(value)
     self.title = value
 
 func screenSize*(self: Game): Vector2 {.inline.} =
@@ -46,26 +49,25 @@ func screenSize*(self: Game): Vector2 {.inline.} =
         return DefaultScreenSize
     return self.screenSize.get()
 
-func newGame*(): Game =
+proc newGame*(): Game =
     result = Game()
     result.systems = @[]
-    InitWindow(
-        int32(screenSize(result).x),
-        int32(screenSize(result).y),
+    initWindow(
+        screenSize(result),
         result.title,
     )
+    instance = some(result)
 
 func draw(self: Game) =
-    BeginDrawing()
+    beginDraw()
 
+    self.clearColor.clearScreen()
+    
     for system in self.systems:
         system.draw()
-    
-    ClearBackground(self.clearColor.get())
+    endDraw()
 
-    EndDrawing()
-
-proc executeOnSystems(self: Game; predicate: proc (system: System)) =
+proc executeOnSystems*(self: Game; predicate: proc (system: System)) =
     for system in self.systems:
         system.predicate()
 
@@ -110,18 +112,17 @@ proc initialize(self: Game) =
         system.initialize()
 
 func update(self: Game) =
-    let delta = GetFrameTime()
+    let delta = getDelta()
     for system in self.systems:
         system.update(delta)
 
 proc run*(self: Game) =
     if not self.isRunning:
-        self.initialize()
+        logInfo("Starting...")
+        setFps(60)
 
-        TraceLog(LOG_INFO, "Starting...")
-        SetTargetFPS(60)
-
-        while not WindowShouldClose():
+        while not isClosing():
+            self.initialize()
             self.update()
             self.draw()
 
@@ -131,4 +132,4 @@ func setClearColor*(self: Game; clearColor: Color) =
 func quit*(self: Game) =
     if self.isRunning:
         self.isRunning = false
-        CloseWindow()
+        close()

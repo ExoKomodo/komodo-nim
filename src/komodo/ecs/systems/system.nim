@@ -7,19 +7,28 @@ import ../components
 import ../entity
 import ../ids
 
+
 type
-    System* = ref object of RootObj
-        enabled: bool
+    SystemObj = object of RootObj
+        isEnabled: bool
         entityToComponents: Table[EntityId, seq[Component]]
         initialized: bool
         uninitializedComponents: seq[Component]
 
+    System* = ref SystemObj
+
+func destroy*(self: var SystemObj) =
+    self.entityToComponents.clear()
+    self.uninitializedComponents = @[]
+    self.isEnabled = false
+
 func entityToComponents*(self: System): Table[EntityId, seq[Component]] {.inline.} = self.entityToComponents
 
-func `isEnabled=`*(self: System; value: bool) {.inline.} = self.enabled = value
-func isEnabled*(self: System): bool {.inline.} = self.enabled
+func `isEnabled=`*(self: var SystemObj; value: bool) {.inline.} = self.isEnabled = value
+func `isEnabled=`*(self: System; value: bool) {.inline.} = self.isEnabled = value
+func isEnabled*(self: SystemObj | System): bool {.inline.} = self.isEnabled
 
-func isInitialized*(self: System): bool {.inline.} = self.initialized
+func isInitialized*(self: SystemObj | System): bool {.inline.} = self.initialized
 
 method initialize*(self: System) {.base.} =
     for component in self.uninitializedComponents:
@@ -52,6 +61,8 @@ func registerComponent*(self: System; component: Component): bool =
         return false
 
     self.entityToComponents[parent.id] &= component
+    if not component.isInitialized:
+        self.uninitializedComponents &= component
     return true
 
 method hasNecessaryComponents*(self: System; entity: Entity; components: seq[Component]): bool {.base.} = false

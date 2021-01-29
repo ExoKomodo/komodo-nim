@@ -11,7 +11,7 @@ component BehaviorComponent:
     init:
         discard
 
-    final:
+    destroy:
         discard
 
 method update*(self: BehaviorComponent; delta: float32) {.base.} =

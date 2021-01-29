@@ -1,4 +1,4 @@
-import ../../lib/raylib
+import ../../lib/graphics/color
 
 import ./component_macros
 
@@ -20,7 +20,7 @@ component TextComponent:
     init:
         discard
 
-    final:
+    destroy:
         discard
 
 func text*(self: TextComponent): auto = self.text

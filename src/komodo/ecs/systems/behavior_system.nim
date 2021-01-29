@@ -1,8 +1,10 @@
 import options
 import tables
 
-import ../components/behavior_component
 import ./system_macros
+import ../components/behavior_component
+import ../../logging
+import ./system
 
 system BehaviorSystem:
     fields:
@@ -21,5 +23,6 @@ system BehaviorSystem:
                 continue
             behavior.get().update(delta)
 
-    final:
-        discard
+    destroy:
+        logInfo("Destroying behavior system...")
+        logInfo("Destroyed behavior system")

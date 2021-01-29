@@ -1,6 +1,9 @@
 import macros
 import strformat
 
+
+proc toConcreteTypeName(typeName: NimNode): string = fmt"{$typeName}Obj"
+
 proc toFieldDefinitions(fields: NimNode): seq[NimNode] =
     result = @[]
     expectKind(fields, nnkCall)
@@ -19,7 +22,6 @@ proc toFieldDefinitions(fields: NimNode): seq[NimNode] =
         expectKind(fieldStatements, nnkStmtList)
         
         let fieldType = fieldStatements[0]
-        expectKind(fieldType, nnkIdent)
         
         result.add(
             newIdentDefs(
@@ -100,15 +102,33 @@ proc generateFormalParams*(
         for param in params:
             result.add(toFormalParam(param))
 
-proc generateRefTypeDefinition*(
+proc generateTypeDefinition*(
     typeName: NimNode;
     statements: NimNode;
     parentTypeName: string;
 ): NimNode =
     expectKind(typeName, nnkIdent)
     let fields = toFieldDefinitions(statements)
+    let concreteTypeName = toConcreteTypeName(typeName)
     result = newTree(
         nnkTypeSection,
+        newTree(
+            nnkTypeDef,
+            ident(concreteTypeName),
+            newEmptyNode(),
+            newTree(
+                nnkObjectTy,
+                newEmptyNode(),
+                newTree(
+                    nnkOfInherit,
+                    ident(parentTypeName),
+                ),
+                newTree(
+                    nnkRecList,
+                    fields,
+                )
+            ),
+        ),
         newTree(
             nnkTypeDef,
             newTree(
@@ -119,26 +139,16 @@ proc generateRefTypeDefinition*(
             newEmptyNode(),
             newTree(
                 nnkRefTy,
-                newTree(
-                    nnkObjectTy,
-                    newEmptyNode(),
-                    newTree(
-                        nnkOfInherit,
-                        ident(parentTypeName),
-                    ),
-                    newTree(
-                        nnkRecList,
-                        fields,
-                    )
-                )
+                ident(concreteTypeName),
             ),
-        )
+        ),
     )
 
 proc generateInit*(
     typeName: NimNode;
     initDefinition: NimNode;
     defaultStatements: NimNode;
+    lockLevel: NimNode;
 ): NimNode =
     expectKind(typeName, nnkIdent)
     let initSignature = initDefinition[0]
@@ -165,41 +175,59 @@ proc generateInit*(
                 newEmptyNode(),
             ),
         ),
-        newEmptyNode(),
+        newTree(
+            nnkPragma,
+            newTree(
+                nnkExprColonExpr,
+                ident("locks"),
+                lockLevel,
+            )
+        ),
         newEmptyNode(),
         quote do:
             `defaultStatements`
             `initBody`
     )
 
-proc generateFinalizer*(typeName: NimNode; finalizerDefinition: NimNode): NimNode =
+proc generateDestructor*(
+    typeName: NimNode;
+    destructorDefinition: NimNode;
+    defaultStatements: NimNode = newEmptyNode();
+): NimNode =
     expectKind(typeName, nnkIdent)
-    let finalizerSignature = finalizerDefinition[0]
-    expectIdent(finalizerSignature, "final")
-    let finalizerBody = finalizerDefinition[1]
-    expectKind(finalizerBody, nnkStmtList)
+    let destructorSignature = destructorDefinition[0]
+    expectIdent(destructorSignature, "destroy")
+    let destructorBody = destructorDefinition[1]
+    expectKind(destructorBody, nnkStmtList)
     
     result = newTree(
         nnkProcDef,
         newTree(
-            nnkPostfix,
-            ident("*"),
-            ident("finalizer"),
+            nnkAccQuoted,
+            ident("="),
+            ident("destroy"),
         ),
         newEmptyNode(),
         newEmptyNode(),
         newTree(
             nnkFormalParams,
-            ident($typeName),
+            newEmptyNode(),
             newTree(
                 nnkIdentDefs,
                 ident("self"),
-                ident($typeName),
+                newTree(
+                    nnkVarTy,
+                    ident(toConcreteTypeName(typeName)),
+                ),
                 newEmptyNode(),
             ),
         ),
         newEmptyNode(),
         newEmptyNode(),
         quote do:
-            `finalizerBody`
+            `destructorBody`
+            `defaultStatements`
     )
+
+func knownLockLevel*(level: BiggestInt): NimNode = newIntLitNode(level)
+func unknownLockLevel*: NimNode = newStrLitNode("unknown")
