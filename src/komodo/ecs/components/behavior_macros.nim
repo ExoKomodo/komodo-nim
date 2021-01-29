@@ -1,6 +1,6 @@
 import macros
 
-import ../../macro_helpers
+import ../../private/macro_helpers
 
 import ./component
 import ./behavior_component
@@ -40,7 +40,7 @@ proc generateBehaviorConstructor(typeName: NimNode; constructorDefinition: NimNo
         (
             quote do:
                 result = `typeName`(
-                    id: nextComponentId(),
+                    id: nextComponentId()
                 )
         ),
         newCall(
@@ -102,36 +102,36 @@ proc generateUpdate(typeName: NimNode; updateDefinition: NimNode): NimNode =
 macro behavior*(typeName: untyped; statements: untyped): untyped =
     result = newStmtList()
     expectKind(statements, nnkStmtList)
-    result.add(
-        generateRefTypeDefinition(
-            typeName,
-            statements[0],
-            "BehaviorComponent",
-        ),
+    
+    let typeDefinition = generateTypeDefinition(
+        typeName,
+        statements[0],
+        "BehaviorComponent",
     )
-    result.add(
-        generateBehaviorConstructor(
-            typeName,
-            statements[1],
-        ),
+    let constructor = generateBehaviorConstructor(
+        typeName,
+        statements[1],
     )
-    result.add(
-        generateInit(
-            typeName,
-            statements[2],
+    let initializer = generateInit(
+        typeName,
+        statements[2],
+        (
             quote do:
                 discard
         ),
+        unknownLockLevel(),
     )
-    result.add(
-        generateUpdate(
-            typeName,
-            statements[3],
-        ),
+    let updater = generateUpdate(
+        typeName,
+        statements[3],
     )
-    result.add(
-        generateFinalizer(
-            typeName,
-            statements[4],
-        ),
+    let destructor = generateDestructor(
+        typeName,
+        statements[4],
     )
+    
+    result.add(typeDefinition)
+    result.add(destructor)
+    result.add(constructor)
+    result.add(initializer)
+    result.add(updater)

@@ -1,6 +1,6 @@
 import macros
 
-import ../../macro_helpers
+import ../../private/macro_helpers
 
 import ./component
 import ../entity
@@ -70,30 +70,30 @@ proc generateComponentConstructor(typeName: NimNode; constructorDefinition: NimN
 macro component*(typeName: untyped; statements: untyped): untyped =
     result = newStmtList()
     expectKind(statements, nnkStmtList)
-    result.add(
-        generateRefTypeDefinition(
-            typeName,
-            statements[0],
-            "Component",
-        ),
+    let typeDefinition = generateTypeDefinition(
+        typeName,
+        statements[0],
+        "Component",
     )
-    result.add(
-        generateComponentConstructor(
-            typeName,
-            statements[1],
-        ),
+    let constructor = generateComponentConstructor(
+        typeName,
+        statements[1],
     )
-    result.add(
-        generateInit(
-            typeName,
-            statements[2],
+    let initializer = generateInit(
+        typeName,
+        statements[2],
+        (
             quote do:
                 procCall self.Component.initialize()
         ),
+        unknownLockLevel(),
     )
-    result.add(
-        generateFinalizer(
-            typeName,
-            statements[3],
-        ),
+    let destructor = generateDestructor(
+        typeName,
+        statements[3],
     )
+    
+    result.add(typeDefinition)
+    result.add(destructor)
+    result.add(constructor)
+    result.add(initializer)

@@ -1,4 +1,4 @@
-import ../../lib/raylib
+import ../../lib/math
 
 import ./component_macros
 
@@ -21,7 +21,7 @@ component TransformComponent:
     init:
         discard
 
-    final:
+    destroy:
         discard
 
 func position*(self: TransformComponent): auto = self.position

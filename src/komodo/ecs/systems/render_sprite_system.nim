@@ -8,19 +8,17 @@ import ../components/[
     transform_component,
 ]
 import ../entity
-import ../../lib/raylib
+import ../../lib/graphics/texture2d
+import ../../logging
 
 func drawComponents(
     sprite: SpriteComponent;
     transform: TransformComponent;
 ) =
-    sprite.texture.DrawTextureEx(
-        Vector2(
-            x: transform.position.x,
-            y: transform.position.y,
-        ),
-        transform.rotation.z,
-        transform.scale.x,
+    sprite.texture.draw(
+        transform.position,
+        transform.rotation,
+        transform.scale,
         sprite.color,
     )
 
@@ -45,8 +43,9 @@ system RenderSpriteSystem:
                 transform.get(),
             )
 
-    final:
-        discard
+    destroy:
+        logInfo("Destroying render sprite system...")
+        logInfo("Destroyed render sprite system")
 
 method hasNecessaryComponents*(self: RenderSpriteSystem; entity: Entity; components: seq[Component]): bool =
     if (

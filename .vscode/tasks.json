@@ -4,7 +4,7 @@
         {
             "label": "Komodo Desktop Example",
             "type": "shell",
-            "command": "./generate_docs.bash && cd examples/desktop && nimble run",
+            "command": "cd examples/desktop; nimble --gc:orc --verbose run",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

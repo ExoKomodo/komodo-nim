@@ -1,9 +1,10 @@
 import macros
 
-import ../../macro_helpers
+import ../../private/macro_helpers
 import ./system
 
 export system
+
 
 proc generateSystemConstructor(typeName: NimNode; constructorDefinition: NimNode): NimNode =
     expectKind(typeName, nnkIdent)
@@ -94,36 +95,36 @@ proc generateDrawOrUpdate(typeName: NimNode; procDefinition: NimNode): NimNode =
 macro system*(typeName: untyped; statements: untyped): untyped =
     result = newStmtList()
     expectKind(statements, nnkStmtList)
-    result.add(
-        generateRefTypeDefinition(
-            typeName,
-            statements[0],
-            "System",
-        ),
+    let typeDefinition = generateTypeDefinition(
+        typeName,
+        statements[0],
+        "System",
     )
-    result.add(
-        generateSystemConstructor(
-            typeName,
-            statements[1],
-        ),
+    let constructor = generateSystemConstructor(
+        typeName,
+        statements[1],
     )
-    result.add(
-        generateInit(
-            typeName,
-            statements[2],
+    let initializer = generateInit(
+        typeName,
+        statements[2],
+        (
             quote do:
                 procCall self.System.initialize()
         ),
+        unknownLockLevel(),
     )
-    result.add(
-        generateDrawOrUpdate(
-            typeName,
-            statements[3],
-        ),
+    let drawOrUpdate = generateDrawOrUpdate(
+        typeName,
+        statements[3],
     )
-    result.add(
-        generateFinalizer(
-            typeName,
-            statements[4],
-        ),
+    let destructor = generateDestructor(
+        typeName,
+        statements[4],
+        quote do:
+            self.destroy()
     )
+    result.add(typeDefinition)
+    result.add(destructor)
+    result.add(constructor)
+    result.add(initializer)
+    result.add(drawOrUpdate)
