@@ -15,42 +15,46 @@ func drawComponents(
     sprite: SpriteComponent;
     transform: TransformComponent;
 ) =
-    sprite.texture.draw(
-        transform.position,
-        transform.rotation,
-        transform.scale,
-        sprite.color,
-    )
+  sprite.texture.draw(
+      transform.position,
+      transform.rotation,
+      transform.scale,
+      sprite.color,
+  )
 
 system RenderSpriteSystem:
-    fields:
-        discard
-    
-    create:
-        discard
+  fields:
+    discard
 
-    init:
-        discard
+  create:
+    discard
 
-    draw:
-        for entityId, components in pairs(self.entityToComponents):
-            let sprite = self.findComponentByParent[:SpriteComponent](entityId)
-            let transform = self.findComponentByParent[:TransformComponent](entityId)
-            if sprite.isNone() or transform.isNone():
-                continue
-            drawComponents(
-                sprite.get(),
-                transform.get(),
-            )
+  init:
+    discard
 
-    destroy:
-        logInfo("Destroying render sprite system...")
-        logInfo("Destroyed render sprite system")
+  draw:
+    for entityId, components in pairs(self.entityToComponents):
+      let sprite = self.findComponentByParent[:SpriteComponent](entityId)
+      let transform = self.findComponentByParent[:TransformComponent](entityId)
+      if sprite.isNone() or transform.isNone():
+        continue
+      drawComponents(
+          sprite.get(),
+          transform.get(),
+      )
 
-method hasNecessaryComponents*(self: RenderSpriteSystem; entity: Entity; components: seq[Component]): bool =
-    if (
-        self.findComponentByParent[:SpriteComponent](entity).isNone() or
-        self.findComponentByParent[:TransformComponent](entity).isNone()
-    ):
-        return false
-    true
+  destroy:
+    logInfo("Destroying render sprite system...")
+    logInfo("Destroyed render sprite system")
+
+method hasNecessaryComponents*(
+    self: RenderSpriteSystem;
+    entity: Entity;
+    components: seq[Component];
+): bool =
+  if (
+      self.findComponentByParent[:SpriteComponent](entity).isNone() or
+      self.findComponentByParent[:TransformComponent](entity).isNone()
+  ):
+    return false
+  true

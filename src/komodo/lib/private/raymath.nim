@@ -1,4 +1,4 @@
-﻿# 
+# 
 #   raymath v1.2 - Math functions to work with Vector3, Matrix and Quaternions
 # 
 #   CONFIGURATION:
@@ -35,7 +35,7 @@
 #     as being the original software.
 # 
 #     3. This notice may not be removed or altered from any source distribution.
-# 
+#
 template RAYMATH_H*(): auto = RAYMATH_H
 # #define RAYMATH_STANDALONE
 # #define RAYMATH_HEADER_ONLY
@@ -51,221 +51,299 @@ import raylib
 # ----------------------------------------------------------------------------------
 # NOTE: Helper types to be used instead of array return types for *ToFloat functions
 type float3* {.bycopy.} = object
-    v*: array[0..2, float32]
+  v*: array[0..2, float32]
 type float16* {.bycopy.} = object
-    v*: array[0..15, float32]
-# ----------------------------------------------------------------------------------
-# Module Functions Definition - Utils math
-# ----------------------------------------------------------------------------------
-# Clamp float value
-proc Clamp*(value: float32; min: float32; max: float32): float32 {.RMDEF, importc: "Clamp".} 
+  v*: array[0..15, float32]
+ # ----------------------------------------------------------------------------------
+ # Module Functions Definition - Utils math
+ # ----------------------------------------------------------------------------------
+ # Clamp float value
+proc Clamp*(value: float32; min: float32; max: float32): float32 {.RMDEF,
+    importc: "Clamp".}
 # Calculate linear interpolation between two floats
-proc Lerp*(start: float32; endx: float32; amount: float32): float32 {.RMDEF, importc: "Lerp".} 
+proc Lerp*(start: float32; endx: float32; amount: float32): float32 {.RMDEF,
+    importc: "Lerp".}
 # Normalize input value within input range
-proc Normalize*(value: float32; start: float32; endx: float32): float32 {.RMDEF, importc: "Normalize".} 
+proc Normalize*(value: float32; start: float32; endx: float32): float32 {.RMDEF,
+    importc: "Normalize".}
 # Remap input value within input range to output range
-proc Remap*(value: float32; inputStart: float32; inputEnd: float32; outputStart: float32; outputEnd: float32): float32 {.RMDEF, importc: "Remap".} 
+proc Remap*(value: float32; inputStart: float32; inputEnd: float32;
+    outputStart: float32; outputEnd: float32): float32 {.RMDEF,
+    importc: "Remap".}
 # ----------------------------------------------------------------------------------
 # Module Functions Definition - Vector2 math
 # ----------------------------------------------------------------------------------
 # Vector with components value 0.0f
-proc Vector2Zero*(): Vector2 {.RMDEF, importc: "Vector2Zero".} 
+proc Vector2Zero*(): Vector2 {.RMDEF, importc: "Vector2Zero".}
 # Vector with components value 1.0f
-proc Vector2One*(): Vector2 {.RMDEF, importc: "Vector2One".} 
+proc Vector2One*(): Vector2 {.RMDEF, importc: "Vector2One".}
 # Add two vectors (v1 + v2)
-proc Vector2Add*(v1: Vector2; v2: Vector2): Vector2 {.RMDEF, importc: "Vector2Add".} 
+proc Vector2Add*(v1: Vector2; v2: Vector2): Vector2 {.RMDEF,
+    importc: "Vector2Add".}
 # Add vector and float value
-proc Vector2AddValue*(v: Vector2; add: float32): Vector2 {.RMDEF, importc: "Vector2AddValue".} 
+proc Vector2AddValue*(v: Vector2; add: float32): Vector2 {.RMDEF,
+    importc: "Vector2AddValue".}
 # Subtract two vectors (v1 - v2)
-proc Vector2Subtract*(v1: Vector2; v2: Vector2): Vector2 {.RMDEF, importc: "Vector2Subtract".} 
+proc Vector2Subtract*(v1: Vector2; v2: Vector2): Vector2 {.RMDEF,
+    importc: "Vector2Subtract".}
 # Subtract vector by float value
-proc Vector2SubtractValue*(v: Vector2; sub: float32): Vector2 {.RMDEF, importc: "Vector2SubtractValue".} 
+proc Vector2SubtractValue*(v: Vector2; sub: float32): Vector2 {.RMDEF,
+    importc: "Vector2SubtractValue".}
 # Calculate vector length
-proc Vector2Length*(v: Vector2): float32 {.RMDEF, importc: "Vector2Length".} 
+proc Vector2Length*(v: Vector2): float32 {.RMDEF, importc: "Vector2Length".}
 # Calculate vector square length
-proc Vector2LengthSqr*(v: Vector2): float32 {.RMDEF, importc: "Vector2LengthSqr".} 
+proc Vector2LengthSqr*(v: Vector2): float32 {.RMDEF,
+    importc: "Vector2LengthSqr".}
 # Calculate two vectors dot product
-proc Vector2DotProduct*(v1: Vector2; v2: Vector2): float32 {.RMDEF, importc: "Vector2DotProduct".} 
+proc Vector2DotProduct*(v1: Vector2; v2: Vector2): float32 {.RMDEF,
+    importc: "Vector2DotProduct".}
 # Calculate distance between two vectors
-proc Vector2Distance*(v1: Vector2; v2: Vector2): float32 {.RMDEF, importc: "Vector2Distance".} 
+proc Vector2Distance*(v1: Vector2; v2: Vector2): float32 {.RMDEF,
+    importc: "Vector2Distance".}
 # Calculate angle from two vectors in X-axis
-proc Vector2Angle*(v1: Vector2; v2: Vector2): float32 {.RMDEF, importc: "Vector2Angle".} 
+proc Vector2Angle*(v1: Vector2; v2: Vector2): float32 {.RMDEF,
+    importc: "Vector2Angle".}
 # Scale vector (multiply by value)
-proc Vector2Scale*(v: Vector2; scale: float32): Vector2 {.RMDEF, importc: "Vector2Scale".} 
+proc Vector2Scale*(v: Vector2; scale: float32): Vector2 {.RMDEF,
+    importc: "Vector2Scale".}
 # Multiply vector by vector
-proc Vector2Multiply*(v1: Vector2; v2: Vector2): Vector2 {.RMDEF, importc: "Vector2Multiply".} 
+proc Vector2Multiply*(v1: Vector2; v2: Vector2): Vector2 {.RMDEF,
+    importc: "Vector2Multiply".}
 # Negate vector
-proc Vector2Negate*(v: Vector2): Vector2 {.RMDEF, importc: "Vector2Negate".} 
+proc Vector2Negate*(v: Vector2): Vector2 {.RMDEF, importc: "Vector2Negate".}
 # Divide vector by vector
-proc Vector2Divide*(v1: Vector2; v2: Vector2): Vector2 {.RMDEF, importc: "Vector2Divide".} 
+proc Vector2Divide*(v1: Vector2; v2: Vector2): Vector2 {.RMDEF,
+    importc: "Vector2Divide".}
 # Normalize provided vector
-proc Vector2Normalize*(v: Vector2): Vector2 {.RMDEF, importc: "Vector2Normalize".} 
+proc Vector2Normalize*(v: Vector2): Vector2 {.RMDEF,
+    importc: "Vector2Normalize".}
 # Calculate linear interpolation between two vectors
-proc Vector2Lerp*(v1: Vector2; v2: Vector2; amount: float32): Vector2 {.RMDEF, importc: "Vector2Lerp".} 
+proc Vector2Lerp*(v1: Vector2; v2: Vector2; amount: float32): Vector2 {.RMDEF,
+    importc: "Vector2Lerp".}
 # Calculate reflected vector to normal
-proc Vector2Reflect*(v: Vector2; normal: Vector2): Vector2 {.RMDEF, importc: "Vector2Reflect".} 
+proc Vector2Reflect*(v: Vector2; normal: Vector2): Vector2 {.RMDEF,
+    importc: "Vector2Reflect".}
 # Rotate Vector by float in Degrees.
-proc Vector2Rotate*(v: Vector2; degs: float32): Vector2 {.RMDEF, importc: "Vector2Rotate".} 
+proc Vector2Rotate*(v: Vector2; degs: float32): Vector2 {.RMDEF,
+    importc: "Vector2Rotate".}
 # Move Vector towards target
-proc Vector2MoveTowards*(v: Vector2; target: Vector2; maxDistance: float32): Vector2 {.RMDEF, importc: "Vector2MoveTowards".} 
+proc Vector2MoveTowards*(v: Vector2; target: Vector2;
+    maxDistance: float32): Vector2 {.RMDEF, importc: "Vector2MoveTowards".}
 # ----------------------------------------------------------------------------------
 # Module Functions Definition - Vector3 math
 # ----------------------------------------------------------------------------------
 # Vector with components value 0.0f
-proc Vector3Zero*(): Vector3 {.RMDEF, importc: "Vector3Zero".} 
+proc Vector3Zero*(): Vector3 {.RMDEF, importc: "Vector3Zero".}
 # Vector with components value 1.0f
-proc Vector3One*(): Vector3 {.RMDEF, importc: "Vector3One".} 
+proc Vector3One*(): Vector3 {.RMDEF, importc: "Vector3One".}
 # Add two vectors
-proc Vector3Add*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF, importc: "Vector3Add".} 
+proc Vector3Add*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF,
+    importc: "Vector3Add".}
 # Add vector and float value
-proc Vector3AddValue*(v: Vector3; add: float32): Vector3 {.RMDEF, importc: "Vector3AddValue".} 
+proc Vector3AddValue*(v: Vector3; add: float32): Vector3 {.RMDEF,
+    importc: "Vector3AddValue".}
 # Subtract two vectors
-proc Vector3Subtract*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF, importc: "Vector3Subtract".} 
+proc Vector3Subtract*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF,
+    importc: "Vector3Subtract".}
 # Subtract vector by float value
-proc Vector3SubtractValue*(v: Vector3; sub: float32): Vector3 {.RMDEF, importc: "Vector3SubtractValue".} 
+proc Vector3SubtractValue*(v: Vector3; sub: float32): Vector3 {.RMDEF,
+    importc: "Vector3SubtractValue".}
 # Multiply vector by scalar
-proc Vector3Scale*(v: Vector3; scalar: float32): Vector3 {.RMDEF, importc: "Vector3Scale".} 
+proc Vector3Scale*(v: Vector3; scalar: float32): Vector3 {.RMDEF,
+    importc: "Vector3Scale".}
 # Multiply vector by vector
-proc Vector3Multiply*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF, importc: "Vector3Multiply".} 
+proc Vector3Multiply*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF,
+    importc: "Vector3Multiply".}
 # Calculate two vectors cross product
-proc Vector3CrossProduct*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF, importc: "Vector3CrossProduct".} 
+proc Vector3CrossProduct*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF,
+    importc: "Vector3CrossProduct".}
 # Calculate one vector perpendicular vector
-proc Vector3Perpendicular*(v: Vector3): Vector3 {.RMDEF, importc: "Vector3Perpendicular".} 
+proc Vector3Perpendicular*(v: Vector3): Vector3 {.RMDEF,
+    importc: "Vector3Perpendicular".}
 # Calculate vector length
-proc Vector3Length*(v: ptr Vector3): float32 {.RMDEF, importc: "Vector3Length".} 
+proc Vector3Length*(v: ptr Vector3): float32 {.RMDEF, importc: "Vector3Length".}
 # Calculate vector square length
-proc Vector3LengthSqr*(v: ptr Vector3): float32 {.RMDEF, importc: "Vector3LengthSqr".} 
+proc Vector3LengthSqr*(v: ptr Vector3): float32 {.RMDEF,
+    importc: "Vector3LengthSqr".}
 # Calculate two vectors dot product
-proc Vector3DotProduct*(v1: Vector3; v2: Vector3): float32 {.RMDEF, importc: "Vector3DotProduct".} 
+proc Vector3DotProduct*(v1: Vector3; v2: Vector3): float32 {.RMDEF,
+    importc: "Vector3DotProduct".}
 # Calculate distance between two vectors
-proc Vector3Distance*(v1: Vector3; v2: Vector3): float32 {.RMDEF, importc: "Vector3Distance".} 
+proc Vector3Distance*(v1: Vector3; v2: Vector3): float32 {.RMDEF,
+    importc: "Vector3Distance".}
 # Negate provided vector (invert direction)
-proc Vector3Negate*(v: Vector3): Vector3 {.RMDEF, importc: "Vector3Negate".} 
+proc Vector3Negate*(v: Vector3): Vector3 {.RMDEF, importc: "Vector3Negate".}
 # Divide vector by vector
-proc Vector3Divide*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF, importc: "Vector3Divide".} 
+proc Vector3Divide*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF,
+    importc: "Vector3Divide".}
 # Normalize provided vector
-proc Vector3Normalize*(v: Vector3): Vector3 {.RMDEF, importc: "Vector3Normalize".} 
+proc Vector3Normalize*(v: Vector3): Vector3 {.RMDEF,
+    importc: "Vector3Normalize".}
 # Orthonormalize provided vectors
 # Makes vectors normalized and orthogonal to each other
 # Gram-Schmidt function implementation
-proc Vector3OrthoNormalize*(v1: ptr Vector3; v2: ptr Vector3) {.RMDEF, importc: "Vector3OrthoNormalize".} 
+proc Vector3OrthoNormalize*(v1: ptr Vector3; v2: ptr Vector3) {.RMDEF,
+    importc: "Vector3OrthoNormalize".}
 # Transforms a Vector3 by a given Matrix
-proc Vector3Transform*(v: Vector3; mat: Matrix): Vector3 {.RMDEF, importc: "Vector3Transform".} 
+proc Vector3Transform*(v: Vector3; mat: Matrix): Vector3 {.RMDEF,
+    importc: "Vector3Transform".}
 # Transform a vector by quaternion rotation
-proc Vector3RotateByQuaternion*(v: Vector3; q: Quaternion): Vector3 {.RMDEF, importc: "Vector3RotateByQuaternion".} 
+proc Vector3RotateByQuaternion*(v: Vector3; q: Quaternion): Vector3 {.RMDEF,
+    importc: "Vector3RotateByQuaternion".}
 # Calculate linear interpolation between two vectors
-proc Vector3Lerp*(v1: Vector3; v2: Vector3; amount: float32): Vector3 {.RMDEF, importc: "Vector3Lerp".} 
+proc Vector3Lerp*(v1: Vector3; v2: Vector3; amount: float32): Vector3 {.RMDEF,
+    importc: "Vector3Lerp".}
 # Calculate reflected vector to normal
-proc Vector3Reflect*(v: Vector3; normal: Vector3): Vector3 {.RMDEF, importc: "Vector3Reflect".} 
+proc Vector3Reflect*(v: Vector3; normal: Vector3): Vector3 {.RMDEF,
+    importc: "Vector3Reflect".}
 # Return min value for each pair of components
-proc Vector3Min*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF, importc: "Vector3Min".} 
+proc Vector3Min*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF,
+    importc: "Vector3Min".}
 # Return max value for each pair of components
-proc Vector3Max*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF, importc: "Vector3Max".} 
+proc Vector3Max*(v1: Vector3; v2: Vector3): Vector3 {.RMDEF,
+    importc: "Vector3Max".}
 # Compute barycenter coordinates (u, v, w) for point p with respect to triangle (a, b, c)
 # NOTE: Assumes P is on the plane of the triangle
-proc Vector3Barycenter*(p: Vector3; a: Vector3; b: Vector3; c: Vector3): Vector3 {.RMDEF, importc: "Vector3Barycenter".} 
+proc Vector3Barycenter*(p: Vector3; a: Vector3; b: Vector3;
+    c: Vector3): Vector3 {.RMDEF, importc: "Vector3Barycenter".}
 # Returns Vector3 as float array
-proc Vector3ToFloatV*(v: Vector3): float3 {.RMDEF, importc: "Vector3ToFloatV".} 
+proc Vector3ToFloatV*(v: Vector3): float3 {.RMDEF, importc: "Vector3ToFloatV".}
 # ----------------------------------------------------------------------------------
 # Module Functions Definition - Matrix math
 # ----------------------------------------------------------------------------------
 # Compute matrix determinant
-proc MatrixDeterminant*(mat: Matrix): float32 {.RMDEF, importc: "MatrixDeterminant".} 
+proc MatrixDeterminant*(mat: Matrix): float32 {.RMDEF,
+    importc: "MatrixDeterminant".}
 # Returns the trace of the matrix (sum of the values along the diagonal)
-proc MatrixTrace*(mat: Matrix): float32 {.RMDEF, importc: "MatrixTrace".} 
+proc MatrixTrace*(mat: Matrix): float32 {.RMDEF, importc: "MatrixTrace".}
 # Transposes provided matrix
-proc MatrixTranspose*(mat: Matrix): Matrix {.RMDEF, importc: "MatrixTranspose".} 
+proc MatrixTranspose*(mat: Matrix): Matrix {.RMDEF, importc: "MatrixTranspose".}
 # Invert provided matrix
-proc MatrixInvert*(mat: Matrix): Matrix {.RMDEF, importc: "MatrixInvert".} 
+proc MatrixInvert*(mat: Matrix): Matrix {.RMDEF, importc: "MatrixInvert".}
 # Normalize provided matrix
-proc MatrixNormalize*(mat: Matrix): Matrix {.RMDEF, importc: "MatrixNormalize".} 
+proc MatrixNormalize*(mat: Matrix): Matrix {.RMDEF, importc: "MatrixNormalize".}
 # Returns identity matrix
-proc MatrixIdentity*(): Matrix {.RMDEF, importc: "MatrixIdentity".} 
+proc MatrixIdentity*(): Matrix {.RMDEF, importc: "MatrixIdentity".}
 # Add two matrices
-proc MatrixAdd*(left: Matrix; right: Matrix): Matrix {.RMDEF, importc: "MatrixAdd".} 
+proc MatrixAdd*(left: Matrix; right: Matrix): Matrix {.RMDEF,
+    importc: "MatrixAdd".}
 # Subtract two matrices (left - right)
-proc MatrixSubtract*(left: Matrix; right: Matrix): Matrix {.RMDEF, importc: "MatrixSubtract".} 
+proc MatrixSubtract*(left: Matrix; right: Matrix): Matrix {.RMDEF,
+    importc: "MatrixSubtract".}
 # Returns two matrix multiplication
 # NOTE: When multiplying matrices... the order matters!
-proc MatrixMultiply*(left: Matrix; right: Matrix): Matrix {.RMDEF, importc: "MatrixMultiply".} 
+proc MatrixMultiply*(left: Matrix; right: Matrix): Matrix {.RMDEF,
+    importc: "MatrixMultiply".}
 # Returns translation matrix
-proc MatrixTranslate*(x: float32; y: float32; z: float32): Matrix {.RMDEF, importc: "MatrixTranslate".} 
+proc MatrixTranslate*(x: float32; y: float32; z: float32): Matrix {.RMDEF,
+    importc: "MatrixTranslate".}
 # Create rotation matrix from axis and angle
 # NOTE: Angle should be provided in radians
-proc MatrixRotate*(axis: Vector3; angle: float32): Matrix {.RMDEF, importc: "MatrixRotate".} 
+proc MatrixRotate*(axis: Vector3; angle: float32): Matrix {.RMDEF,
+    importc: "MatrixRotate".}
 # Returns x-rotation matrix (angle in radians)
-proc MatrixRotateX*(angle: float32): Matrix {.RMDEF, importc: "MatrixRotateX".} 
+proc MatrixRotateX*(angle: float32): Matrix {.RMDEF, importc: "MatrixRotateX".}
 # Returns y-rotation matrix (angle in radians)
-proc MatrixRotateY*(angle: float32): Matrix {.RMDEF, importc: "MatrixRotateY".} 
+proc MatrixRotateY*(angle: float32): Matrix {.RMDEF, importc: "MatrixRotateY".}
 # Returns z-rotation matrix (angle in radians)
-proc MatrixRotateZ*(angle: float32): Matrix {.RMDEF, importc: "MatrixRotateZ".} 
+proc MatrixRotateZ*(angle: float32): Matrix {.RMDEF, importc: "MatrixRotateZ".}
 # Returns xyz-rotation matrix (angles in radians)
-proc MatrixRotateXYZ*(ang: Vector3): Matrix {.RMDEF, importc: "MatrixRotateXYZ".} 
+proc MatrixRotateXYZ*(ang: Vector3): Matrix {.RMDEF,
+    importc: "MatrixRotateXYZ".}
 # Returns zyx-rotation matrix (angles in radians)
 # TODO: This solution is suboptimal, it should be possible to create this matrix in one go
 # instead of using a 3 matrix multiplication
-proc MatrixRotateZYX*(ang: Vector3): Matrix {.RMDEF, importc: "MatrixRotateZYX".} 
+proc MatrixRotateZYX*(ang: Vector3): Matrix {.RMDEF,
+    importc: "MatrixRotateZYX".}
 # Returns scaling matrix
-proc MatrixScale*(x: float32; y: float32; z: float32): Matrix {.RMDEF, importc: "MatrixScale".} 
+proc MatrixScale*(x: float32; y: float32; z: float32): Matrix {.RMDEF,
+    importc: "MatrixScale".}
 # Returns perspective projection matrix
-proc MatrixFrustum*(left: float64; right: float64; bottom: float64; top: float64; near: float64; far: float64): Matrix {.RMDEF, importc: "MatrixFrustum".} 
+proc MatrixFrustum*(left: float64; right: float64; bottom: float64;
+    top: float64; near: float64; far: float64): Matrix {.RMDEF,
+    importc: "MatrixFrustum".}
 # Returns perspective projection matrix
 # NOTE: Angle should be provided in radians
-proc MatrixPerspective*(fovy: float64; aspect: float64; near: float64; far: float64): Matrix {.RMDEF, importc: "MatrixPerspective".} 
+proc MatrixPerspective*(fovy: float64; aspect: float64; near: float64;
+    far: float64): Matrix {.RMDEF, importc: "MatrixPerspective".}
 # Returns orthographic projection matrix
-proc MatrixOrtho*(left: float64; right: float64; bottom: float64; top: float64; near: float64; far: float64): Matrix {.RMDEF, importc: "MatrixOrtho".} 
+proc MatrixOrtho*(left: float64; right: float64; bottom: float64; top: float64;
+    near: float64; far: float64): Matrix {.RMDEF, importc: "MatrixOrtho".}
 # Returns camera look-at matrix (view matrix)
-proc MatrixLookAt*(eye: Vector3; target: Vector3; up: Vector3): Matrix {.RMDEF, importc: "MatrixLookAt".} 
+proc MatrixLookAt*(eye: Vector3; target: Vector3; up: Vector3): Matrix {.RMDEF,
+    importc: "MatrixLookAt".}
 # Returns float array of matrix data
-proc MatrixToFloatV*(mat: Matrix): float16 {.RMDEF, importc: "MatrixToFloatV".} 
+proc MatrixToFloatV*(mat: Matrix): float16 {.RMDEF, importc: "MatrixToFloatV".}
 # ----------------------------------------------------------------------------------
 # Module Functions Definition - Quaternion math
 # ----------------------------------------------------------------------------------
 # Add two quaternions
-proc QuaternionAdd*(q1: Quaternion; q2: Quaternion): Quaternion {.RMDEF, importc: "QuaternionAdd".} 
+proc QuaternionAdd*(q1: Quaternion; q2: Quaternion): Quaternion {.RMDEF,
+    importc: "QuaternionAdd".}
 # Add quaternion and float value
-proc QuaternionAddValue*(q: Quaternion; add: float32): Quaternion {.RMDEF, importc: "QuaternionAddValue".} 
+proc QuaternionAddValue*(q: Quaternion; add: float32): Quaternion {.RMDEF,
+    importc: "QuaternionAddValue".}
 # Subtract two quaternions
-proc QuaternionSubtract*(q1: Quaternion; q2: Quaternion): Quaternion {.RMDEF, importc: "QuaternionSubtract".} 
+proc QuaternionSubtract*(q1: Quaternion; q2: Quaternion): Quaternion {.RMDEF,
+    importc: "QuaternionSubtract".}
 # Subtract quaternion and float value
-proc QuaternionSubtractValue*(q: Quaternion; sub: float32): Quaternion {.RMDEF, importc: "QuaternionSubtractValue".} 
+proc QuaternionSubtractValue*(q: Quaternion; sub: float32): Quaternion {.RMDEF,
+    importc: "QuaternionSubtractValue".}
 # Returns identity quaternion
-proc QuaternionIdentity*(): Quaternion {.RMDEF, importc: "QuaternionIdentity".} 
+proc QuaternionIdentity*(): Quaternion {.RMDEF, importc: "QuaternionIdentity".}
 # Computes the length of a quaternion
-proc QuaternionLength*(q: Quaternion): float32 {.RMDEF, importc: "QuaternionLength".} 
+proc QuaternionLength*(q: Quaternion): float32 {.RMDEF,
+    importc: "QuaternionLength".}
 # Normalize provided quaternion
-proc QuaternionNormalize*(q: Quaternion): Quaternion {.RMDEF, importc: "QuaternionNormalize".} 
+proc QuaternionNormalize*(q: Quaternion): Quaternion {.RMDEF,
+    importc: "QuaternionNormalize".}
 # Invert provided quaternion
-proc QuaternionInvert*(q: Quaternion): Quaternion {.RMDEF, importc: "QuaternionInvert".} 
+proc QuaternionInvert*(q: Quaternion): Quaternion {.RMDEF,
+    importc: "QuaternionInvert".}
 # Calculate two quaternion multiplication
-proc QuaternionMultiply*(q1: Quaternion; q2: Quaternion): Quaternion {.RMDEF, importc: "QuaternionMultiply".} 
+proc QuaternionMultiply*(q1: Quaternion; q2: Quaternion): Quaternion {.RMDEF,
+    importc: "QuaternionMultiply".}
 # Scale quaternion by float value
-proc QuaternionScale*(q: Quaternion; mul: float32): Quaternion {.RMDEF, importc: "QuaternionScale".} 
+proc QuaternionScale*(q: Quaternion; mul: float32): Quaternion {.RMDEF,
+    importc: "QuaternionScale".}
 # Divide two quaternions
-proc QuaternionDivide*(q1: Quaternion; q2: Quaternion): Quaternion {.RMDEF, importc: "QuaternionDivide".} 
+proc QuaternionDivide*(q1: Quaternion; q2: Quaternion): Quaternion {.RMDEF,
+    importc: "QuaternionDivide".}
 # Calculate linear interpolation between two quaternions
-proc QuaternionLerp*(q1: Quaternion; q2: Quaternion; amount: float32): Quaternion {.RMDEF, importc: "QuaternionLerp".} 
+proc QuaternionLerp*(q1: Quaternion; q2: Quaternion;
+    amount: float32): Quaternion {.RMDEF, importc: "QuaternionLerp".}
 # Calculate slerp-optimized interpolation between two quaternions
-proc QuaternionNlerp*(q1: Quaternion; q2: Quaternion; amount: float32): Quaternion {.RMDEF, importc: "QuaternionNlerp".} 
+proc QuaternionNlerp*(q1: Quaternion; q2: Quaternion;
+    amount: float32): Quaternion {.RMDEF, importc: "QuaternionNlerp".}
 # Calculates spherical linear interpolation between two quaternions
-proc QuaternionSlerp*(q1: Quaternion; q2: Quaternion; amount: float32): Quaternion {.RMDEF, importc: "QuaternionSlerp".} 
+proc QuaternionSlerp*(q1: Quaternion; q2: Quaternion;
+    amount: float32): Quaternion {.RMDEF, importc: "QuaternionSlerp".}
 # Calculate quaternion based on the rotation from one vector to another
-proc QuaternionFromVector3ToVector3*(fromx: Vector3; to: Vector3): Quaternion {.RMDEF, importc: "QuaternionFromVector3ToVector3".} 
+proc QuaternionFromVector3ToVector3*(fromx: Vector3; to: Vector3): Quaternion {.
+    RMDEF, importc: "QuaternionFromVector3ToVector3".}
 # Returns a quaternion for a given rotation matrix
-proc QuaternionFromMatrix*(mat: Matrix): Quaternion {.RMDEF, importc: "QuaternionFromMatrix".} 
+proc QuaternionFromMatrix*(mat: Matrix): Quaternion {.RMDEF,
+    importc: "QuaternionFromMatrix".}
 # Returns a matrix for a given quaternion
-proc QuaternionToMatrix*(q: Quaternion): Matrix {.RMDEF, importc: "QuaternionToMatrix".} 
+proc QuaternionToMatrix*(q: Quaternion): Matrix {.RMDEF,
+    importc: "QuaternionToMatrix".}
 # Returns rotation quaternion for an angle and axis
 # NOTE: angle must be provided in radians
-proc QuaternionFromAxisAngle*(axis: Vector3; angle: float32): Quaternion {.RMDEF, importc: "QuaternionFromAxisAngle".} 
+proc QuaternionFromAxisAngle*(axis: Vector3; angle: float32): Quaternion {.
+    RMDEF, importc: "QuaternionFromAxisAngle".}
 # Returns the rotation angle and axis for a given quaternion
-proc QuaternionToAxisAngle*(q: Quaternion; outAxis: ptr Vector3; outAngle: float32) {.RMDEF, importc: "QuaternionToAxisAngle".} 
+proc QuaternionToAxisAngle*(q: Quaternion; outAxis: ptr Vector3;
+    outAngle: float32) {.RMDEF, importc: "QuaternionToAxisAngle".}
 # Returns he quaternion equivalent to Euler angles
-proc QuaternionFromEuler*(roll: float32; pitch: float32; yaw: float32): Quaternion {.RMDEF, importc: "QuaternionFromEuler".} 
+proc QuaternionFromEuler*(roll: float32; pitch: float32;
+    yaw: float32): Quaternion {.RMDEF, importc: "QuaternionFromEuler".}
 # Return the Euler angles equivalent to quaternion (roll, pitch, yaw)
 # NOTE: Angles are returned in a Vector3 struct in degrees
-proc QuaternionToEuler*(q: Quaternion): Vector3 {.RMDEF, importc: "QuaternionToEuler".} 
+proc QuaternionToEuler*(q: Quaternion): Vector3 {.RMDEF,
+    importc: "QuaternionToEuler".}
 # Transform a quaternion given a transformation matrix
-proc QuaternionTransform*(q: Quaternion; mat: Matrix): Quaternion {.RMDEF, importc: "QuaternionTransform".} 
+proc QuaternionTransform*(q: Quaternion; mat: Matrix): Quaternion {.RMDEF,
+    importc: "QuaternionTransform".}
 # Projects a Vector3 from screen space into object space
-proc Vector3Unproject*(source: Vector3; projection: Matrix; view: Matrix): Vector3 {.RMDEF, importc: "Vector3Unproject".} 
+proc Vector3Unproject*(source: Vector3; projection: Matrix;
+    view: Matrix): Vector3 {.RMDEF, importc: "Vector3Unproject".}

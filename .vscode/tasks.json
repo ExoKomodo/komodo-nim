@@ -2,14 +2,35 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Komodo Desktop Example",
+            "label": "Build Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; nimble --gc:orc --verbose run",
+            "command": "cd examples/desktop; nimble build",
+            "problemMatcher": [],
+            "group": "build",
+        },
+        {
+            "label": "Debug Komodo Desktop Example",
+            "type": "shell",
+            "command": "cd examples/desktop; nimble debug",
+            "problemMatcher": [],
+            "group": "build",
+        },
+        {
+            "label": "Run Komodo Desktop Example",
+            "type": "shell",
+            "command": "cd examples/desktop; nimble example",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-        }
+        },
+        {
+            "label": "Format code",
+            "type": "shell",
+            "command": "nimpretty --indent:2 **/*.nim",
+            "problemMatcher": [],
+            "group": "none",
+        },
     ]
 }

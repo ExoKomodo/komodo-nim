@@ -13,5 +13,5 @@ export vector3
 export vector4
 
 type
-    Vector2D* = Vector2 | Vector3 | Vector4
-    Vector3D* = Vector3 | Vector4
+  Vector2D* = Vector2 | Vector3 | Vector4
+  Vector3D* = Vector3 | Vector4

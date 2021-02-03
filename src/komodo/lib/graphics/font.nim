@@ -28,13 +28,13 @@ func drawCentered*(
     fontSize: int32;
     color: Color;
 ) =
-    let centerPosition = Vector2(
-        x: position.x - text.getCenterOffset(fontSize).float32,
-        y: position.y,
-    )
-    draw(
-        text,
-        centerPosition,
-        fontSize,
-        color,
-    )
+  let centerPosition = Vector2(
+      x: position.x - text.getCenterOffset(fontSize).float32,
+      y: position.y,
+  )
+  draw(
+      text,
+      centerPosition,
+      fontSize,
+      color,
+  )

@@ -3,25 +3,25 @@ import ../../lib/graphics/color
 import ./component_macros
 
 component TextComponent:
-    fields:
-        text: string
-        fontSize: int32
-        color: Color
-    
-    create(
-        text: string,
-        fontSize: int32,
-        color: Color,
-    ):
-        result.text = text
-        result.fontSize = fontSize
-        result.color = color
+  fields:
+    text: string
+    fontSize: int32
+    color: Color
 
-    init:
-        discard
+  create(
+      text: string,
+      fontSize: int32,
+      color: Color,
+  ):
+    result.text = text
+    result.fontSize = fontSize
+    result.color = color
 
-    destroy:
-        discard
+  init:
+    discard
+
+  destroy:
+    discard
 
 func text*(self: TextComponent): auto = self.text
 func `text=`*(self: TextComponent; value: string) = self.text = value

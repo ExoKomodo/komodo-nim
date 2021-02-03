@@ -7,23 +7,23 @@ from ../private/raylib import nil
 
 
 type
-    Texture2d* = ref object of RootObj
-        texture: Option[raylib.Texture2D]
+  Texture2d* = ref object of RootObj
+    texture: Option[raylib.Texture2D]
 
 proc unload(self: Texture2d) =
-    if self.texture.isSome():
-        raylib.UnloadTexture(self.texture.unsafeGet())
-        self.texture = none[raylib.Texture2D]()
+  if self.texture.isSome():
+    raylib.UnloadTexture(self.texture.unsafeGet())
+    self.texture = none[raylib.Texture2D]()
 
 proc destroy*(self: Texture2d) =
-    self.unload()
+  self.unload()
 
 proc newTexture2d*(texturePath: string): Texture2d =
-    let image = raylib.LoadImage(texturePath)
-    result = Texture2d(
-        texture: some(raylib.LoadTextureFromImage(image))
-    )
-    raylib.UnloadImage(image)
+  let image = raylib.LoadImage(texturePath)
+  result = Texture2d(
+      texture: some(raylib.LoadTextureFromImage(image))
+  )
+  raylib.UnloadImage(image)
 
 proc draw*(
     self: Texture2d;
@@ -32,16 +32,16 @@ proc draw*(
     scale: Vector3;
     color: Color;
 ) =
-    if self.texture.isNone():
-        return
-    let texture = self.texture.unsafeGet()
-    raylib.DrawTextureEx(
-        texture,
-        Vector2(
-            x: position.x,
-            y: position.y,
-        ),
-        rotation.z,
-        scale.x,
-        color,
-    )
+  if self.texture.isNone():
+    return
+  let texture = self.texture.unsafeGet()
+  raylib.DrawTextureEx(
+      texture,
+      Vector2(
+          x: position.x,
+          y: position.y,
+    ),
+    rotation.z,
+    scale.x,
+    color,
+  )
