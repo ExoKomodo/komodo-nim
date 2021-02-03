@@ -34,13 +34,6 @@ proc generateComponentConstructor(typeName: NimNode; constructorDefinition: NimN
         constructorSignature,
         formalParams
     )
-    formalParams.add(
-        newIdentDefs(
-            ident("isEnabled"),
-            ident("bool"),
-            ident("true"),
-        )
-    )
 
     let defaultStatements = newStmtList(
         (
@@ -53,11 +46,6 @@ proc generateComponentConstructor(typeName: NimNode; constructorDefinition: NimN
             bindSym("parent="),
             ident("result"),
             ident("parent"),
-        ),
-        newCall(
-            bindSym("isEnabled="),
-            ident("result"),
-            ident("isEnabled"),
         ),
     )
     result = generateConstructor(

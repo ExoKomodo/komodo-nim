@@ -14,23 +14,11 @@ proc generateSystemConstructor(typeName: NimNode; constructorDefinition: NimNode
     expectKind(constructorBody, nnkStmtList)
     
     let formalParams = generateFormalParams(typeName, constructorSignature)
-    formalParams.add(
-        newIdentDefs(
-            ident("isEnabled"),
-            ident("bool"),
-            ident("true"),
-        )
-    )
 
     let defaultStatements = newStmtList(
         (
             quote do:
                 result = `typeName`()
-        ),
-        newCall(
-            bindSym("isEnabled="),
-            ident("result"),
-            ident("isEnabled"),
         ),
     )
     result = generateConstructor(

@@ -28,13 +28,6 @@ proc generateBehaviorConstructor(typeName: NimNode; constructorDefinition: NimNo
             newEmptyNode(),
         )
     )
-    formalParams.add(
-        newIdentDefs(
-            ident("isEnabled"),
-            ident("bool"),
-            ident("true"),
-        )
-    )
 
     let defaultStatements = newStmtList(
         (
@@ -47,11 +40,6 @@ proc generateBehaviorConstructor(typeName: NimNode; constructorDefinition: NimNo
             bindSym("parent="),
             ident("result"),
             ident("parent"),
-        ),
-        newCall(
-            bindSym("isEnabled="),
-            ident("result"),
-            ident("isEnabled"),
         ),
     )
     result = generateConstructor(

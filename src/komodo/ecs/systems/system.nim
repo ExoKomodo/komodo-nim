@@ -10,7 +10,6 @@ import ../ids
 
 type
     SystemObj = object of RootObj
-        isEnabled: bool
         entityToComponents: Table[EntityId, seq[Component]]
         initialized: bool
         uninitializedComponents: seq[Component]
@@ -20,13 +19,8 @@ type
 func destroy*(self: var SystemObj) =
     self.entityToComponents.clear()
     self.uninitializedComponents = @[]
-    self.isEnabled = false
 
 func entityToComponents*(self: System): Table[EntityId, seq[Component]] {.inline.} = self.entityToComponents
-
-func `isEnabled=`*(self: var SystemObj; value: bool) {.inline.} = self.isEnabled = value
-func `isEnabled=`*(self: System; value: bool) {.inline.} = self.isEnabled = value
-func isEnabled*(self: SystemObj | System): bool {.inline.} = self.isEnabled
 
 func isInitialized*(self: SystemObj | System): bool {.inline.} = self.initialized
 
