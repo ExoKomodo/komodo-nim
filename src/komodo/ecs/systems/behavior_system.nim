@@ -7,22 +7,22 @@ import ../../logging
 import ./system
 
 system BehaviorSystem:
-    fields:
-        discard
-    
-    create:
-        discard
+  fields:
+    discard
 
-    init:
-        discard
+  create:
+    discard
 
-    update:
-        for entityId, components in pairs(self.entityToComponents):
-            let behavior = self.findComponentByParent[:BehaviorComponent](entityId)
-            if behavior.isNone():
-                continue
-            behavior.get().update(delta)
+  init:
+    discard
 
-    destroy:
-        logInfo("Destroying behavior system...")
-        logInfo("Destroyed behavior system")
+  update:
+    for entityId, components in pairs(self.entityToComponents):
+      let behavior = self.findComponentByParent[:BehaviorComponent](entityId)
+      if behavior.isNone():
+        continue
+      behavior.get().update(delta)
+
+  destroy:
+    logInfo("Destroying behavior system...")
+    logInfo("Destroyed behavior system")

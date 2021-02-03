@@ -2,17 +2,17 @@ import ./component_macros
 
 
 component BehaviorComponent:
-    fields:
-        discard
-    
-    create:
-        discard
+  fields:
+    discard
 
-    init:
-        discard
+  create:
+    discard
 
-    destroy:
-        discard
+  init:
+    discard
+
+  destroy:
+    discard
 
 method update*(self: BehaviorComponent; delta: float32) {.base.} =
-    discard
+  discard

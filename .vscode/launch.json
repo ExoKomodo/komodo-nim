@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Nim: Debug Desktop",
+            "preLaunchTask": "Debug Komodo Desktop Example",
+            "program": "${workspaceFolder}/examples/desktop/bin/desktop",
+            "args": [],
+            "cwd": "${workspaceFolder}/examples/desktop",
+        }
+    ]
+}

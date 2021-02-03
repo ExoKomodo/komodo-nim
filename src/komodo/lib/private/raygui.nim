@@ -1,4 +1,4 @@
-﻿# 
+# 
 #   raygui v2.8 - A simple and easy-to-use immediate-mode gui library
 # 
 #   DESCRIPTION:
@@ -123,7 +123,7 @@
 #     as being the original software.
 # 
 #     3. This notice may not be removed or altered from any source distribution.
-# 
+#
 template RAYGUI_H*(): auto = RAYGUI_H
 template RAYGUI_VERSION*(): auto = "2.6-dev"
 import raylib
@@ -142,141 +142,144 @@ template TEXTEDIT_CURSOR_BLINK_FRAMES*(): auto = 20
 # ----------------------------------------------------------------------------------
 # Style property
 type GuiStyleProp* {.bycopy.} = object
-    controlId*: uint16 
-    propertyId*: uint16 
-    propertyValue*: int32 
+  controlId*: uint16
+  propertyId*: uint16
+  propertyValue*: int32
 # Gui control state
-type GuiControlState* = enum 
-    GUI_STATE_NORMAL = 0 
-    GUI_STATE_FOCUSED 
-    GUI_STATE_PRESSED 
-    GUI_STATE_DISABLED 
-converter GuiControlState2int32* (self: GuiControlState): int32 = self.int32 
+type GuiControlState* = enum
+  GUI_STATE_NORMAL = 0
+  GUI_STATE_FOCUSED
+  GUI_STATE_PRESSED
+  GUI_STATE_DISABLED
+converter GuiControlState2int32*(self: GuiControlState): int32 = self.int32
 # Gui control text alignment
-type GuiTextAlignment* = enum 
-    GUI_TEXT_ALIGN_LEFT = 0 
-    GUI_TEXT_ALIGN_CENTER 
-    GUI_TEXT_ALIGN_RIGHT 
-converter GuiTextAlignment2int32* (self: GuiTextAlignment): int32 = self.int32 
+type GuiTextAlignment* = enum
+  GUI_TEXT_ALIGN_LEFT = 0
+  GUI_TEXT_ALIGN_CENTER
+  GUI_TEXT_ALIGN_RIGHT
+converter GuiTextAlignment2int32*(self: GuiTextAlignment): int32 = self.int32
 # Gui controls
-type GuiControl* = enum 
-    DEFAULT = 0 
-    LABEL # LABELBUTTON
-    BUTTON # IMAGEBUTTON
-    TOGGLE # TOGGLEGROUP
-    SLIDER # SLIDERBAR
-    PROGRESSBAR 
-    CHECKBOX 
-    COMBOBOX 
-    DROPDOWNBOX 
-    TEXTBOX # TEXTBOXMULTI
-    VALUEBOX 
-    SPINNER 
-    LISTVIEW 
-    COLORPICKER 
-    SCROLLBAR 
-    STATUSBAR 
-converter GuiControl2int32* (self: GuiControl): int32 = self.int32 
+type GuiControl* = enum
+  DEFAULT = 0
+  LABEL   # LABELBUTTON
+  BUTTON  # IMAGEBUTTON
+  TOGGLE  # TOGGLEGROUP
+  SLIDER  # SLIDERBAR
+  PROGRESSBAR
+  CHECKBOX
+  COMBOBOX
+  DROPDOWNBOX
+  TEXTBOX # TEXTBOXMULTI
+  VALUEBOX
+  SPINNER
+  LISTVIEW
+  COLORPICKER
+  SCROLLBAR
+  STATUSBAR
+converter GuiControl2int32*(self: GuiControl): int32 = self.int32
 # Gui base properties for every control
-type GuiControlProperty* = enum 
-    BORDER_COLOR_NORMAL = 0 
-    BASE_COLOR_NORMAL 
-    TEXT_COLOR_NORMAL 
-    BORDER_COLOR_FOCUSED 
-    BASE_COLOR_FOCUSED 
-    TEXT_COLOR_FOCUSED 
-    BORDER_COLOR_PRESSED 
-    BASE_COLOR_PRESSED 
-    TEXT_COLOR_PRESSED 
-    BORDER_COLOR_DISABLED 
-    BASE_COLOR_DISABLED 
-    TEXT_COLOR_DISABLED 
-    BORDER_WIDTH 
-    TEXT_PADDING 
-    TEXT_ALIGNMENT 
-    RESERVED 
-converter GuiControlProperty2int32* (self: GuiControlProperty): int32 = self.int32 
+type GuiControlProperty* = enum
+  BORDER_COLOR_NORMAL = 0
+  BASE_COLOR_NORMAL
+  TEXT_COLOR_NORMAL
+  BORDER_COLOR_FOCUSED
+  BASE_COLOR_FOCUSED
+  TEXT_COLOR_FOCUSED
+  BORDER_COLOR_PRESSED
+  BASE_COLOR_PRESSED
+  TEXT_COLOR_PRESSED
+  BORDER_COLOR_DISABLED
+  BASE_COLOR_DISABLED
+  TEXT_COLOR_DISABLED
+  BORDER_WIDTH
+  TEXT_PADDING
+  TEXT_ALIGNMENT
+  RESERVED
+converter GuiControlProperty2int32*(self: GuiControlProperty): int32 = self.int32
 # Gui extended properties depend on control
 # NOTE: We reserve a fixed size of additional properties per control
 # DEFAULT properties
-type GuiDefaultProperty* = enum 
-    TEXT_SIZE = 16 
-    TEXT_SPACING 
-    LINE_COLOR 
-    BACKGROUND_COLOR 
-converter GuiDefaultProperty2int32* (self: GuiDefaultProperty): int32 = self.int32 
+type GuiDefaultProperty* = enum
+  TEXT_SIZE = 16
+  TEXT_SPACING
+  LINE_COLOR
+  BACKGROUND_COLOR
+converter GuiDefaultProperty2int32*(self: GuiDefaultProperty): int32 = self.int32
 # Label
 # typedef enum { } GuiLabelProperty;
 # Button
 # typedef enum { } GuiButtonProperty;
 # Toggle / ToggleGroup
-type GuiToggleProperty* = enum 
-    GROUP_PADDING = 16 
-converter GuiToggleProperty2int32* (self: GuiToggleProperty): int32 = self.int32 
+type GuiToggleProperty* = enum
+  GROUP_PADDING = 16
+converter GuiToggleProperty2int32*(self: GuiToggleProperty): int32 = self.int32
 # Slider / SliderBar
-type GuiSliderProperty* = enum 
-    SLIDER_WIDTH = 16 
-    SLIDER_PADDING 
-converter GuiSliderProperty2int32* (self: GuiSliderProperty): int32 = self.int32 
+type GuiSliderProperty* = enum
+  SLIDER_WIDTH = 16
+  SLIDER_PADDING
+converter GuiSliderProperty2int32*(self: GuiSliderProperty): int32 = self.int32
 # ProgressBar
-type GuiProgressBarProperty* = enum 
-    PROGRESS_PADDING = 16 
-converter GuiProgressBarProperty2int32* (self: GuiProgressBarProperty): int32 = self.int32 
+type GuiProgressBarProperty* = enum
+  PROGRESS_PADDING = 16
+converter GuiProgressBarProperty2int32 * (
+  self: GuiProgressBarProperty): int32 = self.int32
 # CheckBox
-type GuiCheckBoxProperty* = enum 
-    CHECK_PADDING = 16 
-converter GuiCheckBoxProperty2int32* (self: GuiCheckBoxProperty): int32 = self.int32 
+type GuiCheckBoxProperty* = enum
+  CHECK_PADDING = 16
+converter GuiCheckBoxProperty2int32*(self: GuiCheckBoxProperty): int32 = self.int32
 # ComboBox
-type GuiComboBoxProperty* = enum 
-    COMBO_BUTTON_WIDTH = 16 
-    COMBO_BUTTON_PADDING 
-converter GuiComboBoxProperty2int32* (self: GuiComboBoxProperty): int32 = self.int32 
+type GuiComboBoxProperty* = enum
+  COMBO_BUTTON_WIDTH = 16
+  COMBO_BUTTON_PADDING
+converter GuiComboBoxProperty2int32*(self: GuiComboBoxProperty): int32 = self.int32
 # DropdownBox
-type GuiDropdownBoxProperty* = enum 
-    ARROW_PADDING = 16 
-    DROPDOWN_ITEMS_PADDING 
-converter GuiDropdownBoxProperty2int32* (self: GuiDropdownBoxProperty): int32 = self.int32 
+type GuiDropdownBoxProperty* = enum
+  ARROW_PADDING = 16
+  DROPDOWN_ITEMS_PADDING
+converter GuiDropdownBoxProperty2int32 * (
+  self: GuiDropdownBoxProperty): int32 = self.int32
 # TextBox / TextBoxMulti / ValueBox / Spinner
-type GuiTextBoxProperty* = enum 
-    TEXT_INNER_PADDING = 16 
-    TEXT_LINES_PADDING 
-    COLOR_SELECTED_FG 
-    COLOR_SELECTED_BG 
-converter GuiTextBoxProperty2int32* (self: GuiTextBoxProperty): int32 = self.int32 
+type GuiTextBoxProperty* = enum
+  TEXT_INNER_PADDING = 16
+  TEXT_LINES_PADDING
+  COLOR_SELECTED_FG
+  COLOR_SELECTED_BG
+converter GuiTextBoxProperty2int32*(self: GuiTextBoxProperty): int32 = self.int32
 # Spinner
-type GuiSpinnerProperty* = enum 
-    SPIN_BUTTON_WIDTH = 16 
-    SPIN_BUTTON_PADDING 
-converter GuiSpinnerProperty2int32* (self: GuiSpinnerProperty): int32 = self.int32 
+type GuiSpinnerProperty* = enum
+  SPIN_BUTTON_WIDTH = 16
+  SPIN_BUTTON_PADDING
+converter GuiSpinnerProperty2int32*(self: GuiSpinnerProperty): int32 = self.int32
 # ScrollBar
-type GuiScrollBarProperty* = enum 
-    ARROWS_SIZE = 16 
-    ARROWS_VISIBLE 
-    SCROLL_SLIDER_PADDING 
-    SCROLL_SLIDER_SIZE 
-    SCROLL_PADDING 
-    SCROLL_SPEED 
-converter GuiScrollBarProperty2int32* (self: GuiScrollBarProperty): int32 = self.int32 
+type GuiScrollBarProperty* = enum
+  ARROWS_SIZE = 16
+  ARROWS_VISIBLE
+  SCROLL_SLIDER_PADDING
+  SCROLL_SLIDER_SIZE
+  SCROLL_PADDING
+  SCROLL_SPEED
+converter GuiScrollBarProperty2int32*(self: GuiScrollBarProperty): int32 = self.int32
 # ScrollBar side
-type GuiScrollBarSide* = enum 
-    SCROLLBAR_LEFT_SIDE = 0 
-    SCROLLBAR_RIGHT_SIDE 
-converter GuiScrollBarSide2int32* (self: GuiScrollBarSide): int32 = self.int32 
+type GuiScrollBarSide* = enum
+  SCROLLBAR_LEFT_SIDE = 0
+  SCROLLBAR_RIGHT_SIDE
+converter GuiScrollBarSide2int32*(self: GuiScrollBarSide): int32 = self.int32
 # ListView
-type GuiListViewProperty* = enum 
-    LIST_ITEMS_HEIGHT = 16 
-    LIST_ITEMS_PADDING 
-    SCROLLBAR_WIDTH 
-    SCROLLBAR_SIDE 
-converter GuiListViewProperty2int32* (self: GuiListViewProperty): int32 = self.int32 
+type GuiListViewProperty* = enum
+  LIST_ITEMS_HEIGHT = 16
+  LIST_ITEMS_PADDING
+  SCROLLBAR_WIDTH
+  SCROLLBAR_SIDE
+converter GuiListViewProperty2int32*(self: GuiListViewProperty): int32 = self.int32
 # ColorPicker
-type GuiColorPickerProperty* = enum 
-    COLOR_SELECTOR_SIZE = 16 
-    HUEBAR_WIDTH # Right hue bar width
-    HUEBAR_PADDING # Right hue bar separation from panel
-    HUEBAR_SELECTOR_HEIGHT # Right hue bar selector height
-    HUEBAR_SELECTOR_OVERFLOW # Right hue bar selector overflow
-converter GuiColorPickerProperty2int32* (self: GuiColorPickerProperty): int32 = self.int32 
+type GuiColorPickerProperty* = enum
+  COLOR_SELECTOR_SIZE = 16
+  HUEBAR_WIDTH           # Right hue bar width
+  HUEBAR_PADDING         # Right hue bar separation from panel
+  HUEBAR_SELECTOR_HEIGHT # Right hue bar selector height
+  HUEBAR_SELECTOR_OVERFLOW # Right hue bar selector overflow
+converter GuiColorPickerProperty2int32 * (
+  self: GuiColorPickerProperty): int32 = self.int32
 # ----------------------------------------------------------------------------------
 # Global Variables Definition
 # ----------------------------------------------------------------------------------
@@ -289,69 +292,134 @@ proc GuiEnable*() {.RAYGUIDEF, importc: "GuiEnable".} # Enable gui controls (glo
 proc GuiDisable*() {.RAYGUIDEF, importc: "GuiDisable".} # Disable gui controls (global state)
 proc GuiLock*() {.RAYGUIDEF, importc: "GuiLock".} # Lock gui controls (global state)
 proc GuiUnlock*() {.RAYGUIDEF, importc: "GuiUnlock".} # Unlock gui controls (global state)
-proc GuiFade*(alpha: float32) {.RAYGUIDEF, importc: "GuiFade".} # Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f
-proc GuiSetState*(state: int32) {.RAYGUIDEF, importc: "GuiSetState".} # Set gui state (global state)
+proc GuiFade*(alpha: float32) {.RAYGUIDEF,
+    importc: "GuiFade".} # Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f
+proc GuiSetState*(state: int32) {.RAYGUIDEF,
+    importc: "GuiSetState".} # Set gui state (global state)
 proc GuiGetState*(): int32 {.RAYGUIDEF, importc: "GuiGetState".} # Get gui state (global state)
 # Font set/get functions
-proc GuiSetFont*(font: Font) {.RAYGUIDEF, importc: "GuiSetFont".} # Set gui custom font (global state)
+proc GuiSetFont*(font: Font) {.RAYGUIDEF,
+    importc: "GuiSetFont".} # Set gui custom font (global state)
 proc GuiGetFont*(): Font {.RAYGUIDEF, importc: "GuiGetFont".} # Get gui custom font (global state)
 # Style set/get functions
-proc GuiSetStyle*(control: int32; property: int32; value: int32) {.RAYGUIDEF, importc: "GuiSetStyle".} # Set one style property
-proc GuiGetStyle*(control: int32; property: int32): int32 {.RAYGUIDEF, importc: "GuiGetStyle".} # Get one style property
+proc GuiSetStyle*(control: int32; property: int32; value: int32) {.RAYGUIDEF,
+    importc: "GuiSetStyle".} # Set one style property
+proc GuiGetStyle*(control: int32; property: int32): int32 {.RAYGUIDEF,
+    importc: "GuiGetStyle".} # Get one style property
 # Tooltips set functions
 proc GuiEnableTooltip*() {.RAYGUIDEF, importc: "GuiEnableTooltip".} # Enable gui tooltips
 proc GuiDisableTooltip*() {.RAYGUIDEF, importc: "GuiDisableTooltip".} # Disable gui tooltips
-proc GuiSetTooltip*(tooltip: cstring) {.RAYGUIDEF, importc: "GuiSetTooltip".} # Set current tooltip for display
+proc GuiSetTooltip*(tooltip: cstring) {.RAYGUIDEF,
+    importc: "GuiSetTooltip".} # Set current tooltip for display
 proc GuiClearTooltip*() {.RAYGUIDEF, importc: "GuiClearTooltip".} # Clear any tooltip registered
 # Container/separator controls, useful for controls organization
-proc GuiWindowBox*(bounds: Rectangle; title: cstring): bool {.RAYGUIDEF, importc: "GuiWindowBox".} # Window Box control, shows a window that can be closed
-proc GuiGroupBox*(bounds: Rectangle; text: cstring) {.RAYGUIDEF, importc: "GuiGroupBox".} # Group Box control with text name
-proc GuiLine*(bounds: Rectangle; text: cstring) {.RAYGUIDEF, importc: "GuiLine".} # Line separator control, could contain text
-proc GuiPanel*(bounds: Rectangle) {.RAYGUIDEF, importc: "GuiPanel".} # Panel control, useful to group controls
-proc GuiScrollPanel*(bounds: Rectangle; content: Rectangle; scroll: ptr Vector2): Rectangle {.RAYGUIDEF, importc: "GuiScrollPanel".} # Scroll Panel control
+proc GuiWindowBox*(bounds: Rectangle; title: cstring): bool {.RAYGUIDEF,
+    importc: "GuiWindowBox".} # Window Box control, shows a window that can be closed
+proc GuiGroupBox*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
+    importc: "GuiGroupBox".} # Group Box control with text name
+proc GuiLine*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
+    importc: "GuiLine".} # Line separator control, could contain text
+proc GuiPanel*(bounds: Rectangle) {.RAYGUIDEF,
+    importc: "GuiPanel".} # Panel control, useful to group controls
+proc GuiScrollPanel*(bounds: Rectangle; content: Rectangle;
+    scroll: ptr Vector2): Rectangle {.RAYGUIDEF,
+    importc: "GuiScrollPanel".} # Scroll Panel control
 # Basic controls set
-proc GuiLabel*(bounds: Rectangle; text: cstring) {.RAYGUIDEF, importc: "GuiLabel".} # Label control, shows text
-proc GuiButton*(bounds: Rectangle; text: cstring): bool {.RAYGUIDEF, importc: "GuiButton".} # Button control, returns true when clicked
-proc GuiLabelButton*(bounds: Rectangle; text: cstring): bool {.RAYGUIDEF, importc: "GuiLabelButton".} # Label button control, show true when clicked
-proc GuiImageButton*(bounds: Rectangle; text: cstring; texture: Texture2D): bool {.RAYGUIDEF, importc: "GuiImageButton".} # Image button control, returns true when clicked
-proc GuiImageButtonEx*(bounds: Rectangle; text: cstring; texture: Texture2D; texSource: Rectangle): bool {.RAYGUIDEF, importc: "GuiImageButtonEx".} # Image button extended control, returns true when clicked
-proc GuiToggle*(bounds: Rectangle; text: cstring; active: bool): bool {.RAYGUIDEF, importc: "GuiToggle".} # Toggle Button control, returns true when active
-proc GuiToggleGroup*(bounds: Rectangle; text: cstring; active: int32): int32 {.RAYGUIDEF, importc: "GuiToggleGroup".} # Toggle Group control, returns active toggle index
-proc GuiCheckBox*(bounds: Rectangle; text: cstring; checked: bool): bool {.RAYGUIDEF, importc: "GuiCheckBox".} # Check Box control, returns true when active
-proc GuiComboBox*(bounds: Rectangle; text: cstring; active: int32): int32 {.RAYGUIDEF, importc: "GuiComboBox".} # Combo Box control, returns selected item index
-proc GuiDropdownBox*(bounds: Rectangle; text: cstring; active: pointer; editMode: bool): bool {.RAYGUIDEF, importc: "GuiDropdownBox".} # Dropdown Box control, returns selected item
-proc GuiSpinner*(bounds: Rectangle; text: cstring; value: pointer; minValue: int32; maxValue: int32; editMode: bool): bool {.RAYGUIDEF, importc: "GuiSpinner".} # Spinner control, returns selected value
-proc GuiValueBox*(bounds: Rectangle; text: cstring; value: pointer; minValue: int32; maxValue: int32; editMode: bool): bool {.RAYGUIDEF, importc: "GuiValueBox".} # Value Box control, updates input text with numbers
-proc GuiTextBox*(bounds: Rectangle; text: ptr char; textSize: int32; editMode: bool): bool {.RAYGUIDEF, importc: "GuiTextBox".} # Text Box control, updates input text
-proc GuiTextBoxMulti*(bounds: Rectangle; text: ptr char; textSize: int32; editMode: bool): bool {.RAYGUIDEF, importc: "GuiTextBoxMulti".} # Text Box control with multiple lines
-proc GuiSlider*(bounds: Rectangle; textLeft: cstring; textRight: cstring; value: float32; minValue: float32; maxValue: float32): float32 {.RAYGUIDEF, importc: "GuiSlider".} # Slider control, returns selected value
-proc GuiSliderBar*(bounds: Rectangle; textLeft: cstring; textRight: cstring; value: float32; minValue: float32; maxValue: float32): float32 {.RAYGUIDEF, importc: "GuiSliderBar".} # Slider Bar control, returns selected value
-proc GuiProgressBar*(bounds: Rectangle; textLeft: cstring; textRight: cstring; value: float32; minValue: float32; maxValue: float32): float32 {.RAYGUIDEF, importc: "GuiProgressBar".} # Progress Bar control, shows current progress value
-proc GuiStatusBar*(bounds: Rectangle; text: cstring) {.RAYGUIDEF, importc: "GuiStatusBar".} # Status Bar control, shows info text
-proc GuiDummyRec*(bounds: Rectangle; text: cstring) {.RAYGUIDEF, importc: "GuiDummyRec".} # Dummy control for placeholders
-proc GuiScrollBar*(bounds: Rectangle; value: int32; minValue: int32; maxValue: int32): int32 {.RAYGUIDEF, importc: "GuiScrollBar".} # Scroll Bar control
-proc GuiGrid*(bounds: Rectangle; spacing: float32; subdivs: int32): Vector2 {.RAYGUIDEF, importc: "GuiGrid".} # Grid control
+proc GuiLabel*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
+    importc: "GuiLabel".} # Label control, shows text
+proc GuiButton*(bounds: Rectangle; text: cstring): bool {.RAYGUIDEF,
+    importc: "GuiButton".} # Button control, returns true when clicked
+proc GuiLabelButton*(bounds: Rectangle; text: cstring): bool {.RAYGUIDEF,
+    importc: "GuiLabelButton".} # Label button control, show true when clicked
+proc GuiImageButton*(bounds: Rectangle; text: cstring;
+    texture: Texture2D): bool {.RAYGUIDEF,
+    importc: "GuiImageButton".} # Image button control, returns true when clicked
+proc GuiImageButtonEx*(bounds: Rectangle; text: cstring; texture: Texture2D;
+    texSource: Rectangle): bool {.RAYGUIDEF,
+    importc: "GuiImageButtonEx".} # Image button extended control, returns true when clicked
+proc GuiToggle*(bounds: Rectangle; text: cstring; active: bool): bool {.
+    RAYGUIDEF, importc: "GuiToggle".} # Toggle Button control, returns true when active
+proc GuiToggleGroup*(bounds: Rectangle; text: cstring; active: int32): int32 {.
+    RAYGUIDEF, importc: "GuiToggleGroup".} # Toggle Group control, returns active toggle index
+proc GuiCheckBox*(bounds: Rectangle; text: cstring; checked: bool): bool {.
+    RAYGUIDEF, importc: "GuiCheckBox".} # Check Box control, returns true when active
+proc GuiComboBox*(bounds: Rectangle; text: cstring; active: int32): int32 {.
+    RAYGUIDEF, importc: "GuiComboBox".} # Combo Box control, returns selected item index
+proc GuiDropdownBox*(bounds: Rectangle; text: cstring; active: pointer;
+    editMode: bool): bool {.RAYGUIDEF,
+    importc: "GuiDropdownBox".} # Dropdown Box control, returns selected item
+proc GuiSpinner*(bounds: Rectangle; text: cstring; value: pointer;
+    minValue: int32; maxValue: int32; editMode: bool): bool {.RAYGUIDEF,
+    importc: "GuiSpinner".} # Spinner control, returns selected value
+proc GuiValueBox*(bounds: Rectangle; text: cstring; value: pointer;
+    minValue: int32; maxValue: int32; editMode: bool): bool {.RAYGUIDEF,
+    importc: "GuiValueBox".} # Value Box control, updates input text with numbers
+proc GuiTextBox*(bounds: Rectangle; text: ptr char; textSize: int32;
+    editMode: bool): bool {.RAYGUIDEF,
+    importc: "GuiTextBox".} # Text Box control, updates input text
+proc GuiTextBoxMulti*(bounds: Rectangle; text: ptr char; textSize: int32;
+    editMode: bool): bool {.RAYGUIDEF,
+    importc: "GuiTextBoxMulti".} # Text Box control with multiple lines
+proc GuiSlider*(bounds: Rectangle; textLeft: cstring; textRight: cstring;
+    value: float32; minValue: float32; maxValue: float32): float32 {.RAYGUIDEF,
+    importc: "GuiSlider".} # Slider control, returns selected value
+proc GuiSliderBar*(bounds: Rectangle; textLeft: cstring; textRight: cstring;
+    value: float32; minValue: float32; maxValue: float32): float32 {.RAYGUIDEF,
+    importc: "GuiSliderBar".} # Slider Bar control, returns selected value
+proc GuiProgressBar*(bounds: Rectangle; textLeft: cstring; textRight: cstring;
+    value: float32; minValue: float32; maxValue: float32): float32 {.RAYGUIDEF,
+    importc: "GuiProgressBar".} # Progress Bar control, shows current progress value
+proc GuiStatusBar*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
+    importc: "GuiStatusBar".} # Status Bar control, shows info text
+proc GuiDummyRec*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
+    importc: "GuiDummyRec".} # Dummy control for placeholders
+proc GuiScrollBar*(bounds: Rectangle; value: int32; minValue: int32;
+    maxValue: int32): int32 {.RAYGUIDEF, importc: "GuiScrollBar".} # Scroll Bar control
+proc GuiGrid*(bounds: Rectangle; spacing: float32; subdivs: int32): Vector2 {.
+    RAYGUIDEF, importc: "GuiGrid".} # Grid control
 # Advance controls set
-proc GuiListView*(bounds: Rectangle; text: cstring; scrollIndex: pointer; active: int32): int32 {.RAYGUIDEF, importc: "GuiListView".} # List View control, returns selected list item index
-proc GuiListViewEx*(bounds: Rectangle; text: cstring; count: int32; focus: pointer; scrollIndex: pointer; active: int32): int32 {.RAYGUIDEF, importc: "GuiListViewEx".} # List View with extended parameters
-proc GuiMessageBox*(bounds: Rectangle; title: cstring; message: cstring; buttons: cstring): int32 {.RAYGUIDEF, importc: "GuiMessageBox".} # Message Box control, displays a message
-proc GuiTextInputBox*(bounds: Rectangle; title: cstring; message: cstring; buttons: cstring; text: ptr char): int32 {.RAYGUIDEF, importc: "GuiTextInputBox".} # Text Input Box control, ask for text
-proc GuiColorPicker*(bounds: Rectangle; color: Color): Color {.RAYGUIDEF, importc: "GuiColorPicker".} # Color Picker control (multiple color controls)
-proc GuiColorPanel*(bounds: Rectangle; color: Color): Color {.RAYGUIDEF, importc: "GuiColorPanel".} # Color Panel control
-proc GuiColorBarAlpha*(bounds: Rectangle; alpha: float32): float32 {.RAYGUIDEF, importc: "GuiColorBarAlpha".} # Color Bar Alpha control
-proc GuiColorBarHue*(bounds: Rectangle; value: float32): float32 {.RAYGUIDEF, importc: "GuiColorBarHue".} # Color Bar Hue control
+proc GuiListView*(bounds: Rectangle; text: cstring; scrollIndex: pointer;
+    active: int32): int32 {.RAYGUIDEF,
+    importc: "GuiListView".} # List View control, returns selected list item index
+proc GuiListViewEx*(bounds: Rectangle; text: cstring; count: int32;
+    focus: pointer; scrollIndex: pointer; active: int32): int32 {.RAYGUIDEF,
+    importc: "GuiListViewEx".} # List View with extended parameters
+proc GuiMessageBox*(bounds: Rectangle; title: cstring; message: cstring;
+    buttons: cstring): int32 {.RAYGUIDEF,
+    importc: "GuiMessageBox".} # Message Box control, displays a message
+proc GuiTextInputBox*(bounds: Rectangle; title: cstring; message: cstring;
+    buttons: cstring; text: ptr char): int32 {.RAYGUIDEF,
+    importc: "GuiTextInputBox".} # Text Input Box control, ask for text
+proc GuiColorPicker*(bounds: Rectangle; color: Color): Color {.RAYGUIDEF,
+    importc: "GuiColorPicker".} # Color Picker control (multiple color controls)
+proc GuiColorPanel*(bounds: Rectangle; color: Color): Color {.RAYGUIDEF,
+    importc: "GuiColorPanel".} # Color Panel control
+proc GuiColorBarAlpha*(bounds: Rectangle; alpha: float32): float32 {.RAYGUIDEF,
+    importc: "GuiColorBarAlpha".} # Color Bar Alpha control
+proc GuiColorBarHue*(bounds: Rectangle; value: float32): float32 {.RAYGUIDEF,
+    importc: "GuiColorBarHue".} # Color Bar Hue control
 # Styles loading functions
-proc GuiLoadStyle*(fileName: cstring) {.RAYGUIDEF, importc: "GuiLoadStyle".} # Load style file (.rgs)
-proc GuiLoadStyleDefault*() {.RAYGUIDEF, importc: "GuiLoadStyleDefault".} # Load style default over global style
-proc GuiIconText*(iconId: int32; text: cstring): cstring {.RAYGUIDEF, importc: "GuiIconText".} # Get text with icon id prepended (if supported)
+proc GuiLoadStyle*(fileName: cstring) {.RAYGUIDEF,
+    importc: "GuiLoadStyle".} # Load style file (.rgs)
+proc GuiLoadStyleDefault*() {.RAYGUIDEF,
+    importc: "GuiLoadStyleDefault".} # Load style default over global style
+proc GuiIconText*(iconId: int32; text: cstring): cstring {.RAYGUIDEF,
+    importc: "GuiIconText".} # Get text with icon id prepended (if supported)
 # Gui icons functionality
-proc GuiDrawIcon*(iconId: int32; position: Vector2; pixelSize: int32; color: Color) {.RAYGUIDEF, importc: "GuiDrawIcon".} 
-proc GuiGetIcons*(): uint32 {.RAYGUIDEF, importc: "GuiGetIcons".} # Get full icons data pointer
-proc GuiGetIconData*(iconId: int32): uint32 {.RAYGUIDEF, importc: "GuiGetIconData".} # Get icon bit data
-proc GuiSetIconData*(iconId: int32; data: uint32) {.RAYGUIDEF, importc: "GuiSetIconData".} # Set icon bit data
-proc GuiSetIconPixel*(iconId: int32; x: int32; y: int32) {.RAYGUIDEF, importc: "GuiSetIconPixel".} # Set icon pixel value
-proc GuiClearIconPixel*(iconId: int32; x: int32; y: int32) {.RAYGUIDEF, importc: "GuiClearIconPixel".} # Clear icon pixel value
-proc GuiCheckIconPixel*(iconId: int32; x: int32; y: int32): bool {.RAYGUIDEF, importc: "GuiCheckIconPixel".} # Check icon pixel value
+proc GuiDrawIcon*(iconId: int32; position: Vector2; pixelSize: int32;
+    color: Color) {.RAYGUIDEF, importc: "GuiDrawIcon".}
+proc GuiGetIcons*(): uint32 {.RAYGUIDEF,
+    importc: "GuiGetIcons".} # Get full icons data pointer
+proc GuiGetIconData*(iconId: int32): uint32 {.RAYGUIDEF,
+    importc: "GuiGetIconData".} # Get icon bit data
+proc GuiSetIconData*(iconId: int32; data: uint32) {.RAYGUIDEF,
+    importc: "GuiSetIconData".} # Set icon bit data
+proc GuiSetIconPixel*(iconId: int32; x: int32; y: int32) {.RAYGUIDEF,
+    importc: "GuiSetIconPixel".} # Set icon pixel value
+proc GuiClearIconPixel*(iconId: int32; x: int32; y: int32) {.RAYGUIDEF,
+    importc: "GuiClearIconPixel".} # Clear icon pixel value
+proc GuiCheckIconPixel*(iconId: int32; x: int32; y: int32): bool {.RAYGUIDEF,
+    importc: "GuiCheckIconPixel".} # Check icon pixel value
 # 
 #   RAYGUI IMPLEMENTATION
-# 
+#

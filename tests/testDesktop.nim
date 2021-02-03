@@ -3,7 +3,7 @@ import unittest
 import komodo/core
 
 test "Test game":
-    var game = newGame()
+  var game = newGame()
 
-    checkpoint("Running game...")
-    game.run()
+  checkpoint("Running game...")
+  game.run()

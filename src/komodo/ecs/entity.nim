@@ -1,10 +1,10 @@
 import ./ids
 
 type
-    Entity* = ref object of RootObj
-        id*: EntityId
+  Entity* = ref object of RootObj
+    id*: EntityId
 
 proc newEntity*(): Entity =
-    Entity(
-        id: nextEntityId(),
-    )
+  Entity(
+      id: nextEntityId(),
+  )
