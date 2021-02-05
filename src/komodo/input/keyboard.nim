@@ -110,8 +110,14 @@ type Keys* {.pure.} = enum
 converter KeyToint32*(self: Keys): int32 = self.int32
 converter Int32ToKey*(self: int32): Keys = self.Keys
 
-func isDown*(key: Keys): bool =
-  result = raylib.IsKeyDown(key)
+func isDown*(self: Keys): bool =
+  result = raylib.IsKeyDown(self)
 
-func isPressed*(key: Keys): bool =
-  result = raylib.IsKeyPressed(key)
+func isUp*(self: Keys): bool =
+  result = raylib.IsKeyUp(self)
+
+func isPressed*(self: Keys): bool =
+  result = raylib.IsKeyPressed(self)
+
+func isReleased*(self: Keys): bool =
+  result = raylib.IsKeyReleased(self)
