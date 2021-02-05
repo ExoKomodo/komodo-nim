@@ -16,6 +16,7 @@ from komodo/game import executeOnSystems, instance
 behavior TestBehavior:
   fields:
     transform: Option[TransformComponent]
+    action: Action
 
   create:
     discard
@@ -34,15 +35,19 @@ behavior TestBehavior:
       return
     self.transform = transform
 
+    self.action = newAction("move")
+    self.action
+      .map(MouseButtons.Left)
+      .map(Keys.Space)
+
   update:
-    let position = self.transform.get.position
-    self.transform.get.position = Vector3(
-        x: position.x + 1,
-        y: position.y,
-        z: position.z,
-    )
-    if Keys.Space.isPressed():
-      echo "Space pressed"
+    if self.action.isDown():
+      let position = self.transform.get.position
+      self.transform.get.position = Vector3(
+          x: position.x + 1,
+          y: position.y,
+          z: position.z,
+      )
 
   destroy:
     discard
