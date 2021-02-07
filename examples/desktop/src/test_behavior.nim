@@ -1,15 +1,4 @@
-import options
-
-import komodo/ecs/components/[
-    behavior_macros,
-    component,
-    transform_component,
-]
-import komodo/ecs/entity
-import komodo/ecs/systems/system
-import komodo/input
-import komodo/lib/math
-import komodo/logging
+include komodo/prelude
 
 from komodo/game import executeOnSystems, instance
 
