@@ -35,7 +35,7 @@ proc main() =
   let text = newTextComponent(
       parent,
       "Hello from desktop!",
-      fontSize = 16,
+      fontSize = 24,
       color = Black,
   )
   assert game.registerComponent(text)
