@@ -16,14 +16,19 @@ proc main() =
 
   let parent = newEntity()
   assert game.registerEntity(parent)
+  assert game.deregisterEntity(parent)
+  assert not game.deregisterEntity(parent)
+  assert game.registerEntity(parent)
 
-  assert game.registerSystem(newBehaviorSystem())
+  let behavior_system = newBehaviorSystem()
+  assert game.registerSystem(behavior_system)
   let behavior = newTestBehavior(
       parent,
   )
   assert game.registerComponent(behavior)
 
-  assert game.registerSystem(newRenderSpriteSystem())
+  let render_sprite_system = newRenderSpriteSystem()
+  assert game.registerSystem(render_sprite_system)
   let sprite = newSpriteComponent(
       parent,
       "img/brainlet.png",
@@ -31,13 +36,17 @@ proc main() =
   )
   assert game.registerComponent(sprite)
 
-  assert game.registerSystem(newRenderTextSystem())
+  let render_text_system = newRenderTextSystem()
+  assert game.registerSystem(render_text_system)
   let text = newTextComponent(
       parent,
       "Hello from desktop!",
       fontSize = 24,
       color = Black,
   )
+  assert game.registerComponent(text)
+  assert game.deregisterComponent(text)
+  assert not game.deregisterComponent(text)
   assert game.registerComponent(text)
 
   let screenSize = game.screenSize()
@@ -60,6 +69,10 @@ proc main() =
     ),
   )
   assert game.registerComponent(transform)
+
+  assert game.deregisterSystem(behavior_system)
+  assert not game.deregisterSystem(behavior_system)
+  assert game.registerSystem(behavior_system)
 
   game.run()
 

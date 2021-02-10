@@ -3,6 +3,8 @@ import options
 import sequtils
 import tables
 
+from sugar import `=>`
+
 import ../components
 import ../entity
 import ../ids
@@ -28,6 +30,12 @@ func isInitialized*(self: SystemObj | System): bool {.inline.}
 
 method initialize*(self: System) {.base.} =
   for component in self.uninitializedComponents:
+    if (
+      component.isInitialized or
+      component.parent.isNone() or
+      not (component.parent.unsafeGet().id in self.entityToComponents)
+    ):
+      continue
     component.initialize()
   self.uninitializedComponents = @[]
   self.initialized = true
@@ -47,6 +55,24 @@ func findComponentByParent*[T: Component](
 func findComponentByParent*[T: Component](self: System; parent: Entity): Option[T] =
   self.findComponentByParent[:T](parent.id)
 
+proc deregisterComponent*(self: System; component: Component): bool =
+  if component.parent.isNone():
+    return false
+
+  let parent = component.parent.get()
+  if not (parent.id in self.entityToComponents):
+    return false
+
+  var components = self.entityToComponents[parent.id]
+  components.keepIf(_ => _ != component)
+  return true
+
+proc deregisterEntity*(self: System; entity: Entity): bool =
+  if not (entity.id in self.entityToComponents):
+    return false
+  self.entityToComponents.del(entity.id)
+  true
+
 func registerComponent*(self: System; component: Component): bool =
   if component.parent.isNone():
     return false
@@ -56,7 +82,7 @@ func registerComponent*(self: System; component: Component): bool =
     self.entityToComponents[parent.id] = @[]
 
   let components = self.entityToComponents[parent.id]
-  if components.any(proc (c: Component): bool = return c == component):
+  if components.any(_ => _ == component):
     return false
 
   self.entityToComponents[parent.id] &= component
