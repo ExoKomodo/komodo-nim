@@ -1,5 +1,8 @@
 import options
+import sequtils
 import tables
+
+from sugar import `=>`
 
 import ./ecs/[
     components,
@@ -71,6 +74,36 @@ func draw(self: Game) =
 proc executeOnSystems*(self: Game; predicate: proc (system: System)) =
   for system in self.systems:
     system.predicate()
+
+proc deregisterComponent*(self: Game; component: Component): bool =
+  if not self.componentStore.hasKey(component.id):
+    return false
+  if component.parent.isNone:
+    return false
+  
+  let parent = component.parent.get()
+  self.executeOnSystems(proc (system: System) =
+    if system.deregisterComponent(component):
+      system.refreshEntityRegistration(parent)
+  )
+  self.componentStore.del(component.id)
+  true
+
+proc deregisterEntity*(self: Game; entity: Entity): bool =
+  if not self.entityStore.hasKey(entity.id):
+    return false
+  self.executeOnSystems(proc (system: System) =
+    if system.deregisterEntity(entity):
+      system.refreshEntityRegistration(entity)
+  )
+  self.entityStore.del(entity.id)
+  true
+
+proc deregisterSystem*(self: Game; system: System): bool =
+  if not (system in self.systems):
+    return false
+  self.systems.keepIf(_ => _ != system)
+  true
 
 proc registerComponent*(self: Game; component: Component): bool =
   if self.componentStore.hasKey(component.id):
