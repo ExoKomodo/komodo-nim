@@ -12,7 +12,7 @@ import test_behavior
 proc main() =
   var game = newGame()
   game.title = "Desktop Example"
-
+  game.clearColor = Blue
 
   let parent = newEntity()
   assert game.registerEntity(parent)
@@ -49,6 +49,15 @@ proc main() =
   assert not game.deregisterComponent(text)
   assert game.registerComponent(text)
 
+  let render_model_system = newRenderModelSystem()
+  assert game.registerSystem(render_model_system)
+  let model = newModelComponent(
+      parent,
+      "models/cube.obj",
+      color = White,
+  )
+  assert game.registerComponent(model)
+
   let screenSize = game.screenSize()
   let transform = newTransformComponent(
       parent,
@@ -64,8 +73,8 @@ proc main() =
     ),
     scale = Vector3(
         x: 0.5,
-        y: 0,
-        z: 0,
+        y: 1,
+        z: 1,
     ),
   )
   assert game.registerComponent(transform)
