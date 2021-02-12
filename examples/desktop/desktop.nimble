@@ -14,11 +14,11 @@ binDir        = "bin"
 requires "nim >= 1.4.2"
 requires "komodo"
 
-task build, "Build Desktop example":
-  exec "nimble --gc:orc -d:nimpretty build"
+task buildDesktop, "Build Desktop example":
+  exec "nimble --gc:orc --threads:on -d:nimpretty build -Y"
 
-task debug, "Debug Desktop example":
-  exec "nimble --gc:orc -g --debugger:native -d:nimpretty build"
+task debugDesktop, "Debug Desktop example":
+  exec "nimble --gc:orc --threads:on -g --debugger:native -d:nimpretty build -Y"
 
-task example, "Example":
-  exec "nimble --gc:orc -d:nimpretty run"
+task runDesktop, "Example":
+  exec "nimble --gc:orc --threads:on -d:nimpretty run -Y"

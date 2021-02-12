@@ -4,26 +4,33 @@
         {
             "label": "Build Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; nimble build",
+            "command": "cd examples/desktop; nimble buildDesktop",
             "problemMatcher": [],
             "group": "build",
         },
         {
             "label": "Debug Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; nimble debug",
+            "command": "cd komodoeditor; nimble debugDesktop",
             "problemMatcher": [],
             "group": "build",
         },
         {
             "label": "Run Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; nimble example",
+            "command": "cd examples/desktop; nimble runDesktop",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
+        },
+        {
+            "label": "Debug Komodo Editor",
+            "type": "shell",
+            "command": "cd komodoeditor; nimble debugEditor",
+            "problemMatcher": [],
+            "group": "build",
         },
         {
             "label": "Format code",

@@ -39,7 +39,7 @@ type Game* = ref object
   systems: seq[System]
   title: string
 
-var instance* {.global.} = none[Game]()
+# var instance* {.global.} = none[Game]()
 
 func camera*(self: Game): auto {.inline.} =
   if self.camera.isNone():
@@ -75,7 +75,7 @@ proc newGame*(): Game =
       screenSize(result),
       result.title,
   )
-  instance = some(result)
+  # instance = some(result)
 
 func draw(self: Game) =
   beginDraw()
@@ -167,6 +167,15 @@ func update(self: Game) =
   for system in self.systems:
     system.update(delta)
 
+func setClearColor*(self: Game; clearColor: Color) =
+  self.clearColor = some(clearColor)
+
+proc quit*(self: Game) =
+  if self.isRunning:
+    self.isRunning = false
+    # instance = none[Game]()
+    close()
+
 proc run*(self: Game) =
   if not self.isRunning:
     logInfo("Starting...")
@@ -177,10 +186,31 @@ proc run*(self: Game) =
       self.update()
       self.draw()
 
-func setClearColor*(self: Game; clearColor: Color) =
-  self.clearColor = some(clearColor)
+type CommandKind* {.pure.} = enum
+  Default
+  Close
 
-func quit*(self: Game) =
-  if self.isRunning:
-    self.isRunning = false
-    close()
+proc handleCommands(self: Game; commandChannel: ptr Channel[CommandKind]): CommandKind =
+  let (isDataAvailable, message) = commandChannel[].tryRecv()
+  case message
+  of CommandKind.Close:
+    self.quit()
+  else:
+    discard
+  message
+
+proc run*(self: Game; commandChannel: ptr Channel[CommandKind]) =
+  if not self.isRunning:
+    logInfo("Starting...")
+    setFps(60)
+
+    while not isClosing():
+      case self.handleCommands(commandChannel)
+      of CommandKind.Close:
+        # Necessary to break, as GLFW will throw an error forever otherwise
+        break
+      else:
+        discard
+      self.initialize()
+      self.update()
+      self.draw()

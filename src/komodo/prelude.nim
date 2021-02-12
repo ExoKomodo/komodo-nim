@@ -1,5 +1,6 @@
 import options
 
+import ./game
 import ./ecs/components/[
     behavior_macros,
     component,
@@ -8,5 +9,6 @@ import ./ecs/components/[
 import ./ecs/entity
 import ./ecs/systems/system
 import ./input
+import ./lib/graphics
 import ./lib/math
 import ./logging
