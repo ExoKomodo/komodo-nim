@@ -1,7 +1,6 @@
 import options
 import tables
 
-import ./system_macros
 import ../components/[
     component,
     model_component,
@@ -9,7 +8,11 @@ import ../components/[
 ]
 import ../entity
 import ../../lib/graphics/model3d
+import ../../lib/math
+from ../../lib/private/raylib import nil
 import ../../logging
+import ./system_macros
+
 
 func drawComponents(
     model: ModelComponent;
@@ -20,6 +23,8 @@ func drawComponents(
       transform.rotation,
       transform.scale,
       model.color,
+      model.hasWireframe,
+      model.wireframeColor,
   )
 
 system RenderModelSystem:
@@ -33,6 +38,7 @@ system RenderModelSystem:
     discard
 
   draw:
+    raylib.BeginMode3D(injected_camera)
     for entityId, components in pairs(self.entityToComponents):
       let model = self.findComponentByParent[:ModelComponent](entityId)
       let transform = self.findComponentByParent[:TransformComponent](entityId)
@@ -42,6 +48,7 @@ system RenderModelSystem:
           model.get(),
           transform.get(),
       )
+    raylib.EndMode3D()
 
   destroy:
     logInfo("Destroying render model system...")

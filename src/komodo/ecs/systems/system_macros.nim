@@ -1,10 +1,16 @@
 import macros
 
 import ../../private/macro_helpers
+import ../../lib/graphics/camera
 import ./system
 
+export camera
 export system
 
+
+type InteractiveMethod {.pure.} = enum
+  Draw
+  Update
 
 proc generateSystemConstructor(
     typeName: NimNode;
@@ -34,12 +40,12 @@ proc generateSystemConstructor(
 proc generateDrawOrUpdate(typeName: NimNode; procDefinition: NimNode): NimNode =
   expectKind(typeName, nnkIdent)
   let procSignature = procDefinition[0]
-  var isUpdate: bool = false
-  case $procSignature:
-  of "update":
-    isUpdate = true
+
+  let methodType = case $procSignature:
   of "draw":
-    isUpdate = false
+    InteractiveMethod.Draw
+  of "update":
+    InteractiveMethod.Update
   else:
     raiseAssert("Must contain either draw or update block")
 
@@ -56,7 +62,17 @@ proc generateDrawOrUpdate(typeName: NimNode; procDefinition: NimNode): NimNode =
           newEmptyNode(),
     ),
   )
-  if isUpdate:
+  case methodType:
+  of InteractiveMethod.Draw:
+    formalParams.add(
+        newTree(
+            nnkIdentDefs,
+            ident("injected_camera"),
+            ident("Camera"),
+            newEmptyNode(),
+      ),
+    )
+  of InteractiveMethod.Update:
     formalParams.add(
         newTree(
             nnkIdentDefs,

@@ -28,7 +28,9 @@ proc draw*(
     position: Vector3;
     rotation: Vector3;
     scale: Vector3;
-    color: Color;
+    color: Color = White;
+    hasWireframe: bool = false;
+    wireFrameColor: Color = Black;
 ) =
   if self.model.isNone():
     return
@@ -41,3 +43,12 @@ proc draw*(
     scale,
     color,
   )
+  if hasWireframe:
+    raylib.DrawModelWiresEx(
+      model,
+      position,
+      rotation,
+      0.0,
+      scale,
+      wireframeColor,
+    )
