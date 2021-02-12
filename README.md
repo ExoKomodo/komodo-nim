@@ -18,7 +18,7 @@ scoop install nim
 ```
 
 #### Raylib Setup
-Copy the libraries found in the project's `lib/windows` directory to `C:\Windows\System32`.
+Copy the libraries found in the project's `libs/raylib/windows` directory to `C:\Windows\System32`.
 
 ### Mac OS
 
@@ -63,7 +63,7 @@ choosenim stable
 ```
 
 #### Raylib Setup
-Either copy the `libraylib.so` file from `lib/linux` into `/usr/local/lib`, or follow the install instructions found on [raylib's repo wiki](https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux) to build from source and install like so:
+Either copy the `libraylib.so` file from `libs/raylib/linux` into `/usr/local/lib`, or follow the install instructions found on [raylib's repo wiki](https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux) to build from source and install like so:
 ```bash
 cd /tmp
 git clone https://github.com/raysan5/raylib.git raylib
@@ -72,8 +72,8 @@ make PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED
 sudo make install RAYLIB_LIBTYPE=SHARED
 ```
 
-## Raylib
-### Important Links
+## Important Links
 * [raylib bindings](https://github.com/Guevara-chan/Raylib-Forever)
 * [raylib cheatsheet](https://www.raylib.com/cheatsheet/cheatsheet.html)
 * [raylib releases](https://github.com/raysan5/raylib/releases)
+* [IUP documentation](http://webserver2.tecgraf.puc-rio.br/iup)

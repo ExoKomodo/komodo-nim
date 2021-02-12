@@ -9,6 +9,15 @@
             "program": "${workspaceFolder}/examples/desktop/bin/desktop",
             "args": [],
             "cwd": "${workspaceFolder}/examples/desktop",
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Nim: Debug Editor",
+            "preLaunchTask": "Debug Komodo Editor",
+            "program": "${workspaceFolder}/komodoeditor/bin/komodoeditor",
+            "args": [],
+            "cwd": "${workspaceFolder}/komodoeditor",
         }
     ]
 }

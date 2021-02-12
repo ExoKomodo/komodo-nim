@@ -175,14 +175,7 @@ proc generateInit*(
             newEmptyNode(),
       ),
     ),
-    newTree(
-        nnkPragma,
-        newTree(
-            nnkExprColonExpr,
-            ident("locks"),
-            lockLevel,
-      )
-    ),
+    newEmptyNode(),
     newEmptyNode(),
     quote do:
       `defaultStatements`

@@ -28,7 +28,7 @@ jobs:
         run: |
           nimble develop
           cd examples/desktop
-          nimble build -Y
+          nimble buildDesktop -Y
       
       # Generate the Docs
       - name: Generate documentation

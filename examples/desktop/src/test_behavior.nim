@@ -1,6 +1,5 @@
 include komodo/prelude
 
-from komodo/game import executeOnSystems, instance, deregisterComponent, registerComponent
 
 behavior TestBehavior:
   fields:
@@ -13,13 +12,13 @@ behavior TestBehavior:
 
   init:
     var transform = none[TransformComponent]()
-    let game = instance.get()
-    game.executeOnSystems(proc (system: System) =
-      if transform.isNone():
-        transform = system.findComponentByParent[:TransformComponent](
-          self.parent.get().id,
-        )
-    )
+    # TODO: Need to rethink game instance injection
+    # game.executeOnSystems(proc (system: System) =
+    #   if transform.isNone():
+    #     transform = system.findComponentByParent[:TransformComponent](
+    #       self.parent.get().id,
+    #     )
+    # )
     if transform.isNone():
       logError("Failed to find transform")
       return
@@ -44,7 +43,7 @@ behavior TestBehavior:
           z: position.z,
       )
     if self.remove_action.isDown():
-      let game = instance.get()
+      # let game = instance.get()
       discard game.deregisterComponent(self.transform.get())
       discard game.registerComponent(self.transform.get())
 
