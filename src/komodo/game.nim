@@ -21,8 +21,16 @@ const DefaultScreenSize = Vector2(
 )
 const DefaultTitle = "Komodo Game Engine"
 const DefaultClearColor = White
+const DefaultCamera = Camera(
+  position: Vector3(x: 0, y: 10, z: 10),
+  target: Vector3(x: 0, y: 0, z: 0),
+  up: Vector3(x: 0, y: 1, z: 0),
+  fovy: 45,
+  typex: 0,
+)
 
 type Game* = ref object
+  camera: Option[Camera]
   clearColor: Option[Color]
   componentStore: Table[ComponentId, Component]
   entityStore: Table[EntityId, Entity]
@@ -33,22 +41,29 @@ type Game* = ref object
 
 var instance* {.global.} = none[Game]()
 
-func clearColor*(self: Game): Color {.inline.} =
+func camera*(self: Game): auto {.inline.} =
+  if self.camera.isNone():
+    DefaultCamera
+  else:
+    self.camera.unsafeGet()
+
+func clearColor*(self: Game): auto {.inline.} =
   if self.clearColor.isNone():
-    return DefaultClearColor
-  return self.clearColor.get()
+    DefaultClearColor
+  else:
+    self.clearColor.unsafeGet()
 func `clearColor=`*(self: Game; value: Color) {.inline.}
     = self.clearColor = some(value)
 
-func isRunning*(self: Game): bool {.inline.} = self.isRunning
+func isRunning*(self: Game): auto {.inline.} = self.isRunning
 
-func title*(self: Game): string {.inline.} = self.title
+func title*(self: Game): auto {.inline.} = self.title
 func `title=`*(self: Game; value: string) {.inline.} =
   if self.isRunning:
     setWindowTitle(value)
   self.title = value
 
-func screenSize*(self: Game): Vector2 {.inline.} =
+func screenSize*(self: Game): auto {.inline.} =
   if self.screenSize.isNone():
     return DefaultScreenSize
   return self.screenSize.get()
@@ -67,8 +82,9 @@ func draw(self: Game) =
 
   self.clearColor.clearScreen()
 
+  let camera = camera(self)
   for system in self.systems:
-    system.draw()
+    system.draw(camera)
   endDraw()
 
 proc executeOnSystems*(self: Game; predicate: proc (system: System)) =
@@ -80,7 +96,7 @@ proc deregisterComponent*(self: Game; component: Component): bool =
     return false
   if component.parent.isNone:
     return false
-  
+
   let parent = component.parent.get()
   self.executeOnSystems(proc (system: System) =
     if system.deregisterComponent(component):
@@ -134,6 +150,8 @@ proc registerSystem*(self: Game; system: System): bool =
 
 proc initialize(self: Game) =
   self.isRunning = true
+  if self.camera.isNone():
+    self.camera = some(DefaultCamera)
   if self.clearColor.isNone():
     self.clearColor = some(DefaultClearColor)
   if self.screenSize.isNone():

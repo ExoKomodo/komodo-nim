@@ -8,6 +8,7 @@ from sugar import `=>`
 import ../components
 import ../entity
 import ../ids
+import ../../lib/graphics/camera
 
 
 type
@@ -107,7 +108,7 @@ proc refreshEntityRegistration*(self: System; entity: Entity) =
   for component in components:
     discard self.registerComponent(component)
 
-method draw*(self: System) {.base.} =
+method draw*(self: System; injected_camera: Camera) {.base.} =
   discard
 
 method update*(self: System; delta: float32) {.base.} =

@@ -9,23 +9,46 @@ import komodo/lib/math
 
 import test_behavior
 
-proc main() =
-  var game = newGame()
-  game.title = "Desktop Example"
-  game.clearColor = Blue
 
+proc add_cube(game: Game) =
+  let parent = newEntity()
+  assert game.registerEntity(parent)
+  let render_model_system = newRenderModelSystem()
+  assert game.registerSystem(render_model_system)
+  let model = newModelComponent(
+      parent,
+      "models/cube.obj",
+  )
+  model.color = Yellow
+  model.hasWireframe = true
+  assert game.registerComponent(model)
+
+  let transform = newTransformComponent(
+    parent,
+    position = Vector3(
+        x: -4,
+        y: 1,
+        z: 0,
+    ),
+    rotation = Vector3(
+        x: 0,
+        y: 0,
+        z: 0,
+    ),
+    scale = Vector3(
+        x: 0.5,
+        y: 1,
+        z: 1,
+    ),
+  )
+  assert game.registerComponent(transform)
+
+proc add_sprite(game: Game) =
   let parent = newEntity()
   assert game.registerEntity(parent)
   assert game.deregisterEntity(parent)
   assert not game.deregisterEntity(parent)
   assert game.registerEntity(parent)
-
-  let behavior_system = newBehaviorSystem()
-  assert game.registerSystem(behavior_system)
-  let behavior = newTestBehavior(
-      parent,
-  )
-  assert game.registerComponent(behavior)
 
   let render_sprite_system = newRenderSpriteSystem()
   assert game.registerSystem(render_sprite_system)
@@ -49,22 +72,13 @@ proc main() =
   assert not game.deregisterComponent(text)
   assert game.registerComponent(text)
 
-  let render_model_system = newRenderModelSystem()
-  assert game.registerSystem(render_model_system)
-  let model = newModelComponent(
-      parent,
-      "models/cube.obj",
-      color = White,
-  )
-  assert game.registerComponent(model)
-
-  let screenSize = game.screenSize()
+  let screen_size = game.screenSize()
   let transform = newTransformComponent(
-      parent,
-      position = Vector3(
-          x: screenSize.x / 2,
-          y: screenSize.y / 2,
-          z: 0,
+    parent,
+    position = Vector3(
+        x: screen_size.x / 2,
+        y: screen_size.y / 2,
+        z: 0,
     ),
     rotation = Vector3(
         x: 0,
@@ -79,9 +93,24 @@ proc main() =
   )
   assert game.registerComponent(transform)
 
+  let behavior_system = newBehaviorSystem()
+  assert game.registerSystem(behavior_system)
+  let behavior = newTestBehavior(
+      parent,
+  )
+  assert game.registerComponent(behavior)
+
   assert game.deregisterSystem(behavior_system)
   assert not game.deregisterSystem(behavior_system)
   assert game.registerSystem(behavior_system)
+
+proc main() =
+  var game = newGame()
+  game.title = "Desktop Example"
+  game.clearColor = Blue
+
+  game.add_cube()
+  game.add_sprite()
 
   game.run()
 
