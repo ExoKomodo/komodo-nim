@@ -14,7 +14,7 @@
         {
             "label": "Debug Komodo Desktop Example",
             "type": "shell",
-            "command": "cd komodoeditor; nimble debugDesktop",
+            "command": "cd examples/desktop; nimble debugDesktop",
             "problemMatcher": [],
             "group": "build",
         },
