@@ -13,21 +13,25 @@ type
     keyInputs: seq[Keys]
     mouseInputs: seq[MouseButtons]
     name: string
+  
+  ActionManager* = ref object
+    actionMap: Table[string, Action]
 
   Inputs = Keys | MouseButtons
 
-var actionMap {.global.}: Table[string, Action]
+proc newActionManager*(): ActionManager =
+  result = ActionManager()
 
-proc newAction*(action: string): Action =
-  if actionMap.hasKey(action):
-    result = actionMap[action]
+proc newAction*(self: ActionManager; action: string): Action =
+  if self.actionMap.hasKey(action):
+    result = self.actionMap[action]
   else:
     result = Action(
       name: action,
       keyInputs: @[],
       mouseInputs: @[],
     )
-    actionMap[action] = result
+    self.actionMap[action] = result
 
 func name*(self: Action): string = self.name
 
@@ -45,14 +49,14 @@ func checkInputState(
       return true
   return false
 
-proc clear*(self: Action) =
-  actionMap.del(self.name)
-  self.keyInputs = @[]
-  self.mouseInputs = @[]
+proc clear*(self: ActionManager; action: Action) =
+  self.actionMap.del(action.name)
+  action.keyInputs = @[]
+  action.mouseInputs = @[]
 
-proc clear*(self: string) =
-  if self in actionMap:
-    actionMap[self].clear()
+proc clear*(self: ActionManager; action: string) =
+  if action in self.actionMap:
+    self.clear(self.actionMap[action])
 
 func isDown*(self: Action): bool =
   checkInputState(
@@ -86,46 +90,46 @@ func isReleased*(self: Action): bool =
     mouse.isReleased,
   )
 
-proc map*(self: Action; input: Inputs): Action {.discardable.} =
-  if not (self.name in actionMap):
-    actionMap[self.name] = self
+proc map*(self: ActionManager; action: Action; input: Inputs): ActionManager {.discardable.} =
+  if not (action.name in self.actionMap):
+    self.actionMap[action.name] = action
   if input is Keys:
-    if not (input.Keys in self.keyInputs):
-      self.keyInputs &= input.Keys
+    if not (input.Keys in action.keyInputs):
+      action.keyInputs &= input.Keys
   elif input is MouseButtons:
-    if not (input.MouseButtons in self.mouseInputs):
-      self.mouseInputs &= input.MouseButtons
+    if not (input.MouseButtons in action.mouseInputs):
+      action.mouseInputs &= input.MouseButtons
   self
 
-proc map*(self: string; input: Inputs): Action {.discardable.} =
-  if not (self in actionMap):
-    actionMap[self] = newAction(self)
-  actionMap[self].map(input)
+proc map*(self: ActionManager; action: string; input: Inputs): ActionManager {.discardable.} =
+  if not (action in self.actionMap):
+    self.actionMap[action] = self.newAction(action)
+  self.actionMap[action].map(input)
 
-proc map*(self: string; inputs: openArray[Inputs]): Action {.discardable.} =
+proc map*(self: ActionManager; action: string; inputs: openArray[Inputs]): ActionManager {.discardable.} =
   for input in inputs:
-    result = self.map(input)
+    result = self.map(action, input)
 
-proc map*(self: Action; inputs: openArray[Inputs]): Action {.discardable.} =
+proc map*(self: ActionManager; action: Action; inputs: openArray[Inputs]): ActionManager {.discardable.} =
   for input in inputs:
-    result = self.map(input)
+    result = self.map(action, input)
 
-proc unmap*(self: Action; input: Inputs) =
-  if self.name in actionMap:
-    self.inputs = self.inputs.filter(x => x != input)
+proc unmap*(self: ActionManager; action: Action; input: Inputs) =
+  if action.name in self.actionMap:
+    action.inputs = action.inputs.filter(x => x != input)
   else:
-    logInfo(fmt"Action map did not contain action '{self.name}'")
+    logInfo(fmt"Action map did not contain action '{action.name}'")
 
-proc unmap*(self: string; input: Inputs) =
-  if self in actionMap:
-    actionMap[self].unmap(input)
+proc unmap*(self: ActionManager; action: string; input: Inputs) =
+  if action in self.actionMap:
+    self.actionMap[action].unmap(action, input)
   else:
-    logInfo(fmt"Action map did not contain action '{self}'")
+    logInfo(fmt"Action map did not contain action '{action}'")
 
-proc unmap*(self: string; inputs: openArray[Inputs]) =
+proc unmap*(self: ActionManager; action: string; inputs: openArray[Inputs]) =
   for input in inputs:
-    self.unmap(input)
+    self.unmap(action, input)
 
-proc unmap*(self: Action; inputs: openArray[Inputs]) =
+proc unmap*(self: ActionManager; action: Action; inputs: openArray[Inputs]) =
   for input in inputs:
-    self.unmap(input)
+    self.unmap(action, input)

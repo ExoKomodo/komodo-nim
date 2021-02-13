@@ -17,6 +17,8 @@ proc clearScreen*(clearColor: Option[Color]) =
 
 proc getDelta*: float32 = raylib.GetFrameTime()
 
+proc getFps*: int32 = raylib.GetFPS()
+
 proc close*() = raylib.CloseWindow()
 
 proc endDraw*() = raylib.EndDrawing()

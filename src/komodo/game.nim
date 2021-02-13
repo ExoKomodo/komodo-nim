@@ -39,8 +39,6 @@ type Game* = ref object
   systems: seq[System]
   title: string
 
-# var instance* {.global.} = none[Game]()
-
 func camera*(self: Game): auto {.inline.} =
   if self.camera.isNone():
     DefaultCamera

@@ -1,13 +1,10 @@
 import options
+import tables
 
 import ./game
-import ./ecs/components/[
-    behavior_macros,
-    component,
-    transform_component,
-]
+import ./ecs/components
 import ./ecs/entity
-import ./ecs/systems/system
+import ./ecs/systems
 import ./input
 import ./lib/graphics
 import ./lib/math
