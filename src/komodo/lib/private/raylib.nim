@@ -69,7 +69,7 @@
 #     3. This notice may not be removed or altered from any source distribution.
 #
 
-{.passL: "-lraylib".}
+{.passL: "-static -lraylib -lm".}
 {.pragma: RLAPI, cdecl, discardable.}
 
 converter int2in32*(self: int): int32 = self.int32
