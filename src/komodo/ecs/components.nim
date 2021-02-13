@@ -1,6 +1,5 @@
 import ./components/[
     component,
-    behavior_component,
     model_component,
     sprite_component,
     text_component,
@@ -8,7 +7,6 @@ import ./components/[
 ]
 
 export component
-export behavior_component
 export model_component
 export sprite_component
 export text_component
