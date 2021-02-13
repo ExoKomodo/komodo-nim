@@ -68,12 +68,11 @@
 # 
 #     3. This notice may not be removed or altered from any source distribution.
 #
+
+{.passL: "-lraylib".}
+{.pragma: RLAPI, cdecl, discardable.}
+
 converter int2in32*(self: int): int32 = self.int32
-const LEXT* = when defined(windows): ".dll"
-elif defined(macosx): ".dylib"
-else: ".so"
-{.pragma: RLAPI, cdecl, discardable, dynlib: "libraylib" & LEXT.}
-{.pragma: RLAPI, cdecl, discardable, dynlib: "libraylib" & LEXT.}
 # ----------------------------------------------------------------------------------
 # Some basic Defines
 # ----------------------------------------------------------------------------------

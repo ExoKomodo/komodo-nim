@@ -16,10 +16,10 @@ requires "komodo"
 requires "iup"
 
 task buildEditor, "Build Komodo Editor":
-  exec "nimble --gc:orc --threads:on -d:nimpretty build -Y"
+  exec "nimble --gc:orc --threads:on --opt:speed -d:nimpretty -d:release build -Y"
 
 task debugEditor, "Debug Komodo Editor":
   exec "nimble --gc:orc --threads:on -g --debugger:native -d:nimpretty build -Y"
 
 task runEditor, "Run":
-  exec "nimble --gc:orc --threads:on -d:nimpretty run -Y"
+  exec "nimble --gc:orc --threads:on --opt:speed -d:nimpretty -d:release run -Y"

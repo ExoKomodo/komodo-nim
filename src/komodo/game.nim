@@ -14,6 +14,8 @@ import ./lib/graphics
 import ./lib/math
 import ./logging
 
+import ./lib/private/raygui
+
 
 const DefaultScreenSize = Vector2(
     x: 800,

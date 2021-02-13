@@ -126,6 +126,8 @@
 #
 template RAYGUI_H*(): auto = RAYGUI_H
 template RAYGUI_VERSION*(): auto = "2.6-dev"
+{.pragma: RAYGUIDEF, cdecl, discardable.}
+
 import raylib
 # Define functions scope to be used internally (static) or externally (extern) to the module including this file
 # Allow custom memory allocators

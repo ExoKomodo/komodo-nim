@@ -39,8 +39,9 @@
 template RAYMATH_H*(): auto = RAYMATH_H
 # #define RAYMATH_STANDALONE
 # #define RAYMATH_HEADER_ONLY
+{.pragma: RMDEF, cdecl, discardable.}
+
 import raylib
-{.pragma: RMDEF, cdecl, discardable, dynlib: "libraylib" & LEXT.}
 # ----------------------------------------------------------------------------------
 # Defines and Macros
 # ----------------------------------------------------------------------------------

@@ -56,7 +56,8 @@
 #     3. This notice may not be removed or altered from any source distribution.
 #
 template RLGL_H*(): auto = RLGL_H
-{.pragma: RLAPI, cdecl, discardable, dynlib: "libraylib" & LEXT.}
+{.pragma: RLAPI, cdecl, discardable.}
+
 import raylib
 # Security check in case no GRAPHICS_API_OPENGL_* defined
 # Security check in case multiple GRAPHICS_API_OPENGL_* defined
