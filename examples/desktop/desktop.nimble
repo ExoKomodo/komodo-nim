@@ -15,10 +15,10 @@ requires "nim >= 1.4.2"
 requires "komodo"
 
 task buildDesktop, "Build Desktop example":
-  exec "nimble --verbose --clibdir:../../libs/raylib/linux --clibdir:../../libs/raylib/window --gc:orc --threads:on --opt:speed -d:nimpretty -d:release build -Y"
+  exec "nimble --verbose --gc:orc --threads:on --opt:speed -d:nimpretty -d:release build -Y"
 
 task debugDesktop, "Debug Desktop example":
-  exec "nimble --verbose --clibdir:../../libs/raylib/linux --clibdir:../../libs/raylib/window --gc:orc --threads:on -g --debugger:native -d:nimpretty build -Y"
+  exec "nimble --verbose --gc:orc --threads:on -g --debugger:native -d:nimpretty build -Y"
 
 task runDesktop, "Example":
-  exec "nimble --verbose --clibdir:../../libs/raylib/linux --clibdir:../../libs/raylib/window --gc:orc --threads:on --opt:speed -d:nimpretty -d:release run -Y"
+  exec "nimble --verbose --gc:orc --threads:on --opt:speed -d:nimpretty -d:release run -Y"
