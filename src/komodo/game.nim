@@ -119,12 +119,18 @@ proc deregisterSystem*(self: Game; system: System): bool =
   self.systems.keepIf(_ => _ != system)
   true
 
+proc registerEntity*(self: Game; entity: Entity): bool =
+  self.entityStore[entity.id] = entity
+  self.executeOnSystems(proc (system: System) =
+    discard system.registerEntity(entity, self.componentStore)
+  )
+  true
+
 proc registerComponent*(self: Game; component: Component): bool =
-  if self.componentStore.hasKey(component.id):
+  if component.parent.isNone():
     return false
-  if component.parent.isNone:
-    return false
-  let parent = component.parent.get()
+  let parent = component.parent.unsafeGet()
+  discard self.registerEntity(parent)
   self.componentStore[component.id] = component
 
   self.executeOnSystems(proc (system: System) =
@@ -133,17 +139,11 @@ proc registerComponent*(self: Game; component: Component): bool =
   )
   true
 
-proc registerEntity*(self: Game; entity: Entity): bool =
-  if self.entityStore.hasKey(entity.id):
-    return false
-  self.entityStore[entity.id] = entity
-  self.executeOnSystems(proc (system: System) =
-    system.refreshEntityRegistration(entity)
-  )
-  true
-
 proc registerSystem*(self: Game; system: System): bool =
-  self.systems &= system
+  if not self.systems.any(_ => _ == system):
+    self.systems &= system
+  for entity in self.entityStore.values:
+    discard self.registerEntity(entity)
   return true
 
 proc initialize(self: Game) =
