@@ -45,26 +45,26 @@ proc addCube(game: Game) =
   assert game.registerComponent(transform)
 
 proc addBrainlet(game: Game) =
-  let render_sprite_system = newRenderSpriteSystem()
-  assert game.registerSystem(render_sprite_system)
-
-  let render_text_system = newRenderTextSystem()
-  assert game.registerSystem(render_text_system)
-
-  let move_system = newMoveSystem()
-  assert game.registerSystem(move_system)
-
+  ##########
+  # Entity #
+  ##########
   let parent = newEntity()
   assert game.registerEntity(parent)
   assert game.deregisterEntity(parent)
   assert not game.deregisterEntity(parent)
   assert game.registerEntity(parent)
 
+  #############
+  # Component #
+  #############
   let sprite = newSpriteComponent(
       parent,
       "img/brainlet.png",
       color = White,
   )
+  assert game.registerComponent(sprite)
+  assert game.deregisterComponent(sprite)
+  assert not game.deregisterComponent(sprite)
   assert game.registerComponent(sprite)
 
   let text = newTextComponent(
@@ -98,6 +98,30 @@ proc addBrainlet(game: Game) =
     ),
   )
   assert game.registerComponent(transform)
+  assert game.deregisterComponent(transform)
+  assert not game.deregisterComponent(transform)
+  assert game.registerComponent(transform)
+
+  ##########
+  # System #
+  ##########
+  let render_sprite_system = newRenderSpriteSystem()
+  assert game.registerSystem(render_sprite_system)
+  assert game.deregisterSystem(render_sprite_system)
+  assert not game.deregisterSystem(render_sprite_system)
+  assert game.registerSystem(render_sprite_system)
+  
+  let render_text_system = newRenderTextSystem()
+  assert game.registerSystem(render_text_system)
+  assert game.deregisterSystem(render_text_system)
+  assert not game.deregisterSystem(render_text_system)
+  assert game.registerSystem(render_text_system)
+
+  let move_system = newMoveSystem()
+  assert game.registerSystem(move_system)
+  assert game.deregisterSystem(move_system)
+  assert not game.deregisterSystem(move_system)
+  assert game.registerSystem(move_system)
 
 proc main() =
   var game = newGame()

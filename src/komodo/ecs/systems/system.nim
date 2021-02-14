@@ -19,43 +19,6 @@ type
 
   System* = ref SystemObj
 
-func destroy*(self: var SystemObj) =
-  self.entityToComponents.clear()
-  self.uninitializedComponents = @[]
-
-func entityToComponents*(self: System): Table[EntityId, seq[Component]] {.inline.}
-    = self.entityToComponents
-
-func isInitialized*(self: SystemObj | System): bool {.inline.}
-    = self.initialized
-
-method initialize*(self: System) {.base.} =
-  for component in self.uninitializedComponents:
-    if (
-      component.isInitialized or
-      component.parent.isNone() or
-      not (component.parent.unsafeGet().id in self.entityToComponents)
-    ):
-      continue
-    component.initialize()
-  self.uninitializedComponents = @[]
-  self.initialized = true
-
-func findComponentByParent*[T: Component](
-    self: System;
-    parentId: EntityId;
-): Option[T] =
-  if not self.entityToComponents.hasKey(parentId):
-    return none[T]()
-  let components = self.entityToComponents[parentId]
-  for component in components:
-    if component of T:
-      return some[T](T(component))
-  return none[T]()
-
-func findComponentByParent*[T: Component](self: System; parent: Entity): Option[T] =
-  self.findComponentByParent[:T](parent.id)
-
 proc deregisterComponent*(self: System; component: Component): bool =
   if component.parent.isNone():
     return false
@@ -74,6 +37,49 @@ proc deregisterEntity*(self: System; entity: Entity): bool =
   self.entityToComponents.del(entity.id)
   true
 
+func destroy*(self: var SystemObj) =
+  self.entityToComponents.clear()
+  self.uninitializedComponents = @[]
+
+func entityToComponents*(self: System): Table[EntityId, seq[Component]] {.inline.}
+    = self.entityToComponents
+
+func findComponentByParent*[T: Component](
+    self: System;
+    parentId: EntityId;
+): Option[T] =
+  if not self.entityToComponents.hasKey(parentId):
+    return none[T]()
+  let components = self.entityToComponents[parentId]
+  for component in components:
+    if component of T:
+      return some[T](T(component))
+  return none[T]()
+
+func findComponentByParent*[T: Component](self: System; parent: Entity): Option[T] =
+  self.findComponentByParent[:T](parent.id)
+
+method hasNecessaryComponents*(
+    self: System;
+    entity: Entity;
+    components: seq[Component];
+): bool {.base.} = false
+
+func isInitialized*(self: SystemObj | System): bool {.inline.}
+    = self.initialized
+
+method initialize*(self: System) {.base.} =
+  for component in self.uninitializedComponents:
+    if (
+      component.isInitialized or
+      component.parent.isNone() or
+      not (component.parent.unsafeGet().id in self.entityToComponents)
+    ):
+      continue
+    component.initialize()
+  self.uninitializedComponents = @[]
+  self.initialized = true
+
 func registerComponent*(self: System; component: Component): bool =
   if component.parent.isNone():
     return false
@@ -83,7 +89,7 @@ func registerComponent*(self: System; component: Component): bool =
     self.entityToComponents[parent.id] = @[]
 
   let components = self.entityToComponents[parent.id]
-  if components.any(_ => _ == component):
+  if components.any(_ => _.id == component.id):
     return false
 
   self.entityToComponents[parent.id] &= component
@@ -91,14 +97,8 @@ func registerComponent*(self: System; component: Component): bool =
     self.uninitializedComponents &= component
   return true
 
-method hasNecessaryComponents*(
-    self: System;
-    entity: Entity;
-    components: seq[Component];
-): bool {.base.} = false
-
 proc refreshEntityRegistration*(self: System; entity: Entity) =
-  if not self.entityToComponents.hasKey(entity.id):
+  if not (entity.id in self.entityToComponents):
     return
   let components = self.entityToComponents[entity.id]
   if not self.hasNecessaryComponents(entity, components):
@@ -107,6 +107,22 @@ proc refreshEntityRegistration*(self: System; entity: Entity) =
 
   for component in components:
     discard self.registerComponent(component)
+
+func registerEntity*(
+  self: System;
+  entity: Entity;
+  componentStore: Table[ComponentId, Component];
+): bool =
+  if entity.id in self.entityToComponents:
+    return false
+
+  self.entityToComponents[entity.id] = @[]
+  for component in componentStore.values:
+    if component.parent.isSome() and component.parent.unsafeGet().id == entity.id:
+      discard self.registerComponent(component)
+
+  self.refreshEntityRegistration(entity)
+  return true
 
 method draw*(self: System; injected_camera: Camera) {.base.} =
   discard
