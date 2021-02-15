@@ -10,29 +10,29 @@ type
   Texture2d* = ref object of RootObj
     texture: Option[raylib.Texture2D]
 
-proc unload(self: Texture2d) =
-  if self.texture.isSome():
+func unload(self: Texture2d) =
+  if self.texture.isSome:
     raylib.UnloadTexture(self.texture.unsafeGet())
     self.texture = none[raylib.Texture2D]()
 
-proc destroy*(self: Texture2d) =
+func destroy*(self: Texture2d) =
   self.unload()
 
-proc newTexture2d*(texturePath: string): Texture2d =
+func newTexture2d*(texturePath: string): Texture2d =
   let image = raylib.LoadImage(texturePath)
   result = Texture2d(
       texture: some(raylib.LoadTextureFromImage(image))
   )
   raylib.UnloadImage(image)
 
-proc draw*(
+func draw*(
     self: Texture2d;
     position: Vector3;
     rotation: Vector3;
     scale: Vector3;
     color: Color;
 ) =
-  if self.texture.isNone():
+  if self.texture.isNone:
     return
   let texture = self.texture.unsafeGet()
   raylib.DrawTextureEx(

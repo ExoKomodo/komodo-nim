@@ -2,9 +2,13 @@ import macros
 import strformat
 
 
+func knownLockLevel*(level: BiggestInt): NimNode = newIntLitNode(level)
+
+func unknownLockLevel*: NimNode = newStrLitNode("unknown")
+
 proc toConcreteTypeName(typeName: NimNode): string = fmt"{$typeName}Obj"
 
-proc toFieldDefinitions(fields: NimNode): seq[NimNode] =
+func toFieldDefinitions(fields: NimNode): seq[NimNode] =
   result = @[]
   expectKind(fields, nnkCall)
   expectIdent(fields[0], "fields")
@@ -30,7 +34,7 @@ proc toFieldDefinitions(fields: NimNode): seq[NimNode] =
       ),
     )
 
-proc toFormalParam(param: NimNode): NimNode =
+func toFormalParam(param: NimNode): NimNode =
   expectKind(param, nnkExprColonExpr)
 
   let paramName = param[0]
@@ -148,7 +152,7 @@ proc generateInit*(
     typeName: NimNode;
     initDefinition: NimNode;
     defaultStatements: NimNode;
-    lockLevel: NimNode;
+    lockLevel: NimNode = knownLockLevel(0);
 ): NimNode =
   expectKind(typeName, nnkIdent)
   let initSignature = initDefinition[0]
@@ -175,7 +179,14 @@ proc generateInit*(
             newEmptyNode(),
       ),
     ),
-    newEmptyNode(),
+    newTree(
+      nnkPragma,
+      newTree(
+        nnkExprColonExpr,
+        ident("locks"),
+        lockLevel,
+      )
+    ),
     newEmptyNode(),
     quote do:
       `defaultStatements`
@@ -221,6 +232,3 @@ proc generateDestructor*(
       `destructorBody`
       `defaultStatements`
   )
-
-func knownLockLevel*(level: BiggestInt): NimNode = newIntLitNode(level)
-func unknownLockLevel*: NimNode = newStrLitNode("unknown")

@@ -288,137 +288,137 @@ converter GuiColorPickerProperty2int32 * (
 # Module Functions Declaration
 # ----------------------------------------------------------------------------------
 # State modification functions
-proc GuiEnable*() {.RAYGUIDEF, importc: "GuiEnable".} # Enable gui controls (global state)
-proc GuiDisable*() {.RAYGUIDEF, importc: "GuiDisable".} # Disable gui controls (global state)
-proc GuiLock*() {.RAYGUIDEF, importc: "GuiLock".} # Lock gui controls (global state)
-proc GuiUnlock*() {.RAYGUIDEF, importc: "GuiUnlock".} # Unlock gui controls (global state)
-proc GuiFade*(alpha: float32) {.RAYGUIDEF,
+func GuiEnable*() {.RAYGUIDEF, importc: "GuiEnable".} # Enable gui controls (global state)
+func GuiDisable*() {.RAYGUIDEF, importc: "GuiDisable".} # Disable gui controls (global state)
+func GuiLock*() {.RAYGUIDEF, importc: "GuiLock".} # Lock gui controls (global state)
+func GuiUnlock*() {.RAYGUIDEF, importc: "GuiUnlock".} # Unlock gui controls (global state)
+func GuiFade*(alpha: float32) {.RAYGUIDEF,
     importc: "GuiFade".} # Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f
-proc GuiSetState*(state: int32) {.RAYGUIDEF,
+func GuiSetState*(state: int32) {.RAYGUIDEF,
     importc: "GuiSetState".} # Set gui state (global state)
-proc GuiGetState*(): int32 {.RAYGUIDEF, importc: "GuiGetState".} # Get gui state (global state)
+func GuiGetState*(): int32 {.RAYGUIDEF, importc: "GuiGetState".} # Get gui state (global state)
 # Font set/get functions
-proc GuiSetFont*(font: Font) {.RAYGUIDEF,
+func GuiSetFont*(font: Font) {.RAYGUIDEF,
     importc: "GuiSetFont".} # Set gui custom font (global state)
-proc GuiGetFont*(): Font {.RAYGUIDEF, importc: "GuiGetFont".} # Get gui custom font (global state)
+func GuiGetFont*(): Font {.RAYGUIDEF, importc: "GuiGetFont".} # Get gui custom font (global state)
 # Style set/get functions
-proc GuiSetStyle*(control: int32; property: int32; value: int32) {.RAYGUIDEF,
+func GuiSetStyle*(control: int32; property: int32; value: int32) {.RAYGUIDEF,
     importc: "GuiSetStyle".} # Set one style property
-proc GuiGetStyle*(control: int32; property: int32): int32 {.RAYGUIDEF,
+func GuiGetStyle*(control: int32; property: int32): int32 {.RAYGUIDEF,
     importc: "GuiGetStyle".} # Get one style property
 # Tooltips set functions
-proc GuiEnableTooltip*() {.RAYGUIDEF, importc: "GuiEnableTooltip".} # Enable gui tooltips
-proc GuiDisableTooltip*() {.RAYGUIDEF, importc: "GuiDisableTooltip".} # Disable gui tooltips
-proc GuiSetTooltip*(tooltip: cstring) {.RAYGUIDEF,
+func GuiEnableTooltip*() {.RAYGUIDEF, importc: "GuiEnableTooltip".} # Enable gui tooltips
+func GuiDisableTooltip*() {.RAYGUIDEF, importc: "GuiDisableTooltip".} # Disable gui tooltips
+func GuiSetTooltip*(tooltip: cstring) {.RAYGUIDEF,
     importc: "GuiSetTooltip".} # Set current tooltip for display
-proc GuiClearTooltip*() {.RAYGUIDEF, importc: "GuiClearTooltip".} # Clear any tooltip registered
+func GuiClearTooltip*() {.RAYGUIDEF, importc: "GuiClearTooltip".} # Clear any tooltip registered
 # Container/separator controls, useful for controls organization
-proc GuiWindowBox*(bounds: Rectangle; title: cstring): bool {.RAYGUIDEF,
+func GuiWindowBox*(bounds: Rectangle; title: cstring): bool {.RAYGUIDEF,
     importc: "GuiWindowBox".} # Window Box control, shows a window that can be closed
-proc GuiGroupBox*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
+func GuiGroupBox*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
     importc: "GuiGroupBox".} # Group Box control with text name
-proc GuiLine*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
+func GuiLine*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
     importc: "GuiLine".} # Line separator control, could contain text
-proc GuiPanel*(bounds: Rectangle) {.RAYGUIDEF,
+func GuiPanel*(bounds: Rectangle) {.RAYGUIDEF,
     importc: "GuiPanel".} # Panel control, useful to group controls
-proc GuiScrollPanel*(bounds: Rectangle; content: Rectangle;
+func GuiScrollPanel*(bounds: Rectangle; content: Rectangle;
     scroll: ptr Vector2): Rectangle {.RAYGUIDEF,
     importc: "GuiScrollPanel".} # Scroll Panel control
 # Basic controls set
-proc GuiLabel*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
+func GuiLabel*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
     importc: "GuiLabel".} # Label control, shows text
-proc GuiButton*(bounds: Rectangle; text: cstring): bool {.RAYGUIDEF,
+func GuiButton*(bounds: Rectangle; text: cstring): bool {.RAYGUIDEF,
     importc: "GuiButton".} # Button control, returns true when clicked
-proc GuiLabelButton*(bounds: Rectangle; text: cstring): bool {.RAYGUIDEF,
+func GuiLabelButton*(bounds: Rectangle; text: cstring): bool {.RAYGUIDEF,
     importc: "GuiLabelButton".} # Label button control, show true when clicked
-proc GuiImageButton*(bounds: Rectangle; text: cstring;
+func GuiImageButton*(bounds: Rectangle; text: cstring;
     texture: Texture2D): bool {.RAYGUIDEF,
     importc: "GuiImageButton".} # Image button control, returns true when clicked
-proc GuiImageButtonEx*(bounds: Rectangle; text: cstring; texture: Texture2D;
+func GuiImageButtonEx*(bounds: Rectangle; text: cstring; texture: Texture2D;
     texSource: Rectangle): bool {.RAYGUIDEF,
     importc: "GuiImageButtonEx".} # Image button extended control, returns true when clicked
-proc GuiToggle*(bounds: Rectangle; text: cstring; active: bool): bool {.
+func GuiToggle*(bounds: Rectangle; text: cstring; active: bool): bool {.
     RAYGUIDEF, importc: "GuiToggle".} # Toggle Button control, returns true when active
-proc GuiToggleGroup*(bounds: Rectangle; text: cstring; active: int32): int32 {.
+func GuiToggleGroup*(bounds: Rectangle; text: cstring; active: int32): int32 {.
     RAYGUIDEF, importc: "GuiToggleGroup".} # Toggle Group control, returns active toggle index
-proc GuiCheckBox*(bounds: Rectangle; text: cstring; checked: bool): bool {.
+func GuiCheckBox*(bounds: Rectangle; text: cstring; checked: bool): bool {.
     RAYGUIDEF, importc: "GuiCheckBox".} # Check Box control, returns true when active
-proc GuiComboBox*(bounds: Rectangle; text: cstring; active: int32): int32 {.
+func GuiComboBox*(bounds: Rectangle; text: cstring; active: int32): int32 {.
     RAYGUIDEF, importc: "GuiComboBox".} # Combo Box control, returns selected item index
-proc GuiDropdownBox*(bounds: Rectangle; text: cstring; active: pointer;
+func GuiDropdownBox*(bounds: Rectangle; text: cstring; active: pointer;
     editMode: bool): bool {.RAYGUIDEF,
     importc: "GuiDropdownBox".} # Dropdown Box control, returns selected item
-proc GuiSpinner*(bounds: Rectangle; text: cstring; value: pointer;
+func GuiSpinner*(bounds: Rectangle; text: cstring; value: pointer;
     minValue: int32; maxValue: int32; editMode: bool): bool {.RAYGUIDEF,
     importc: "GuiSpinner".} # Spinner control, returns selected value
-proc GuiValueBox*(bounds: Rectangle; text: cstring; value: pointer;
+func GuiValueBox*(bounds: Rectangle; text: cstring; value: pointer;
     minValue: int32; maxValue: int32; editMode: bool): bool {.RAYGUIDEF,
     importc: "GuiValueBox".} # Value Box control, updates input text with numbers
-proc GuiTextBox*(bounds: Rectangle; text: ptr char; textSize: int32;
+func GuiTextBox*(bounds: Rectangle; text: ptr char; textSize: int32;
     editMode: bool): bool {.RAYGUIDEF,
     importc: "GuiTextBox".} # Text Box control, updates input text
-proc GuiTextBoxMulti*(bounds: Rectangle; text: ptr char; textSize: int32;
+func GuiTextBoxMulti*(bounds: Rectangle; text: ptr char; textSize: int32;
     editMode: bool): bool {.RAYGUIDEF,
     importc: "GuiTextBoxMulti".} # Text Box control with multiple lines
-proc GuiSlider*(bounds: Rectangle; textLeft: cstring; textRight: cstring;
+func GuiSlider*(bounds: Rectangle; textLeft: cstring; textRight: cstring;
     value: float32; minValue: float32; maxValue: float32): float32 {.RAYGUIDEF,
     importc: "GuiSlider".} # Slider control, returns selected value
-proc GuiSliderBar*(bounds: Rectangle; textLeft: cstring; textRight: cstring;
+func GuiSliderBar*(bounds: Rectangle; textLeft: cstring; textRight: cstring;
     value: float32; minValue: float32; maxValue: float32): float32 {.RAYGUIDEF,
     importc: "GuiSliderBar".} # Slider Bar control, returns selected value
-proc GuiProgressBar*(bounds: Rectangle; textLeft: cstring; textRight: cstring;
+func GuiProgressBar*(bounds: Rectangle; textLeft: cstring; textRight: cstring;
     value: float32; minValue: float32; maxValue: float32): float32 {.RAYGUIDEF,
     importc: "GuiProgressBar".} # Progress Bar control, shows current progress value
-proc GuiStatusBar*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
+func GuiStatusBar*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
     importc: "GuiStatusBar".} # Status Bar control, shows info text
-proc GuiDummyRec*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
+func GuiDummyRec*(bounds: Rectangle; text: cstring) {.RAYGUIDEF,
     importc: "GuiDummyRec".} # Dummy control for placeholders
-proc GuiScrollBar*(bounds: Rectangle; value: int32; minValue: int32;
+func GuiScrollBar*(bounds: Rectangle; value: int32; minValue: int32;
     maxValue: int32): int32 {.RAYGUIDEF, importc: "GuiScrollBar".} # Scroll Bar control
-proc GuiGrid*(bounds: Rectangle; spacing: float32; subdivs: int32): Vector2 {.
+func GuiGrid*(bounds: Rectangle; spacing: float32; subdivs: int32): Vector2 {.
     RAYGUIDEF, importc: "GuiGrid".} # Grid control
 # Advance controls set
-proc GuiListView*(bounds: Rectangle; text: cstring; scrollIndex: pointer;
+func GuiListView*(bounds: Rectangle; text: cstring; scrollIndex: pointer;
     active: int32): int32 {.RAYGUIDEF,
     importc: "GuiListView".} # List View control, returns selected list item index
-proc GuiListViewEx*(bounds: Rectangle; text: cstring; count: int32;
+func GuiListViewEx*(bounds: Rectangle; text: cstring; count: int32;
     focus: pointer; scrollIndex: pointer; active: int32): int32 {.RAYGUIDEF,
     importc: "GuiListViewEx".} # List View with extended parameters
-proc GuiMessageBox*(bounds: Rectangle; title: cstring; message: cstring;
+func GuiMessageBox*(bounds: Rectangle; title: cstring; message: cstring;
     buttons: cstring): int32 {.RAYGUIDEF,
     importc: "GuiMessageBox".} # Message Box control, displays a message
-proc GuiTextInputBox*(bounds: Rectangle; title: cstring; message: cstring;
+func GuiTextInputBox*(bounds: Rectangle; title: cstring; message: cstring;
     buttons: cstring; text: ptr char): int32 {.RAYGUIDEF,
     importc: "GuiTextInputBox".} # Text Input Box control, ask for text
-proc GuiColorPicker*(bounds: Rectangle; color: Color): Color {.RAYGUIDEF,
+func GuiColorPicker*(bounds: Rectangle; color: Color): Color {.RAYGUIDEF,
     importc: "GuiColorPicker".} # Color Picker control (multiple color controls)
-proc GuiColorPanel*(bounds: Rectangle; color: Color): Color {.RAYGUIDEF,
+func GuiColorPanel*(bounds: Rectangle; color: Color): Color {.RAYGUIDEF,
     importc: "GuiColorPanel".} # Color Panel control
-proc GuiColorBarAlpha*(bounds: Rectangle; alpha: float32): float32 {.RAYGUIDEF,
+func GuiColorBarAlpha*(bounds: Rectangle; alpha: float32): float32 {.RAYGUIDEF,
     importc: "GuiColorBarAlpha".} # Color Bar Alpha control
-proc GuiColorBarHue*(bounds: Rectangle; value: float32): float32 {.RAYGUIDEF,
+func GuiColorBarHue*(bounds: Rectangle; value: float32): float32 {.RAYGUIDEF,
     importc: "GuiColorBarHue".} # Color Bar Hue control
 # Styles loading functions
-proc GuiLoadStyle*(fileName: cstring) {.RAYGUIDEF,
+func GuiLoadStyle*(fileName: cstring) {.RAYGUIDEF,
     importc: "GuiLoadStyle".} # Load style file (.rgs)
-proc GuiLoadStyleDefault*() {.RAYGUIDEF,
+func GuiLoadStyleDefault*() {.RAYGUIDEF,
     importc: "GuiLoadStyleDefault".} # Load style default over global style
-proc GuiIconText*(iconId: int32; text: cstring): cstring {.RAYGUIDEF,
+func GuiIconText*(iconId: int32; text: cstring): cstring {.RAYGUIDEF,
     importc: "GuiIconText".} # Get text with icon id prepended (if supported)
 # Gui icons functionality
-proc GuiDrawIcon*(iconId: int32; position: Vector2; pixelSize: int32;
+func GuiDrawIcon*(iconId: int32; position: Vector2; pixelSize: int32;
     color: Color) {.RAYGUIDEF, importc: "GuiDrawIcon".}
-proc GuiGetIcons*(): uint32 {.RAYGUIDEF,
+func GuiGetIcons*(): uint32 {.RAYGUIDEF,
     importc: "GuiGetIcons".} # Get full icons data pointer
-proc GuiGetIconData*(iconId: int32): uint32 {.RAYGUIDEF,
+func GuiGetIconData*(iconId: int32): uint32 {.RAYGUIDEF,
     importc: "GuiGetIconData".} # Get icon bit data
-proc GuiSetIconData*(iconId: int32; data: uint32) {.RAYGUIDEF,
+func GuiSetIconData*(iconId: int32; data: uint32) {.RAYGUIDEF,
     importc: "GuiSetIconData".} # Set icon bit data
-proc GuiSetIconPixel*(iconId: int32; x: int32; y: int32) {.RAYGUIDEF,
+func GuiSetIconPixel*(iconId: int32; x: int32; y: int32) {.RAYGUIDEF,
     importc: "GuiSetIconPixel".} # Set icon pixel value
-proc GuiClearIconPixel*(iconId: int32; x: int32; y: int32) {.RAYGUIDEF,
+func GuiClearIconPixel*(iconId: int32; x: int32; y: int32) {.RAYGUIDEF,
     importc: "GuiClearIconPixel".} # Clear icon pixel value
-proc GuiCheckIconPixel*(iconId: int32; x: int32; y: int32): bool {.RAYGUIDEF,
+func GuiCheckIconPixel*(iconId: int32; x: int32; y: int32): bool {.RAYGUIDEF,
     importc: "GuiCheckIconPixel".} # Check icon pixel value
 # 
 #   RAYGUI IMPLEMENTATION

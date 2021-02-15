@@ -36,7 +36,7 @@ system RenderSpriteSystem:
     for entityId, components in pairs(self.entityToComponents):
       let sprite = self.findComponentByParent[:SpriteComponent](entityId)
       let transform = self.findComponentByParent[:TransformComponent](entityId)
-      if sprite.isNone() or transform.isNone():
+      if sprite.isNone or transform.isNone:
         continue
       drawComponents(
           sprite.get(),
@@ -53,8 +53,8 @@ method hasNecessaryComponents*(
     components: seq[Component];
 ): bool =
   if (
-      self.findComponentByParent[:SpriteComponent](entity).isNone() or
-      self.findComponentByParent[:TransformComponent](entity).isNone()
+      self.findComponentByParent[:SpriteComponent](entity).isNone or
+      self.findComponentByParent[:TransformComponent](entity).isNone
   ):
     return false
   true

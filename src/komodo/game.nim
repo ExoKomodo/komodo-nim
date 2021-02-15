@@ -40,40 +40,31 @@ type Game* = ref object
   title: string
 
 func camera*(self: Game): auto {.inline.} =
-  if self.camera.isNone():
-    DefaultCamera
-  else:
-    self.camera.unsafeGet()
+  self.camera.get(DefaultCamera)
 
 func clearColor*(self: Game): auto {.inline.} =
-  if self.clearColor.isNone():
-    DefaultClearColor
-  else:
-    self.clearColor.unsafeGet()
-func `clearColor=`*(self: Game; value: Color) {.inline.}
-    = self.clearColor = some(value)
+  self.clearColor.get(DefaultClearColor)
+func `clearColor=`*(self: Game; value: Color) {.inline.} =
+  self.clearColor = some(value)
 
 func isRunning*(self: Game): auto {.inline.} = self.isRunning
 
 func title*(self: Game): auto {.inline.} = self.title
 func `title=`*(self: Game; value: string) {.inline.} =
-  if self.isRunning:
-    setWindowTitle(value)
   self.title = value
+  setWindowTitle(self.title)
 
 func screenSize*(self: Game): auto {.inline.} =
-  if self.screenSize.isNone():
-    return DefaultScreenSize
-  return self.screenSize.get()
+  self.screenSize.get(DefaultScreenSize)
 
-proc newGame*(): Game =
+func newGame*(title: string = DefaultTitle): Game =
   result = Game()
   result.systems = @[]
+  result.title = title
   initWindow(
       screenSize(result),
       result.title,
   )
-  # instance = some(result)
 
 func draw(self: Game) =
   beginDraw()
@@ -85,11 +76,11 @@ func draw(self: Game) =
     system.draw(camera)
   endDraw()
 
-proc executeOnSystems*(self: Game; predicate: proc (system: System)) =
+func executeOnSystems*(self: Game; predicate: proc (system: System)) =
   for system in self.systems:
     system.predicate()
 
-proc deregisterComponent*(self: Game; component: Component): bool =
+func deregisterComponent*(self: Game; component: Component): bool =
   if not self.componentStore.hasKey(component.id):
     return false
   if component.parent.isNone:
@@ -103,7 +94,7 @@ proc deregisterComponent*(self: Game; component: Component): bool =
   self.componentStore.del(component.id)
   true
 
-proc deregisterEntity*(self: Game; entity: Entity): bool =
+func deregisterEntity*(self: Game; entity: Entity): bool =
   if not self.entityStore.hasKey(entity.id):
     return false
   self.executeOnSystems(proc (system: System) =
@@ -113,21 +104,21 @@ proc deregisterEntity*(self: Game; entity: Entity): bool =
   self.entityStore.del(entity.id)
   true
 
-proc deregisterSystem*(self: Game; system: System): bool =
+func deregisterSystem*(self: Game; system: System): bool =
   if not (system in self.systems):
     return false
   self.systems.keepIf(_ => _ != system)
   true
 
-proc registerEntity*(self: Game; entity: Entity): bool =
+func registerEntity*(self: Game; entity: Entity): bool =
   self.entityStore[entity.id] = entity
   self.executeOnSystems(proc (system: System) =
     discard system.registerEntity(entity, self.componentStore)
   )
   true
 
-proc registerComponent*(self: Game; component: Component): bool =
-  if component.parent.isNone():
+func registerComponent*(self: Game; component: Component): bool =
+  if component.parent.isNone:
     return false
   let parent = component.parent.unsafeGet()
   discard self.registerEntity(parent)
@@ -139,20 +130,20 @@ proc registerComponent*(self: Game; component: Component): bool =
   )
   true
 
-proc registerSystem*(self: Game; system: System): bool =
+func registerSystem*(self: Game; system: System): bool =
   if not self.systems.any(_ => _ == system):
     self.systems &= system
   for entity in self.entityStore.values:
     discard self.registerEntity(entity)
   return true
 
-proc initialize(self: Game) =
+func initialize(self: Game) =
   self.isRunning = true
-  if self.camera.isNone():
+  if self.camera.isNone:
     self.camera = some(DefaultCamera)
-  if self.clearColor.isNone():
+  if self.clearColor.isNone:
     self.clearColor = some(DefaultClearColor)
-  if self.screenSize.isNone():
+  if self.screenSize.isNone:
     self.screenSize = some(DefaultscreenSize)
   if self.title == "":
     self.title = DefaultTitle
@@ -168,13 +159,12 @@ func update(self: Game) =
 func setClearColor*(self: Game; clearColor: Color) =
   self.clearColor = some(clearColor)
 
-proc quit*(self: Game) =
+func quit*(self: Game) =
   if self.isRunning:
     self.isRunning = false
-    # instance = none[Game]()
     close()
 
-proc run*(self: Game) =
+func run*(self: Game) =
   if not self.isRunning:
     logInfo("Starting...")
     setFps(60)
@@ -188,7 +178,7 @@ type CommandKind* {.pure.} = enum
   Default
   Close
 
-proc handleCommands(self: Game; commandChannel: ptr Channel[CommandKind]): CommandKind =
+func handleCommands(self: Game; commandChannel: ptr Channel[CommandKind]): CommandKind =
   let (isDataAvailable, message) = commandChannel[].tryRecv()
   case message
   of CommandKind.Close:
@@ -197,7 +187,7 @@ proc handleCommands(self: Game; commandChannel: ptr Channel[CommandKind]): Comma
     discard
   message
 
-proc run*(self: Game; commandChannel: ptr Channel[CommandKind]) =
+func run*(self: Game; commandChannel: ptr Channel[CommandKind]) =
   if not self.isRunning:
     logInfo("Starting...")
     setFps(60)

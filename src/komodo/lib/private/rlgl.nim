@@ -120,150 +120,150 @@ converter FramebufferTexType2int32*(self: FramebufferTexType): int32 = self.int3
 # ------------------------------------------------------------------------------------
 # Functions Declaration - Matrix operations
 # ------------------------------------------------------------------------------------
-proc rlMatrixMode*(mode: int32) {.RLAPI,
+func rlMatrixMode*(mode: int32) {.RLAPI,
     importc: "rlMatrixMode".} # Choose the current matrix to be transformed
-proc rlPushMatrix*() {.RLAPI, importc: "rlPushMatrix".} # Push the current matrix to stack
-proc rlPopMatrix*() {.RLAPI, importc: "rlPopMatrix".} # Pop lattest inserted matrix from stack
-proc rlLoadIdentity*() {.RLAPI, importc: "rlLoadIdentity".} # Reset current matrix to identity matrix
-proc rlTranslatef*(x: float32; y: float32; z: float32) {.RLAPI,
+func rlPushMatrix*() {.RLAPI, importc: "rlPushMatrix".} # Push the current matrix to stack
+func rlPopMatrix*() {.RLAPI, importc: "rlPopMatrix".} # Pop lattest inserted matrix from stack
+func rlLoadIdentity*() {.RLAPI, importc: "rlLoadIdentity".} # Reset current matrix to identity matrix
+func rlTranslatef*(x: float32; y: float32; z: float32) {.RLAPI,
     importc: "rlTranslatef".} # Multiply the current matrix by a translation matrix
-proc rlRotatef*(angleDeg: float32; x: float32; y: float32; z: float32) {.RLAPI,
+func rlRotatef*(angleDeg: float32; x: float32; y: float32; z: float32) {.RLAPI,
     importc: "rlRotatef".} # Multiply the current matrix by a rotation matrix
-proc rlScalef*(x: float32; y: float32; z: float32) {.RLAPI,
+func rlScalef*(x: float32; y: float32; z: float32) {.RLAPI,
     importc: "rlScalef".} # Multiply the current matrix by a scaling matrix
-proc rlMultMatrixf*(matf: float32) {.RLAPI,
+func rlMultMatrixf*(matf: float32) {.RLAPI,
     importc: "rlMultMatrixf".} # Multiply the current matrix by another matrix
-proc rlFrustum*(left: float64; right: float64; bottom: float64; top: float64;
+func rlFrustum*(left: float64; right: float64; bottom: float64; top: float64;
     znear: float64; zfar: float64) {.RLAPI, importc: "rlFrustum".}
-proc rlOrtho*(left: float64; right: float64; bottom: float64; top: float64;
+func rlOrtho*(left: float64; right: float64; bottom: float64; top: float64;
     znear: float64; zfar: float64) {.RLAPI, importc: "rlOrtho".}
-proc rlViewport*(x: int32; y: int32; width: int32; height: int32) {.RLAPI,
+func rlViewport*(x: int32; y: int32; width: int32; height: int32) {.RLAPI,
     importc: "rlViewport".} # Set the viewport area
 # ------------------------------------------------------------------------------------
 # Functions Declaration - Vertex level operations
 # ------------------------------------------------------------------------------------
-proc rlBegin*(mode: int32) {.RLAPI, importc: "rlBegin".} # Initialize drawing mode (how to organize vertex)
-proc rlEnd*() {.RLAPI, importc: "rlEnd".} # Finish vertex providing
-proc rlVertex2i*(x: int32; y: int32) {.RLAPI,
+func rlBegin*(mode: int32) {.RLAPI, importc: "rlBegin".} # Initialize drawing mode (how to organize vertex)
+func rlEnd*() {.RLAPI, importc: "rlEnd".} # Finish vertex providing
+func rlVertex2i*(x: int32; y: int32) {.RLAPI,
     importc: "rlVertex2i".} # Define one vertex (position) - 2 int
-proc rlVertex2f*(x: float32; y: float32) {.RLAPI,
+func rlVertex2f*(x: float32; y: float32) {.RLAPI,
     importc: "rlVertex2f".} # Define one vertex (position) - 2 float
-proc rlVertex3f*(x: float32; y: float32; z: float32) {.RLAPI,
+func rlVertex3f*(x: float32; y: float32; z: float32) {.RLAPI,
     importc: "rlVertex3f".} # Define one vertex (position) - 3 float
-proc rlTexCoord2f*(x: float32; y: float32) {.RLAPI,
+func rlTexCoord2f*(x: float32; y: float32) {.RLAPI,
     importc: "rlTexCoord2f".} # Define one vertex (texture coordinate) - 2 float
-proc rlNormal3f*(x: float32; y: float32; z: float32) {.RLAPI,
+func rlNormal3f*(x: float32; y: float32; z: float32) {.RLAPI,
     importc: "rlNormal3f".} # Define one vertex (normal) - 3 float
-proc rlColor4ub*(r: uint8; g: uint8; b: uint8; a: uint8) {.RLAPI,
+func rlColor4ub*(r: uint8; g: uint8; b: uint8; a: uint8) {.RLAPI,
     importc: "rlColor4ub".} # Define one vertex (color) - 4 byte
-proc rlColor3f*(x: float32; y: float32; z: float32) {.RLAPI,
+func rlColor3f*(x: float32; y: float32; z: float32) {.RLAPI,
     importc: "rlColor3f".} # Define one vertex (color) - 3 float
-proc rlColor4f*(x: float32; y: float32; z: float32; w: float32) {.RLAPI,
+func rlColor4f*(x: float32; y: float32; z: float32; w: float32) {.RLAPI,
     importc: "rlColor4f".} # Define one vertex (color) - 4 float
 # ------------------------------------------------------------------------------------
 # Functions Declaration - OpenGL equivalent functions (common to 1.1, 3.3+, ES2)
 # NOTE: This functions are used to completely abstract raylib code from OpenGL layer
 # ------------------------------------------------------------------------------------
-proc rlEnableTexture*(id: uint32) {.RLAPI, importc: "rlEnableTexture".} # Enable texture usage
-proc rlDisableTexture*() {.RLAPI, importc: "rlDisableTexture".} # Disable texture usage
-proc rlTextureParameters*(id: uint32; param: int32; value: int32) {.RLAPI,
+func rlEnableTexture*(id: uint32) {.RLAPI, importc: "rlEnableTexture".} # Enable texture usage
+func rlDisableTexture*() {.RLAPI, importc: "rlDisableTexture".} # Disable texture usage
+func rlTextureParameters*(id: uint32; param: int32; value: int32) {.RLAPI,
     importc: "rlTextureParameters".} # Set texture parameters (filter, wrap)
-proc rlEnableShader*(id: uint32) {.RLAPI,
+func rlEnableShader*(id: uint32) {.RLAPI,
     importc: "rlEnableShader".} # Enable shader program usage
-proc rlDisableShader*() {.RLAPI, importc: "rlDisableShader".} # Disable shader program usage
-proc rlEnableFramebuffer*(id: uint32) {.RLAPI,
+func rlDisableShader*() {.RLAPI, importc: "rlDisableShader".} # Disable shader program usage
+func rlEnableFramebuffer*(id: uint32) {.RLAPI,
     importc: "rlEnableFramebuffer".} # Enable render texture (fbo)
-proc rlDisableFramebuffer*() {.RLAPI, importc: "rlDisableFramebuffer".} # Disable render texture (fbo), return to default framebuffer
-proc rlEnableDepthTest*() {.RLAPI, importc: "rlEnableDepthTest".} # Enable depth test
-proc rlDisableDepthTest*() {.RLAPI, importc: "rlDisableDepthTest".} # Disable depth test
-proc rlEnableDepthMask*() {.RLAPI, importc: "rlEnableDepthMask".} # Enable depth write
-proc rlDisableDepthMask*() {.RLAPI, importc: "rlDisableDepthMask".} # Disable depth write
-proc rlEnableBackfaceCulling*() {.RLAPI,
+func rlDisableFramebuffer*() {.RLAPI, importc: "rlDisableFramebuffer".} # Disable render texture (fbo), return to default framebuffer
+func rlEnableDepthTest*() {.RLAPI, importc: "rlEnableDepthTest".} # Enable depth test
+func rlDisableDepthTest*() {.RLAPI, importc: "rlDisableDepthTest".} # Disable depth test
+func rlEnableDepthMask*() {.RLAPI, importc: "rlEnableDepthMask".} # Enable depth write
+func rlDisableDepthMask*() {.RLAPI, importc: "rlDisableDepthMask".} # Disable depth write
+func rlEnableBackfaceCulling*() {.RLAPI,
     importc: "rlEnableBackfaceCulling".} # Enable backface culling
-proc rlDisableBackfaceCulling*() {.RLAPI,
+func rlDisableBackfaceCulling*() {.RLAPI,
     importc: "rlDisableBackfaceCulling".} # Disable backface culling
-proc rlEnableScissorTest*() {.RLAPI, importc: "rlEnableScissorTest".} # Enable scissor test
-proc rlDisableScissorTest*() {.RLAPI, importc: "rlDisableScissorTest".} # Disable scissor test
-proc rlScissor*(x: int32; y: int32; width: int32; height: int32) {.RLAPI,
+func rlEnableScissorTest*() {.RLAPI, importc: "rlEnableScissorTest".} # Enable scissor test
+func rlDisableScissorTest*() {.RLAPI, importc: "rlDisableScissorTest".} # Disable scissor test
+func rlScissor*(x: int32; y: int32; width: int32; height: int32) {.RLAPI,
     importc: "rlScissor".} # Scissor test
-proc rlEnableWireMode*() {.RLAPI, importc: "rlEnableWireMode".} # Enable wire mode
-proc rlDisableWireMode*() {.RLAPI, importc: "rlDisableWireMode".} # Disable wire mode
-proc rlSetLineWidth*(width: float32) {.RLAPI,
+func rlEnableWireMode*() {.RLAPI, importc: "rlEnableWireMode".} # Enable wire mode
+func rlDisableWireMode*() {.RLAPI, importc: "rlDisableWireMode".} # Disable wire mode
+func rlSetLineWidth*(width: float32) {.RLAPI,
     importc: "rlSetLineWidth".} # Set the line drawing width
-proc rlGetLineWidth*(): float32 {.RLAPI,
+func rlGetLineWidth*(): float32 {.RLAPI,
     importc: "rlGetLineWidth".} # Get the line drawing width
-proc rlEnableSmoothLines*() {.RLAPI, importc: "rlEnableSmoothLines".} # Enable line aliasing
-proc rlDisableSmoothLines*() {.RLAPI, importc: "rlDisableSmoothLines".} # Disable line aliasing
-proc rlClearColor*(r: uint8; g: uint8; b: uint8; a: uint8) {.RLAPI,
+func rlEnableSmoothLines*() {.RLAPI, importc: "rlEnableSmoothLines".} # Enable line aliasing
+func rlDisableSmoothLines*() {.RLAPI, importc: "rlDisableSmoothLines".} # Disable line aliasing
+func rlClearColor*(r: uint8; g: uint8; b: uint8; a: uint8) {.RLAPI,
     importc: "rlClearColor".} # Clear color buffer with color
-proc rlClearScreenBuffers*() {.RLAPI, importc: "rlClearScreenBuffers".} # Clear used screen buffers (color and depth)
-proc rlUpdateBuffer*(bufferId: int32; data: pointer; dataSize: int32) {.RLAPI,
+func rlClearScreenBuffers*() {.RLAPI, importc: "rlClearScreenBuffers".} # Clear used screen buffers (color and depth)
+func rlUpdateBuffer*(bufferId: int32; data: pointer; dataSize: int32) {.RLAPI,
     importc: "rlUpdateBuffer".} # Update GPU buffer with new data
-proc rlLoadAttribBuffer*(vaoId: uint32; shaderLoc: int32; buffer: pointer;
+func rlLoadAttribBuffer*(vaoId: uint32; shaderLoc: int32; buffer: pointer;
     size: int32; dynamic: bool): uint32 {.RLAPI,
     importc: "rlLoadAttribBuffer".} # Load a new attributes buffer
 # ------------------------------------------------------------------------------------
 # Functions Declaration - rlgl functionality
 # ------------------------------------------------------------------------------------
-proc rlglInit*(width: int32; height: int32) {.RLAPI,
+func rlglInit*(width: int32; height: int32) {.RLAPI,
     importc: "rlglInit".} # Initialize rlgl (buffers, shaders, textures, states)
-proc rlglClose*() {.RLAPI, importc: "rlglClose".} # De-inititialize rlgl (buffers, shaders, textures)
-proc rlglDraw*() {.RLAPI, importc: "rlglDraw".} # Update and draw default internal buffers
-proc rlCheckErrors*() {.RLAPI, importc: "rlCheckErrors".} # Check and log OpenGL error codes
-proc rlGetVersion*(): int32 {.RLAPI, importc: "rlGetVersion".} # Returns current OpenGL version
-proc rlCheckBufferLimit*(vCount: int32): bool {.RLAPI,
+func rlglClose*() {.RLAPI, importc: "rlglClose".} # De-inititialize rlgl (buffers, shaders, textures)
+func rlglDraw*() {.RLAPI, importc: "rlglDraw".} # Update and draw default internal buffers
+func rlCheckErrors*() {.RLAPI, importc: "rlCheckErrors".} # Check and log OpenGL error codes
+func rlGetVersion*(): int32 {.RLAPI, importc: "rlGetVersion".} # Returns current OpenGL version
+func rlCheckBufferLimit*(vCount: int32): bool {.RLAPI,
     importc: "rlCheckBufferLimit".} # Check internal buffer overflow for a given number of vertex
-proc rlSetDebugMarker*(text: cstring) {.RLAPI,
+func rlSetDebugMarker*(text: cstring) {.RLAPI,
     importc: "rlSetDebugMarker".} # Set debug marker for analysis
-proc rlSetBlendMode*(glSrcFactor: int32; glDstFactor: int32;
+func rlSetBlendMode*(glSrcFactor: int32; glDstFactor: int32;
     glEquation: int32) {.RLAPI, importc: "rlSetBlendMode".} #
-proc rlLoadExtensions*(loader: pointer) {.RLAPI,
+func rlLoadExtensions*(loader: pointer) {.RLAPI,
     importc: "rlLoadExtensions".} # Load OpenGL extensions
 # Textures data management
-proc rlLoadTexture*(data: pointer; width: int32; height: int32; format: int32;
+func rlLoadTexture*(data: pointer; width: int32; height: int32; format: int32;
     mipmapCount: int32): uint32 {.RLAPI, importc: "rlLoadTexture".} # Load texture in GPU
-proc rlLoadTextureDepth*(width: int32; height: int32;
+func rlLoadTextureDepth*(width: int32; height: int32;
     useRenderBuffer: bool): uint32 {.RLAPI,
     importc: "rlLoadTextureDepth".} # Load depth texture/renderbuffer (to be attached to fbo)
-proc rlLoadTextureCubemap*(data: pointer; size: int32; format: int32): uint32 {.
+func rlLoadTextureCubemap*(data: pointer; size: int32; format: int32): uint32 {.
     RLAPI, importc: "rlLoadTextureCubemap".} # Load texture cubemap
-proc rlUpdateTexture*(id: uint32; offsetX: int32; offsetY: int32; width: int32;
+func rlUpdateTexture*(id: uint32; offsetX: int32; offsetY: int32; width: int32;
     height: int32; format: int32; data: pointer) {.RLAPI,
     importc: "rlUpdateTexture".} # Update GPU texture with new data
-proc rlGetGlTextureFormats*(format: int32; glInternalFormat: uint32;
+func rlGetGlTextureFormats*(format: int32; glInternalFormat: uint32;
     glFormat: uint32; glType: uint32) {.RLAPI,
     importc: "rlGetGlTextureFormats".} # Get OpenGL internal formats
-proc rlUnloadTexture*(id: uint32) {.RLAPI,
+func rlUnloadTexture*(id: uint32) {.RLAPI,
     importc: "rlUnloadTexture".} # Unload texture from GPU memory
-proc rlGenerateMipmaps*(texture: ptr Texture2D) {.RLAPI,
+func rlGenerateMipmaps*(texture: ptr Texture2D) {.RLAPI,
     importc: "rlGenerateMipmaps".} # Generate mipmap data for selected texture
-proc rlReadTexturePixels*(texture: Texture2D): pointer {.RLAPI,
+func rlReadTexturePixels*(texture: Texture2D): pointer {.RLAPI,
     importc: "rlReadTexturePixels".} # Read texture pixel data
-proc rlReadScreenPixels*(width: int32; height: int32): uint8 {.RLAPI,
+func rlReadScreenPixels*(width: int32; height: int32): uint8 {.RLAPI,
     importc: "rlReadScreenPixels".} # Read screen pixel data (color buffer)
 # Framebuffer management (fbo)
-proc rlLoadFramebuffer*(width: int32; height: int32): uint32 {.RLAPI,
+func rlLoadFramebuffer*(width: int32; height: int32): uint32 {.RLAPI,
     importc: "rlLoadFramebuffer".} # Load an empty framebuffer
-proc rlFramebufferAttach*(fboId: uint32; texId: uint32; attachType: int32;
+func rlFramebufferAttach*(fboId: uint32; texId: uint32; attachType: int32;
     texType: int32) {.RLAPI,
     importc: "rlFramebufferAttach".} # Attach texture/renderbuffer to a framebuffer
-proc rlFramebufferComplete*(id: uint32): bool {.RLAPI,
+func rlFramebufferComplete*(id: uint32): bool {.RLAPI,
     importc: "rlFramebufferComplete".} # Verify framebuffer is complete
-proc rlUnloadFramebuffer*(id: uint32) {.RLAPI,
+func rlUnloadFramebuffer*(id: uint32) {.RLAPI,
     importc: "rlUnloadFramebuffer".} # Delete framebuffer from GPU
 # Vertex data management
-proc rlLoadMesh*(mesh: ptr Mesh; dynamic: bool) {.RLAPI,
+func rlLoadMesh*(mesh: ptr Mesh; dynamic: bool) {.RLAPI,
     importc: "rlLoadMesh".} # Upload vertex data into GPU and provided VAO/VBO ids
-proc rlUpdateMesh*(mesh: Mesh; buffer: int32; count: int32) {.RLAPI,
+func rlUpdateMesh*(mesh: Mesh; buffer: int32; count: int32) {.RLAPI,
     importc: "rlUpdateMesh".} # Update vertex or index data on GPU (upload new data to one buffer)
-proc rlUpdateMeshAt*(mesh: Mesh; buffer: int32; count: int32; index: int32) {.
+func rlUpdateMeshAt*(mesh: Mesh; buffer: int32; count: int32; index: int32) {.
     RLAPI, importc: "rlUpdateMeshAt".} # Update vertex or index data on GPU, at index
-proc rlDrawMesh*(mesh: Mesh; material: Material; transform: Matrix) {.RLAPI,
+func rlDrawMesh*(mesh: Mesh; material: Material; transform: Matrix) {.RLAPI,
     importc: "rlDrawMesh".} # Draw a 3d mesh with material and transform
-proc rlDrawMeshInstanced*(mesh: Mesh; material: Material;
+func rlDrawMeshInstanced*(mesh: Mesh; material: Material;
     transforms: ptr Matrix; count: int32) {.RLAPI,
     importc: "rlDrawMeshInstanced".} # Draw a 3d mesh with material and transform
-proc rlUnloadMesh*(mesh: Mesh) {.RLAPI, importc: "rlUnloadMesh".} # Unload mesh data from CPU and GPU
+func rlUnloadMesh*(mesh: Mesh) {.RLAPI, importc: "rlUnloadMesh".} # Unload mesh data from CPU and GPU
 # NOTE: There is a set of shader related functions that are available to end user,
 # to avoid creating function wrappers through core module, they have been directly declared in raylib.h
 # ------------------------------------------------------------------------------------
@@ -271,72 +271,72 @@ proc rlUnloadMesh*(mesh: Mesh) {.RLAPI, importc: "rlUnloadMesh".} # Unload mesh 
 # NOTE: This functions are useless when using OpenGL 1.1
 # ------------------------------------------------------------------------------------
 # Shader loading/unloading functions
-proc LoadShader*(vsFileName: cstring; fsFileName: cstring): Shader {.RLAPI,
+func LoadShader*(vsFileName: cstring; fsFileName: cstring): Shader {.RLAPI,
     importc: "LoadShader".} # Load shader from files and bind default locations
-proc LoadShaderCode*(vsCode: cstring; fsCode: cstring): Shader {.RLAPI,
+func LoadShaderCode*(vsCode: cstring; fsCode: cstring): Shader {.RLAPI,
     importc: "LoadShaderCode".} # Load shader from code strings and bind default locations
-proc UnloadShader*(shader: Shader) {.RLAPI,
+func UnloadShader*(shader: Shader) {.RLAPI,
     importc: "UnloadShader".} # Unload shader from GPU memory (VRAM)
-proc GetShaderDefault*(): Shader {.RLAPI, importc: "GetShaderDefault".} # Get default shader
-proc GetTextureDefault*(): Texture2D {.RLAPI,
+func GetShaderDefault*(): Shader {.RLAPI, importc: "GetShaderDefault".} # Get default shader
+func GetTextureDefault*(): Texture2D {.RLAPI,
     importc: "GetTextureDefault".} # Get default texture
-proc GetShapesTexture*(): Texture2D {.RLAPI,
+func GetShapesTexture*(): Texture2D {.RLAPI,
     importc: "GetShapesTexture".} # Get texture to draw shapes
-proc GetShapesTextureRec*(): Rectangle {.RLAPI,
+func GetShapesTextureRec*(): Rectangle {.RLAPI,
     importc: "GetShapesTextureRec".} # Get texture rectangle to draw shapes
 # Shader configuration functions
-proc GetShaderLocation*(shader: Shader; uniformName: cstring): int32 {.RLAPI,
+func GetShaderLocation*(shader: Shader; uniformName: cstring): int32 {.RLAPI,
     importc: "GetShaderLocation".} # Get shader uniform location
-proc GetShaderLocationAttrib*(shader: Shader; attribName: cstring): int32 {.
+func GetShaderLocationAttrib*(shader: Shader; attribName: cstring): int32 {.
     RLAPI, importc: "GetShaderLocationAttrib".} # Get shader attribute location
-proc SetShaderValue*(shader: Shader; uniformLoc: int32; value: pointer;
+func SetShaderValue*(shader: Shader; uniformLoc: int32; value: pointer;
     uniformType: int32) {.RLAPI, importc: "SetShaderValue".} # Set shader uniform value
-proc SetShaderValueV*(shader: Shader; uniformLoc: int32; value: pointer;
+func SetShaderValueV*(shader: Shader; uniformLoc: int32; value: pointer;
     uniformType: int32; count: int32) {.RLAPI,
     importc: "SetShaderValueV".} # Set shader uniform value vector
-proc SetShaderValueMatrix*(shader: Shader; uniformLoc: int32; mat: Matrix) {.
+func SetShaderValueMatrix*(shader: Shader; uniformLoc: int32; mat: Matrix) {.
     RLAPI, importc: "SetShaderValueMatrix".} # Set shader uniform value (matrix 4x4)
-proc SetMatrixProjection*(proj: Matrix) {.RLAPI,
+func SetMatrixProjection*(proj: Matrix) {.RLAPI,
     importc: "SetMatrixProjection".} # Set a custom projection matrix (replaces internal projection matrix)
-proc SetMatrixModelview*(view: Matrix) {.RLAPI,
+func SetMatrixModelview*(view: Matrix) {.RLAPI,
     importc: "SetMatrixModelview".} # Set a custom modelview matrix (replaces internal modelview matrix)
-proc GetMatrixModelview*(): Matrix {.RLAPI,
+func GetMatrixModelview*(): Matrix {.RLAPI,
     importc: "GetMatrixModelview".} # Get internal modelview matrix
 # Texture maps generation (PBR)
 # NOTE: Required shaders should be provided
-proc GenTextureCubemap*(shader: Shader; panorama: Texture2D; size: int32;
+func GenTextureCubemap*(shader: Shader; panorama: Texture2D; size: int32;
     format: int32): TextureCubemap {.RLAPI,
     importc: "GenTextureCubemap".} # Generate cubemap texture from 2D panorama texture
-proc GenTextureIrradiance*(shader: Shader; cubemap: TextureCubemap;
+func GenTextureIrradiance*(shader: Shader; cubemap: TextureCubemap;
     size: int32): TextureCubemap {.RLAPI,
     importc: "GenTextureIrradiance".} # Generate irradiance texture using cubemap data
-proc GenTexturePrefilter*(shader: Shader; cubemap: TextureCubemap;
+func GenTexturePrefilter*(shader: Shader; cubemap: TextureCubemap;
     size: int32): TextureCubemap {.RLAPI,
     importc: "GenTexturePrefilter".} # Generate prefilter texture using cubemap data
-proc GenTextureBRDF*(shader: Shader; size: int32): Texture2D {.RLAPI,
+func GenTextureBRDF*(shader: Shader; size: int32): Texture2D {.RLAPI,
     importc: "GenTextureBRDF".} # Generate BRDF texture using cubemap data
 # Shading begin/end functions
-proc BeginShaderMode*(shader: Shader) {.RLAPI,
+func BeginShaderMode*(shader: Shader) {.RLAPI,
     importc: "BeginShaderMode".} # Begin custom shader drawing
-proc EndShaderMode*() {.RLAPI, importc: "EndShaderMode".} # End custom shader drawing (use default shader)
-proc BeginBlendMode*(mode: int32) {.RLAPI,
+func EndShaderMode*() {.RLAPI, importc: "EndShaderMode".} # End custom shader drawing (use default shader)
+func BeginBlendMode*(mode: int32) {.RLAPI,
     importc: "BeginBlendMode".} # Begin blending mode (alpha, additive, multiplied)
-proc EndBlendMode*() {.RLAPI, importc: "EndBlendMode".} # End blending mode (reset to default: alpha blending)
+func EndBlendMode*() {.RLAPI, importc: "EndBlendMode".} # End blending mode (reset to default: alpha blending)
 # VR control functions
-proc InitVrSimulator*() {.RLAPI, importc: "InitVrSimulator".} # Init VR simulator for selected device parameters
-proc CloseVrSimulator*() {.RLAPI, importc: "CloseVrSimulator".} # Close VR simulator for current device
-proc UpdateVrTracking*(camera: ptr Camera) {.RLAPI,
+func InitVrSimulator*() {.RLAPI, importc: "InitVrSimulator".} # Init VR simulator for selected device parameters
+func CloseVrSimulator*() {.RLAPI, importc: "CloseVrSimulator".} # Close VR simulator for current device
+func UpdateVrTracking*(camera: ptr Camera) {.RLAPI,
     importc: "UpdateVrTracking".} # Update VR tracking (position and orientation) and camera
-proc SetVrConfiguration*(info: VrDeviceInfo; distortion: Shader) {.RLAPI,
+func SetVrConfiguration*(info: VrDeviceInfo; distortion: Shader) {.RLAPI,
     importc: "SetVrConfiguration".} # Set stereo rendering configuration parameters
-proc IsVrSimulatorReady*(): bool {.RLAPI,
+func IsVrSimulatorReady*(): bool {.RLAPI,
     importc: "IsVrSimulatorReady".} # Detect if VR simulator is ready
-proc ToggleVrMode*() {.RLAPI, importc: "ToggleVrMode".} # Enable/Disable VR experience
-proc BeginVrDrawing*() {.RLAPI, importc: "BeginVrDrawing".} # Begin VR simulator stereo rendering
-proc EndVrDrawing*() {.RLAPI, importc: "EndVrDrawing".} # End VR simulator stereo rendering
-proc LoadFileText*(fileName: cstring): ptr char {.RLAPI,
+func ToggleVrMode*() {.RLAPI, importc: "ToggleVrMode".} # Enable/Disable VR experience
+func BeginVrDrawing*() {.RLAPI, importc: "BeginVrDrawing".} # Begin VR simulator stereo rendering
+func EndVrDrawing*() {.RLAPI, importc: "EndVrDrawing".} # End VR simulator stereo rendering
+func LoadFileText*(fileName: cstring): ptr char {.RLAPI,
     importc: "LoadFileText".} # Load chars array from text file
-proc GetPixelDataSize*(width: int32; height: int32; format: int32): int32 {.
+func GetPixelDataSize*(width: int32; height: int32; format: int32): int32 {.
     RLAPI, importc: "GetPixelDataSize".} # Get pixel data size in bytes (image or texture)
 # 
 #   RLGL IMPLEMENTATION

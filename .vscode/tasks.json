@@ -6,10 +6,7 @@
             "type": "shell",
             "command": "cd examples/desktop; nimble buildDesktop",
             "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
         },
         {
             "label": "Debug Komodo Desktop Example",
@@ -23,6 +20,16 @@
             "type": "shell",
             "command": "cd examples/desktop; nimble runDesktop",
             "problemMatcher": [],
+        },
+        {
+            "label": "Build Komodo Editor",
+            "type": "shell",
+            "command": "cd komodoeditor; nimble buildEditor",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
         },
         {
             "label": "Debug Komodo Editor",
