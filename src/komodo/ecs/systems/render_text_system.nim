@@ -38,7 +38,7 @@ system RenderTextSystem:
     for entityId, components in pairs(self.entityToComponents):
       let text = self.findComponentByParent[:TextComponent](entityId)
       let transform = self.findComponentByParent[:TransformComponent](entityId)
-      if text.isNone() or transform.isNone():
+      if text.isNone or transform.isNone:
         continue
       drawComponents(
           text.get(),
@@ -55,8 +55,8 @@ method hasNecessaryComponents*(
     components: seq[Component];
 ): bool =
   if (
-      self.findComponentByParent[:TextComponent](entity).isNone() or
-      self.findComponentByParent[:TransformComponent](entity).isNone()
+      self.findComponentByParent[:TextComponent](entity).isNone or
+      self.findComponentByParent[:TransformComponent](entity).isNone
   ):
     return false
   true

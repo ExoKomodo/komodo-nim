@@ -19,8 +19,8 @@ type
 
   System* = ref SystemObj
 
-proc deregisterComponent*(self: System; component: Component): bool =
-  if component.parent.isNone():
+func deregisterComponent*(self: System; component: Component): bool {.locks: 0.} =
+  if component.parent.isNone:
     return false
 
   let parent = component.parent.get()
@@ -31,7 +31,7 @@ proc deregisterComponent*(self: System; component: Component): bool =
   components.keepIf(_ => _ != component)
   return true
 
-proc deregisterEntity*(self: System; entity: Entity): bool =
+func deregisterEntity*(self: System; entity: Entity): bool {.locks: 0.} =
   if not (entity.id in self.entityToComponents):
     return false
   self.entityToComponents.del(entity.id)
@@ -41,13 +41,13 @@ func destroy*(self: var SystemObj) =
   self.entityToComponents.clear()
   self.uninitializedComponents = @[]
 
-func entityToComponents*(self: System): Table[EntityId, seq[Component]] {.inline.}
+func entityToComponents*(self: System): Table[EntityId, seq[Component]] {.inline, locks: 0.}
     = self.entityToComponents
 
 func findComponentByParent*[T: Component](
     self: System;
     parentId: EntityId;
-): Option[T] =
+): Option[T] {.locks: 0.} =
   if not self.entityToComponents.hasKey(parentId):
     return none[T]()
   let components = self.entityToComponents[parentId]
@@ -56,23 +56,23 @@ func findComponentByParent*[T: Component](
       return some[T](T(component))
   return none[T]()
 
-func findComponentByParent*[T: Component](self: System; parent: Entity): Option[T] =
+func findComponentByParent*[T: Component](self: System; parent: Entity): Option[T] {.locks: 0.} =
   self.findComponentByParent[:T](parent.id)
 
 method hasNecessaryComponents*(
     self: System;
     entity: Entity;
     components: seq[Component];
-): bool {.base.} = false
+): bool {.base, locks: 0.} = false
 
-func isInitialized*(self: SystemObj | System): bool {.inline.}
+func isInitialized*(self: SystemObj | System): bool {.inline, locks: 0.}
     = self.initialized
 
-method initialize*(self: System) {.base.} =
+method initialize*(self: System) {.base, locks: 0.} =
   for component in self.uninitializedComponents:
     if (
       component.isInitialized or
-      component.parent.isNone() or
+      component.parent.isNone or
       not (component.parent.unsafeGet().id in self.entityToComponents)
     ):
       continue
@@ -80,8 +80,8 @@ method initialize*(self: System) {.base.} =
   self.uninitializedComponents = @[]
   self.initialized = true
 
-func registerComponent*(self: System; component: Component): bool =
-  if component.parent.isNone():
+func registerComponent*(self: System; component: Component): bool {.locks: 0.} =
+  if component.parent.isNone:
     return false
 
   let parent = component.parent.get()
@@ -97,7 +97,7 @@ func registerComponent*(self: System; component: Component): bool =
     self.uninitializedComponents &= component
   return true
 
-proc refreshEntityRegistration*(self: System; entity: Entity) =
+func refreshEntityRegistration*(self: System; entity: Entity) {.locks: 0.} =
   if not (entity.id in self.entityToComponents):
     return
   let components = self.entityToComponents[entity.id]
@@ -112,13 +112,13 @@ func registerEntity*(
   self: System;
   entity: Entity;
   componentStore: Table[ComponentId, Component];
-): bool =
+): bool {.locks: 0.} =
   if entity.id in self.entityToComponents:
     return false
 
   self.entityToComponents[entity.id] = @[]
   for component in componentStore.values:
-    if component.parent.isSome() and component.parent.unsafeGet().id == entity.id:
+    if component.parent.isSome and component.parent.unsafeGet().id == entity.id:
       discard self.registerComponent(component)
 
   self.refreshEntityRegistration(entity)

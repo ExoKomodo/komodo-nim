@@ -8,7 +8,6 @@ import ../components/[
 ]
 import ../entity
 import ../../lib/graphics/model3d
-import ../../lib/math
 from ../../lib/private/raylib import nil
 import ../../logging
 import ./system_macros
@@ -42,7 +41,7 @@ system RenderModelSystem:
     for entityId, components in pairs(self.entityToComponents):
       let model = self.findComponentByParent[:ModelComponent](entityId)
       let transform = self.findComponentByParent[:TransformComponent](entityId)
-      if model.isNone() or transform.isNone():
+      if model.isNone or transform.isNone:
         continue
       drawComponents(
           model.get(),
@@ -60,8 +59,8 @@ method hasNecessaryComponents*(
     components: seq[Component];
 ): bool =
   if (
-      self.findComponentByParent[:ModelComponent](entity).isNone() or
-      self.findComponentByParent[:TransformComponent](entity).isNone()
+      self.findComponentByParent[:ModelComponent](entity).isNone or
+      self.findComponentByParent[:TransformComponent](entity).isNone
   ):
     return false
   true

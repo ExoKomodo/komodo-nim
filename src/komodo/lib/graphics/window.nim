@@ -5,32 +5,30 @@ from ../private/raylib import nil
 import ../math
 import ./color
 
-proc beginDraw*() = raylib.BeginDrawing()
+func beginDraw*() = raylib.BeginDrawing()
 
-proc clearScreen*(clearColor: Color = White) = raylib.ClearBackground(clearColor)
+func clearScreen*(clearColor: Color = White) =
+  raylib.ClearBackground(clearColor)
 
-proc clearScreen*(clearColor: Option[Color]) =
-  if clearColor.isSome():
-    clearScreen(clearColor.unsafeGet())
-  else:
-    clearScreen()
+func clearScreen*(clearColor: Option[Color]) =
+  clearScreen(clearColor.get(White))
 
-proc getDelta*: float32 = raylib.GetFrameTime()
+func getDelta*: float32 = raylib.GetFrameTime()
 
-proc getFps*: int32 = raylib.GetFPS()
+func getFps*: int32 = raylib.GetFPS()
 
-proc close*() = raylib.CloseWindow()
+func close*() = raylib.CloseWindow()
 
-proc endDraw*() = raylib.EndDrawing()
+func endDraw*() = raylib.EndDrawing()
 
-proc initWindow*(screenSize: Vector2; title: string) = raylib.InitWindow(
+func initWindow*(screenSize: Vector2; title: string) = raylib.InitWindow(
     int32(screenSize.x),
     int32(screenSize.y),
     title,
 )
 
-proc isClosing*: bool = raylib.WindowShouldClose()
+func isClosing*: bool = raylib.WindowShouldClose()
 
-proc setFps*(fps: int32) = raylib.SetTargetFPS(fps)
+func setFps*(fps: int32) = raylib.SetTargetFPS(fps)
 
-proc setWindowTitle*(title: string) = raylib.SetWindowTitle(title)
+func setWindowTitle*(title: string) = raylib.SetWindowTitle(title)

@@ -6,18 +6,30 @@
             "request": "launch",
             "name": "Nim: Debug Desktop",
             "preLaunchTask": "Debug Komodo Desktop Example",
+            "preRunCommands": [
+                "command script import --allow-reload ./.vscode/lldbnim.py"
+            ],
             "program": "${workspaceFolder}/examples/desktop/bin/desktop",
             "args": [],
             "cwd": "${workspaceFolder}/examples/desktop",
+            "sourceLanguages": [
+                "nim",
+            ],
         },
         {
             "type": "lldb",
             "request": "launch",
             "name": "Nim: Debug Editor",
             "preLaunchTask": "Debug Komodo Editor",
+            "preRunCommands": [
+                "command script import --allow-reload ./.vscode/lldbnim.py"
+            ],
             "program": "${workspaceFolder}/komodoeditor/bin/komodoeditor",
             "args": [],
             "cwd": "${workspaceFolder}/komodoeditor",
+            "sourceLanguages": [
+                "nim",
+            ],
         }
     ]
 }
