@@ -1,4 +1,4 @@
-import komodo/prelude
+include komodo/prelude
 
 import strformat
 
@@ -47,26 +47,25 @@ system MoveSystem:
 
   update:
     for entity_id, components in pairs(self.entityToComponents):
-      if self.findComponentByParent[:SpriteComponent](entity_id).isNone:
+      if self.findComponentByParent[:SpriteComponent](entity_id).isNone():
         continue
-      let textOpt = self.findComponentByParent[:TextComponent](entity_id)
-      if textOpt.isNone:
+      let text = self.findComponentByParent[:TextComponent](entity_id)
+      if text.isNone():
         continue
-      let transformOpt = self.findComponentByParent[:TransformComponent](entityId)
-      if transformOpt.isNone:
+      let transform = self.findComponentByParent[:TransformComponent](entityId)
+      if transform.isNone():
         continue
-      let transform = transformOpt.unsafeGet()
       
       if self.move_left_action.isDown():
-        move(transform, xDirection = -1, delta = delta,)
+        move(transform.unsafeGet(), xDirection = -1, delta = delta,)
       if self.move_right_action.isDown():
-        move(transform, xDirection = 1, delta = delta,)
+        move(transform.unsafeGet(), xDirection = 1, delta = delta,)
       if self.move_up_action.isDown():
-        move(transform, yDirection = -1, delta = delta,)
+        move(transform.unsafeGet(), yDirection = -1, delta = delta,)
       if self.move_down_action.isDown():
-        move(transform, yDirection = 1, delta = delta,)
+        move(transform.unsafeGet(), yDirection = 1, delta = delta,)
       
-      textOpt.get.text = fmt"Hello from Desktop: {getFps()} FPS"
+      text.get.text = fmt"Hello from Desktop: {getFps()} FPS"
 
   destroy:
     discard

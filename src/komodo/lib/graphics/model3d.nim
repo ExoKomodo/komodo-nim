@@ -10,20 +10,20 @@ type
   Model3d* = ref object of RootObj
     model: Option[raylib.Model]
 
-proc unload(self: Model3d) =
-  if self.model.isSome():
+func unload(self: Model3d) =
+  if self.model.isSome:
     raylib.UnloadModel(self.model.unsafeGet())
     self.model = none[raylib.Model]()
 
-proc destroy*(self: Model3d) =
+func destroy*(self: Model3d) =
   self.unload()
 
-proc newModel3d*(modelPath: string): Model3d =
+func newModel3d*(modelPath: string): Model3d =
   result = Model3d(
       model: some(raylib.LoadModel(modelPath))
   )
 
-proc draw*(
+func draw*(
     self: Model3d;
     position: Vector3;
     rotation: Vector3;
@@ -32,7 +32,7 @@ proc draw*(
     hasWireframe: bool = false;
     wireFrameColor: Color = Black;
 ) =
-  if self.model.isNone():
+  if self.model.isNone:
     return
   let model = self.model.unsafeGet()
   raylib.DrawModelEx(

@@ -1,4 +1,5 @@
 import os
+import strformat
 
 import komodo/game
 import ./game_window
@@ -23,34 +24,72 @@ proc startGame(): CallbackCode {.cdecl.} =
     createThread(gameThread, game_window.start, channel)
   DefaultCallbackCode
 
-proc generateSkeleton(channel: ptr Channel[CommandKind]) =
-  let startCallback = callback:
+proc generateSkeleton(channel: ptr Channel[CommandKind]): tuple[vertical_box: VerticalBox, ecs_tree: Tree] =
+  let start_callback = callback:
     startGame()
-  let startButton = newButton(
+  let start_button = newButton(
     "Start",
-    startCallback,
+    start_callback,
   )
   
-  let closeCallback = callback:
+  let close_callback = callback:
     sendCloseCommand()
-  let closeButton = newButton(
+  let close_button = newButton(
     "Close Game",
-    closeCallback,
+    close_callback,
   )
+
+  let ecs_tree = newTree("ECS")
+
   let label = newLabel("Welcome to the Komodo Editor")
   let vertical_box = newVerticalBox(
     label,
-    startButton,
-    closeButton,
+    start_button,
+    close_button,
+    ecs_tree,
   )
   vertical_box[AlignmentAttribute] = "ACENTER"
   vertical_box[GapAttribute] = 10
-  vertical_box[MarginAttribute] = createDimensionAttribute(100, 10)
+  vertical_box[MarginAttribute] = createDimensionAttribute(20, 20)
 
   let dialog = newDialog(vertical_box)
   dialog[TitleAttribute] = "Komodo Editor"
 
   dialog.show()
+
+  result.vertical_box = vertical_box
+  result.ecs_tree = ecs_tree
+
+func fillSkeleton(ecs_tree: Tree) =
+  let systemsHierarchy = ecs_tree.createBranch(
+    "Systems",
+  )
+  for x in 0..5:
+    let id = 5 - x
+    discard ecs_tree.createLeaf(
+      fmt"System {id}",
+      systemsHierarchy,
+    )
+
+  let componentsHierarchy = ecs_tree.createBranch(
+    "Components",
+  )
+  for x in 0..5:
+    let id = 5 - x
+    discard ecs_tree.createLeaf(
+      fmt"Component {id}",
+      componentsHierarchy,
+    )
+  
+  let entitiesHierarchy = ecs_tree.createBranch(
+    "Entities",
+  )
+  for x in 0..5:
+    let id = 5 - x
+    discard ecs_tree.createLeaf(
+      fmt"Entity {id}",
+      entitiesHierarchy,
+    )
 
 proc init(channel: ptr Channel[CommandKind]) = 
   var argc = create(cint)
@@ -59,13 +98,14 @@ proc init(channel: ptr Channel[CommandKind]) =
   assert iup.open(argc, argv.addr) == 0         # UIP requires calling open()
 
   channel[].open()
-  generateSkeleton(channel)
+  let (_, ecs_tree) = generateSkeleton(channel)
+  fillSkeleton(ecs_tree)
 
 proc close(channel: ptr Channel[CommandKind]) = 
   iup.close()
   channel[].close()
 
-proc run() =
+func run() =
   iup.mainLoop()
 
 when isMainModule:
