@@ -58,9 +58,7 @@ method hasNecessaryComponents*(
     entity: Entity;
     components: seq[Component];
 ): bool =
-  if (
-      self.findComponentByParent[:ModelComponent](entity).isNone or
-      self.findComponentByParent[:TransformComponent](entity).isNone
-  ):
-    return false
-  true
+  (
+    self.findComponentByParent[:ModelComponent](entity).isNone and
+    self.findComponentByParent[:TransformComponent](entity).isNone
+  )
