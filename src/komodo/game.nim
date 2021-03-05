@@ -10,7 +10,9 @@ import ./ecs/[
     ids,
     systems,
 ]
+import ./lib/audio/sound_device
 import ./lib/graphics
+import ./lib/graphics/window
 import ./lib/math
 import ./logging
 
@@ -36,6 +38,7 @@ type Game* = ref object
   entityStore: Table[EntityId, Entity]
   isRunning: bool
   screenSize: Option[Vector2]
+  shouldCloseAudio: bool
   systems: seq[System]
   title: string
 
@@ -49,6 +52,10 @@ func `clearColor=`*(self: Game; value: Color) {.inline.} =
 
 func isRunning*(self: Game): auto {.inline.} = self.isRunning
 
+func shouldCloseAudio*(self: Game): auto {.inline.} = self.isRunning
+func `shouldCloseAudio=`*(self: Game; value: bool) {.inline.} =
+  self.shouldCloseAudio = value
+
 func title*(self: Game): auto {.inline.} = self.title
 func `title=`*(self: Game; value: string) {.inline.} =
   self.title = value
@@ -61,10 +68,12 @@ func newGame*(title: string = DefaultTitle): Game =
   result = Game()
   result.systems = @[]
   result.title = title
-  initWindow(
+  window.initialize(
       screenSize(result),
       result.title,
   )
+  if not sound_device.isReady():
+    sound_device.initialize()
 
 func draw(self: Game) =
   beginDraw()
@@ -162,7 +171,10 @@ func setClearColor*(self: Game; clearColor: Color) =
 func quit*(self: Game) =
   if self.isRunning:
     self.isRunning = false
-    close()
+    
+    if self.shouldCloseAudio:
+      sound_device.close()
+    window.close()
 
 func run*(self: Game) =
   if not self.isRunning:

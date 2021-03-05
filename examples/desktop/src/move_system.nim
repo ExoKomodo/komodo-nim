@@ -3,6 +3,7 @@ import komodo/prelude
 import strformat
 
 import komodo/ecs/systems/system_macros
+import komodo/lib/audio
 
 
 func move(
@@ -25,6 +26,7 @@ system MoveSystem:
     move_right_action: Action
     move_up_action: Action
     move_down_action: Action
+    sound_action: Action
 
   create:
     discard
@@ -35,6 +37,7 @@ system MoveSystem:
     self.move_right_action = self.action_manager.newAction("move_right")
     self.move_up_action = self.action_manager.newAction("move_up")
     self.move_down_action = self.action_manager.newAction("move_down")
+    self.sound_action = self.action_manager.newAction("sound")
     self.action_manager
       .map(self.move_left_action, Keys.Left)
       .map(self.move_left_action, Keys.A)
@@ -44,18 +47,27 @@ system MoveSystem:
       .map(self.move_up_action, Keys.W)
       .map(self.move_down_action, Keys.Down)
       .map(self.move_down_action, Keys.S)
+      .map(self.sound_action, Keys.Space)
 
   update:
     for entity_id, components in pairs(self.entityToComponents):
       if self.findComponentByParent[:SpriteComponent](entity_id).isNone:
         continue
+      
       let textOpt = self.findComponentByParent[:TextComponent](entity_id)
       if textOpt.isNone:
         continue
+      let text = textOpt.unsafeGet()
+      
       let transformOpt = self.findComponentByParent[:TransformComponent](entityId)
       if transformOpt.isNone:
         continue
       let transform = transformOpt.unsafeGet()
+      
+      let soundOpt = self.findComponentByParent[:SoundComponent](entityId)
+      if soundOpt.isNone:
+        continue
+      let sound = soundOpt.unsafeGet()
       
       if self.move_left_action.isDown():
         move(transform, xDirection = -1, delta = delta,)
@@ -66,7 +78,24 @@ system MoveSystem:
       if self.move_down_action.isDown():
         move(transform, yDirection = 1, delta = delta,)
       
-      textOpt.get.text = fmt"Hello from Desktop: {getFps()} FPS"
+      text.text = fmt"Hello from Desktop: {getFps()} FPS"
+      if self.sound_action.isPressed():
+        if sound.sound.isPlaying():
+          sound.sound.pause()
+        else:
+          sound.sound.play()
 
   destroy:
     discard
+
+method hasNecessaryComponents*(
+    self: MoveSystem;
+    entity: Entity;
+    components: seq[Component];
+): bool =
+  not (
+      self.findComponentByParent[:SpriteComponent](entity).isNone or
+      self.findComponentByParent[:TextComponent](entity).isNone or
+      self.findComponentByParent[:TransformComponent](entity).isNone or
+      self.findComponentByParent[:SoundComponent](entity).isNone
+  )

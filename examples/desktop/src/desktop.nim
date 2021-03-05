@@ -67,6 +67,15 @@ proc addBrainlet(game: Game) =
   assert not game.deregisterComponent(sprite)
   assert game.registerComponent(sprite)
 
+  let sound = newSoundComponent(
+      parent,
+      "audio/not-the-bees.mp3",
+  )
+  assert game.registerComponent(sound)
+  assert game.deregisterComponent(sound)
+  assert not game.deregisterComponent(sound)
+  assert game.registerComponent(sound)
+
   let text = newTextComponent(
       parent,
       "Hello from desktop!",
@@ -127,6 +136,7 @@ proc main() =
   var game = newGame()
   game.title = "Desktop Example"
   game.clearColor = Blue
+  game.shouldCloseAudio = false
 
   game.addCube()
   game.addBrainlet()
