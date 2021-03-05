@@ -21,7 +21,7 @@ func close*() = raylib.CloseWindow()
 
 func endDraw*() = raylib.EndDrawing()
 
-func initWindow*(screenSize: Vector2; title: string) = raylib.InitWindow(
+func initialize*(screenSize: Vector2; title: string) = raylib.InitWindow(
     int32(screenSize.x),
     int32(screenSize.y),
     title,
