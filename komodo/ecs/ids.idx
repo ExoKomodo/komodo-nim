@@ -1,0 +1,8 @@
+ComponentId	komodo/ecs/ids.html#ComponentId	ids: ComponentId	
+hash	komodo/ecs/ids.html#hash,ComponentId	ids: hash(id: ComponentId): Hash	
+`==`	komodo/ecs/ids.html#==,ComponentId,ComponentId	ids: `==`(left: ComponentId; right: ComponentId): bool	
+nextComponentId	komodo/ecs/ids.html#nextComponentId	ids: nextComponentId(): ComponentId	
+EntityId	komodo/ecs/ids.html#EntityId	ids: EntityId	
+hash	komodo/ecs/ids.html#hash,EntityId	ids: hash(id: EntityId): Hash	
+`==`	komodo/ecs/ids.html#==,EntityId,EntityId	ids: `==`(left: EntityId; right: EntityId): bool	
+nextEntityId	komodo/ecs/ids.html#nextEntityId	ids: nextEntityId(): EntityId	

@@ -1,0 +1,5 @@
+RenderTextSystem	komodo/ecs/systems/render_text_system.html#RenderTextSystem	render_text_system: RenderTextSystem	
+newRenderTextSystem	komodo/ecs/systems/render_text_system.html#newRenderTextSystem	render_text_system: newRenderTextSystem(): RenderTextSystem	
+initialize	komodo/ecs/systems/render_text_system.html#initialize.e,RenderTextSystem	render_text_system: initialize(self: RenderTextSystem)	
+draw	komodo/ecs/systems/render_text_system.html#draw.e,RenderTextSystem,Camera3D	render_text_system: draw(self: RenderTextSystem; injected_camera: Camera)	
+hasNecessaryComponents	komodo/ecs/systems/render_text_system.html#hasNecessaryComponents.e,RenderTextSystem,Entity,seq[Component]	render_text_system: hasNecessaryComponents(self: RenderTextSystem; entity: Entity;\n                       components: seq[Component]): bool	

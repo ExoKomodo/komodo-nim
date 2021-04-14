@@ -1,0 +1,9 @@
+TransformComponent	komodo/ecs/components/transform_component.html#TransformComponent	transform_component: TransformComponent	
+newTransformComponent	komodo/ecs/components/transform_component.html#newTransformComponent,Entity,Vector3,Vector3,Vector3	transform_component: newTransformComponent(parent: Entity; position: Vector3; rotation: Vector3;\n                      scale: Vector3): TransformComponent	
+initialize	komodo/ecs/components/transform_component.html#initialize.e,TransformComponent	transform_component: initialize(self: TransformComponent)	
+position	komodo/ecs/components/transform_component.html#position,TransformComponent	transform_component: position(self: TransformComponent): auto	
+position=	komodo/ecs/components/transform_component.html#position=,TransformComponent,Vector3	transform_component: position=(self: TransformComponent; value: Vector3)	
+rotation	komodo/ecs/components/transform_component.html#rotation,TransformComponent	transform_component: rotation(self: TransformComponent): auto	
+rotation=	komodo/ecs/components/transform_component.html#rotation=,TransformComponent,Vector3	transform_component: rotation=(self: TransformComponent; value: Vector3)	
+scale	komodo/ecs/components/transform_component.html#scale,TransformComponent	transform_component: scale(self: TransformComponent): auto	
+scale=	komodo/ecs/components/transform_component.html#scale=,TransformComponent,Vector3	transform_component: scale=(self: TransformComponent; value: Vector3)	

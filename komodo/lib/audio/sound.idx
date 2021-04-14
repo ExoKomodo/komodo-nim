@@ -1,0 +1,8 @@
+Sound	komodo/lib/audio/sound.html#Sound	sound: Sound	
+destroy	komodo/lib/audio/sound.html#destroy,Sound	sound: destroy(self: Sound)	
+newSound	komodo/lib/audio/sound.html#newSound,string	sound: newSound(soundPath: string): Sound	
+isPlaying	komodo/lib/audio/sound.html#isPlaying,Sound	sound: isPlaying(self: Sound): bool	
+pause	komodo/lib/audio/sound.html#pause,Sound	sound: pause(self: Sound)	
+play	komodo/lib/audio/sound.html#play,Sound	sound: play(self: Sound)	
+resume	komodo/lib/audio/sound.html#resume,Sound	sound: resume(self: Sound)	
+stop	komodo/lib/audio/sound.html#stop,Sound	sound: stop(self: Sound)	

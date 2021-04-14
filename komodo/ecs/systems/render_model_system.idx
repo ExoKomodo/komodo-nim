@@ -1,0 +1,5 @@
+RenderModelSystem	komodo/ecs/systems/render_model_system.html#RenderModelSystem	render_model_system: RenderModelSystem	
+newRenderModelSystem	komodo/ecs/systems/render_model_system.html#newRenderModelSystem	render_model_system: newRenderModelSystem(): RenderModelSystem	
+initialize	komodo/ecs/systems/render_model_system.html#initialize.e,RenderModelSystem	render_model_system: initialize(self: RenderModelSystem)	
+draw	komodo/ecs/systems/render_model_system.html#draw.e,RenderModelSystem,Camera3D	render_model_system: draw(self: RenderModelSystem; injected_camera: Camera)	
+hasNecessaryComponents	komodo/ecs/systems/render_model_system.html#hasNecessaryComponents.e,RenderModelSystem,Entity,seq[Component]	render_model_system: hasNecessaryComponents(self: RenderModelSystem; entity: Entity;\n                       components: seq[Component]): bool	

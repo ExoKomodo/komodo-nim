@@ -1,0 +1,7 @@
+knownLockLevel	komodo/private/macro_helpers.html#knownLockLevel,BiggestInt	macro_helpers: knownLockLevel(level: BiggestInt): NimNode	
+unknownLockLevel	komodo/private/macro_helpers.html#unknownLockLevel	macro_helpers: unknownLockLevel(): NimNode	
+generateConstructor	komodo/private/macro_helpers.html#generateConstructor,NimNode,NimNode,NimNode,NimNode	macro_helpers: generateConstructor(typeName: NimNode; formalParams: NimNode;\n                    defaultStatements: NimNode; constructorBody: NimNode): NimNode	
+generateFormalParams	komodo/private/macro_helpers.html#generateFormalParams,NimNode,NimNode,NimNode	macro_helpers: generateFormalParams(typeName: NimNode; constructorSignature: NimNode;\n                     startingParams: NimNode = nil): NimNode	
+generateTypeDefinition	komodo/private/macro_helpers.html#generateTypeDefinition,NimNode,NimNode,string	macro_helpers: generateTypeDefinition(typeName: NimNode; statements: NimNode;\n                       parentTypeName: string): NimNode	
+generateInit	komodo/private/macro_helpers.html#generateInit,NimNode,NimNode,NimNode,NimNode	macro_helpers: generateInit(typeName: NimNode; initDefinition: NimNode;\n             defaultStatements: NimNode; lockLevel: NimNode = knownLockLevel(0)): NimNode	
+generateDestructor	komodo/private/macro_helpers.html#generateDestructor,NimNode,NimNode,NimNode	macro_helpers: generateDestructor(typeName: NimNode; destructorDefinition: NimNode;\n                   defaultStatements: NimNode = newEmptyNode()): NimNode	

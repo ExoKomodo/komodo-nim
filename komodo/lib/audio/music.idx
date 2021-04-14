@@ -1,0 +1,8 @@
+Music	komodo/lib/audio/music.html#Music	music: Music	
+destroy	komodo/lib/audio/music.html#destroy,Music	music: destroy(self: Music)	
+newMusic	komodo/lib/audio/music.html#newMusic,string	music: newMusic(musicPath: string): Music	
+isPlaying	komodo/lib/audio/music.html#isPlaying,Music	music: isPlaying(self: Music): bool	
+pause	komodo/lib/audio/music.html#pause,Music	music: pause(self: Music)	
+play	komodo/lib/audio/music.html#play,Music	music: play(self: Music)	
+resume	komodo/lib/audio/music.html#resume,Music	music: resume(self: Music)	
+stop	komodo/lib/audio/music.html#stop,Music	music: stop(self: Music)	

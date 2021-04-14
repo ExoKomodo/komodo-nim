@@ -1,0 +1,2 @@
+draw	komodo/lib/graphics/font.html#draw,string,Vector2D,int32,Color	font: draw(text: string; position: Vector2D; fontSize: int32; color: Color)	
+drawCentered	komodo/lib/graphics/font.html#drawCentered,string,Vector2D,int32,Color	font: drawCentered(text: string; position: Vector2D; fontSize: int32; color: Color)	

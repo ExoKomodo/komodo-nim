@@ -1,0 +1,4 @@
+Model3d	komodo/lib/graphics/model3d.html#Model3d	model3d: Model3d	
+destroy	komodo/lib/graphics/model3d.html#destroy,Model3d	model3d: destroy(self: Model3d)	
+newModel3d	komodo/lib/graphics/model3d.html#newModel3d,string	model3d: newModel3d(modelPath: string): Model3d	
+draw	komodo/lib/graphics/model3d.html#draw,Model3d,Vector3,Vector3,Vector3,Color,bool,Color	model3d: draw(self: Model3d; position: Vector3; rotation: Vector3; scale: Vector3;\n     color: Color = White; hasWireframe: bool = false;\n     wireFrameColor: Color = Black)	

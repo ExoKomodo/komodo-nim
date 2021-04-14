@@ -1,0 +1,6 @@
+SpriteComponent	komodo/ecs/components/sprite_component.html#SpriteComponent	sprite_component: SpriteComponent	
+newSpriteComponent	komodo/ecs/components/sprite_component.html#newSpriteComponent,Entity,string,Color	sprite_component: newSpriteComponent(parent: Entity; texturePath: string; color: Color): SpriteComponent	
+initialize	komodo/ecs/components/sprite_component.html#initialize.e,SpriteComponent	sprite_component: initialize(self: SpriteComponent)	
+color=	komodo/ecs/components/sprite_component.html#color=,SpriteComponent,Color	sprite_component: color=(self: SpriteComponent; value: Color): auto	
+color	komodo/ecs/components/sprite_component.html#color,SpriteComponent	sprite_component: color(self: SpriteComponent): auto	
+texture	komodo/ecs/components/sprite_component.html#texture,SpriteComponent	sprite_component: texture(self: SpriteComponent): auto	

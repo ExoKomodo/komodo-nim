@@ -1,0 +1,10 @@
+ModelComponent	komodo/ecs/components/model_component.html#ModelComponent	model_component: ModelComponent	
+newModelComponent	komodo/ecs/components/model_component.html#newModelComponent,Entity,string	model_component: newModelComponent(parent: Entity; modelPath: string): ModelComponent	
+initialize	komodo/ecs/components/model_component.html#initialize.e,ModelComponent	model_component: initialize(self: ModelComponent)	
+color=	komodo/ecs/components/model_component.html#color=,ModelComponent,Color	model_component: color=(self: ModelComponent; value: Color)	
+color	komodo/ecs/components/model_component.html#color,ModelComponent	model_component: color(self: ModelComponent): auto	
+model	komodo/ecs/components/model_component.html#model,ModelComponent	model_component: model(self: ModelComponent): auto	
+hasWireframe=	komodo/ecs/components/model_component.html#hasWireframe=,ModelComponent,bool	model_component: hasWireframe=(self: ModelComponent; value: bool)	
+hasWireframe	komodo/ecs/components/model_component.html#hasWireframe,ModelComponent	model_component: hasWireframe(self: ModelComponent): bool	
+wireframeColor=	komodo/ecs/components/model_component.html#wireframeColor=,ModelComponent,Color	model_component: wireframeColor=(self: ModelComponent; value: Color)	
+wireframeColor	komodo/ecs/components/model_component.html#wireframeColor,ModelComponent	model_component: wireframeColor(self: ModelComponent): auto	

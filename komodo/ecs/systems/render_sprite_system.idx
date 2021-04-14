@@ -1,0 +1,5 @@
+RenderSpriteSystem	komodo/ecs/systems/render_sprite_system.html#RenderSpriteSystem	render_sprite_system: RenderSpriteSystem	
+newRenderSpriteSystem	komodo/ecs/systems/render_sprite_system.html#newRenderSpriteSystem	render_sprite_system: newRenderSpriteSystem(): RenderSpriteSystem	
+initialize	komodo/ecs/systems/render_sprite_system.html#initialize.e,RenderSpriteSystem	render_sprite_system: initialize(self: RenderSpriteSystem)	
+draw	komodo/ecs/systems/render_sprite_system.html#draw.e,RenderSpriteSystem,Camera3D	render_sprite_system: draw(self: RenderSpriteSystem; injected_camera: Camera)	
+hasNecessaryComponents	komodo/ecs/systems/render_sprite_system.html#hasNecessaryComponents.e,RenderSpriteSystem,Entity,seq[Component]	render_sprite_system: hasNecessaryComponents(self: RenderSpriteSystem; entity: Entity;\n                       components: seq[Component]): bool	

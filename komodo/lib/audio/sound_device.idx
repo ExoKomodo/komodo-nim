@@ -1,0 +1,4 @@
+initialize	komodo/lib/audio/sound_device.html#initialize	sound_device: initialize()	
+isReady	komodo/lib/audio/sound_device.html#isReady	sound_device: isReady(): bool	
+close	komodo/lib/audio/sound_device.html#close	sound_device: close()	
+setMasterVolume	komodo/lib/audio/sound_device.html#setMasterVolume,float32	sound_device: setMasterVolume(volume: float32)	

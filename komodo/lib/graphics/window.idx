@@ -1,0 +1,11 @@
+beginDraw	komodo/lib/graphics/window.html#beginDraw	window: beginDraw()	
+clearScreen	komodo/lib/graphics/window.html#clearScreen,Color	window: clearScreen(clearColor: Color = White)	
+clearScreen	komodo/lib/graphics/window.html#clearScreen,Option[Color]	window: clearScreen(clearColor: Option[Color])	
+getDelta	komodo/lib/graphics/window.html#getDelta	window: getDelta(): float32	
+getFps	komodo/lib/graphics/window.html#getFps	window: getFps(): int32	
+close	komodo/lib/graphics/window.html#close	window: close()	
+endDraw	komodo/lib/graphics/window.html#endDraw	window: endDraw()	
+initialize	komodo/lib/graphics/window.html#initialize,Vector2,string	window: initialize(screenSize: Vector2; title: string)	
+isClosing	komodo/lib/graphics/window.html#isClosing	window: isClosing(): bool	
+setFps	komodo/lib/graphics/window.html#setFps,int32	window: setFps(fps: int32)	
+setWindowTitle	komodo/lib/graphics/window.html#setWindowTitle,string	window: setWindowTitle(title: string)	

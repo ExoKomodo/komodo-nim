@@ -1,0 +1,4 @@
+SoundComponent	komodo/ecs/components/sound_component.html#SoundComponent	sound_component: SoundComponent	
+newSoundComponent	komodo/ecs/components/sound_component.html#newSoundComponent,Entity,string	sound_component: newSoundComponent(parent: Entity; soundPath: string): SoundComponent	
+initialize	komodo/ecs/components/sound_component.html#initialize.e,SoundComponent	sound_component: initialize(self: SoundComponent)	
+sound	komodo/ecs/components/sound_component.html#sound,SoundComponent	sound_component: sound(self: SoundComponent): auto	

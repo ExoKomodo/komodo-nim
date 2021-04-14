@@ -1,0 +1,4 @@
+MusicComponent	komodo/ecs/components/music_component.html#MusicComponent	music_component: MusicComponent	
+newMusicComponent	komodo/ecs/components/music_component.html#newMusicComponent,Entity,string	music_component: newMusicComponent(parent: Entity; musicPath: string): MusicComponent	
+initialize	komodo/ecs/components/music_component.html#initialize.e,MusicComponent	music_component: initialize(self: MusicComponent)	
+music	komodo/ecs/components/music_component.html#music,MusicComponent	music_component: music(self: MusicComponent): auto	

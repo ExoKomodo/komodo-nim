@@ -1,0 +1,23 @@
+Game	komodo/game.html#Game	game: Game	
+camera	komodo/game.html#camera,Game	game: camera(self: Game): auto	
+clearColor	komodo/game.html#clearColor,Game	game: clearColor(self: Game): auto	
+clearColor=	komodo/game.html#clearColor=,Game,Color	game: clearColor=(self: Game; value: Color)	
+isRunning	komodo/game.html#isRunning,Game	game: isRunning(self: Game): auto	
+shouldCloseAudio	komodo/game.html#shouldCloseAudio,Game	game: shouldCloseAudio(self: Game): auto	
+shouldCloseAudio=	komodo/game.html#shouldCloseAudio=,Game,bool	game: shouldCloseAudio=(self: Game; value: bool)	
+title	komodo/game.html#title,Game	game: title(self: Game): auto	
+title=	komodo/game.html#title=,Game,string	game: title=(self: Game; value: string)	
+screenSize	komodo/game.html#screenSize,Game	game: screenSize(self: Game): auto	
+newGame	komodo/game.html#newGame,string	game: newGame(title: string = DefaultTitle): Game	
+executeOnSystems	komodo/game.html#executeOnSystems,Game,proc(System)	game: executeOnSystems(self: Game; predicate: proc (system: System))	
+deregisterComponent	komodo/game.html#deregisterComponent,Game,Component	game: deregisterComponent(self: Game; component: Component): bool	
+deregisterEntity	komodo/game.html#deregisterEntity,Game,Entity	game: deregisterEntity(self: Game; entity: Entity): bool	
+deregisterSystem	komodo/game.html#deregisterSystem,Game,System	game: deregisterSystem(self: Game; system: System): bool	
+registerEntity	komodo/game.html#registerEntity,Game,Entity	game: registerEntity(self: Game; entity: Entity): bool	
+registerComponent	komodo/game.html#registerComponent,Game,Component	game: registerComponent(self: Game; component: Component): bool	
+registerSystem	komodo/game.html#registerSystem,Game,System	game: registerSystem(self: Game; system: System): bool	
+setClearColor	komodo/game.html#setClearColor,Game,Color	game: setClearColor(self: Game; clearColor: Color)	
+quit	komodo/game.html#quit,Game	game: quit(self: Game)	
+run	komodo/game.html#run,Game	game: run(self: Game)	
+CommandKind	komodo/game.html#CommandKind	game: CommandKind	
+run	komodo/game.html#run,Game,ptr.Channel[CommandKind]	game: run(self: Game; commandChannel: ptr Channel[CommandKind])	

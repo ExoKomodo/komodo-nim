@@ -1,0 +1,6 @@
+Component	komodo/ecs/components/component.html#Component	component: Component	
+isInitialized	komodo/ecs/components/component.html#isInitialized,Component	component: isInitialized(self: Component): bool	
+parent=	komodo/ecs/components/component.html#parent=,ComponentObj,Entity	component: parent=(self: var ComponentObj; value: Entity)	
+parent=	komodo/ecs/components/component.html#parent=,Component,Entity	component: parent=(self: Component; value: Entity)	
+parent	komodo/ecs/components/component.html#parent	component: parent(self: ComponentObj | Component): Option[Entity]	
+initialize	komodo/ecs/components/component.html#initialize.e,Component	component: initialize(self: Component)	

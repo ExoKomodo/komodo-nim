@@ -1,0 +1,15 @@
+System	komodo/ecs/systems/system.html#System	system: System	
+deregisterComponent	komodo/ecs/systems/system.html#deregisterComponent,System,Component	system: deregisterComponent(self: System; component: Component): bool	
+deregisterEntity	komodo/ecs/systems/system.html#deregisterEntity,System,Entity	system: deregisterEntity(self: System; entity: Entity): bool	
+destroy	komodo/ecs/systems/system.html#destroy,SystemObj	system: destroy(self: var SystemObj)	
+entityToComponents	komodo/ecs/systems/system.html#entityToComponents,System	system: entityToComponents(self: System): Table[EntityId, seq[Component]]	
+findComponentByParent	komodo/ecs/systems/system.html#findComponentByParent,System,EntityId	system: findComponentByParent[T: Component](self: System; parentId: EntityId): Option[T]	
+findComponentByParent	komodo/ecs/systems/system.html#findComponentByParent,System,Entity	system: findComponentByParent[T: Component](self: System; parent: Entity): Option[T]	
+hasNecessaryComponents	komodo/ecs/systems/system.html#hasNecessaryComponents.e,System,Entity,seq[Component]	system: hasNecessaryComponents(self: System; entity: Entity; components: seq[Component]): bool	
+isInitialized	komodo/ecs/systems/system.html#isInitialized	system: isInitialized(self: SystemObj | System): bool	
+initialize	komodo/ecs/systems/system.html#initialize.e,System	system: initialize(self: System)	
+registerComponent	komodo/ecs/systems/system.html#registerComponent,System,Component	system: registerComponent(self: System; component: Component): bool	
+refreshEntityRegistration	komodo/ecs/systems/system.html#refreshEntityRegistration,System,Entity	system: refreshEntityRegistration(self: System; entity: Entity)	
+registerEntity	komodo/ecs/systems/system.html#registerEntity,System,Entity,Table[ComponentId,Component]	system: registerEntity(self: System; entity: Entity;\n               componentStore: Table[ComponentId, Component]): bool	
+draw	komodo/ecs/systems/system.html#draw.e,System,Camera3D	system: draw(self: System; injected_camera: Camera)	
+update	komodo/ecs/systems/system.html#update.e,System,float32	system: update(self: System; delta: float32)	

@@ -1,0 +1,4 @@
+Texture2d	komodo/lib/graphics/texture2d.html#Texture2d	texture2d: Texture2d	
+destroy	komodo/lib/graphics/texture2d.html#destroy,Texture2d	texture2d: destroy(self: Texture2d)	
+newTexture2d	komodo/lib/graphics/texture2d.html#newTexture2d,string	texture2d: newTexture2d(texturePath: string): Texture2d	
+draw	komodo/lib/graphics/texture2d.html#draw,Texture2d,Vector3,Vector3,Vector3,Color	texture2d: draw(self: Texture2d; position: Vector3; rotation: Vector3; scale: Vector3;\n     color: Color)	

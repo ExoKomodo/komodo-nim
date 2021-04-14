@@ -1,0 +1,9 @@
+TextComponent	komodo/ecs/components/text_component.html#TextComponent	text_component: TextComponent	
+newTextComponent	komodo/ecs/components/text_component.html#newTextComponent,Entity,string,int32,Color	text_component: newTextComponent(parent: Entity; text: string; fontSize: int32; color: Color): TextComponent	
+initialize	komodo/ecs/components/text_component.html#initialize.e,TextComponent	text_component: initialize(self: TextComponent)	
+text	komodo/ecs/components/text_component.html#text,TextComponent	text_component: text(self: TextComponent): auto	
+text=	komodo/ecs/components/text_component.html#text=,TextComponent,string	text_component: text=(self: TextComponent; value: string)	
+fontSize	komodo/ecs/components/text_component.html#fontSize,TextComponent	text_component: fontSize(self: TextComponent): auto	
+fontSize=	komodo/ecs/components/text_component.html#fontSize=,TextComponent,int32	text_component: fontSize=(self: TextComponent; value: int32)	
+color	komodo/ecs/components/text_component.html#color,TextComponent	text_component: color(self: TextComponent): auto	
+color=	komodo/ecs/components/text_component.html#color=,TextComponent,Color	text_component: color=(self: TextComponent; value: Color)	

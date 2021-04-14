@@ -1,0 +1,3 @@
+logDebug	komodo/logging.html#logDebug,string	logging: logDebug(message: string)	
+logInfo	komodo/logging.html#logInfo,string	logging: logInfo(message: string)	
+logError	komodo/logging.html#logError,string	logging: logError(message: string)	
