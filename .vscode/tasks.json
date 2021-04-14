@@ -7,6 +7,7 @@
             "command": "cd examples/desktop; nimble buildDesktop",
             "problemMatcher": [],
             "group": "build",
+            "dependsOn": ["Clean Komodo Desktop Example"],
         },
         {
             "label": "Debug Komodo Desktop Example",
@@ -14,6 +15,7 @@
             "command": "cd examples/desktop; nimble debugDesktop",
             "problemMatcher": [],
             "group": "build",
+            "dependsOn": ["Clean Komodo Desktop Example"],
         },
         {
             "label": "Clean Komodo Desktop Example",
@@ -27,6 +29,7 @@
             "type": "shell",
             "command": "cd examples/desktop; nimble runDesktop",
             "problemMatcher": [],
+            "dependsOn": ["Clean Komodo Desktop Example"],
         },
         {
             "label": "Format code",
