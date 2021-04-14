@@ -185,6 +185,7 @@ func run*(self: Game) =
       self.initialize()
       self.update()
       self.draw()
+    self.quit()
 
 type CommandKind* {.pure.} = enum
   Default
@@ -214,3 +215,4 @@ func run*(self: Game; commandChannel: ptr Channel[CommandKind]) =
       self.initialize()
       self.update()
       self.draw()
+    self.quit()

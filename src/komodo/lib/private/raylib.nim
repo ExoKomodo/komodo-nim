@@ -84,6 +84,13 @@ template RAD2DEG*(): auto = (180.0f/PI)
 # Plain structures in C++ (without constructors) can be initialized from { } initializers.
 # Some Basic Colors
 # NOTE: Custom raylib color palette for amazing visuals on WHITE background
+# Color type, RGBA (32bit)
+type Color* {.bycopy.} = object
+  r*: uint8
+  g*: uint8
+  b*: uint8
+  a*: uint8
+
 template LIGHTGRAY*(): auto = Color(r: 200, g: 200, b: 200, a: 255) # Light Gray
 template GRAY*(): auto = Color(r: 130, g: 130, b: 130, a: 255) # Gray
 template DARKGRAY*(): auto = Color(r: 80, g: 80, b: 80, a: 255) # Dark Gray
@@ -145,12 +152,6 @@ type Matrix* {.bycopy.} = object
   m1*, m5*, m9*, m13*: float32
   m2*, m6*, m10*, m14*: float32
   m3*, m7*, m11*, m15*: float32
-# Color type, RGBA (32bit)
-type Color* {.bycopy.} = object
-  r*: uint8
-  g*: uint8
-  b*: uint8
-  a*: uint8
 # Rectangle type
 type Rectangle* {.bycopy.} = object
   x*: float32

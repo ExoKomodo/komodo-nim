@@ -4,29 +4,48 @@
         {
             "label": "Build Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; nimble buildDesktop",
+            "command": "cd examples/desktop; nimble doBuild",
             "problemMatcher": [],
-            "group": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "Clean Komodo Desktop Example"
+            ]
         },
         {
             "label": "Debug Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; nimble debugDesktop",
+            "command": "cd examples/desktop; nimble doDebug",
             "problemMatcher": [],
             "group": "build",
+            "dependsOn": [
+                "Clean Komodo Desktop Example"
+            ]
+        },
+        {
+            "label": "Clean Komodo Desktop Example",
+            "type": "shell",
+            "command": "cd examples/desktop; rm bin/*",
+            "problemMatcher": [],
+            "group": "build"
         },
         {
             "label": "Run Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; nimble runDesktop",
+            "command": "cd examples/desktop; nimble doRun",
             "problemMatcher": [],
+            "dependsOn": [
+                "Clean Komodo Desktop Example"
+            ]
         },
         {
             "label": "Format code",
             "type": "shell",
             "command": "nimpretty --indent:2 **/*.nim",
             "problemMatcher": [],
-            "group": "none",
-        },
+            "group": "none"
+        }
     ]
 }
