@@ -16,6 +16,13 @@
             "group": "build",
         },
         {
+            "label": "Clean Komodo Desktop Example",
+            "type": "shell",
+            "command": "cd examples/desktop; rm bin/*",
+            "problemMatcher": [],
+            "group": "build",
+        },
+        {
             "label": "Run Komodo Desktop Example",
             "type": "shell",
             "command": "cd examples/desktop; nimble runDesktop",

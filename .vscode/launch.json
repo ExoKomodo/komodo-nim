@@ -6,6 +6,7 @@
             "request": "launch",
             "name": "Nim: Debug Desktop",
             "preLaunchTask": "Debug Komodo Desktop Example",
+            "postDebugTask": "Clean Komodo Desktop Example",
             "preRunCommands": [
                 "command script import --allow-reload ./.vscode/lldbnim.py"
             ],
