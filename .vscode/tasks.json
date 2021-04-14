@@ -22,23 +22,6 @@
             "problemMatcher": [],
         },
         {
-            "label": "Build Komodo Editor",
-            "type": "shell",
-            "command": "cd komodoeditor; nimble buildEditor",
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-        },
-        {
-            "label": "Debug Komodo Editor",
-            "type": "shell",
-            "command": "cd komodoeditor; nimble debugEditor",
-            "problemMatcher": [],
-            "group": "build",
-        },
-        {
             "label": "Format code",
             "type": "shell",
             "command": "nimpretty --indent:2 **/*.nim",
