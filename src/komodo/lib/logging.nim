@@ -6,6 +6,6 @@ func log_debug*(message: string) =
 func log_info*(message: string) =
   raylib.TraceLog(raylib.LOG_INFO, message)
 
-func log_error*(message: string) =
+proc log_error*(message: string) {.sideEffect.} =
   raylib.TraceLog(raylib.LOG_ERROR, message)
 

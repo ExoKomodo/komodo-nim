@@ -1,46 +1,53 @@
 from komodo/lib/color import nil
+from komodo/lib/logging import nil
 from komodo/lib/math import nil
 from komodo/lib/window import nil
 
+import komodo/rendering
 
-type GameState* = object of RootObj
-  screen_size: math.Vector2
-  title: string
+import komodo/[
+  entity,
+  game_state,
+]
+export entity
+export game_state
 
-func screen_size*(self: GameState): auto = self.screen_size
-func title*(self: GameState): auto = self.title
+import strformat
 
-func newGameState*(
-  title: string,
-  width: Natural,
-  height: Natural;
-): GameState =
-  GameState(
-    screen_size: math.Vector2(
-      x: width.float,
-      y: height.float,
-    ),
-    title: title,
-  )
 
-func run*(
+proc draw(
+  state: GameState;
+  cache: ResourceCache;
+) {.sideEffect.} =
+  for entity in state.entities:
+    rendering.draw(entity, cache)
+
+proc run*(
   initial_state: GameState;
+  pre_init: proc(state: GameState): GameState {.noSideEffect.};
   init: proc(state: GameState): GameState {.noSideEffect.};
-  post_init: proc(state: GameState): GameState {.noSideEffect.};
   update: proc(state: GameState; delta: float): GameState {.noSideEffect.};
-  exit: proc(state: GameState) {.noSideEffect.};
-) =
-  var state = initial_state.init()
+  exit: proc(state: GameState): GameState {.noSideEffect.};
+): auto =
+  logging.log_info("Initializing Komodo")
+  var state = initial_state.pre_init()
   window.initialize(
-    state.screenSize,
+    state.screen_size,
     state.title,
   )
-  state = state.post_init()
-  
+  state = state.init()
+  logging.log_info("Successfully initialized Komodo!")
+
+  var cache = newResourceCache()
   while not window.is_closing():
     window.clear_screen(color.DarkGreen)
-    window.begin_draw()
+
     state = state.update(window.get_delta())
+    
+    window.begin_draw()
+    state.draw(cache)
     window.end_draw()
   
-  state.exit()
+  logging.log_info("Exiting Komodo")
+  result = state.exit()
+  logging.log_info("Exited Komodo!")
