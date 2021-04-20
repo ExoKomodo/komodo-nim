@@ -27,7 +27,7 @@
         {
             "label": "Clean Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; rm bin/*",
+            "command": "cd examples/desktop; rm bin/*; echo \"Cleaned...\"",
             "problemMatcher": [],
             "group": "build"
         },

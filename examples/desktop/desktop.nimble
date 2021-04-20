@@ -15,10 +15,10 @@ requires "nim >= 1.4.2"
 requires "komodo"
 
 task doBuild, "Build Desktop example":
-  exec "nimble --verbose --gc:orc --threads:on -d:nimpretty build -Y"
+  exec "nimble --verbose --threads:on -d:nimpretty build -Y"
 
 task doDebug, "Debug Desktop example":
-  exec "nimble --verbose --gc:orc --threads:on -g --debugger:native -d:nimpretty build -Y"
+  exec "nimble --verbose --threads:on -g --debugger:native -d:nimpretty build -Y"
 
 task doRun, "Example":
-  exec "nimble --verbose --gc:orc --threads:on -d:nimpretty run -Y"
+  exec "nimble --verbose --threads:on -d:nimpretty run -Y"

@@ -709,894 +709,894 @@ converter NPatchType2int32*(self: NPatchType): int32 = self.int32
 # Window and Graphics Device Functions (Module: core)
 # ------------------------------------------------------------------------------------
 # Window-related functions
-func InitWindow*(width: int32; height: int32; title: cstring) {.RLAPI,
+proc InitWindow*(width: int32; height: int32; title: cstring) {.RLAPI,
     importc: "InitWindow".} # Initialize window and OpenGL context
-func WindowShouldClose*(): bool {.RLAPI,
+proc WindowShouldClose*(): bool {.RLAPI,
     importc: "WindowShouldClose".} # Check if KEY_ESCAPE pressed or Close icon pressed
-func CloseWindow*() {.RLAPI, importc: "CloseWindow".} # Close window and unload OpenGL context
-func IsWindowReady*(): bool {.RLAPI, importc: "IsWindowReady".} # Check if window has been initialized successfully
-func IsWindowFullscreen*(): bool {.RLAPI,
+proc CloseWindow*() {.RLAPI, importc: "CloseWindow".} # Close window and unload OpenGL context
+proc IsWindowReady*(): bool {.RLAPI, importc: "IsWindowReady".} # Check if window has been initialized successfully
+proc IsWindowFullscreen*(): bool {.RLAPI,
     importc: "IsWindowFullscreen".} # Check if window is currently fullscreen
-func IsWindowHidden*(): bool {.RLAPI, importc: "IsWindowHidden".} # Check if window is currently hidden (only PLATFORM_DESKTOP)
-func IsWindowMinimized*(): bool {.RLAPI,
+proc IsWindowHidden*(): bool {.RLAPI, importc: "IsWindowHidden".} # Check if window is currently hidden (only PLATFORM_DESKTOP)
+proc IsWindowMinimized*(): bool {.RLAPI,
     importc: "IsWindowMinimized".} # Check if window is currently minimized (only PLATFORM_DESKTOP)
-func IsWindowMaximized*(): bool {.RLAPI,
+proc IsWindowMaximized*(): bool {.RLAPI,
     importc: "IsWindowMaximized".} # Check if window is currently maximized (only PLATFORM_DESKTOP)
-func IsWindowFocused*(): bool {.RLAPI, importc: "IsWindowFocused".} # Check if window is currently focused (only PLATFORM_DESKTOP)
-func IsWindowResized*(): bool {.RLAPI, importc: "IsWindowResized".} # Check if window has been resized last frame
-func IsWindowState*(flag: uint32): bool {.RLAPI,
+proc IsWindowFocused*(): bool {.RLAPI, importc: "IsWindowFocused".} # Check if window is currently focused (only PLATFORM_DESKTOP)
+proc IsWindowResized*(): bool {.RLAPI, importc: "IsWindowResized".} # Check if window has been resized last frame
+proc IsWindowState*(flag: uint32): bool {.RLAPI,
     importc: "IsWindowState".} # Check if one specific window flag is enabled
-func SetWindowState*(flags: uint32) {.RLAPI,
+proc SetWindowState*(flags: uint32) {.RLAPI,
     importc: "SetWindowState".} # Set window configuration state using flags
-func ClearWindowState*(flags: uint32) {.RLAPI,
+proc ClearWindowState*(flags: uint32) {.RLAPI,
     importc: "ClearWindowState".} # Clear window configuration state flags
-func ToggleFullscreen*() {.RLAPI, importc: "ToggleFullscreen".} # Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
-func MaximizeWindow*() {.RLAPI, importc: "MaximizeWindow".} # Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
-func MinimizeWindow*() {.RLAPI, importc: "MinimizeWindow".} # Set window state: minimized, if resizable (only PLATFORM_DESKTOP)
-func RestoreWindow*() {.RLAPI, importc: "RestoreWindow".} # Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
-func SetWindowIcon*(image: Image) {.RLAPI,
+proc ToggleFullscreen*() {.RLAPI, importc: "ToggleFullscreen".} # Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
+proc MaximizeWindow*() {.RLAPI, importc: "MaximizeWindow".} # Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
+proc MinimizeWindow*() {.RLAPI, importc: "MinimizeWindow".} # Set window state: minimized, if resizable (only PLATFORM_DESKTOP)
+proc RestoreWindow*() {.RLAPI, importc: "RestoreWindow".} # Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
+proc SetWindowIcon*(image: Image) {.RLAPI,
     importc: "SetWindowIcon".} # Set icon for window (only PLATFORM_DESKTOP)
-func SetWindowTitle*(title: cstring) {.RLAPI,
+proc SetWindowTitle*(title: cstring) {.RLAPI,
     importc: "SetWindowTitle".} # Set title for window (only PLATFORM_DESKTOP)
-func SetWindowPosition*(x: int32; y: int32) {.RLAPI,
+proc SetWindowPosition*(x: int32; y: int32) {.RLAPI,
     importc: "SetWindowPosition".} # Set window position on screen (only PLATFORM_DESKTOP)
-func SetWindowMonitor*(monitor: int32) {.RLAPI,
+proc SetWindowMonitor*(monitor: int32) {.RLAPI,
     importc: "SetWindowMonitor".} # Set monitor for the current window (fullscreen mode)
-func SetWindowMinSize*(width: int32; height: int32) {.RLAPI,
+proc SetWindowMinSize*(width: int32; height: int32) {.RLAPI,
     importc: "SetWindowMinSize".} # Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
-func SetWindowSize*(width: int32; height: int32) {.RLAPI,
+proc SetWindowSize*(width: int32; height: int32) {.RLAPI,
     importc: "SetWindowSize".} # Set window dimensions
-func GetWindowHandle*(): pointer {.RLAPI,
+proc GetWindowHandle*(): pointer {.RLAPI,
     importc: "GetWindowHandle".} # Get native window handle
-func GetScreenWidth*(): int32 {.RLAPI, importc: "GetScreenWidth".} # Get current screen width
-func GetScreenHeight*(): int32 {.RLAPI, importc: "GetScreenHeight".} # Get current screen height
-func GetMonitorCount*(): int32 {.RLAPI, importc: "GetMonitorCount".} # Get number of connected monitors
-func GetCurrentMonitor*(): int32 {.RLAPI,
+proc GetScreenWidth*(): int32 {.RLAPI, importc: "GetScreenWidth".} # Get current screen width
+proc GetScreenHeight*(): int32 {.RLAPI, importc: "GetScreenHeight".} # Get current screen height
+proc GetMonitorCount*(): int32 {.RLAPI, importc: "GetMonitorCount".} # Get number of connected monitors
+proc GetCurrentMonitor*(): int32 {.RLAPI,
     importc: "GetCurrentMonitor".} # Get current connected monitor
-func GetMonitorPosition*(monitor: int32): Vector2 {.RLAPI,
+proc GetMonitorPosition*(monitor: int32): Vector2 {.RLAPI,
     importc: "GetMonitorPosition".} # Get specified monitor position
-func GetMonitorWidth*(monitor: int32): int32 {.RLAPI,
+proc GetMonitorWidth*(monitor: int32): int32 {.RLAPI,
     importc: "GetMonitorWidth".} # Get specified monitor width
-func GetMonitorHeight*(monitor: int32): int32 {.RLAPI,
+proc GetMonitorHeight*(monitor: int32): int32 {.RLAPI,
     importc: "GetMonitorHeight".} # Get specified monitor height
-func GetMonitorPhysicalWidth*(monitor: int32): int32 {.RLAPI,
+proc GetMonitorPhysicalWidth*(monitor: int32): int32 {.RLAPI,
     importc: "GetMonitorPhysicalWidth".} # Get specified monitor physical width in millimetres
-func GetMonitorPhysicalHeight*(monitor: int32): int32 {.RLAPI,
+proc GetMonitorPhysicalHeight*(monitor: int32): int32 {.RLAPI,
     importc: "GetMonitorPhysicalHeight".} # Get specified monitor physical height in millimetres
-func GetMonitorRefreshRate*(monitor: int32): int32 {.RLAPI,
+proc GetMonitorRefreshRate*(monitor: int32): int32 {.RLAPI,
     importc: "GetMonitorRefreshRate".} # Get specified monitor refresh rate
-func GetWindowPosition*(): Vector2 {.RLAPI,
+proc GetWindowPosition*(): Vector2 {.RLAPI,
     importc: "GetWindowPosition".} # Get window position XY on monitor
-func GetWindowScaleDPI*(): Vector2 {.RLAPI,
+proc GetWindowScaleDPI*(): Vector2 {.RLAPI,
     importc: "GetWindowScaleDPI".} # Get window scale DPI factor
-func GetMonitorName*(monitor: int32): cstring {.RLAPI,
+proc GetMonitorName*(monitor: int32): cstring {.RLAPI,
     importc: "GetMonitorName".} # Get the human-readable, UTF-8 encoded name of the primary monitor
-func SetClipboardText*(text: cstring) {.RLAPI,
+proc SetClipboardText*(text: cstring) {.RLAPI,
     importc: "SetClipboardText".} # Set clipboard text content
-func GetClipboardText*(): cstring {.RLAPI,
+proc GetClipboardText*(): cstring {.RLAPI,
     importc: "GetClipboardText".} # Get clipboard text content
 # Cursor-related functions
-func ShowCursor*() {.RLAPI, importc: "ShowCursor".} # Shows cursor
-func HideCursor*() {.RLAPI, importc: "HideCursor".} # Hides cursor
-func IsCursorHidden*(): bool {.RLAPI, importc: "IsCursorHidden".} # Check if cursor is not visible
-func EnableCursor*() {.RLAPI, importc: "EnableCursor".} # Enables cursor (unlock cursor)
-func DisableCursor*() {.RLAPI, importc: "DisableCursor".} # Disables cursor (lock cursor)
-func IsCursorOnScreen*(): bool {.RLAPI, importc: "IsCursorOnScreen".} # Check if cursor is on the current screen.
+proc ShowCursor*() {.RLAPI, importc: "ShowCursor".} # Shows cursor
+proc HideCursor*() {.RLAPI, importc: "HideCursor".} # Hides cursor
+proc IsCursorHidden*(): bool {.RLAPI, importc: "IsCursorHidden".} # Check if cursor is not visible
+proc EnableCursor*() {.RLAPI, importc: "EnableCursor".} # Enables cursor (unlock cursor)
+proc DisableCursor*() {.RLAPI, importc: "DisableCursor".} # Disables cursor (lock cursor)
+proc IsCursorOnScreen*(): bool {.RLAPI, importc: "IsCursorOnScreen".} # Check if cursor is on the current screen.
 # Drawing-related functions
-func ClearBackground*(color: Color) {.RLAPI,
+proc ClearBackground*(color: Color) {.RLAPI,
     importc: "ClearBackground".} # Set background color (framebuffer clear color)
-func BeginDrawing*() {.RLAPI, importc: "BeginDrawing".} # Setup canvas (framebuffer) to start drawing
-func EndDrawing*() {.RLAPI, importc: "EndDrawing".} # End canvas drawing and swap buffers (double buffering)
-func BeginMode2D*(camera: Camera2D) {.RLAPI,
+proc BeginDrawing*() {.RLAPI, importc: "BeginDrawing".} # Setup canvas (framebuffer) to start drawing
+proc EndDrawing*() {.RLAPI, importc: "EndDrawing".} # End canvas drawing and swap buffers (double buffering)
+proc BeginMode2D*(camera: Camera2D) {.RLAPI,
     importc: "BeginMode2D".} # Initialize 2D mode with custom camera (2D)
-func EndMode2D*() {.RLAPI, importc: "EndMode2D".} # Ends 2D mode with custom camera
-func BeginMode3D*(camera: Camera3D) {.RLAPI,
+proc EndMode2D*() {.RLAPI, importc: "EndMode2D".} # Ends 2D mode with custom camera
+proc BeginMode3D*(camera: Camera3D) {.RLAPI,
     importc: "BeginMode3D".} # Initializes 3D mode with custom camera (3D)
-func EndMode3D*() {.RLAPI, importc: "EndMode3D".} # Ends 3D mode and returns to default 2D orthographic mode
-func BeginTextureMode*(target: RenderTexture2D) {.RLAPI,
+proc EndMode3D*() {.RLAPI, importc: "EndMode3D".} # Ends 3D mode and returns to default 2D orthographic mode
+proc BeginTextureMode*(target: RenderTexture2D) {.RLAPI,
     importc: "BeginTextureMode".} # Initializes render texture for drawing
-func EndTextureMode*() {.RLAPI, importc: "EndTextureMode".} # Ends drawing to render texture
-func BeginScissorMode*(x: int32; y: int32; width: int32; height: int32) {.RLAPI,
+proc EndTextureMode*() {.RLAPI, importc: "EndTextureMode".} # Ends drawing to render texture
+proc BeginScissorMode*(x: int32; y: int32; width: int32; height: int32) {.RLAPI,
     importc: "BeginScissorMode".} # Begin scissor mode (define screen area for following drawing)
-func EndScissorMode*() {.RLAPI, importc: "EndScissorMode".} # End scissor mode
+proc EndScissorMode*() {.RLAPI, importc: "EndScissorMode".} # End scissor mode
 # Screen-space-related functions
-func GetMouseRay*(mousePosition: Vector2; camera: Camera): Ray {.RLAPI,
+proc GetMouseRay*(mousePosition: Vector2; camera: Camera): Ray {.RLAPI,
     importc: "GetMouseRay".} # Returns a ray trace from mouse position
-func GetCameraMatrix*(camera: Camera): Matrix {.RLAPI,
+proc GetCameraMatrix*(camera: Camera): Matrix {.RLAPI,
     importc: "GetCameraMatrix".} # Returns camera transform matrix (view matrix)
-func GetCameraMatrix2D*(camera: Camera2D): Matrix {.RLAPI,
+proc GetCameraMatrix2D*(camera: Camera2D): Matrix {.RLAPI,
     importc: "GetCameraMatrix2D".} # Returns camera 2d transform matrix
-func GetWorldToScreen*(position: Vector3; camera: Camera): Vector2 {.RLAPI,
+proc GetWorldToScreen*(position: Vector3; camera: Camera): Vector2 {.RLAPI,
     importc: "GetWorldToScreen".} # Returns the screen space position for a 3d world space position
-func GetWorldToScreenEx*(position: Vector3; camera: Camera; width: int32;
+proc GetWorldToScreenEx*(position: Vector3; camera: Camera; width: int32;
     height: int32): Vector2 {.RLAPI,
     importc: "GetWorldToScreenEx".} # Returns size position for a 3d world space position
-func GetWorldToScreen2D*(position: Vector2; camera: Camera2D): Vector2 {.RLAPI,
+proc GetWorldToScreen2D*(position: Vector2; camera: Camera2D): Vector2 {.RLAPI,
     importc: "GetWorldToScreen2D".} # Returns the screen space position for a 2d camera world space position
-func GetScreenToWorld2D*(position: Vector2; camera: Camera2D): Vector2 {.RLAPI,
+proc GetScreenToWorld2D*(position: Vector2; camera: Camera2D): Vector2 {.RLAPI,
     importc: "GetScreenToWorld2D".} # Returns the world space position for a 2d camera screen space position
 # Timing-related functions
-func SetTargetFPS*(fps: int32) {.RLAPI, importc: "SetTargetFPS".} # Set target FPS (maximum)
-func GetFPS*(): int32 {.RLAPI, importc: "GetFPS".} # Returns current FPS
-func GetFrameTime*(): float32 {.RLAPI, importc: "GetFrameTime".} # Returns time in seconds for last frame drawn
-func GetTime*(): float64 {.RLAPI, importc: "GetTime".} # Returns elapsed time in seconds since InitWindow()
+proc SetTargetFPS*(fps: int32) {.RLAPI, importc: "SetTargetFPS".} # Set target FPS (maximum)
+proc GetFPS*(): int32 {.RLAPI, importc: "GetFPS".} # Returns current FPS
+proc GetFrameTime*(): float32 {.RLAPI, importc: "GetFrameTime".} # Returns time in seconds for last frame drawn
+proc GetTime*(): float64 {.RLAPI, importc: "GetTime".} # Returns elapsed time in seconds since InitWindow()
 # Misc. functions
-func SetConfigFlags*(flags: uint32) {.RLAPI,
+proc SetConfigFlags*(flags: uint32) {.RLAPI,
     importc: "SetConfigFlags".} # Setup init configuration flags (view FLAGS)
-func SetTraceLogLevel*(logType: int32) {.RLAPI,
+proc SetTraceLogLevel*(logType: int32) {.RLAPI,
     importc: "SetTraceLogLevel".} # Set the current threshold (minimum) log level
-func SetTraceLogExit*(logType: int32) {.RLAPI,
+proc SetTraceLogExit*(logType: int32) {.RLAPI,
     importc: "SetTraceLogExit".} # Set the exit threshold (minimum) log level
-func SetTraceLogCallback*(callback: int) {.RLAPI,
+proc SetTraceLogCallback*(callback: int) {.RLAPI,
     importc: "SetTraceLogCallback".} # Set a trace log callback to enable custom logging
-func TraceLog*(logType: int32; text: cstring) {.RLAPI, varargs,
+proc TraceLog*(logType: int32; text: cstring) {.RLAPI, varargs,
     importc: "TraceLog".} # Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR)
-func MemAlloc*(size: int32): pointer {.RLAPI,
+proc MemAlloc*(size: int32): pointer {.RLAPI,
     importc: "MemAlloc".} # Internal memory allocator
-func MemFree*(data: pointer) {.RLAPI, importc: "MemFree".} # Internal memory free
-func TakeScreenshot*(fileName: cstring) {.RLAPI,
+proc MemFree*(data: pointer) {.RLAPI, importc: "MemFree".} # Internal memory free
+proc TakeScreenshot*(fileName: cstring) {.RLAPI,
     importc: "TakeScreenshot".} # Takes a screenshot of current screen (saved a .png)
-func GetRandomValue*(min: int32; max: int32): int32 {.RLAPI,
+proc GetRandomValue*(min: int32; max: int32): int32 {.RLAPI,
     importc: "GetRandomValue".} # Returns a random value between min and max (both included)
 # Files management functions
-func LoadFileData*(fileName: cstring; bytesRead: uint32): uint8 {.RLAPI,
+proc LoadFileData*(fileName: cstring; bytesRead: uint32): uint8 {.RLAPI,
     importc: "LoadFileData".} # Load file data as byte array (read)
-func UnloadFileData*(data: uint8) {.RLAPI,
+proc UnloadFileData*(data: uint8) {.RLAPI,
     importc: "UnloadFileData".} # Unload file data allocated by LoadFileData()
-func SaveFileData*(fileName: cstring; data: pointer;
+proc SaveFileData*(fileName: cstring; data: pointer;
     bytesToWrite: uint32): bool {.RLAPI,
     importc: "SaveFileData".} # Save data to file from byte array (write), returns true on success
-func LoadFileText*(fileName: cstring): ptr char {.RLAPI,
+proc LoadFileText*(fileName: cstring): ptr char {.RLAPI,
     importc: "LoadFileText".} # Load text data from file (read), returns a '\0' terminated string
-func UnloadFileText*(text: uint8) {.RLAPI,
+proc UnloadFileText*(text: uint8) {.RLAPI,
     importc: "UnloadFileText".} # Unload file text data allocated by LoadFileText()
-func SaveFileText*(fileName: cstring; text: ptr char): bool {.RLAPI,
+proc SaveFileText*(fileName: cstring; text: ptr char): bool {.RLAPI,
     importc: "SaveFileText".} # Save text data to file (write), string must be '\0' terminated, returns true on success
-func FileExists*(fileName: cstring): bool {.RLAPI,
+proc FileExists*(fileName: cstring): bool {.RLAPI,
     importc: "FileExists".} # Check if file exists
-func DirectoryExists*(dirPath: cstring): bool {.RLAPI,
+proc DirectoryExists*(dirPath: cstring): bool {.RLAPI,
     importc: "DirectoryExists".} # Check if a directory path exists
-func IsFileExtension*(fileName: cstring; ext: cstring): bool {.RLAPI,
+proc IsFileExtension*(fileName: cstring; ext: cstring): bool {.RLAPI,
     importc: "IsFileExtension".} # Check file extension (including point: .png, .wav)
-func GetFileExtension*(fileName: cstring): cstring {.RLAPI,
+proc GetFileExtension*(fileName: cstring): cstring {.RLAPI,
     importc: "GetFileExtension".} # Get pointer to extension for a filename string (including point: ".png")
-func GetFileName*(filePath: cstring): cstring {.RLAPI,
+proc GetFileName*(filePath: cstring): cstring {.RLAPI,
     importc: "GetFileName".} # Get pointer to filename for a path string
-func GetFileNameWithoutExt*(filePath: cstring): cstring {.RLAPI,
+proc GetFileNameWithoutExt*(filePath: cstring): cstring {.RLAPI,
     importc: "GetFileNameWithoutExt".} # Get filename string without extension (uses static string)
-func GetDirectoryPath*(filePath: cstring): cstring {.RLAPI,
+proc GetDirectoryPath*(filePath: cstring): cstring {.RLAPI,
     importc: "GetDirectoryPath".} # Get full path for a given fileName with path (uses static string)
-func GetPrevDirectoryPath*(dirPath: cstring): cstring {.RLAPI,
+proc GetPrevDirectoryPath*(dirPath: cstring): cstring {.RLAPI,
     importc: "GetPrevDirectoryPath".} # Get previous directory path for a given path (uses static string)
-func GetWorkingDirectory*(): cstring {.RLAPI,
+proc GetWorkingDirectory*(): cstring {.RLAPI,
     importc: "GetWorkingDirectory".} # Get current working directory (uses static string)
-func GetDirectoryFiles*(dirPath: cstring; count: pointer): cstringArray {.RLAPI,
+proc GetDirectoryFiles*(dirPath: cstring; count: pointer): cstringArray {.RLAPI,
     importc: "GetDirectoryFiles".} # Get filenames in a directory path (memory should be freed)
-func ClearDirectoryFiles*() {.RLAPI, importc: "ClearDirectoryFiles".} # Clear directory files paths buffers (free memory)
-func ChangeDirectory*(dir: cstring): bool {.RLAPI,
+proc ClearDirectoryFiles*() {.RLAPI, importc: "ClearDirectoryFiles".} # Clear directory files paths buffers (free memory)
+proc ChangeDirectory*(dir: cstring): bool {.RLAPI,
     importc: "ChangeDirectory".} # Change working directory, return true on success
-func IsFileDropped*(): bool {.RLAPI, importc: "IsFileDropped".} # Check if a file has been dropped into window
-func GetDroppedFiles*(count: pointer): cstringArray {.RLAPI,
+proc IsFileDropped*(): bool {.RLAPI, importc: "IsFileDropped".} # Check if a file has been dropped into window
+proc GetDroppedFiles*(count: pointer): cstringArray {.RLAPI,
     importc: "GetDroppedFiles".} # Get dropped files names (memory should be freed)
-func ClearDroppedFiles*() {.RLAPI, importc: "ClearDroppedFiles".} # Clear dropped files paths buffer (free memory)
-func GetFileModTime*(fileName: cstring): int32 {.RLAPI,
+proc ClearDroppedFiles*() {.RLAPI, importc: "ClearDroppedFiles".} # Clear dropped files paths buffer (free memory)
+proc GetFileModTime*(fileName: cstring): int32 {.RLAPI,
     importc: "GetFileModTime".} # Get file modification time (last write time)
-func CompressData*(data: uint8; dataLength: int32;
+proc CompressData*(data: uint8; dataLength: int32;
     compDataLength: pointer): uint8 {.RLAPI,
     importc: "CompressData".} # Compress data (DEFLATE algorithm)
-func DecompressData*(compData: uint8; compDataLength: int32;
+proc DecompressData*(compData: uint8; compDataLength: int32;
     dataLength: pointer): uint8 {.RLAPI,
     importc: "DecompressData".} # Decompress data (DEFLATE algorithm)
 # Persistent storage management
-func SaveStorageValue*(position: uint32; value: int32): bool {.RLAPI,
+proc SaveStorageValue*(position: uint32; value: int32): bool {.RLAPI,
     importc: "SaveStorageValue".} # Save integer value to storage file (to defined position), returns true on success
-func LoadStorageValue*(position: uint32): int32 {.RLAPI,
+proc LoadStorageValue*(position: uint32): int32 {.RLAPI,
     importc: "LoadStorageValue".} # Load integer value from storage file (from defined position)
-func OpenURL*(url: cstring) {.RLAPI, importc: "OpenURL".} # Open URL with default system browser (if available)
+proc OpenURL*(url: cstring) {.RLAPI, importc: "OpenURL".} # Open URL with default system browser (if available)
 # ------------------------------------------------------------------------------------
 # Input Handling Functions (Module: core)
 # ------------------------------------------------------------------------------------
 # Input-related functions: keyboard
-func IsKeyPressed*(key: int32): bool {.RLAPI,
+proc IsKeyPressed*(key: int32): bool {.RLAPI,
     importc: "IsKeyPressed".} # Detect if a key has been pressed once
-func IsKeyDown*(key: int32): bool {.RLAPI,
+proc IsKeyDown*(key: int32): bool {.RLAPI,
     importc: "IsKeyDown".} # Detect if a key is being pressed
-func IsKeyReleased*(key: int32): bool {.RLAPI,
+proc IsKeyReleased*(key: int32): bool {.RLAPI,
     importc: "IsKeyReleased".} # Detect if a key has been released once
-func IsKeyUp*(key: int32): bool {.RLAPI,
+proc IsKeyUp*(key: int32): bool {.RLAPI,
     importc: "IsKeyUp".} # Detect if a key is NOT being pressed
-func SetExitKey*(key: int32) {.RLAPI, importc: "SetExitKey".} # Set a custom key to exit program (default is ESC)
-func GetKeyPressed*(): int32 {.RLAPI, importc: "GetKeyPressed".} # Get key pressed (keycode), call it multiple times for keys queued
-func GetCharPressed*(): int32 {.RLAPI, importc: "GetCharPressed".} # Get char pressed (unicode), call it multiple times for chars queued
+proc SetExitKey*(key: int32) {.RLAPI, importc: "SetExitKey".} # Set a custom key to exit program (default is ESC)
+proc GetKeyPressed*(): int32 {.RLAPI, importc: "GetKeyPressed".} # Get key pressed (keycode), call it multiple times for keys queued
+proc GetCharPressed*(): int32 {.RLAPI, importc: "GetCharPressed".} # Get char pressed (unicode), call it multiple times for chars queued
 # Input-related functions: gamepads
-func IsGamepadAvailable*(gamepad: int32): bool {.RLAPI,
+proc IsGamepadAvailable*(gamepad: int32): bool {.RLAPI,
     importc: "IsGamepadAvailable".} # Detect if a gamepad is available
-func IsGamepadName*(gamepad: int32; name: cstring): bool {.RLAPI,
+proc IsGamepadName*(gamepad: int32; name: cstring): bool {.RLAPI,
     importc: "IsGamepadName".} # Check gamepad name (if available)
-func GetGamepadName*(gamepad: int32): cstring {.RLAPI,
+proc GetGamepadName*(gamepad: int32): cstring {.RLAPI,
     importc: "GetGamepadName".} # Return gamepad internal name id
-func IsGamepadButtonPressed*(gamepad: int32; button: int32): bool {.RLAPI,
+proc IsGamepadButtonPressed*(gamepad: int32; button: int32): bool {.RLAPI,
     importc: "IsGamepadButtonPressed".} # Detect if a gamepad button has been pressed once
-func IsGamepadButtonDown*(gamepad: int32; button: int32): bool {.RLAPI,
+proc IsGamepadButtonDown*(gamepad: int32; button: int32): bool {.RLAPI,
     importc: "IsGamepadButtonDown".} # Detect if a gamepad button is being pressed
-func IsGamepadButtonReleased*(gamepad: int32; button: int32): bool {.RLAPI,
+proc IsGamepadButtonReleased*(gamepad: int32; button: int32): bool {.RLAPI,
     importc: "IsGamepadButtonReleased".} # Detect if a gamepad button has been released once
-func IsGamepadButtonUp*(gamepad: int32; button: int32): bool {.RLAPI,
+proc IsGamepadButtonUp*(gamepad: int32; button: int32): bool {.RLAPI,
     importc: "IsGamepadButtonUp".} # Detect if a gamepad button is NOT being pressed
-func GetGamepadButtonPressed*(): int32 {.RLAPI,
+proc GetGamepadButtonPressed*(): int32 {.RLAPI,
     importc: "GetGamepadButtonPressed".} # Get the last gamepad button pressed
-func GetGamepadAxisCount*(gamepad: int32): int32 {.RLAPI,
+proc GetGamepadAxisCount*(gamepad: int32): int32 {.RLAPI,
     importc: "GetGamepadAxisCount".} # Return gamepad axis count for a gamepad
-func GetGamepadAxisMovement*(gamepad: int32; axis: int32): float32 {.RLAPI,
+proc GetGamepadAxisMovement*(gamepad: int32; axis: int32): float32 {.RLAPI,
     importc: "GetGamepadAxisMovement".} # Return axis movement value for a gamepad axis
 # Input-related functions: mouse
-func IsMouseButtonPressed*(button: int32): bool {.RLAPI,
+proc IsMouseButtonPressed*(button: int32): bool {.RLAPI,
     importc: "IsMouseButtonPressed".} # Detect if a mouse button has been pressed once
-func IsMouseButtonDown*(button: int32): bool {.RLAPI,
+proc IsMouseButtonDown*(button: int32): bool {.RLAPI,
     importc: "IsMouseButtonDown".} # Detect if a mouse button is being pressed
-func IsMouseButtonReleased*(button: int32): bool {.RLAPI,
+proc IsMouseButtonReleased*(button: int32): bool {.RLAPI,
     importc: "IsMouseButtonReleased".} # Detect if a mouse button has been released once
-func IsMouseButtonUp*(button: int32): bool {.RLAPI,
+proc IsMouseButtonUp*(button: int32): bool {.RLAPI,
     importc: "IsMouseButtonUp".} # Detect if a mouse button is NOT being pressed
-func GetMouseX*(): int32 {.RLAPI, importc: "GetMouseX".} # Returns mouse position X
-func GetMouseY*(): int32 {.RLAPI, importc: "GetMouseY".} # Returns mouse position Y
-func GetMousePosition*(): Vector2 {.RLAPI,
+proc GetMouseX*(): int32 {.RLAPI, importc: "GetMouseX".} # Returns mouse position X
+proc GetMouseY*(): int32 {.RLAPI, importc: "GetMouseY".} # Returns mouse position Y
+proc GetMousePosition*(): Vector2 {.RLAPI,
     importc: "GetMousePosition".} # Returns mouse position XY
-func SetMousePosition*(x: int32; y: int32) {.RLAPI,
+proc SetMousePosition*(x: int32; y: int32) {.RLAPI,
     importc: "SetMousePosition".} # Set mouse position XY
-func SetMouseOffset*(offsetX: int32; offsetY: int32) {.RLAPI,
+proc SetMouseOffset*(offsetX: int32; offsetY: int32) {.RLAPI,
     importc: "SetMouseOffset".} # Set mouse offset
-func SetMouseScale*(scaleX: float32; scaleY: float32) {.RLAPI,
+proc SetMouseScale*(scaleX: float32; scaleY: float32) {.RLAPI,
     importc: "SetMouseScale".} # Set mouse scaling
-func GetMouseWheelMove*(): float32 {.RLAPI,
+proc GetMouseWheelMove*(): float32 {.RLAPI,
     importc: "GetMouseWheelMove".} # Returns mouse wheel movement Y
-func GetMouseCursor*(): int32 {.RLAPI, importc: "GetMouseCursor".} # Returns mouse cursor if (MouseCursor enum)
-func SetMouseCursor*(cursor: int32) {.RLAPI, importc: "SetMouseCursor".} # Set mouse cursor
+proc GetMouseCursor*(): int32 {.RLAPI, importc: "GetMouseCursor".} # Returns mouse cursor if (MouseCursor enum)
+proc SetMouseCursor*(cursor: int32) {.RLAPI, importc: "SetMouseCursor".} # Set mouse cursor
 # Input-related functions: touch
-func GetTouchX*(): int32 {.RLAPI, importc: "GetTouchX".} # Returns touch position X for touch point 0 (relative to screen size)
-func GetTouchY*(): int32 {.RLAPI, importc: "GetTouchY".} # Returns touch position Y for touch point 0 (relative to screen size)
-func GetTouchPosition*(index: int32): Vector2 {.RLAPI,
+proc GetTouchX*(): int32 {.RLAPI, importc: "GetTouchX".} # Returns touch position X for touch point 0 (relative to screen size)
+proc GetTouchY*(): int32 {.RLAPI, importc: "GetTouchY".} # Returns touch position Y for touch point 0 (relative to screen size)
+proc GetTouchPosition*(index: int32): Vector2 {.RLAPI,
     importc: "GetTouchPosition".} # Returns touch position XY for a touch point index (relative to screen size)
 # ------------------------------------------------------------------------------------
 # Gestures and Touch Handling Functions (Module: gestures)
 # ------------------------------------------------------------------------------------
-func SetGesturesEnabled*(gestureFlags: uint32) {.RLAPI,
+proc SetGesturesEnabled*(gestureFlags: uint32) {.RLAPI,
     importc: "SetGesturesEnabled".} # Enable a set of gestures using flags
-func IsGestureDetected*(gesture: int32): bool {.RLAPI,
+proc IsGestureDetected*(gesture: int32): bool {.RLAPI,
     importc: "IsGestureDetected".} # Check if a gesture have been detected
-func GetGestureDetected*(): int32 {.RLAPI,
+proc GetGestureDetected*(): int32 {.RLAPI,
     importc: "GetGestureDetected".} # Get latest detected gesture
-func GetTouchPointsCount*(): int32 {.RLAPI,
+proc GetTouchPointsCount*(): int32 {.RLAPI,
     importc: "GetTouchPointsCount".} # Get touch points count
-func GetGestureHoldDuration*(): float32 {.RLAPI,
+proc GetGestureHoldDuration*(): float32 {.RLAPI,
     importc: "GetGestureHoldDuration".} # Get gesture hold time in milliseconds
-func GetGestureDragVector*(): Vector2 {.RLAPI,
+proc GetGestureDragVector*(): Vector2 {.RLAPI,
     importc: "GetGestureDragVector".} # Get gesture drag vector
-func GetGestureDragAngle*(): float32 {.RLAPI,
+proc GetGestureDragAngle*(): float32 {.RLAPI,
     importc: "GetGestureDragAngle".} # Get gesture drag angle
-func GetGesturePinchVector*(): Vector2 {.RLAPI,
+proc GetGesturePinchVector*(): Vector2 {.RLAPI,
     importc: "GetGesturePinchVector".} # Get gesture pinch delta
-func GetGesturePinchAngle*(): float32 {.RLAPI,
+proc GetGesturePinchAngle*(): float32 {.RLAPI,
     importc: "GetGesturePinchAngle".} # Get gesture pinch angle
 # ------------------------------------------------------------------------------------
 # Camera System Functions (Module: camera)
 # ------------------------------------------------------------------------------------
-func SetCameraMode*(camera: Camera; mode: int32) {.RLAPI,
+proc SetCameraMode*(camera: Camera; mode: int32) {.RLAPI,
     importc: "SetCameraMode".} # Set camera mode (multiple camera modes available)
-func UpdateCamera*(camera: ptr Camera) {.RLAPI,
+proc UpdateCamera*(camera: ptr Camera) {.RLAPI,
     importc: "UpdateCamera".} # Update camera position for selected mode
-func SetCameraPanControl*(keyPan: int32) {.RLAPI,
+proc SetCameraPanControl*(keyPan: int32) {.RLAPI,
     importc: "SetCameraPanControl".} # Set camera pan key to combine with mouse movement (free camera)
-func SetCameraAltControl*(keyAlt: int32) {.RLAPI,
+proc SetCameraAltControl*(keyAlt: int32) {.RLAPI,
     importc: "SetCameraAltControl".} # Set camera alt key to combine with mouse movement (free camera)
-func SetCameraSmoothZoomControl*(keySmoothZoom: int32) {.RLAPI,
+proc SetCameraSmoothZoomControl*(keySmoothZoom: int32) {.RLAPI,
     importc: "SetCameraSmoothZoomControl".} # Set camera smooth zoom key to combine with mouse (free camera)
-func SetCameraMoveControls*(keyFront: int32; keyBack: int32; keyRight: int32;
+proc SetCameraMoveControls*(keyFront: int32; keyBack: int32; keyRight: int32;
     keyLeft: int32; keyUp: int32; keyDown: int32) {.RLAPI,
     importc: "SetCameraMoveControls".} # Set camera move controls (1st person and 3rd person cameras)
 # ------------------------------------------------------------------------------------
 # Basic Shapes Drawing Functions (Module: shapes)
 # ------------------------------------------------------------------------------------
 # Basic shapes drawing functions
-func DrawPixel*(posX: int32; posY: int32; color: Color) {.RLAPI,
+proc DrawPixel*(posX: int32; posY: int32; color: Color) {.RLAPI,
     importc: "DrawPixel".} # Draw a pixel
-func DrawPixelV*(position: Vector2; color: Color) {.RLAPI,
+proc DrawPixelV*(position: Vector2; color: Color) {.RLAPI,
     importc: "DrawPixelV".} # Draw a pixel (Vector version)
-func DrawLine*(startPosX: int32; startPosY: int32; endPosX: int32;
+proc DrawLine*(startPosX: int32; startPosY: int32; endPosX: int32;
     endPosY: int32; color: Color) {.RLAPI, importc: "DrawLine".} # Draw a line
-func DrawLineV*(startPos: Vector2; endPos: Vector2; color: Color) {.RLAPI,
+proc DrawLineV*(startPos: Vector2; endPos: Vector2; color: Color) {.RLAPI,
     importc: "DrawLineV".} # Draw a line (Vector version)
-func DrawLineEx*(startPos: Vector2; endPos: Vector2; thick: float32;
+proc DrawLineEx*(startPos: Vector2; endPos: Vector2; thick: float32;
     color: Color) {.RLAPI, importc: "DrawLineEx".} # Draw a line defining thickness
-func DrawLineBezier*(startPos: Vector2; endPos: Vector2; thick: float32;
+proc DrawLineBezier*(startPos: Vector2; endPos: Vector2; thick: float32;
     color: Color) {.RLAPI,
     importc: "DrawLineBezier".} # Draw a line using cubic-bezier curves in-out
-func DrawLineBezierQuad*(startPos: Vector2; endPos: Vector2;
+proc DrawLineBezierQuad*(startPos: Vector2; endPos: Vector2;
     controlPos: Vector2; thick: float32; color: Color) {.RLAPI,
     importc: "DrawLineBezierQuad".} # Draw line using quadratic bezier curves with a control point
-func DrawLineStrip*(points: ptr Vector2; pointsCount: int32; color: Color) {.
+proc DrawLineStrip*(points: ptr Vector2; pointsCount: int32; color: Color) {.
     RLAPI, importc: "DrawLineStrip".} # Draw lines sequence
-func DrawCircle*(centerX: int32; centerY: int32; radius: float32;
+proc DrawCircle*(centerX: int32; centerY: int32; radius: float32;
     color: Color) {.RLAPI, importc: "DrawCircle".} # Draw a color-filled circle
-func DrawCircleSector*(center: Vector2; radius: float32; startAngle: int32;
+proc DrawCircleSector*(center: Vector2; radius: float32; startAngle: int32;
     endAngle: int32; segments: int32; color: Color) {.RLAPI,
     importc: "DrawCircleSector".} # Draw a piece of a circle
-func DrawCircleSectorLines*(center: Vector2; radius: float32; startAngle: int32;
+proc DrawCircleSectorLines*(center: Vector2; radius: float32; startAngle: int32;
     endAngle: int32; segments: int32; color: Color) {.RLAPI,
     importc: "DrawCircleSectorLines".} # Draw circle sector outline
-func DrawCircleGradient*(centerX: int32; centerY: int32; radius: float32;
+proc DrawCircleGradient*(centerX: int32; centerY: int32; radius: float32;
     color1: Color; color2: Color) {.RLAPI,
     importc: "DrawCircleGradient".} # Draw a gradient-filled circle
-func DrawCircleV*(center: Vector2; radius: float32; color: Color) {.RLAPI,
+proc DrawCircleV*(center: Vector2; radius: float32; color: Color) {.RLAPI,
     importc: "DrawCircleV".} # Draw a color-filled circle (Vector version)
-func DrawCircleLines*(centerX: int32; centerY: int32; radius: float32;
+proc DrawCircleLines*(centerX: int32; centerY: int32; radius: float32;
     color: Color) {.RLAPI, importc: "DrawCircleLines".} # Draw circle outline
-func DrawEllipse*(centerX: int32; centerY: int32; radiusH: float32;
+proc DrawEllipse*(centerX: int32; centerY: int32; radiusH: float32;
     radiusV: float32; color: Color) {.RLAPI, importc: "DrawEllipse".} # Draw ellipse
-func DrawEllipseLines*(centerX: int32; centerY: int32; radiusH: float32;
+proc DrawEllipseLines*(centerX: int32; centerY: int32; radiusH: float32;
     radiusV: float32; color: Color) {.RLAPI,
     importc: "DrawEllipseLines".} # Draw ellipse outline
-func DrawRing*(center: Vector2; innerRadius: float32; outerRadius: float32;
+proc DrawRing*(center: Vector2; innerRadius: float32; outerRadius: float32;
     startAngle: int32; endAngle: int32; segments: int32; color: Color) {.RLAPI,
     importc: "DrawRing".} # Draw ring
-func DrawRingLines*(center: Vector2; innerRadius: float32; outerRadius: float32;
+proc DrawRingLines*(center: Vector2; innerRadius: float32; outerRadius: float32;
     startAngle: int32; endAngle: int32; segments: int32; color: Color) {.RLAPI,
     importc: "DrawRingLines".} # Draw ring outline
-func DrawRectangle*(posX: int32; posY: int32; width: int32; height: int32;
+proc DrawRectangle*(posX: int32; posY: int32; width: int32; height: int32;
     color: Color) {.RLAPI, importc: "DrawRectangle".} # Draw a color-filled rectangle
-func DrawRectangleV*(position: Vector2; size: Vector2; color: Color) {.RLAPI,
+proc DrawRectangleV*(position: Vector2; size: Vector2; color: Color) {.RLAPI,
     importc: "DrawRectangleV".} # Draw a color-filled rectangle (Vector version)
-func DrawRectangleRec*(rec: Rectangle; color: Color) {.RLAPI,
+proc DrawRectangleRec*(rec: Rectangle; color: Color) {.RLAPI,
     importc: "DrawRectangleRec".} # Draw a color-filled rectangle
-func DrawRectanglePro*(rec: Rectangle; origin: Vector2; rotation: float32;
+proc DrawRectanglePro*(rec: Rectangle; origin: Vector2; rotation: float32;
     color: Color) {.RLAPI,
     importc: "DrawRectanglePro".} # Draw a color-filled rectangle with pro parameters
-func DrawRectangleGradientV*(posX: int32; posY: int32; width: int32;
+proc DrawRectangleGradientV*(posX: int32; posY: int32; width: int32;
     height: int32; color1: Color; color2: Color) {.RLAPI,
     importc: "DrawRectangleGradientV".} # Draw a vertical-gradient-filled rectangle
-func DrawRectangleGradientH*(posX: int32; posY: int32; width: int32;
+proc DrawRectangleGradientH*(posX: int32; posY: int32; width: int32;
     height: int32; color1: Color; color2: Color) {.RLAPI,
     importc: "DrawRectangleGradientH".} # Draw a horizontal-gradient-filled rectangle
-func DrawRectangleGradientEx*(rec: Rectangle; col1: Color; col2: Color;
+proc DrawRectangleGradientEx*(rec: Rectangle; col1: Color; col2: Color;
     col3: Color; col4: Color) {.RLAPI,
     importc: "DrawRectangleGradientEx".} # Draw a gradient-filled rectangle with custom vertex colors
-func DrawRectangleLines*(posX: int32; posY: int32; width: int32; height: int32;
+proc DrawRectangleLines*(posX: int32; posY: int32; width: int32; height: int32;
     color: Color) {.RLAPI, importc: "DrawRectangleLines".} # Draw rectangle outline
-func DrawRectangleLinesEx*(rec: Rectangle; lineThick: int32; color: Color) {.
+proc DrawRectangleLinesEx*(rec: Rectangle; lineThick: int32; color: Color) {.
     RLAPI, importc: "DrawRectangleLinesEx".} # Draw rectangle outline with extended parameters
-func DrawRectangleRounded*(rec: Rectangle; roundness: float32; segments: int32;
+proc DrawRectangleRounded*(rec: Rectangle; roundness: float32; segments: int32;
     color: Color) {.RLAPI,
     importc: "DrawRectangleRounded".} # Draw rectangle with rounded edges
-func DrawRectangleRoundedLines*(rec: Rectangle; roundness: float32;
+proc DrawRectangleRoundedLines*(rec: Rectangle; roundness: float32;
     segments: int32; lineThick: int32; color: Color) {.RLAPI,
     importc: "DrawRectangleRoundedLines".} # Draw rectangle with rounded edges outline
-func DrawTriangle*(v1: Vector2; v2: Vector2; v3: Vector2; color: Color) {.RLAPI,
+proc DrawTriangle*(v1: Vector2; v2: Vector2; v3: Vector2; color: Color) {.RLAPI,
     importc: "DrawTriangle".} # Draw a color-filled triangle (vertex in counter-clockwise order!)
-func DrawTriangleLines*(v1: Vector2; v2: Vector2; v3: Vector2; color: Color) {.
+proc DrawTriangleLines*(v1: Vector2; v2: Vector2; v3: Vector2; color: Color) {.
     RLAPI,
     importc: "DrawTriangleLines".} # Draw triangle outline (vertex in counter-clockwise order!)
-func DrawTriangleFan*(points: ptr Vector2; pointsCount: int32; color: Color) {.
+proc DrawTriangleFan*(points: ptr Vector2; pointsCount: int32; color: Color) {.
     RLAPI,
     importc: "DrawTriangleFan".} # Draw a triangle fan defined by points (first vertex is the center)
-func DrawTriangleStrip*(points: ptr Vector2; pointsCount: int32;
+proc DrawTriangleStrip*(points: ptr Vector2; pointsCount: int32;
     color: Color) {.RLAPI,
     importc: "DrawTriangleStrip".} # Draw a triangle strip defined by points
-func DrawPoly*(center: Vector2; sides: int32; radius: float32;
+proc DrawPoly*(center: Vector2; sides: int32; radius: float32;
     rotation: float32; color: Color) {.RLAPI,
     importc: "DrawPoly".} # Draw a regular polygon (Vector version)
-func DrawPolyLines*(center: Vector2; sides: int32; radius: float32;
+proc DrawPolyLines*(center: Vector2; sides: int32; radius: float32;
     rotation: float32; color: Color) {.RLAPI,
     importc: "DrawPolyLines".} # Draw a polygon outline of n sides
 # Basic shapes collision detection functions
-func CheckCollisionRecs*(rec1: Rectangle; rec2: Rectangle): bool {.RLAPI,
+proc CheckCollisionRecs*(rec1: Rectangle; rec2: Rectangle): bool {.RLAPI,
     importc: "CheckCollisionRecs".} # Check collision between two rectangles
-func CheckCollisionCircles*(center1: Vector2; radius1: float32;
+proc CheckCollisionCircles*(center1: Vector2; radius1: float32;
     center2: Vector2; radius2: float32): bool {.RLAPI,
     importc: "CheckCollisionCircles".} # Check collision between two circles
-func CheckCollisionCircleRec*(center: Vector2; radius: float32;
+proc CheckCollisionCircleRec*(center: Vector2; radius: float32;
     rec: Rectangle): bool {.RLAPI,
     importc: "CheckCollisionCircleRec".} # Check collision between circle and rectangle
-func CheckCollisionPointRec*(point: Vector2; rec: Rectangle): bool {.RLAPI,
+proc CheckCollisionPointRec*(point: Vector2; rec: Rectangle): bool {.RLAPI,
     importc: "CheckCollisionPointRec".} # Check if point is inside rectangle
-func CheckCollisionPointCircle*(point: Vector2; center: Vector2;
+proc CheckCollisionPointCircle*(point: Vector2; center: Vector2;
     radius: float32): bool {.RLAPI,
     importc: "CheckCollisionPointCircle".} # Check if point is inside circle
-func CheckCollisionPointTriangle*(point: Vector2; p1: Vector2; p2: Vector2;
+proc CheckCollisionPointTriangle*(point: Vector2; p1: Vector2; p2: Vector2;
     p3: Vector2): bool {.RLAPI,
     importc: "CheckCollisionPointTriangle".} # Check if point is inside a triangle
-func CheckCollisionLines*(startPos1: Vector2; endPos1: Vector2;
+proc CheckCollisionLines*(startPos1: Vector2; endPos1: Vector2;
     startPos2: Vector2; endPos2: Vector2; collisionPoint: ptr Vector2): bool {.
     RLAPI,
     importc: "CheckCollisionLines".} # Check the collision between two lines defined by two points each, returns collision point by reference
-func GetCollisionRec*(rec1: Rectangle; rec2: Rectangle): Rectangle {.RLAPI,
+proc GetCollisionRec*(rec1: Rectangle; rec2: Rectangle): Rectangle {.RLAPI,
     importc: "GetCollisionRec".} # Get collision rectangle for two rectangles collision
 # ------------------------------------------------------------------------------------
 # Texture Loading and Drawing Functions (Module: textures)
 # ------------------------------------------------------------------------------------
 # Image loading functions
 # NOTE: This functions do not require GPU access
-func LoadImage*(fileName: cstring): Image {.RLAPI,
+proc LoadImage*(fileName: cstring): Image {.RLAPI,
     importc: "LoadImage".} # Load image from file into CPU memory (RAM)
-func LoadImageRaw*(fileName: cstring; width: int32; height: int32;
+proc LoadImageRaw*(fileName: cstring; width: int32; height: int32;
     format: int32; headerSize: int32): Image {.RLAPI,
     importc: "LoadImageRaw".} # Load image from RAW file data
-func LoadImageAnim*(fileName: cstring; frames: pointer): Image {.RLAPI,
+proc LoadImageAnim*(fileName: cstring; frames: pointer): Image {.RLAPI,
     importc: "LoadImageAnim".} # Load image sequence from file (frames appended to image.data)
-func LoadImageFromMemory*(fileType: cstring; fileData: UncheckedArray[byte];
+proc LoadImageFromMemory*(fileType: cstring; fileData: UncheckedArray[byte];
     dataSize: int32): Image {.RLAPI,
     importc: "LoadImageFromMemory".} # Load image from memory buffer, fileType refers to extension: i.e. "png"
-func UnloadImage*(image: Image) {.RLAPI,
+proc UnloadImage*(image: Image) {.RLAPI,
     importc: "UnloadImage".} # Unload image from CPU memory (RAM)
-func ExportImage*(image: Image; fileName: cstring): bool {.RLAPI,
+proc ExportImage*(image: Image; fileName: cstring): bool {.RLAPI,
     importc: "ExportImage".} # Export image data to file, returns true on success
-func ExportImageAsCode*(image: Image; fileName: cstring): bool {.RLAPI,
+proc ExportImageAsCode*(image: Image; fileName: cstring): bool {.RLAPI,
     importc: "ExportImageAsCode".} # Export image as code file defining an array of bytes, returns true on success
 # Image generation functions
-func GenImageColor*(width: int32; height: int32; color: Color): Image {.RLAPI,
+proc GenImageColor*(width: int32; height: int32; color: Color): Image {.RLAPI,
     importc: "GenImageColor".} # Generate image: plain color
-func GenImageGradientV*(width: int32; height: int32; top: Color;
+proc GenImageGradientV*(width: int32; height: int32; top: Color;
     bottom: Color): Image {.RLAPI,
     importc: "GenImageGradientV".} # Generate image: vertical gradient
-func GenImageGradientH*(width: int32; height: int32; left: Color;
+proc GenImageGradientH*(width: int32; height: int32; left: Color;
     right: Color): Image {.RLAPI,
     importc: "GenImageGradientH".} # Generate image: horizontal gradient
-func GenImageGradientRadial*(width: int32; height: int32; density: float32;
+proc GenImageGradientRadial*(width: int32; height: int32; density: float32;
     inner: Color; outer: Color): Image {.RLAPI,
     importc: "GenImageGradientRadial".} # Generate image: radial gradient
-func GenImageChecked*(width: int32; height: int32; checksX: int32;
+proc GenImageChecked*(width: int32; height: int32; checksX: int32;
     checksY: int32; col1: Color; col2: Color): Image {.RLAPI,
     importc: "GenImageChecked".} # Generate image: checked
-func GenImageWhiteNoise*(width: int32; height: int32; factor: float32): Image {.
+proc GenImageWhiteNoise*(width: int32; height: int32; factor: float32): Image {.
     RLAPI, importc: "GenImageWhiteNoise".} # Generate image: white noise
-func GenImagePerlinNoise*(width: int32; height: int32; offsetX: int32;
+proc GenImagePerlinNoise*(width: int32; height: int32; offsetX: int32;
     offsetY: int32; scale: float32): Image {.RLAPI,
     importc: "GenImagePerlinNoise".} # Generate image: perlin noise
-func GenImageCellular*(width: int32; height: int32; tileSize: int32): Image {.
+proc GenImageCellular*(width: int32; height: int32; tileSize: int32): Image {.
     RLAPI,
     importc: "GenImageCellular".} # Generate image: cellular algorithm. Bigger tileSize means bigger cells
 # Image manipulation functions
-func ImageCopy*(image: Image): Image {.RLAPI,
+proc ImageCopy*(image: Image): Image {.RLAPI,
     importc: "ImageCopy".} # Create an image duplicate (useful for transformations)
-func ImageFromImage*(image: Image; rec: Rectangle): Image {.RLAPI,
+proc ImageFromImage*(image: Image; rec: Rectangle): Image {.RLAPI,
     importc: "ImageFromImage".} # Create an image from another image piece
-func ImageText*(text: cstring; fontSize: int32; color: Color): Image {.RLAPI,
+proc ImageText*(text: cstring; fontSize: int32; color: Color): Image {.RLAPI,
     importc: "ImageText".} # Create an image from text (default font)
-func ImageTextEx*(font: Font; text: cstring; fontSize: float32;
+proc ImageTextEx*(font: Font; text: cstring; fontSize: float32;
     spacing: float32; tint: Color): Image {.RLAPI,
     importc: "ImageTextEx".} # Create an image from text (custom sprite font)
-func ImageFormat*(image: ptr Image; newFormat: int32) {.RLAPI,
+proc ImageFormat*(image: ptr Image; newFormat: int32) {.RLAPI,
     importc: "ImageFormat".} # Convert image data to desired format
-func ImageToPOT*(image: ptr Image; fill: Color) {.RLAPI,
+proc ImageToPOT*(image: ptr Image; fill: Color) {.RLAPI,
     importc: "ImageToPOT".} # Convert image to POT (power-of-two)
-func ImageCrop*(image: ptr Image; crop: Rectangle) {.RLAPI,
+proc ImageCrop*(image: ptr Image; crop: Rectangle) {.RLAPI,
     importc: "ImageCrop".} # Crop an image to a defined rectangle
-func ImageAlphaCrop*(image: ptr Image; threshold: float32) {.RLAPI,
+proc ImageAlphaCrop*(image: ptr Image; threshold: float32) {.RLAPI,
     importc: "ImageAlphaCrop".} # Crop image depending on alpha value
-func ImageAlphaClear*(image: ptr Image; color: Color; threshold: float32) {.
+proc ImageAlphaClear*(image: ptr Image; color: Color; threshold: float32) {.
     RLAPI, importc: "ImageAlphaClear".} # Clear alpha channel to desired color
-func ImageAlphaMask*(image: ptr Image; alphaMask: Image) {.RLAPI,
+proc ImageAlphaMask*(image: ptr Image; alphaMask: Image) {.RLAPI,
     importc: "ImageAlphaMask".} # Apply alpha mask to image
-func ImageAlphaPremultiply*(image: ptr Image) {.RLAPI,
+proc ImageAlphaPremultiply*(image: ptr Image) {.RLAPI,
     importc: "ImageAlphaPremultiply".} # Premultiply alpha channel
-func ImageResize*(image: ptr Image; newWidth: int32; newHeight: int32) {.RLAPI,
+proc ImageResize*(image: ptr Image; newWidth: int32; newHeight: int32) {.RLAPI,
     importc: "ImageResize".} # Resize image (Bicubic scaling algorithm)
-func ImageResizeNN*(image: ptr Image; newWidth: int32; newHeight: int32) {.
+proc ImageResizeNN*(image: ptr Image; newWidth: int32; newHeight: int32) {.
     RLAPI, importc: "ImageResizeNN".} # Resize image (Nearest-Neighbor scaling algorithm)
-func ImageResizeCanvas*(image: ptr Image; newWidth: int32; newHeight: int32;
+proc ImageResizeCanvas*(image: ptr Image; newWidth: int32; newHeight: int32;
     offsetX: int32; offsetY: int32; fill: Color) {.RLAPI,
     importc: "ImageResizeCanvas".} # Resize canvas and fill with color
-func ImageMipmaps*(image: ptr Image) {.RLAPI,
+proc ImageMipmaps*(image: ptr Image) {.RLAPI,
     importc: "ImageMipmaps".} # Generate all mipmap levels for a provided image
-func ImageDither*(image: ptr Image; rBpp: int32; gBpp: int32; bBpp: int32;
+proc ImageDither*(image: ptr Image; rBpp: int32; gBpp: int32; bBpp: int32;
     aBpp: int32) {.RLAPI,
     importc: "ImageDither".} # Dither image data to 16bpp or lower (Floyd-Steinberg dithering)
-func ImageFlipVertical*(image: ptr Image) {.RLAPI,
+proc ImageFlipVertical*(image: ptr Image) {.RLAPI,
     importc: "ImageFlipVertical".} # Flip image vertically
-func ImageFlipHorizontal*(image: ptr Image) {.RLAPI,
+proc ImageFlipHorizontal*(image: ptr Image) {.RLAPI,
     importc: "ImageFlipHorizontal".} # Flip image horizontally
-func ImageRotateCW*(image: ptr Image) {.RLAPI,
+proc ImageRotateCW*(image: ptr Image) {.RLAPI,
     importc: "ImageRotateCW".} # Rotate image clockwise 90deg
-func ImageRotateCCW*(image: ptr Image) {.RLAPI,
+proc ImageRotateCCW*(image: ptr Image) {.RLAPI,
     importc: "ImageRotateCCW".} # Rotate image counter-clockwise 90deg
-func ImageColorTint*(image: ptr Image; color: Color) {.RLAPI,
+proc ImageColorTint*(image: ptr Image; color: Color) {.RLAPI,
     importc: "ImageColorTint".} # Modify image color: tint
-func ImageColorInvert*(image: ptr Image) {.RLAPI,
+proc ImageColorInvert*(image: ptr Image) {.RLAPI,
     importc: "ImageColorInvert".} # Modify image color: invert
-func ImageColorGrayscale*(image: ptr Image) {.RLAPI,
+proc ImageColorGrayscale*(image: ptr Image) {.RLAPI,
     importc: "ImageColorGrayscale".} # Modify image color: grayscale
-func ImageColorContrast*(image: ptr Image; contrast: float32) {.RLAPI,
+proc ImageColorContrast*(image: ptr Image; contrast: float32) {.RLAPI,
     importc: "ImageColorContrast".} # Modify image color: contrast (-100 to 100)
-func ImageColorBrightness*(image: ptr Image; brightness: int32) {.RLAPI,
+proc ImageColorBrightness*(image: ptr Image; brightness: int32) {.RLAPI,
     importc: "ImageColorBrightness".} # Modify image color: brightness (-255 to 255)
-func ImageColorReplace*(image: ptr Image; color: Color; replace: Color) {.RLAPI,
+proc ImageColorReplace*(image: ptr Image; color: Color; replace: Color) {.RLAPI,
     importc: "ImageColorReplace".} # Modify image color: replace color
-func LoadImageColors*(image: Image): ptr Color {.RLAPI,
+proc LoadImageColors*(image: Image): ptr Color {.RLAPI,
     importc: "LoadImageColors".} # Load color data from image as a Color array (RGBA - 32bit)
-func LoadImagePalette*(image: Image; maxPaletteSize: int32;
+proc LoadImagePalette*(image: Image; maxPaletteSize: int32;
     colorsCount: pointer): ptr Color {.RLAPI,
     importc: "LoadImagePalette".} # Load colors palette from image as a Color array (RGBA - 32bit)
-func UnloadImageColors*(colors: ptr Color) {.RLAPI,
+proc UnloadImageColors*(colors: ptr Color) {.RLAPI,
     importc: "UnloadImageColors".} # Unload color data loaded with LoadImageColors()
-func UnloadImagePalette*(colors: ptr Color) {.RLAPI,
+proc UnloadImagePalette*(colors: ptr Color) {.RLAPI,
     importc: "UnloadImagePalette".} # Unload colors palette loaded with LoadImagePalette()
-func GetImageAlphaBorder*(image: Image; threshold: float32): Rectangle {.RLAPI,
+proc GetImageAlphaBorder*(image: Image; threshold: float32): Rectangle {.RLAPI,
     importc: "GetImageAlphaBorder".} # Get image alpha border rectangle
 # Image drawing functions
 # NOTE: Image software-rendering functions (CPU)
-func ImageClearBackground*(dst: ptr Image; color: Color) {.RLAPI,
+proc ImageClearBackground*(dst: ptr Image; color: Color) {.RLAPI,
     importc: "ImageClearBackground".} # Clear image background with given color
-func ImageDrawPixel*(dst: ptr Image; posX: int32; posY: int32; color: Color) {.
+proc ImageDrawPixel*(dst: ptr Image; posX: int32; posY: int32; color: Color) {.
     RLAPI, importc: "ImageDrawPixel".} # Draw pixel within an image
-func ImageDrawPixelV*(dst: ptr Image; position: Vector2; color: Color) {.RLAPI,
+proc ImageDrawPixelV*(dst: ptr Image; position: Vector2; color: Color) {.RLAPI,
     importc: "ImageDrawPixelV".} # Draw pixel within an image (Vector version)
-func ImageDrawLine*(dst: ptr Image; startPosX: int32; startPosY: int32;
+proc ImageDrawLine*(dst: ptr Image; startPosX: int32; startPosY: int32;
     endPosX: int32; endPosY: int32; color: Color) {.RLAPI,
     importc: "ImageDrawLine".} # Draw line within an image
-func ImageDrawLineV*(dst: ptr Image; start: Vector2; endx: Vector2;
+proc ImageDrawLineV*(dst: ptr Image; start: Vector2; endx: Vector2;
     color: Color) {.RLAPI,
     importc: "ImageDrawLineV".} # Draw line within an image (Vector version)
-func ImageDrawCircle*(dst: ptr Image; centerX: int32; centerY: int32;
+proc ImageDrawCircle*(dst: ptr Image; centerX: int32; centerY: int32;
     radius: int32; color: Color) {.RLAPI,
     importc: "ImageDrawCircle".} # Draw circle within an image
-func ImageDrawCircleV*(dst: ptr Image; center: Vector2; radius: int32;
+proc ImageDrawCircleV*(dst: ptr Image; center: Vector2; radius: int32;
     color: Color) {.RLAPI,
     importc: "ImageDrawCircleV".} # Draw circle within an image (Vector version)
-func ImageDrawRectangle*(dst: ptr Image; posX: int32; posY: int32; width: int32;
+proc ImageDrawRectangle*(dst: ptr Image; posX: int32; posY: int32; width: int32;
     height: int32; color: Color) {.RLAPI,
     importc: "ImageDrawRectangle".} # Draw rectangle within an image
-func ImageDrawRectangleV*(dst: ptr Image; position: Vector2; size: Vector2;
+proc ImageDrawRectangleV*(dst: ptr Image; position: Vector2; size: Vector2;
     color: Color) {.RLAPI,
     importc: "ImageDrawRectangleV".} # Draw rectangle within an image (Vector version)
-func ImageDrawRectangleRec*(dst: ptr Image; rec: Rectangle; color: Color) {.
+proc ImageDrawRectangleRec*(dst: ptr Image; rec: Rectangle; color: Color) {.
     RLAPI, importc: "ImageDrawRectangleRec".} # Draw rectangle within an image
-func ImageDrawRectangleLines*(dst: ptr Image; rec: Rectangle; thick: int32;
+proc ImageDrawRectangleLines*(dst: ptr Image; rec: Rectangle; thick: int32;
     color: Color) {.RLAPI,
     importc: "ImageDrawRectangleLines".} # Draw rectangle lines within an image
-func ImageDraw*(dst: ptr Image; src: Image; srcRec: Rectangle;
+proc ImageDraw*(dst: ptr Image; src: Image; srcRec: Rectangle;
     dstRec: Rectangle; tint: Color) {.RLAPI,
     importc: "ImageDraw".} # Draw a source image within a destination image (tint applied to source)
-func ImageDrawText*(dst: ptr Image; text: cstring; posX: int32; posY: int32;
+proc ImageDrawText*(dst: ptr Image; text: cstring; posX: int32; posY: int32;
     fontSize: int32; color: Color) {.RLAPI,
     importc: "ImageDrawText".} # Draw text (using default font) within an image (destination)
-func ImageDrawTextEx*(dst: ptr Image; font: Font; text: cstring;
+proc ImageDrawTextEx*(dst: ptr Image; font: Font; text: cstring;
     position: Vector2; fontSize: float32; spacing: float32; tint: Color) {.
     RLAPI,
     importc: "ImageDrawTextEx".} # Draw text (custom sprite font) within an image (destination)
 # Texture loading functions
 # NOTE: These functions require GPU access
-func LoadTexture*(fileName: cstring): Texture2D {.RLAPI,
+proc LoadTexture*(fileName: cstring): Texture2D {.RLAPI,
     importc: "LoadTexture".} # Load texture from file into GPU memory (VRAM)
-func LoadTextureFromImage*(image: Image): Texture2D {.RLAPI,
+proc LoadTextureFromImage*(image: Image): Texture2D {.RLAPI,
     importc: "LoadTextureFromImage".} # Load texture from image data
-func LoadTextureCubemap*(image: Image; layoutType: int32): TextureCubemap {.
+proc LoadTextureCubemap*(image: Image; layoutType: int32): TextureCubemap {.
     RLAPI,
     importc: "LoadTextureCubemap".} # Load cubemap from image, multiple image cubemap layouts supported
-func LoadRenderTexture*(width: int32; height: int32): RenderTexture2D {.RLAPI,
+proc LoadRenderTexture*(width: int32; height: int32): RenderTexture2D {.RLAPI,
     importc: "LoadRenderTexture".} # Load texture for rendering (framebuffer)
-func UnloadTexture*(texture: Texture2D) {.RLAPI,
+proc UnloadTexture*(texture: Texture2D) {.RLAPI,
     importc: "UnloadTexture".} # Unload texture from GPU memory (VRAM)
-func UnloadRenderTexture*(target: RenderTexture2D) {.RLAPI,
+proc UnloadRenderTexture*(target: RenderTexture2D) {.RLAPI,
     importc: "UnloadRenderTexture".} # Unload render texture from GPU memory (VRAM)
-func UpdateTexture*(texture: Texture2D; pixels: pointer) {.RLAPI,
+proc UpdateTexture*(texture: Texture2D; pixels: pointer) {.RLAPI,
     importc: "UpdateTexture".} # Update GPU texture with new data
-func UpdateTextureRec*(texture: Texture2D; rec: Rectangle; pixels: pointer) {.
+proc UpdateTextureRec*(texture: Texture2D; rec: Rectangle; pixels: pointer) {.
     RLAPI, importc: "UpdateTextureRec".} # Update GPU texture rectangle with new data
-func GetTextureData*(texture: Texture2D): Image {.RLAPI,
+proc GetTextureData*(texture: Texture2D): Image {.RLAPI,
     importc: "GetTextureData".} # Get pixel data from GPU texture and return an Image
-func GetScreenData*(): Image {.RLAPI, importc: "GetScreenData".} # Get pixel data from screen buffer and return an Image (screenshot)
+proc GetScreenData*(): Image {.RLAPI, importc: "GetScreenData".} # Get pixel data from screen buffer and return an Image (screenshot)
 # Texture configuration functions
-func GenTextureMipmaps*(texture: ptr Texture2D) {.RLAPI,
+proc GenTextureMipmaps*(texture: ptr Texture2D) {.RLAPI,
     importc: "GenTextureMipmaps".} # Generate GPU mipmaps for a texture
-func SetTextureFilter*(texture: Texture2D; filterMode: int32) {.RLAPI,
+proc SetTextureFilter*(texture: Texture2D; filterMode: int32) {.RLAPI,
     importc: "SetTextureFilter".} # Set texture scaling filter mode
-func SetTextureWrap*(texture: Texture2D; wrapMode: int32) {.RLAPI,
+proc SetTextureWrap*(texture: Texture2D; wrapMode: int32) {.RLAPI,
     importc: "SetTextureWrap".} # Set texture wrapping mode
 # Texture drawing functions
-func DrawTexture*(texture: Texture2D; posX: int32; posY: int32; tint: Color) {.
+proc DrawTexture*(texture: Texture2D; posX: int32; posY: int32; tint: Color) {.
     RLAPI, importc: "DrawTexture".} # Draw a Texture2D
-func DrawTextureV*(texture: Texture2D; position: Vector2; tint: Color) {.RLAPI,
+proc DrawTextureV*(texture: Texture2D; position: Vector2; tint: Color) {.RLAPI,
     importc: "DrawTextureV".} # Draw a Texture2D with position defined as Vector2
-func DrawTextureEx*(texture: Texture2D; position: Vector2; rotation: float32;
+proc DrawTextureEx*(texture: Texture2D; position: Vector2; rotation: float32;
     scale: float32; tint: Color) {.RLAPI,
     importc: "DrawTextureEx".} # Draw a Texture2D with extended parameters
-func DrawTextureRec*(texture: Texture2D; source: Rectangle; position: Vector2;
+proc DrawTextureRec*(texture: Texture2D; source: Rectangle; position: Vector2;
     tint: Color) {.RLAPI,
     importc: "DrawTextureRec".} # Draw a part of a texture defined by a rectangle
-func DrawTextureQuad*(texture: Texture2D; tiling: Vector2; offset: Vector2;
+proc DrawTextureQuad*(texture: Texture2D; tiling: Vector2; offset: Vector2;
     quad: Rectangle; tint: Color) {.RLAPI,
     importc: "DrawTextureQuad".} # Draw texture quad with tiling and offset parameters
-func DrawTextureTiled*(texture: Texture2D; source: Rectangle; dest: Rectangle;
+proc DrawTextureTiled*(texture: Texture2D; source: Rectangle; dest: Rectangle;
     origin: Vector2; rotation: float32; scale: float32; tint: Color) {.RLAPI,
     importc: "DrawTextureTiled".} # Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.
-func DrawTexturePro*(texture: Texture2D; source: Rectangle; dest: Rectangle;
+proc DrawTexturePro*(texture: Texture2D; source: Rectangle; dest: Rectangle;
     origin: Vector2; rotation: float32; tint: Color) {.RLAPI,
     importc: "DrawTexturePro".} # Draw a part of a texture defined by a rectangle with 'pro' parameters
-func DrawTextureNPatch*(texture: Texture2D; nPatchInfo: NPatchInfo;
+proc DrawTextureNPatch*(texture: Texture2D; nPatchInfo: NPatchInfo;
     dest: Rectangle; origin: Vector2; rotation: float32; tint: Color) {.RLAPI,
     importc: "DrawTextureNPatch".} # Draws a texture (or part of it) that stretches or shrinks nicely
 # Color/pixel related functions
-func Fade*(color: Color; alpha: float32): Color {.RLAPI,
+proc Fade*(color: Color; alpha: float32): Color {.RLAPI,
     importc: "Fade".} # Returns color with alpha applied, alpha goes from 0.0f to 1.0f
-func ColorToInt*(color: Color): int32 {.RLAPI,
+proc ColorToInt*(color: Color): int32 {.RLAPI,
     importc: "ColorToInt".} # Returns hexadecimal value for a Color
-func ColorNormalize*(color: Color): Vector4 {.RLAPI,
+proc ColorNormalize*(color: Color): Vector4 {.RLAPI,
     importc: "ColorNormalize".} # Returns Color normalized as float [0..1]
-func ColorFromNormalized*(normalized: Vector4): Color {.RLAPI,
+proc ColorFromNormalized*(normalized: Vector4): Color {.RLAPI,
     importc: "ColorFromNormalized".} # Returns Color from normalized values [0..1]
-func ColorToHSV*(color: Color): Vector3 {.RLAPI,
+proc ColorToHSV*(color: Color): Vector3 {.RLAPI,
     importc: "ColorToHSV".} # Returns HSV values for a Color
-func ColorFromHSV*(hue: float32; saturation: float32; value: float32): Color {.
+proc ColorFromHSV*(hue: float32; saturation: float32; value: float32): Color {.
     RLAPI, importc: "ColorFromHSV".} # Returns a Color from HSV values
-func ColorAlpha*(color: Color; alpha: float32): Color {.RLAPI,
+proc ColorAlpha*(color: Color; alpha: float32): Color {.RLAPI,
     importc: "ColorAlpha".} # Returns color with alpha applied, alpha goes from 0.0f to 1.0f
-func ColorAlphaBlend*(dst: Color; src: Color; tint: Color): Color {.RLAPI,
+proc ColorAlphaBlend*(dst: Color; src: Color; tint: Color): Color {.RLAPI,
     importc: "ColorAlphaBlend".} # Returns src alpha-blended into dst color with tint
-func GetColor*(hexValue: int32): Color {.RLAPI,
+proc GetColor*(hexValue: int32): Color {.RLAPI,
     importc: "GetColor".} # Get Color structure from hexadecimal value
-func GetPixelColor*(srcPtr: pointer; format: int32): Color {.RLAPI,
+proc GetPixelColor*(srcPtr: pointer; format: int32): Color {.RLAPI,
     importc: "GetPixelColor".} # Get Color from a source pixel pointer of certain format
-func SetPixelColor*(dstPtr: pointer; color: Color; format: int32) {.RLAPI,
+proc SetPixelColor*(dstPtr: pointer; color: Color; format: int32) {.RLAPI,
     importc: "SetPixelColor".} # Set color formatted into destination pixel pointer
-func GetPixelDataSize*(width: int32; height: int32; format: int32): int32 {.
+proc GetPixelDataSize*(width: int32; height: int32; format: int32): int32 {.
     RLAPI, importc: "GetPixelDataSize".} # Get pixel data size in bytes for certain format
 # ------------------------------------------------------------------------------------
 # Font Loading and Text Drawing Functions (Module: text)
 # ------------------------------------------------------------------------------------
 # Font loading/unloading functions
-func GetFontDefault*(): Font {.RLAPI, importc: "GetFontDefault".} # Get the default Font
-func LoadFont*(fileName: cstring): Font {.RLAPI,
+proc GetFontDefault*(): Font {.RLAPI, importc: "GetFontDefault".} # Get the default Font
+proc LoadFont*(fileName: cstring): Font {.RLAPI,
     importc: "LoadFont".} # Load font from file into GPU memory (VRAM)
-func LoadFontEx*(fileName: cstring; fontSize: int32; fontChars: pointer;
+proc LoadFontEx*(fileName: cstring; fontSize: int32; fontChars: pointer;
     charsCount: int32): Font {.RLAPI,
     importc: "LoadFontEx".} # Load font from file with extended parameters
-func LoadFontFromImage*(image: Image; key: Color; firstChar: int32): Font {.
+proc LoadFontFromImage*(image: Image; key: Color; firstChar: int32): Font {.
     RLAPI, importc: "LoadFontFromImage".} # Load font from Image (XNA style)
-func LoadFontFromMemory*(fileType: cstring; fileData: UncheckedArray[byte];
+proc LoadFontFromMemory*(fileType: cstring; fileData: UncheckedArray[byte];
     dataSize: int32; fontSize: int32; fontChars: pointer;
     charsCount: int32): Font {.RLAPI,
     importc: "LoadFontFromMemory".} # Load font from memory buffer, fileType refers to extension: i.e. "ttf"
-func LoadFontData*(fileData: UncheckedArray[byte]; dataSize: int32;
+proc LoadFontData*(fileData: UncheckedArray[byte]; dataSize: int32;
     fontSize: int32; fontChars: pointer; charsCount: int32;
     typex: int32): ptr CharInfo {.RLAPI,
     importc: "LoadFontData".} # Load font data for further use
-func GenImageFontAtlas*(chars: ptr ptr CharInfo; recs: ptr Rectangle;
+proc GenImageFontAtlas*(chars: ptr ptr CharInfo; recs: ptr Rectangle;
     charsCount: int32; fontSize: int32; padding: int32;
     packMethod: int32): Image {.RLAPI,
     importc: "GenImageFontAtlas".} # Generate image font atlas using chars info
-func UnloadFontData*(chars: ptr CharInfo; charsCount: int32) {.RLAPI,
+proc UnloadFontData*(chars: ptr CharInfo; charsCount: int32) {.RLAPI,
     importc: "UnloadFontData".} # Unload font chars info data (RAM)
-func UnloadFont*(font: Font) {.RLAPI, importc: "UnloadFont".} # Unload Font from GPU memory (VRAM)
+proc UnloadFont*(font: Font) {.RLAPI, importc: "UnloadFont".} # Unload Font from GPU memory (VRAM)
 # Text drawing functions
-func DrawFPS*(posX: int32; posY: int32) {.RLAPI, importc: "DrawFPS".} # Shows current FPS
-func DrawText*(text: cstring; posX: int32; posY: int32; fontSize: int32;
+proc DrawFPS*(posX: int32; posY: int32) {.RLAPI, importc: "DrawFPS".} # Shows current FPS
+proc DrawText*(text: cstring; posX: int32; posY: int32; fontSize: int32;
     color: Color) {.RLAPI, importc: "DrawText".} # Draw text (using default font)
-func DrawTextEx*(font: Font; text: cstring; position: Vector2;
+proc DrawTextEx*(font: Font; text: cstring; position: Vector2;
     fontSize: float32; spacing: float32; tint: Color) {.RLAPI,
     importc: "DrawTextEx".} # Draw text using font and additional parameters
-func DrawTextRec*(font: Font; text: cstring; rec: Rectangle; fontSize: float32;
+proc DrawTextRec*(font: Font; text: cstring; rec: Rectangle; fontSize: float32;
     spacing: float32; wordWrap: bool; tint: Color) {.RLAPI,
     importc: "DrawTextRec".} # Draw text using font inside rectangle limits
-func DrawTextRecEx*(font: Font; text: cstring; rec: Rectangle;
+proc DrawTextRecEx*(font: Font; text: cstring; rec: Rectangle;
     fontSize: float32; spacing: float32; wordWrap: bool; tint: Color;
     selectStart: int32; selectLength: int32; selectTint: Color;
     selectBackTint: Color) {.RLAPI,
     importc: "DrawTextRecEx".} # Draw text using font inside rectangle limits with support for text selection
-func DrawTextCodepoint*(font: Font; codepoint: int32; position: Vector2;
+proc DrawTextCodepoint*(font: Font; codepoint: int32; position: Vector2;
     fontSize: float32; tint: Color) {.RLAPI,
     importc: "DrawTextCodepoint".} # Draw one character (codepoint)
 # Text misc. functions
-func MeasureText*(text: cstring; fontSize: int32): int32 {.RLAPI,
+proc MeasureText*(text: cstring; fontSize: int32): int32 {.RLAPI,
     importc: "MeasureText".} # Measure string width for default font
-func MeasureTextEx*(font: Font; text: cstring; fontSize: float32;
+proc MeasureTextEx*(font: Font; text: cstring; fontSize: float32;
     spacing: float32): Vector2 {.RLAPI,
     importc: "MeasureTextEx".} # Measure string size for Font
-func GetGlyphIndex*(font: Font; codepoint: int32): int32 {.RLAPI,
+proc GetGlyphIndex*(font: Font; codepoint: int32): int32 {.RLAPI,
     importc: "GetGlyphIndex".} # Get index position for a unicode character on font
 # Text strings management functions (no utf8 strings, only byte chars)
 # NOTE: Some strings allocate memory internally for returned strings, just be careful!
-func TextCopy*(dst: ptr char; src: cstring): int32 {.RLAPI,
+proc TextCopy*(dst: ptr char; src: cstring): int32 {.RLAPI,
     importc: "TextCopy".} # Copy one string to another, returns bytes copied
-func TextIsEqual*(text1: cstring; text2: cstring): bool {.RLAPI,
+proc TextIsEqual*(text1: cstring; text2: cstring): bool {.RLAPI,
     importc: "TextIsEqual".} # Check if two text string are equal
-func TextLength*(text: cstring): uint32 {.RLAPI,
+proc TextLength*(text: cstring): uint32 {.RLAPI,
     importc: "TextLength".} # Get text length, checks for '\0' ending
-func TextFormat*(text: cstring): cstring {.RLAPI, varargs,
+proc TextFormat*(text: cstring): cstring {.RLAPI, varargs,
     importc: "TextFormat".} # Text formatting with variables (sprintf style)
-func TextSubtext*(text: cstring; position: int32; length: int32): cstring {.
+proc TextSubtext*(text: cstring; position: int32; length: int32): cstring {.
     RLAPI, importc: "TextSubtext".} # Get a piece of a text string
-func TextReplace*(text: ptr char; replace: cstring; by: cstring): ptr char {.
+proc TextReplace*(text: ptr char; replace: cstring; by: cstring): ptr char {.
     RLAPI, importc: "TextReplace".} # Replace text string (memory must be freed!)
-func TextInsert*(text: cstring; insert: cstring; position: int32): ptr char {.
+proc TextInsert*(text: cstring; insert: cstring; position: int32): ptr char {.
     RLAPI, importc: "TextInsert".} # Insert text in a position (memory must be freed!)
-func TextJoin*(textList: cstring; count: int32; delimiter: cstring): cstring {.
+proc TextJoin*(textList: cstring; count: int32; delimiter: cstring): cstring {.
     RLAPI, importc: "TextJoin".} # Join text strings with delimiter
-func TextSplit*(text: cstring; delimiter: char; count: pointer): cstring {.
+proc TextSplit*(text: cstring; delimiter: char; count: pointer): cstring {.
     RLAPI, importc: "TextSplit".} # Split text into multiple strings
-func TextAppend*(text: ptr char; append: cstring; position: pointer) {.RLAPI,
+proc TextAppend*(text: ptr char; append: cstring; position: pointer) {.RLAPI,
     importc: "TextAppend".} # Append text at specific position and move cursor!
-func TextFindIndex*(text: cstring; find: cstring): int32 {.RLAPI,
+proc TextFindIndex*(text: cstring; find: cstring): int32 {.RLAPI,
     importc: "TextFindIndex".} # Find first text occurrence within a string
-func TextToUpper*(text: cstring): cstring {.RLAPI,
+proc TextToUpper*(text: cstring): cstring {.RLAPI,
     importc: "TextToUpper".} # Get upper case version of provided string
-func TextToLower*(text: cstring): cstring {.RLAPI,
+proc TextToLower*(text: cstring): cstring {.RLAPI,
     importc: "TextToLower".} # Get lower case version of provided string
-func TextToPascal*(text: cstring): cstring {.RLAPI,
+proc TextToPascal*(text: cstring): cstring {.RLAPI,
     importc: "TextToPascal".} # Get Pascal case notation version of provided string
-func TextToInteger*(text: cstring): int32 {.RLAPI,
+proc TextToInteger*(text: cstring): int32 {.RLAPI,
     importc: "TextToInteger".} # Get integer value from text (negative values not supported)
-func TextToUtf8*(codepoints: pointer; length: int32): ptr char {.RLAPI,
+proc TextToUtf8*(codepoints: pointer; length: int32): ptr char {.RLAPI,
     importc: "TextToUtf8".} # Encode text codepoint into utf8 text (memory must be freed!)
 # UTF8 text strings management functions
-func GetCodepoints*(text: cstring; count: pointer): pointer {.RLAPI,
+proc GetCodepoints*(text: cstring; count: pointer): pointer {.RLAPI,
     importc: "GetCodepoints".} # Get all codepoints in a string, codepoints count returned by parameters
-func GetCodepointsCount*(text: cstring): int32 {.RLAPI,
+proc GetCodepointsCount*(text: cstring): int32 {.RLAPI,
     importc: "GetCodepointsCount".} # Get total number of characters (codepoints) in a UTF8 encoded string
-func GetNextCodepoint*(text: cstring; bytesProcessed: pointer): int32 {.RLAPI,
+proc GetNextCodepoint*(text: cstring; bytesProcessed: pointer): int32 {.RLAPI,
     importc: "GetNextCodepoint".} # Returns next codepoint in a UTF8 encoded string; 0x3f('?') is returned on failure
-func CodepointToUtf8*(codepoint: int32; byteLength: pointer): cstring {.RLAPI,
+proc CodepointToUtf8*(codepoint: int32; byteLength: pointer): cstring {.RLAPI,
     importc: "CodepointToUtf8".} # Encode codepoint into utf8 text (char array length returned as parameter)
 # ------------------------------------------------------------------------------------
 # Basic 3d Shapes Drawing Functions (Module: models)
 # ------------------------------------------------------------------------------------
 # Basic geometric 3D shapes drawing functions
-func DrawLine3D*(startPos: Vector3; endPos: Vector3; color: Color) {.RLAPI,
+proc DrawLine3D*(startPos: Vector3; endPos: Vector3; color: Color) {.RLAPI,
     importc: "DrawLine3D".} # Draw a line in 3D world space
-func DrawPoint3D*(position: Vector3; color: Color) {.RLAPI,
+proc DrawPoint3D*(position: Vector3; color: Color) {.RLAPI,
     importc: "DrawPoint3D".} # Draw a point in 3D space, actually a small line
-func DrawCircle3D*(center: Vector3; radius: float32; rotationAxis: Vector3;
+proc DrawCircle3D*(center: Vector3; radius: float32; rotationAxis: Vector3;
     rotationAngle: float32; color: Color) {.RLAPI,
     importc: "DrawCircle3D".} # Draw a circle in 3D world space
-func DrawTriangle3D*(v1: Vector3; v2: Vector3; v3: Vector3; color: Color) {.
+proc DrawTriangle3D*(v1: Vector3; v2: Vector3; v3: Vector3; color: Color) {.
     RLAPI,
     importc: "DrawTriangle3D".} # Draw a color-filled triangle (vertex in counter-clockwise order!)
-func DrawTriangleStrip3D*(points: ptr Vector3; pointsCount: int32;
+proc DrawTriangleStrip3D*(points: ptr Vector3; pointsCount: int32;
     color: Color) {.RLAPI,
     importc: "DrawTriangleStrip3D".} # Draw a triangle strip defined by points
-func DrawCube*(position: Vector3; width: float32; height: float32;
+proc DrawCube*(position: Vector3; width: float32; height: float32;
     length: float32; color: Color) {.RLAPI, importc: "DrawCube".} # Draw cube
-func DrawCubeV*(position: Vector3; size: Vector3; color: Color) {.RLAPI,
+proc DrawCubeV*(position: Vector3; size: Vector3; color: Color) {.RLAPI,
     importc: "DrawCubeV".} # Draw cube (Vector version)
-func DrawCubeWires*(position: Vector3; width: float32; height: float32;
+proc DrawCubeWires*(position: Vector3; width: float32; height: float32;
     length: float32; color: Color) {.RLAPI, importc: "DrawCubeWires".} # Draw cube wires
-func DrawCubeWiresV*(position: Vector3; size: Vector3; color: Color) {.RLAPI,
+proc DrawCubeWiresV*(position: Vector3; size: Vector3; color: Color) {.RLAPI,
     importc: "DrawCubeWiresV".} # Draw cube wires (Vector version)
-func DrawCubeTexture*(texture: Texture2D; position: Vector3; width: float32;
+proc DrawCubeTexture*(texture: Texture2D; position: Vector3; width: float32;
     height: float32; length: float32; color: Color) {.RLAPI,
     importc: "DrawCubeTexture".} # Draw cube textured
-func DrawSphere*(centerPos: Vector3; radius: float32; color: Color) {.RLAPI,
+proc DrawSphere*(centerPos: Vector3; radius: float32; color: Color) {.RLAPI,
     importc: "DrawSphere".} # Draw sphere
-func DrawSphereEx*(centerPos: Vector3; radius: float32; rings: int32;
+proc DrawSphereEx*(centerPos: Vector3; radius: float32; rings: int32;
     slices: int32; color: Color) {.RLAPI,
     importc: "DrawSphereEx".} # Draw sphere with extended parameters
-func DrawSphereWires*(centerPos: Vector3; radius: float32; rings: int32;
+proc DrawSphereWires*(centerPos: Vector3; radius: float32; rings: int32;
     slices: int32; color: Color) {.RLAPI, importc: "DrawSphereWires".} # Draw sphere wires
-func DrawCylinder*(position: Vector3; radiusTop: float32; radiusBottom: float32;
+proc DrawCylinder*(position: Vector3; radiusTop: float32; radiusBottom: float32;
     height: float32; slices: int32; color: Color) {.RLAPI,
     importc: "DrawCylinder".} # Draw a cylinder/cone
-func DrawCylinderWires*(position: Vector3; radiusTop: float32;
+proc DrawCylinderWires*(position: Vector3; radiusTop: float32;
     radiusBottom: float32; height: float32; slices: int32; color: Color) {.
     RLAPI, importc: "DrawCylinderWires".} # Draw a cylinder/cone wires
-func DrawPlane*(centerPos: Vector3; size: Vector2; color: Color) {.RLAPI,
+proc DrawPlane*(centerPos: Vector3; size: Vector2; color: Color) {.RLAPI,
     importc: "DrawPlane".} # Draw a plane XZ
-func DrawRay*(ray: Ray; color: Color) {.RLAPI, importc: "DrawRay".} # Draw a ray line
-func DrawGrid*(slices: int32; spacing: float32) {.RLAPI,
+proc DrawRay*(ray: Ray; color: Color) {.RLAPI, importc: "DrawRay".} # Draw a ray line
+proc DrawGrid*(slices: int32; spacing: float32) {.RLAPI,
     importc: "DrawGrid".} # Draw a grid (centered at (0, 0, 0))
-func DrawGizmo*(position: Vector3) {.RLAPI, importc: "DrawGizmo".} # Draw simple gizmo
+proc DrawGizmo*(position: Vector3) {.RLAPI, importc: "DrawGizmo".} # Draw simple gizmo
 # ------------------------------------------------------------------------------------
 # Model 3d Loading and Drawing Functions (Module: models)
 # ------------------------------------------------------------------------------------
 # Model loading/unloading functions
-func LoadModel*(fileName: cstring): Model {.RLAPI,
+proc LoadModel*(fileName: cstring): Model {.RLAPI,
     importc: "LoadModel".} # Load model from files (meshes and materials)
-func LoadModelFromMesh*(mesh: Mesh): Model {.RLAPI,
+proc LoadModelFromMesh*(mesh: Mesh): Model {.RLAPI,
     importc: "LoadModelFromMesh".} # Load model from generated mesh (default material)
-func UnloadModel*(model: Model) {.RLAPI,
+proc UnloadModel*(model: Model) {.RLAPI,
     importc: "UnloadModel".} # Unload model (including meshes) from memory (RAM and/or VRAM)
-func UnloadModelKeepMeshes*(model: Model) {.RLAPI,
+proc UnloadModelKeepMeshes*(model: Model) {.RLAPI,
     importc: "UnloadModelKeepMeshes".} # Unload model (but not meshes) from memory (RAM and/or VRAM)
 # Mesh loading/unloading functions
-func LoadMeshes*(fileName: cstring; meshCount: pointer): ptr Mesh {.RLAPI,
+proc LoadMeshes*(fileName: cstring; meshCount: pointer): ptr Mesh {.RLAPI,
     importc: "LoadMeshes".} # Load meshes from model file
-func UnloadMesh*(mesh: Mesh) {.RLAPI, importc: "UnloadMesh".} # Unload mesh from memory (RAM and/or VRAM)
-func ExportMesh*(mesh: Mesh; fileName: cstring): bool {.RLAPI,
+proc UnloadMesh*(mesh: Mesh) {.RLAPI, importc: "UnloadMesh".} # Unload mesh from memory (RAM and/or VRAM)
+proc ExportMesh*(mesh: Mesh; fileName: cstring): bool {.RLAPI,
     importc: "ExportMesh".} # Export mesh data to file, returns true on success
 # Material loading/unloading functions
-func LoadMaterials*(fileName: cstring; materialCount: pointer): ptr Material {.
+proc LoadMaterials*(fileName: cstring; materialCount: pointer): ptr Material {.
     RLAPI, importc: "LoadMaterials".} # Load materials from model file
-func LoadMaterialDefault*(): Material {.RLAPI,
+proc LoadMaterialDefault*(): Material {.RLAPI,
     importc: "LoadMaterialDefault".} # Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)
-func UnloadMaterial*(material: Material) {.RLAPI,
+proc UnloadMaterial*(material: Material) {.RLAPI,
     importc: "UnloadMaterial".} # Unload material from GPU memory (VRAM)
-func SetMaterialTexture*(material: ptr Material; mapType: int32;
+proc SetMaterialTexture*(material: ptr Material; mapType: int32;
     texture: Texture2D) {.RLAPI,
     importc: "SetMaterialTexture".} # Set texture for a material map type (MAP_DIFFUSE, MAP_SPECULAR...)
-func SetModelMeshMaterial*(model: ptr Model; meshId: int32;
+proc SetModelMeshMaterial*(model: ptr Model; meshId: int32;
     materialId: int32) {.RLAPI, importc: "SetModelMeshMaterial".} # Set material for a mesh
 # Model animations loading/unloading functions
-func LoadModelAnimations*(fileName: cstring;
+proc LoadModelAnimations*(fileName: cstring;
     animsCount: pointer): ptr ModelAnimation {.RLAPI,
     importc: "LoadModelAnimations".} # Load model animations from file
-func UpdateModelAnimation*(model: Model; anim: ModelAnimation; frame: int32) {.
+proc UpdateModelAnimation*(model: Model; anim: ModelAnimation; frame: int32) {.
     RLAPI, importc: "UpdateModelAnimation".} # Update model animation pose
-func UnloadModelAnimation*(anim: ModelAnimation) {.RLAPI,
+proc UnloadModelAnimation*(anim: ModelAnimation) {.RLAPI,
     importc: "UnloadModelAnimation".} # Unload animation data
-func IsModelAnimationValid*(model: Model; anim: ModelAnimation): bool {.RLAPI,
+proc IsModelAnimationValid*(model: Model; anim: ModelAnimation): bool {.RLAPI,
     importc: "IsModelAnimationValid".} # Check model animation skeleton match
 # Mesh generation functions
-func GenMeshPoly*(sides: int32; radius: float32): Mesh {.RLAPI,
+proc GenMeshPoly*(sides: int32; radius: float32): Mesh {.RLAPI,
     importc: "GenMeshPoly".} # Generate polygonal mesh
-func GenMeshPlane*(width: float32; length: float32; resX: int32;
+proc GenMeshPlane*(width: float32; length: float32; resX: int32;
     resZ: int32): Mesh {.RLAPI,
     importc: "GenMeshPlane".} # Generate plane mesh (with subdivisions)
-func GenMeshCube*(width: float32; height: float32; length: float32): Mesh {.
+proc GenMeshCube*(width: float32; height: float32; length: float32): Mesh {.
     RLAPI, importc: "GenMeshCube".} # Generate cuboid mesh
-func GenMeshSphere*(radius: float32; rings: int32; slices: int32): Mesh {.RLAPI,
+proc GenMeshSphere*(radius: float32; rings: int32; slices: int32): Mesh {.RLAPI,
     importc: "GenMeshSphere".} # Generate sphere mesh (standard sphere)
-func GenMeshHemiSphere*(radius: float32; rings: int32; slices: int32): Mesh {.
+proc GenMeshHemiSphere*(radius: float32; rings: int32; slices: int32): Mesh {.
     RLAPI, importc: "GenMeshHemiSphere".} # Generate half-sphere mesh (no bottom cap)
-func GenMeshCylinder*(radius: float32; height: float32; slices: int32): Mesh {.
+proc GenMeshCylinder*(radius: float32; height: float32; slices: int32): Mesh {.
     RLAPI, importc: "GenMeshCylinder".} # Generate cylinder mesh
-func GenMeshTorus*(radius: float32; size: float32; radSeg: int32;
+proc GenMeshTorus*(radius: float32; size: float32; radSeg: int32;
     sides: int32): Mesh {.RLAPI, importc: "GenMeshTorus".} # Generate torus mesh
-func GenMeshKnot*(radius: float32; size: float32; radSeg: int32;
+proc GenMeshKnot*(radius: float32; size: float32; radSeg: int32;
     sides: int32): Mesh {.RLAPI, importc: "GenMeshKnot".} # Generate trefoil knot mesh
-func GenMeshHeightmap*(heightmap: Image; size: Vector3): Mesh {.RLAPI,
+proc GenMeshHeightmap*(heightmap: Image; size: Vector3): Mesh {.RLAPI,
     importc: "GenMeshHeightmap".} # Generate heightmap mesh from image data
-func GenMeshCubicmap*(cubicmap: Image; cubeSize: Vector3): Mesh {.RLAPI,
+proc GenMeshCubicmap*(cubicmap: Image; cubeSize: Vector3): Mesh {.RLAPI,
     importc: "GenMeshCubicmap".} # Generate cubes-based map mesh from image data
 # Mesh manipulation functions
-func MeshBoundingBox*(mesh: Mesh): BoundingBox {.RLAPI,
+proc MeshBoundingBox*(mesh: Mesh): BoundingBox {.RLAPI,
     importc: "MeshBoundingBox".} # Compute mesh bounding box limits
-func MeshTangents*(mesh: ptr Mesh) {.RLAPI, importc: "MeshTangents".} # Compute mesh tangents
-func MeshBinormals*(mesh: ptr Mesh) {.RLAPI,
+proc MeshTangents*(mesh: ptr Mesh) {.RLAPI, importc: "MeshTangents".} # Compute mesh tangents
+proc MeshBinormals*(mesh: ptr Mesh) {.RLAPI,
     importc: "MeshBinormals".} # Compute mesh binormals
-func MeshNormalsSmooth*(mesh: ptr Mesh) {.RLAPI,
+proc MeshNormalsSmooth*(mesh: ptr Mesh) {.RLAPI,
     importc: "MeshNormalsSmooth".} # Smooth (average) vertex normals
 # Model drawing functions
-func DrawModel*(model: Model; position: Vector3; scale: float32; tint: Color) {.
+proc DrawModel*(model: Model; position: Vector3; scale: float32; tint: Color) {.
     RLAPI, importc: "DrawModel".} # Draw a model (with texture if set)
-func DrawModelEx*(model: Model; position: Vector3; rotationAxis: Vector3;
+proc DrawModelEx*(model: Model; position: Vector3; rotationAxis: Vector3;
     rotationAngle: float32; scale: Vector3; tint: Color) {.RLAPI,
     importc: "DrawModelEx".} # Draw a model with extended parameters
-func DrawModelWires*(model: Model; position: Vector3; scale: float32;
+proc DrawModelWires*(model: Model; position: Vector3; scale: float32;
     tint: Color) {.RLAPI,
     importc: "DrawModelWires".} # Draw a model wires (with texture if set)
-func DrawModelWiresEx*(model: Model; position: Vector3; rotationAxis: Vector3;
+proc DrawModelWiresEx*(model: Model; position: Vector3; rotationAxis: Vector3;
     rotationAngle: float32; scale: Vector3; tint: Color) {.RLAPI,
     importc: "DrawModelWiresEx".} # Draw a model wires (with texture if set) with extended parameters
-func DrawBoundingBox*(box: BoundingBox; color: Color) {.RLAPI,
+proc DrawBoundingBox*(box: BoundingBox; color: Color) {.RLAPI,
     importc: "DrawBoundingBox".} # Draw bounding box (wires)
-func DrawBillboard*(camera: Camera; texture: Texture2D; center: Vector3;
+proc DrawBillboard*(camera: Camera; texture: Texture2D; center: Vector3;
     size: float32; tint: Color) {.RLAPI, importc: "DrawBillboard".} # Draw a billboard texture
-func DrawBillboardRec*(camera: Camera; texture: Texture2D; source: Rectangle;
+proc DrawBillboardRec*(camera: Camera; texture: Texture2D; source: Rectangle;
     center: Vector3; size: float32; tint: Color) {.RLAPI,
     importc: "DrawBillboardRec".} # Draw a billboard texture defined by source
 # Collision detection functions
-func CheckCollisionSpheres*(center1: Vector3; radius1: float32;
+proc CheckCollisionSpheres*(center1: Vector3; radius1: float32;
     center2: Vector3; radius2: float32): bool {.RLAPI,
     importc: "CheckCollisionSpheres".} # Detect collision between two spheres
-func CheckCollisionBoxes*(box1: BoundingBox; box2: BoundingBox): bool {.RLAPI,
+proc CheckCollisionBoxes*(box1: BoundingBox; box2: BoundingBox): bool {.RLAPI,
     importc: "CheckCollisionBoxes".} # Detect collision between two bounding boxes
-func CheckCollisionBoxSphere*(box: BoundingBox; center: Vector3;
+proc CheckCollisionBoxSphere*(box: BoundingBox; center: Vector3;
     radius: float32): bool {.RLAPI,
     importc: "CheckCollisionBoxSphere".} # Detect collision between box and sphere
-func CheckCollisionRaySphere*(ray: Ray; center: Vector3;
+proc CheckCollisionRaySphere*(ray: Ray; center: Vector3;
     radius: float32): bool {.RLAPI,
     importc: "CheckCollisionRaySphere".} # Detect collision between ray and sphere
-func CheckCollisionRaySphereEx*(ray: Ray; center: Vector3; radius: float32;
+proc CheckCollisionRaySphereEx*(ray: Ray; center: Vector3; radius: float32;
     collisionPoint: ptr Vector3): bool {.RLAPI,
     importc: "CheckCollisionRaySphereEx".} # Detect collision between ray and sphere, returns collision point
-func CheckCollisionRayBox*(ray: Ray; box: BoundingBox): bool {.RLAPI,
+proc CheckCollisionRayBox*(ray: Ray; box: BoundingBox): bool {.RLAPI,
     importc: "CheckCollisionRayBox".} # Detect collision between ray and box
-func GetCollisionRayMesh*(ray: Ray; mesh: Mesh;
+proc GetCollisionRayMesh*(ray: Ray; mesh: Mesh;
     transform: Matrix): RayHitInfo {.RLAPI,
     importc: "GetCollisionRayMesh".} # Get collision info between ray and mesh
-func GetCollisionRayModel*(ray: Ray; model: Model): RayHitInfo {.RLAPI,
+proc GetCollisionRayModel*(ray: Ray; model: Model): RayHitInfo {.RLAPI,
     importc: "GetCollisionRayModel".} # Get collision info between ray and model
-func GetCollisionRayTriangle*(ray: Ray; p1: Vector3; p2: Vector3;
+proc GetCollisionRayTriangle*(ray: Ray; p1: Vector3; p2: Vector3;
     p3: Vector3): RayHitInfo {.RLAPI,
     importc: "GetCollisionRayTriangle".} # Get collision info between ray and triangle
-func GetCollisionRayGround*(ray: Ray; groundHeight: float32): RayHitInfo {.
+proc GetCollisionRayGround*(ray: Ray; groundHeight: float32): RayHitInfo {.
     RLAPI,
     importc: "GetCollisionRayGround".} # Get collision info between ray and ground plane (Y-normal plane)
 # ------------------------------------------------------------------------------------
@@ -1604,177 +1604,177 @@ func GetCollisionRayGround*(ray: Ray; groundHeight: float32): RayHitInfo {.
 # NOTE: This functions are useless when using OpenGL 1.1
 # ------------------------------------------------------------------------------------
 # Shader loading/unloading functions
-func LoadShader*(vsFileName: cstring; fsFileName: cstring): Shader {.RLAPI,
+proc LoadShader*(vsFileName: cstring; fsFileName: cstring): Shader {.RLAPI,
     importc: "LoadShader".} # Load shader from files and bind default locations
-func LoadShaderCode*(vsCode: cstring; fsCode: cstring): Shader {.RLAPI,
+proc LoadShaderCode*(vsCode: cstring; fsCode: cstring): Shader {.RLAPI,
     importc: "LoadShaderCode".} # Load shader from code strings and bind default locations
-func UnloadShader*(shader: Shader) {.RLAPI,
+proc UnloadShader*(shader: Shader) {.RLAPI,
     importc: "UnloadShader".} # Unload shader from GPU memory (VRAM)
-func GetShaderDefault*(): Shader {.RLAPI, importc: "GetShaderDefault".} # Get default shader
-func GetTextureDefault*(): Texture2D {.RLAPI,
+proc GetShaderDefault*(): Shader {.RLAPI, importc: "GetShaderDefault".} # Get default shader
+proc GetTextureDefault*(): Texture2D {.RLAPI,
     importc: "GetTextureDefault".} # Get default texture
-func GetShapesTexture*(): Texture2D {.RLAPI,
+proc GetShapesTexture*(): Texture2D {.RLAPI,
     importc: "GetShapesTexture".} # Get texture to draw shapes
-func GetShapesTextureRec*(): Rectangle {.RLAPI,
+proc GetShapesTextureRec*(): Rectangle {.RLAPI,
     importc: "GetShapesTextureRec".} # Get texture rectangle to draw shapes
-func SetShapesTexture*(texture: Texture2D; source: Rectangle) {.RLAPI,
+proc SetShapesTexture*(texture: Texture2D; source: Rectangle) {.RLAPI,
     importc: "SetShapesTexture".} # Define default texture used to draw shapes
 # Shader configuration functions
-func GetShaderLocation*(shader: Shader; uniformName: cstring): int32 {.RLAPI,
+proc GetShaderLocation*(shader: Shader; uniformName: cstring): int32 {.RLAPI,
     importc: "GetShaderLocation".} # Get shader uniform location
-func GetShaderLocationAttrib*(shader: Shader; attribName: cstring): int32 {.
+proc GetShaderLocationAttrib*(shader: Shader; attribName: cstring): int32 {.
     RLAPI, importc: "GetShaderLocationAttrib".} # Get shader attribute location
-func SetShaderValue*(shader: Shader; uniformLoc: int32; value: pointer;
+proc SetShaderValue*(shader: Shader; uniformLoc: int32; value: pointer;
     uniformType: int32) {.RLAPI, importc: "SetShaderValue".} # Set shader uniform value
-func SetShaderValueV*(shader: Shader; uniformLoc: int32; value: pointer;
+proc SetShaderValueV*(shader: Shader; uniformLoc: int32; value: pointer;
     uniformType: int32; count: int32) {.RLAPI,
     importc: "SetShaderValueV".} # Set shader uniform value vector
-func SetShaderValueMatrix*(shader: Shader; uniformLoc: int32; mat: Matrix) {.
+proc SetShaderValueMatrix*(shader: Shader; uniformLoc: int32; mat: Matrix) {.
     RLAPI, importc: "SetShaderValueMatrix".} # Set shader uniform value (matrix 4x4)
-func SetShaderValueTexture*(shader: Shader; uniformLoc: int32;
+proc SetShaderValueTexture*(shader: Shader; uniformLoc: int32;
     texture: Texture2D) {.RLAPI,
     importc: "SetShaderValueTexture".} # Set shader uniform value for texture
-func SetMatrixProjection*(proj: Matrix) {.RLAPI,
+proc SetMatrixProjection*(proj: Matrix) {.RLAPI,
     importc: "SetMatrixProjection".} # Set a custom projection matrix (replaces internal projection matrix)
-func SetMatrixModelview*(view: Matrix) {.RLAPI,
+proc SetMatrixModelview*(view: Matrix) {.RLAPI,
     importc: "SetMatrixModelview".} # Set a custom modelview matrix (replaces internal modelview matrix)
-func GetMatrixModelview*(): Matrix {.RLAPI,
+proc GetMatrixModelview*(): Matrix {.RLAPI,
     importc: "GetMatrixModelview".} # Get internal modelview matrix
-func GetMatrixProjection*(): Matrix {.RLAPI,
+proc GetMatrixProjection*(): Matrix {.RLAPI,
     importc: "GetMatrixProjection".} # Get internal projection matrix
 # Texture maps generation (PBR)
 # NOTE: Required shaders should be provided
-func GenTextureCubemap*(shader: Shader; panorama: Texture2D; size: int32;
+proc GenTextureCubemap*(shader: Shader; panorama: Texture2D; size: int32;
     format: int32): TextureCubemap {.RLAPI,
     importc: "GenTextureCubemap".} # Generate cubemap texture from 2D panorama texture
-func GenTextureIrradiance*(shader: Shader; cubemap: TextureCubemap;
+proc GenTextureIrradiance*(shader: Shader; cubemap: TextureCubemap;
     size: int32): TextureCubemap {.RLAPI,
     importc: "GenTextureIrradiance".} # Generate irradiance texture using cubemap data
-func GenTexturePrefilter*(shader: Shader; cubemap: TextureCubemap;
+proc GenTexturePrefilter*(shader: Shader; cubemap: TextureCubemap;
     size: int32): TextureCubemap {.RLAPI,
     importc: "GenTexturePrefilter".} # Generate prefilter texture using cubemap data
-func GenTextureBRDF*(shader: Shader; size: int32): Texture2D {.RLAPI,
+proc GenTextureBRDF*(shader: Shader; size: int32): Texture2D {.RLAPI,
     importc: "GenTextureBRDF".} # Generate BRDF texture
 # Shading begin/end functions
-func BeginShaderMode*(shader: Shader) {.RLAPI,
+proc BeginShaderMode*(shader: Shader) {.RLAPI,
     importc: "BeginShaderMode".} # Begin custom shader drawing
-func EndShaderMode*() {.RLAPI, importc: "EndShaderMode".} # End custom shader drawing (use default shader)
-func BeginBlendMode*(mode: int32) {.RLAPI,
+proc EndShaderMode*() {.RLAPI, importc: "EndShaderMode".} # End custom shader drawing (use default shader)
+proc BeginBlendMode*(mode: int32) {.RLAPI,
     importc: "BeginBlendMode".} # Begin blending mode (alpha, additive, multiplied)
-func EndBlendMode*() {.RLAPI, importc: "EndBlendMode".} # End blending mode (reset to default: alpha blending)
+proc EndBlendMode*() {.RLAPI, importc: "EndBlendMode".} # End blending mode (reset to default: alpha blending)
 # VR control functions
-func InitVrSimulator*() {.RLAPI, importc: "InitVrSimulator".} # Init VR simulator for selected device parameters
-func CloseVrSimulator*() {.RLAPI, importc: "CloseVrSimulator".} # Close VR simulator for current device
-func UpdateVrTracking*(camera: ptr Camera) {.RLAPI,
+proc InitVrSimulator*() {.RLAPI, importc: "InitVrSimulator".} # Init VR simulator for selected device parameters
+proc CloseVrSimulator*() {.RLAPI, importc: "CloseVrSimulator".} # Close VR simulator for current device
+proc UpdateVrTracking*(camera: ptr Camera) {.RLAPI,
     importc: "UpdateVrTracking".} # Update VR tracking (position and orientation) and camera
-func SetVrConfiguration*(info: VrDeviceInfo; distortion: Shader) {.RLAPI,
+proc SetVrConfiguration*(info: VrDeviceInfo; distortion: Shader) {.RLAPI,
     importc: "SetVrConfiguration".} # Set stereo rendering configuration parameters
-func IsVrSimulatorReady*(): bool {.RLAPI,
+proc IsVrSimulatorReady*(): bool {.RLAPI,
     importc: "IsVrSimulatorReady".} # Detect if VR simulator is ready
-func ToggleVrMode*() {.RLAPI, importc: "ToggleVrMode".} # Enable/Disable VR experience
-func BeginVrDrawing*() {.RLAPI, importc: "BeginVrDrawing".} # Begin VR simulator stereo rendering
-func EndVrDrawing*() {.RLAPI, importc: "EndVrDrawing".} # End VR simulator stereo rendering
+proc ToggleVrMode*() {.RLAPI, importc: "ToggleVrMode".} # Enable/Disable VR experience
+proc BeginVrDrawing*() {.RLAPI, importc: "BeginVrDrawing".} # Begin VR simulator stereo rendering
+proc EndVrDrawing*() {.RLAPI, importc: "EndVrDrawing".} # End VR simulator stereo rendering
 # ------------------------------------------------------------------------------------
 # Audio Loading and Playing Functions (Module: audio)
 # ------------------------------------------------------------------------------------
 # Audio device management functions
-func InitAudioDevice*() {.RLAPI, importc: "InitAudioDevice".} # Initialize audio device and context
-func CloseAudioDevice*() {.RLAPI, importc: "CloseAudioDevice".} # Close the audio device and context
-func IsAudioDeviceReady*(): bool {.RLAPI,
+proc InitAudioDevice*() {.RLAPI, importc: "InitAudioDevice".} # Initialize audio device and context
+proc CloseAudioDevice*() {.RLAPI, importc: "CloseAudioDevice".} # Close the audio device and context
+proc IsAudioDeviceReady*(): bool {.RLAPI,
     importc: "IsAudioDeviceReady".} # Check if audio device has been initialized successfully
-func SetMasterVolume*(volume: float32) {.RLAPI,
+proc SetMasterVolume*(volume: float32) {.RLAPI,
     importc: "SetMasterVolume".} # Set master volume (listener)
 # Wave/Sound loading/unloading functions
-func LoadWave*(fileName: cstring): Wave {.RLAPI,
+proc LoadWave*(fileName: cstring): Wave {.RLAPI,
     importc: "LoadWave".} # Load wave data from file
-func LoadWaveFromMemory*(fileType: cstring; fileData: UncheckedArray[byte];
+proc LoadWaveFromMemory*(fileType: cstring; fileData: UncheckedArray[byte];
     dataSize: int32): Wave {.RLAPI,
     importc: "LoadWaveFromMemory".} # Load wave from memory buffer, fileType refers to extension: i.e. "wav"
-func LoadSound*(fileName: cstring): Sound {.RLAPI,
+proc LoadSound*(fileName: cstring): Sound {.RLAPI,
     importc: "LoadSound".} # Load sound from file
-func LoadSoundFromWave*(wave: Wave): Sound {.RLAPI,
+proc LoadSoundFromWave*(wave: Wave): Sound {.RLAPI,
     importc: "LoadSoundFromWave".} # Load sound from wave data
-func UpdateSound*(sound: Sound; data: pointer; samplesCount: int32) {.RLAPI,
+proc UpdateSound*(sound: Sound; data: pointer; samplesCount: int32) {.RLAPI,
     importc: "UpdateSound".} # Update sound buffer with new data
-func UnloadWave*(wave: Wave) {.RLAPI, importc: "UnloadWave".} # Unload wave data
-func UnloadSound*(sound: Sound) {.RLAPI, importc: "UnloadSound".} # Unload sound
-func ExportWave*(wave: Wave; fileName: cstring): bool {.RLAPI,
+proc UnloadWave*(wave: Wave) {.RLAPI, importc: "UnloadWave".} # Unload wave data
+proc UnloadSound*(sound: Sound) {.RLAPI, importc: "UnloadSound".} # Unload sound
+proc ExportWave*(wave: Wave; fileName: cstring): bool {.RLAPI,
     importc: "ExportWave".} # Export wave data to file, returns true on success
-func ExportWaveAsCode*(wave: Wave; fileName: cstring): bool {.RLAPI,
+proc ExportWaveAsCode*(wave: Wave; fileName: cstring): bool {.RLAPI,
     importc: "ExportWaveAsCode".} # Export wave sample data to code (.h), returns true on success
 # Wave/Sound management functions
-func PlaySound*(sound: Sound) {.RLAPI, importc: "PlaySound".} # Play a sound
-func StopSound*(sound: Sound) {.RLAPI, importc: "StopSound".} # Stop playing a sound
-func PauseSound*(sound: Sound) {.RLAPI, importc: "PauseSound".} # Pause a sound
-func ResumeSound*(sound: Sound) {.RLAPI, importc: "ResumeSound".} # Resume a paused sound
-func PlaySoundMulti*(sound: Sound) {.RLAPI,
+proc PlaySound*(sound: Sound) {.RLAPI, importc: "PlaySound".} # Play a sound
+proc StopSound*(sound: Sound) {.RLAPI, importc: "StopSound".} # Stop playing a sound
+proc PauseSound*(sound: Sound) {.RLAPI, importc: "PauseSound".} # Pause a sound
+proc ResumeSound*(sound: Sound) {.RLAPI, importc: "ResumeSound".} # Resume a paused sound
+proc PlaySoundMulti*(sound: Sound) {.RLAPI,
     importc: "PlaySoundMulti".} # Play a sound (using multichannel buffer pool)
-func StopSoundMulti*() {.RLAPI, importc: "StopSoundMulti".} # Stop any sound playing (using multichannel buffer pool)
-func GetSoundsPlaying*(): int32 {.RLAPI,
+proc StopSoundMulti*() {.RLAPI, importc: "StopSoundMulti".} # Stop any sound playing (using multichannel buffer pool)
+proc GetSoundsPlaying*(): int32 {.RLAPI,
     importc: "GetSoundsPlaying".} # Get number of sounds playing in the multichannel
-func IsSoundPlaying*(sound: Sound): bool {.RLAPI,
+proc IsSoundPlaying*(sound: Sound): bool {.RLAPI,
     importc: "IsSoundPlaying".} # Check if a sound is currently playing
-func SetSoundVolume*(sound: Sound; volume: float32) {.RLAPI,
+proc SetSoundVolume*(sound: Sound; volume: float32) {.RLAPI,
     importc: "SetSoundVolume".} # Set volume for a sound (1.0 is max level)
-func SetSoundPitch*(sound: Sound; pitch: float32) {.RLAPI,
+proc SetSoundPitch*(sound: Sound; pitch: float32) {.RLAPI,
     importc: "SetSoundPitch".} # Set pitch for a sound (1.0 is base level)
-func WaveFormat*(wave: ptr Wave; sampleRate: int32; sampleSize: int32;
+proc WaveFormat*(wave: ptr Wave; sampleRate: int32; sampleSize: int32;
     channels: int32) {.RLAPI, importc: "WaveFormat".} # Convert wave data to desired format
-func WaveCopy*(wave: Wave): Wave {.RLAPI, importc: "WaveCopy".} # Copy a wave to a new wave
-func WaveCrop*(wave: ptr Wave; initSample: int32; finalSample: int32) {.RLAPI,
+proc WaveCopy*(wave: Wave): Wave {.RLAPI, importc: "WaveCopy".} # Copy a wave to a new wave
+proc WaveCrop*(wave: ptr Wave; initSample: int32; finalSample: int32) {.RLAPI,
     importc: "WaveCrop".} # Crop a wave to defined samples range
-func LoadWaveSamples*(wave: Wave): float32 {.RLAPI,
+proc LoadWaveSamples*(wave: Wave): float32 {.RLAPI,
     importc: "LoadWaveSamples".} # Load samples data from wave as a floats array
-func UnloadWaveSamples*(samples: float32) {.RLAPI,
+proc UnloadWaveSamples*(samples: float32) {.RLAPI,
     importc: "UnloadWaveSamples".} # Unload samples data loaded with LoadWaveSamples()
 # Music management functions
-func LoadMusicStream*(fileName: cstring): Music {.RLAPI,
+proc LoadMusicStream*(fileName: cstring): Music {.RLAPI,
     importc: "LoadMusicStream".} # Load music stream from file
-func UnloadMusicStream*(music: Music) {.RLAPI,
+proc UnloadMusicStream*(music: Music) {.RLAPI,
     importc: "UnloadMusicStream".} # Unload music stream
-func PlayMusicStream*(music: Music) {.RLAPI,
+proc PlayMusicStream*(music: Music) {.RLAPI,
     importc: "PlayMusicStream".} # Start music playing
-func UpdateMusicStream*(music: Music) {.RLAPI,
+proc UpdateMusicStream*(music: Music) {.RLAPI,
     importc: "UpdateMusicStream".} # Updates buffers for music streaming
-func StopMusicStream*(music: Music) {.RLAPI, importc: "StopMusicStream".} # Stop music playing
-func PauseMusicStream*(music: Music) {.RLAPI,
+proc StopMusicStream*(music: Music) {.RLAPI, importc: "StopMusicStream".} # Stop music playing
+proc PauseMusicStream*(music: Music) {.RLAPI,
     importc: "PauseMusicStream".} # Pause music playing
-func ResumeMusicStream*(music: Music) {.RLAPI,
+proc ResumeMusicStream*(music: Music) {.RLAPI,
     importc: "ResumeMusicStream".} # Resume playing paused music
-func IsMusicPlaying*(music: Music): bool {.RLAPI,
+proc IsMusicPlaying*(music: Music): bool {.RLAPI,
     importc: "IsMusicPlaying".} # Check if music is playing
-func SetMusicVolume*(music: Music; volume: float32) {.RLAPI,
+proc SetMusicVolume*(music: Music; volume: float32) {.RLAPI,
     importc: "SetMusicVolume".} # Set volume for music (1.0 is max level)
-func SetMusicPitch*(music: Music; pitch: float32) {.RLAPI,
+proc SetMusicPitch*(music: Music; pitch: float32) {.RLAPI,
     importc: "SetMusicPitch".} # Set pitch for a music (1.0 is base level)
-func GetMusicTimeLength*(music: Music): float32 {.RLAPI,
+proc GetMusicTimeLength*(music: Music): float32 {.RLAPI,
     importc: "GetMusicTimeLength".} # Get music time length (in seconds)
-func GetMusicTimePlayed*(music: Music): float32 {.RLAPI,
+proc GetMusicTimePlayed*(music: Music): float32 {.RLAPI,
     importc: "GetMusicTimePlayed".} # Get current music time played (in seconds)
 # AudioStream management functions
-func InitAudioStream*(sampleRate: uint32; sampleSize: uint32;
+proc InitAudioStream*(sampleRate: uint32; sampleSize: uint32;
     channels: uint32): AudioStream {.RLAPI,
     importc: "InitAudioStream".} # Init audio stream (to stream raw audio pcm data)
-func UpdateAudioStream*(stream: AudioStream; data: pointer;
+proc UpdateAudioStream*(stream: AudioStream; data: pointer;
     samplesCount: int32) {.RLAPI,
     importc: "UpdateAudioStream".} # Update audio stream buffers with data
-func CloseAudioStream*(stream: AudioStream) {.RLAPI,
+proc CloseAudioStream*(stream: AudioStream) {.RLAPI,
     importc: "CloseAudioStream".} # Close audio stream and free memory
-func IsAudioStreamProcessed*(stream: AudioStream): bool {.RLAPI,
+proc IsAudioStreamProcessed*(stream: AudioStream): bool {.RLAPI,
     importc: "IsAudioStreamProcessed".} # Check if any audio stream buffers requires refill
-func PlayAudioStream*(stream: AudioStream) {.RLAPI,
+proc PlayAudioStream*(stream: AudioStream) {.RLAPI,
     importc: "PlayAudioStream".} # Play audio stream
-func PauseAudioStream*(stream: AudioStream) {.RLAPI,
+proc PauseAudioStream*(stream: AudioStream) {.RLAPI,
     importc: "PauseAudioStream".} # Pause audio stream
-func ResumeAudioStream*(stream: AudioStream) {.RLAPI,
+proc ResumeAudioStream*(stream: AudioStream) {.RLAPI,
     importc: "ResumeAudioStream".} # Resume audio stream
-func IsAudioStreamPlaying*(stream: AudioStream): bool {.RLAPI,
+proc IsAudioStreamPlaying*(stream: AudioStream): bool {.RLAPI,
     importc: "IsAudioStreamPlaying".} # Check if audio stream is playing
-func StopAudioStream*(stream: AudioStream) {.RLAPI,
+proc StopAudioStream*(stream: AudioStream) {.RLAPI,
     importc: "StopAudioStream".} # Stop audio stream
-func SetAudioStreamVolume*(stream: AudioStream; volume: float32) {.RLAPI,
+proc SetAudioStreamVolume*(stream: AudioStream; volume: float32) {.RLAPI,
     importc: "SetAudioStreamVolume".} # Set volume for audio stream (1.0 is max level)
-func SetAudioStreamPitch*(stream: AudioStream; pitch: float32) {.RLAPI,
+proc SetAudioStreamPitch*(stream: AudioStream; pitch: float32) {.RLAPI,
     importc: "SetAudioStreamPitch".} # Set pitch for audio stream (1.0 is base level)
-func SetAudioStreamBufferSizeDefault*(size: int32) {.RLAPI,
+proc SetAudioStreamBufferSizeDefault*(size: int32) {.RLAPI,
     importc: "SetAudioStreamBufferSizeDefault".} # Default size for new audio streams
