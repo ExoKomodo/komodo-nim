@@ -1,0 +1,31 @@
+{
+  "devDependencies": {
+    "npm-watch": "^0.9.0"
+  },
+  "scripts": {
+    "build": "npm run buildDesktop",
+    "start": "npm run startDesktop",
+    "watch": "npm run build; node_modules/.bin/npm-watch build",
+    "buildDesktop": "cd examples/desktop; nimble build",
+    "startDesktop": "cd examples/desktop; nimble run",
+    "watchDesktop": "npm run buildDesktop; node_modules/.bin/npm-watch build "
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "src",
+        "examples",
+        "komodo.nimble",
+        "nim.cfg"
+      ],
+      "extensions": [
+        "nim",
+        "nimble",
+        "cfg",
+        "nims"
+      ],
+      "delay": 500,
+      "runOnChangeOnly": true
+    }
+  }
+}

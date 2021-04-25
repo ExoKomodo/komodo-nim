@@ -14,11 +14,24 @@ binDir        = "bin"
 requires "nim >= 1.4.2"
 requires "komodo"
 
-task doBuild, "Build Desktop example":
+task build, "Build Desktop example":
   exec "nimble --verbose --threads:on -d:nimpretty build -Y"
 
-task doDebug, "Debug Desktop example":
+task releaseBuild, "Build Desktop example with release optimizations":
+  exec "nimble --verbose --threads:on -d:nimpretty -d:release build -Y"
+
+task dangerBuild, "Build Desktop example with danger optimizations":
+  exec "nimble --verbose --threads:on -d:nimpretty -d:danger build -Y"
+
+task debug, "Debug Desktop example":
   exec "nimble --verbose --threads:on -g --debugger:native -d:nimpretty build -Y"
 
-task doRun, "Example":
+task run, "Example":
   exec "nimble --verbose --threads:on -d:nimpretty run -Y"
+
+task releaseRun, "Run Desktop example with release optimizations":
+  exec "nimble --verbose --threads:on -d:nimpretty -d:release run -Y"
+
+task dangerRun, "Run Desktop example with danger optimizations":
+  exec "nimble --verbose --threads:on -d:nimpretty -d:danger run -Y"
+

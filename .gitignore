@@ -12,3 +12,5 @@ htmldocs/
 *.exe
 bin/
 .DS_Store
+
+node_modules/

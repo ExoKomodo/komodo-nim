@@ -4,7 +4,7 @@
         {
             "label": "Build Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; nimble doBuild",
+            "command": "cd examples/desktop; nimble build",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -17,7 +17,7 @@
         {
             "label": "Debug Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; nimble doDebug",
+            "command": "cd examples/desktop; nimble debug",
             "problemMatcher": [],
             "group": "build",
             "dependsOn": [
@@ -34,7 +34,7 @@
         {
             "label": "Run Komodo Desktop Example",
             "type": "shell",
-            "command": "cd examples/desktop; nimble doRun",
+            "command": "cd examples/desktop; nimble run",
             "problemMatcher": [],
             "dependsOn": [
                 "Clean Komodo Desktop Example"
