@@ -1,20 +1,16 @@
-from komodo/lib/math import nil
+from ./utils/math import nil
 
-import komodo/entity
+import ./entity
 
 
 type
-  GameStateObj = object of RootObj
-    screen_size: math.Vector2
-    title: string
-    entities: seq[Entity]
-  GameState* = ref GameStateObj
+  GameState* = object
+    screen_size*: math.Vector2
+    title*: string
+    entities*: seq[Entity]
 
-func entities*(self: GameState): auto = self.entities
 func height*(self: GameState): auto = self.screen_size.y.int
 func width*(self: GameState): auto = self.screen_size.x.int
-func screen_size*(self: GameState): auto = self.screen_size
-func title*(self: GameState): auto = self.title
 
 func newGameState*(
   title: string;

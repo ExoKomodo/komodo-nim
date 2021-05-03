@@ -1,4 +1,4 @@
-from ../lib/private/raylib import nil
+from ../utils/private/raylib import nil
 
 type Keys* {.pure.} = enum
   Space = 32

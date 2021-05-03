@@ -10,6 +10,7 @@ nimblecache/
 htmldocs/
 
 *.exe
+*.out
 bin/
 .DS_Store
 

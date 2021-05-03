@@ -1,4 +1,4 @@
-import math/[
+import ./math/[
     matrix,
     quaternion,
     vector2,

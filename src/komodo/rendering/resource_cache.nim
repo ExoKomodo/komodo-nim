@@ -3,7 +3,7 @@ import tables
 
 import ./drawable
 
-from ../lib/private/raylib import nil
+from ../utils/private/raylib import nil
 
 
 type

@@ -1,7 +1,7 @@
-from komodo/lib/color import nil
-from komodo/lib/logging import nil
-from komodo/lib/math import nil
-from komodo/lib/window import nil
+from komodo/utils/color import nil
+from komodo/utils/logging import nil
+from komodo/utils/math import nil
+from komodo/utils/window import nil
 
 import komodo/rendering
 

@@ -1,6 +1,6 @@
 import ./entity
-import ./lib/math/vector3
-import ./lib/logging
+import ./utils/math/vector3
+import ./utils/logging
 import ./rendering/[
   drawable,
   resource_cache,
