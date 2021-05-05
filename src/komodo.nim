@@ -15,7 +15,10 @@ export game_state
 export math
 export message
 
+import std/exitprocs
 import strformat
+
+from sugar import `=>`
 
 
 proc draw(
@@ -34,34 +37,44 @@ proc handle_messages(
     result = result.on_message(message)
   result = result.messages <- @[]
 
+proc cleanup(state: ref GameState; exit: proc(state: GameState); cache: ResourceCache) {.noconv.} =
+  cache.unload()
+  logging.log_info("Exiting Komodo...")
+  state[].exit()
+  logging.log_info("Exited Komodo!")
+
+proc box[T](x: T): ref T =
+  new(result); result[] = x
+
 proc run*(
   initial_state: GameState;
   pre_init: proc(state: GameState): GameState {.noSideEffect.};
   init: proc(state: GameState): GameState {.noSideEffect.};
   update: proc(state: GameState; delta: float): GameState {.noSideEffect.};
   on_message: proc(state: GameState; message: Message): GameState {.noSideEffect.};
-  exit: proc(state: GameState): GameState {.noSideEffect.};
-): auto =
-  logging.log_info("Initializing Komodo")
-  var state = initial_state.pre_init()
+  exit: proc(state: GameState);
+): GameState =
+  logging.log_info("Initializing Komodo...")
+  result = initial_state.pre_init()
+  var state_ref = box[GameState](result)
   window.initialize(
-    state.screen_size,
-    state.title,
+    result.screen_size,
+    result.title,
   )
-  state = state.init()
-  logging.log_info("Successfully initialized Komodo!")
+  result = result.init()
+  logging.log_info("Initialized Komodo!")
 
   var cache = newResourceCache()
+  let exit_proc = () => cleanup(state_ref, exit, cache)
+  addExitProc(exit_proc)
+  setControlCHook(() {.noconv.} => quit())
   while not window.is_closing():
     window.clear_screen(color.DarkGreen)
 
-    state = state.handle_messages(on_message)
-    state = state.update(window.get_delta())
+    result = result.handle_messages(on_message)
+    result = result.update(window.get_delta())
     
     window.begin_draw()
-    state.draw(cache)
+    result.draw(cache)
     window.end_draw()
-  
-  logging.log_info("Exiting Komodo")
-  result = state.exit()
-  logging.log_info("Exited Komodo!")
+  exit_proc()

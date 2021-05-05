@@ -7,7 +7,7 @@ import komodo/utils/[
 import ./brainlet
 import ./messages
 
-import sugar
+from sugar import collect
 
 func pre_init(initial_state: GameState): GameState =
   result = initial_state
@@ -29,6 +29,7 @@ func on_message(initial_state: GameState; message: Message): GameState =
     )
 
 func update(initial_state: GameState; delta: float): GameState =
+#   logging.log_info($delta)
   result = initial_state
   result.messages.add(
     newMoveMessage(
@@ -38,11 +39,12 @@ func update(initial_state: GameState; delta: float): GameState =
     )
   )
 
-func exit(initial_state: GameState): GameState =
-  result = initial_state
+proc exit(initial_state: GameState) =
+  logging.log_info("Exiting desktop example...")
+  logging.log_info("Exited desktop example!")
 
 proc main() =
-  log_info("Welcome to the desktop example!")
+  log_info("Welcome to the desktop example")
   let state = newGameState(
     title = "Komodo",
     width = 800,

@@ -1,9 +1,11 @@
 import options
+import strformat
 import tables
 
 import ./drawable
 
 from ../utils/private/raylib import nil
+from ../utils/logging import nil
 
 
 type
@@ -60,3 +62,32 @@ proc load*(self: ResourceCache; drawable: Drawable): Option[Resource] =
         none[Resource]()
       else:
         some(font)
+
+proc unload(self: ResourceCache; font: raylib.Font) =
+  raylib.UnloadFont(font)
+
+proc unload(self: ResourceCache; texture: raylib.Texture) =
+  raylib.UnloadTexture(texture)
+
+proc unload*(self: ResourceCache; drawable: Drawable) =
+  case drawable.kind:
+    of DrawableKind.image:
+      let texture = self.load_texture(drawable)
+      if texture.is_some:
+        self.unload(texture.unsafe_get)
+    of DrawableKind.text:
+      let font = self.load_font(drawable)
+      if font.is_some:
+        self.unload(font.unsafe_get)
+
+proc unload*(self: ResourceCache) =
+  for path, font_asset in self.font_cache.pairs:
+    logging.log_info(fmt"Unloading font: {path}")
+    self.unload(font_asset)
+    logging.log_info(fmt"Unloaded font: {path}")
+  
+  for path, texture_asset in self.texture_cache.pairs:
+    logging.log_info(fmt"Unloading texture: {path}")
+    self.unload(texture_asset)
+    logging.log_info(fmt"Unloaded texture: {path}")
+
