@@ -1,56 +1,41 @@
 import komodo
 import komodo/macro_helpers
-import komodo/rendering
 import komodo/utils/[
   logging,
   math,
 ]
+import ./brainlet
+import ./messages
 
-import strformat
 import sugar
-
-
-func move(entity: Entity; translation: Vector3): Entity =
-  result = entity.position <| Vector3(
-    x: entity.position.x + translation.x,
-    y: entity.position.y + translation.y,
-    z: entity.position.z + translation.z,
-  )
 
 func pre_init(initial_state: GameState): GameState =
   result = initial_state
 
 func init(initial_state: GameState): GameState =
-  result = initial_state.entities <| @[
-    newEntity(
-      drawables = @[
-        Drawable(
-          kind: DrawableKind.image,
-          image_path: "img/brainlet.png",
-        ),
-        Drawable(
-          kind: DrawableKind.text,
-          font_path: "font path",
-          text: "Hello world!",
-        ),
-      ],
-      position = Vector3(
-        x: 100,
-        y: 10,
-        z: 0,
-      ),
-    )
+  result = initial_state.entities <- @[
+    newBrainlet(),
   ]
+
+func on_message(initial_state: GameState; message: Message): GameState =
+  result = initial_state
+  
+  if message.kind == "move":
+    let move_message_data = MoveMessageData(message.data)
+    result = result.entities <- (
+      block: collect(newSeq):
+        for entity in result.entities:
+          entity.handle(move_message_data)
+    )
 
 func update(initial_state: GameState; delta: float): GameState =
   result = initial_state
-  
-  log_debug(fmt"Delta: {delta}")
-  
-  result = initial_state.entities <| (
-    block: collect(newSeq):
-      for entity in initial_state.entities:
-        entity.move(Vector3(x: 1, y: 0, z: 0))
+  result.messages.add(
+    newMoveMessage(
+      MoveMessageData(
+        translation: Vector3(x: 100, y: 100, z: 0) * delta,
+      )
+    )
   )
 
 func exit(initial_state: GameState): GameState =
@@ -69,6 +54,7 @@ proc main() =
     pre_init,
     init,
     update,
+    on_message,
     exit,
   )
 

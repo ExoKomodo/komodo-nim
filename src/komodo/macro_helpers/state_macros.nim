@@ -33,9 +33,9 @@ func updated*(value: NimNode; initial_state: NimNode): NimNode =
       `field` = `value`
       `new_state`
 
-macro `|>`*(value: untyped; initial_state: untyped): untyped =
+macro `->`*(value: untyped; initial_state: untyped): untyped =
   value.updated(initial_state)
 
-macro `<|`*(initial_state: untyped; value: untyped): untyped =
+macro `<-`*(initial_state: untyped; value: untyped): untyped =
   value.updated(initial_state)
 
