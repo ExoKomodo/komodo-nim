@@ -1,10 +1,13 @@
+import ./data_bag
+
+export data_bag
+
+
 type
   MessageKind* = distinct string
-  MessageDataObj = object of RootObj
-  MessageData* = ref MessageDataObj
   Message* = object
     kind: MessageKind
-    data: MessageData
+    data: DataBag
 
 func `==`*(a, b: MessageKind): bool {.borrow.}
 func `==`*(a: string, b: MessageKind): bool = a.MessageKind == b
@@ -17,7 +20,7 @@ func kind*(self: Message): auto = self.kind
 
 func newMessage*(
   kind: MessageKind;
-  data: MessageData;
+  data: DataBag;
 ): Message = Message(
   data: data,
   kind: kind,

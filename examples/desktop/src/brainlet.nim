@@ -1,9 +1,21 @@
 import komodo
 import komodo/rendering
 
+type
+  BrainletData* = ref object of DataBag
+    velocity: float32
 
-func newBrainlet*(): Entity =
+func velocity*(self: BrainletData): auto = self.velocity
+
+func newBrainletData*(velocity: float): BrainletData =
+  BrainletData(
+    kind: "brainlet",
+    velocity: velocity,
+  )
+
+func newBrainlet*(data: BrainletData): Entity =
   newEntity(
+    data = data,
     drawables = @[
       Drawable(
         kind: DrawableKind.image,
@@ -21,4 +33,5 @@ func newBrainlet*(): Entity =
       z: 0,
     ),
   )
+
 

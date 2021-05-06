@@ -9,23 +9,28 @@ import ./messages
 
 from sugar import collect
 
+
 func pre_init(initial_state: GameState): GameState =
   result = initial_state
 
 func init(initial_state: GameState): GameState =
   result = initial_state.entities <- @[
-    newBrainlet(),
+    newBrainlet(
+      newBrainletData(1)
+    ),
   ]
 
 func on_message(initial_state: GameState; message: Message): GameState =
   result = initial_state
   
   if message.kind == "move":
-    let move_message_data = MoveMessageData(message.data)
+    let move_message_data = message.data.MoveMessageData
     result = result.entities <- (
       block: collect(newSeq):
         for entity in result.entities:
-          entity.handle(move_message_data)
+          let data = entity.data
+          if data.kind == "brainlet":
+            entity.handle(move_message_data, entity.data.BrainletData.velocity)
     )
 
 func update(initial_state: GameState; delta: float): GameState =
@@ -33,8 +38,8 @@ func update(initial_state: GameState; delta: float): GameState =
   result = initial_state
   result.messages.add(
     newMoveMessage(
-      MoveMessageData(
-        translation: Vector3(x: 100, y: 100, z: 0) * delta,
+      newMoveMessageData(
+        translation=Vector3(x: 100, y: 100, z: 0) * delta,
       )
     )
   )

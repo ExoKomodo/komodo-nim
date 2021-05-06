@@ -6,6 +6,7 @@ from komodo/utils/window import nil
 import komodo/rendering
 import komodo/macro_helpers
 import komodo/[
+  data_bag,
   entity,
   game_state,
   message,
