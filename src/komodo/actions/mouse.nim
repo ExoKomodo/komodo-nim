@@ -1,5 +1,6 @@
 from ../utils/private/raylib import nil
 
+
 type MouseButtons* {.pure.} = enum
   Left = 0
   Right = 1
@@ -19,3 +20,4 @@ func isPressed*(self: MouseButtons): bool =
 
 func isReleased*(self: MouseButtons): bool =
   result = raylib.IsMouseButtonReleased(self)
+

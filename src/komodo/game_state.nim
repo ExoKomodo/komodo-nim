@@ -1,5 +1,6 @@
 from ./utils/math import nil
 
+import ./actions
 import ./entity
 import ./message
 
@@ -8,6 +9,7 @@ type
   GameState* = object
     screen_size*: math.Vector2
     title*: string
+    actions*: ActionMap
     entities*: seq[Entity]
     messages*: seq[Message]
 
@@ -18,6 +20,7 @@ func newGameState*(
   title: string;
   width: Natural;
   height: Natural;
+  actions: ActionMap;
   entities: seq[Entity] = @[];
   messages: seq[Message] = @[];
 ): auto =
@@ -30,3 +33,4 @@ func newGameState*(
     entities: entities,
     messages: messages,
   )
+

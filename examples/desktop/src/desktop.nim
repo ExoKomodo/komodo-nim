@@ -4,14 +4,52 @@ import komodo/utils/[
   logging,
   math,
 ]
+import komodo/utils/math/vector_operations
 import ./brainlet
 import ./messages
 
 from sugar import collect
 
 
+const
+  UP = "up".ActionId
+  DOWN = "down".ActionId
+  LEFT = "left".ActionId
+  RIGHT = "right".ActionId
+
+func get_move_direction(actions: ActionMap): Vector3 =
+  result = Vector3()
+  if actions.isDown(UP):
+    result += math.vector3.UP
+  if actions.isDown(DOWN):
+    result += math.vector3.DOWN
+  
+  if actions.isDown(LEFT):
+    result += math.vector3.LEFT
+  if actions.isDown(RIGHT):
+    result += math.vector3.RIGHT
+
 func pre_init(initial_state: GameState): GameState =
-  result = initial_state
+  result = initial_state.actions <- newActionMap(
+    @[
+      newAction(
+        UP,
+        @[Keys.Up, Keys.W]
+      ),
+      newAction(
+        DOWN,
+        @[Keys.Down, Keys.S],
+      ),
+      newAction(
+        LEFT,
+        @[Keys.Left, Keys.A],
+      ),
+      newAction(
+        RIGHT,
+        @[Keys.Right, Keys.D],
+      ),
+    ]
+  )
 
 func init(initial_state: GameState): GameState =
   result = initial_state.entities <- @[
@@ -25,12 +63,13 @@ func on_message(initial_state: GameState; message: Message): GameState =
   
   if message.kind == "move":
     let move_message_data = message.data.MoveMessageData
+    let direction = result.actions.get_move_direction()
     result = result.entities <- (
       block: collect(newSeq):
         for entity in result.entities:
           let data = entity.data
           if data.kind == "brainlet":
-            entity.handle(move_message_data, entity.data.BrainletData.velocity)
+            entity.handle(move_message_data, direction, entity.data.BrainletData.velocity)
     )
 
 func update(initial_state: GameState; delta: float): GameState =
@@ -54,6 +93,7 @@ proc main() =
     title = "Komodo",
     width = 800,
     height = 600,
+    actions = newActionMap(),
     entities = @[],
   )
   

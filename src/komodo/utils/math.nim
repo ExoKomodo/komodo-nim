@@ -1,11 +1,13 @@
 import ./math/[
-    matrix,
-    quaternion,
-    vector2,
-    vector3,
-    vector4,
+  core,
+  matrix,
+  quaternion,
+  vector2,
+  vector3,
+  vector4,
 ]
 
+export core
 export matrix
 export quaternion
 export vector2
@@ -15,3 +17,4 @@ export vector4
 type
   Vector2D* = Vector2 | Vector3 | Vector4
   Vector3D* = Vector3 | Vector4
+

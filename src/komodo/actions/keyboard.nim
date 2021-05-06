@@ -1,5 +1,6 @@
 from ../utils/private/raylib import nil
 
+
 type Keys* {.pure.} = enum
   Space = 32
   Apostrophe = 39
@@ -121,3 +122,4 @@ func isPressed*(self: Keys): bool =
 
 func isReleased*(self: Keys): bool =
   result = raylib.IsKeyReleased(self)
+

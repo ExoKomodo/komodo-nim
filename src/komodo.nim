@@ -1,8 +1,14 @@
+import std/exitprocs
+import strformat
+
+from sugar import `=>`
+
 from komodo/utils/color import nil
 from komodo/utils/logging import nil
 from komodo/utils/math import nil
 from komodo/utils/window import nil
 
+import komodo/actions
 import komodo/rendering
 import komodo/macro_helpers
 import komodo/[
@@ -11,15 +17,12 @@ import komodo/[
   game_state,
   message,
 ]
+
+export actions
 export entity
 export game_state
 export math
 export message
-
-import std/exitprocs
-import strformat
-
-from sugar import `=>`
 
 
 proc draw(

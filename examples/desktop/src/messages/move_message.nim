@@ -1,4 +1,7 @@
 import komodo
+from komodo/utils/logging import nil
+
+import strformat
 
 
 type
@@ -16,13 +19,26 @@ func newMoveMessageData*(translation: Vector3): MoveMessageData =
 func newMoveMessage*(data: MoveMessageData): Message =
   newMessage("move", data)
 
-func translate(entity: Entity; translation: Vector3; velocity: float): Entity =
+func translate(
+  entity: Entity;
+  translation: Vector3;
+  velocity: float;
+): Entity =
   result = newEntity(
     data = entity.data,
     drawables = entity.drawables,
     position = entity.position + translation * velocity,
   )
 
-func handle*(entity: Entity; message_data: MoveMessageData, velocity: float): Entity =
-  result = entity.translate(message_data.translation, velocity)
-  
+func handle*(
+  entity: Entity;
+  message_data: MoveMessageData;
+  direction: Vector3;
+  velocity: float;
+): Entity =
+  logging.log_info(fmt"Length: {message_data.translation.length()}")
+  result = entity.translate(
+    message_data.translation * direction,
+    velocity,
+  )
+
