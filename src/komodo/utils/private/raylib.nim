@@ -72,22 +72,15 @@
 #     as being the original software.
 # 
 #     3. This notice may not be removed or altered from any source distribution.
-<<<<<<< HEAD
-#
-converter int2in32*(self: int): int32 = self.int32
-const LEXT* = when defined(windows): ".dll"
-elif defined(macosx): ".dylib"
-else: ".so"
-{.pragma: RLAPI, cdecl, discardable, dynlib: "libraylib" & LEXT.}
-=======
-# 
 converter int2in32* (self: int): int32 = self.int32
-const LEXT* = when defined(windows):".dll"
-elif defined(macosx):               ".dylib"
-else:                               ".so"
+const LNAME* = "libraylib"
+const LEXT* = (
+  when defined(windows): ".dll"
+  elif defined(macosx): ".dylib"
+  else: ".so"
+)
 template RAYLIB_VERSION*(): auto = "3.7.0"
->>>>>>> f5ca25b (Update to raylib 3.7.0)
-{.pragma: RLAPI, cdecl, discardable, dynlib: "libraylib" & LEXT.}
+{.pragma: RLAPI, cdecl, discardable, dynlib: LNAME & LEXT.}
 # ----------------------------------------------------------------------------------
 # Some basic Defines
 # ----------------------------------------------------------------------------------
