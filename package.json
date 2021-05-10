@@ -8,7 +8,8 @@
     "watch": "npm run build; node_modules/.bin/npm-watch build",
     "buildDesktop": "cd examples/desktop; nimble build",
     "startDesktop": "cd examples/desktop; nimble run",
-    "watchDesktop": "npm run buildDesktop; node_modules/.bin/npm-watch build "
+    "watchDesktop": "npm run buildDesktop; node_modules/.bin/npm-watch build",
+    "releaseDesktop": "cd examples/desktop; nimble releaseBuild"
   },
   "watch": {
     "build": {

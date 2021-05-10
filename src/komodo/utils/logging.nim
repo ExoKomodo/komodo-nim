@@ -1,4 +1,4 @@
-from ./private/raylib import nil, TraceLogType2int32
+from ./private/raylib import nil, TraceLogLevel2int32
 
 func log_debug*(message: string) =
   raylib.TraceLog(raylib.LOG_DEBUG, message)
