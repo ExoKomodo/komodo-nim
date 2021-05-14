@@ -73,7 +73,6 @@ func on_message(initial_state: GameState; message: Message): GameState =
     )
 
 func update(initial_state: GameState; delta: float): GameState =
-#   logging.log_info($delta)
   result = initial_state
   result.messages.add(
     newMoveMessage(

@@ -36,7 +36,6 @@ func handle*(
   direction: Vector3;
   velocity: float;
 ): Entity =
-  logging.log_info(fmt"Length: {message_data.translation.length()}")
   result = entity.translate(
     message_data.translation * direction,
     velocity,
