@@ -1,14 +1,15 @@
 import komodo
-from komodo/utils/logging import nil
-
-import strformat
 
 
 type
   MoveMessageData* = ref object of DataBag
     translation: Vector3
+    direction: Vector3
+    velocity: float
 
+func direction*(self: MoveMessageData): auto = self.direction
 func translation*(self: MoveMessageData): auto = self.translation
+func velocity*(self: MoveMessageData): auto = self.velocity
 
 func newMoveMessageData*(translation: Vector3): MoveMessageData =
   MoveMessageData(
@@ -22,22 +23,20 @@ func newMoveMessage*(data: MoveMessageData): Message =
 func translate(
   entity: Entity;
   translation: Vector3;
-  velocity: float;
 ): Entity =
-  result = newEntity(
+  newEntity(
     data = entity.data,
     drawables = entity.drawables,
-    position = entity.position + translation * velocity,
+    position = entity.position + translation,
   )
 
 func handle*(
   entity: Entity;
   message_data: MoveMessageData;
-  direction: Vector3;
-  velocity: float;
 ): Entity =
   result = entity.translate(
-    message_data.translation * direction,
-    velocity,
+    message_data.translation *
+    message_data.direction +
+    message_data.velocity
   )
 
