@@ -2,24 +2,30 @@ import komodo
 import komodo/rendering
 import komodo/utils/math
 
+import ./actions as brainlet_actions
+import ./messages as brainlet_messages
 
-const BRAINLET_KIND* = "brainlet".DataKind
+
+const brainlet_kind* = "brainlet".DataKind
 
 type
   BrainletData* = ref object of DataBag
     velocity: float32
 
-func has_brainlet_data*(entity: Entity): bool = entity.data.kind == BRAINLET_KIND
+func has_brainlet_data*(entity: Entity): bool = entity.data.kind == brainlet_kind
 
 func velocity*(self: BrainletData): auto = self.velocity
 
 func newBrainletData*(velocity: float): BrainletData =
   BrainletData(
-    kind: BRAINLET_KIND,
+    kind: brainlet_kind,
     velocity: velocity,
   )
 
-func newBrainlet*(data: BrainletData): Entity =
+func newBrainlet*(
+  data: BrainletData;
+  position: Vector3=Vector3();
+): Entity =
   newEntity(
     data = data,
     drawables = @[
@@ -33,38 +39,47 @@ func newBrainlet*(data: BrainletData): Entity =
         text: "Hello world!",
       ),
     ],
-    position = Vector3(
-      x: 100,
-      y: 10,
-      z: 0,
-    ),
+    position = position,
   )
 
-const
-  UP = "up".ActionId
-  DOWN = "down".ActionId
-  LEFT = "left".ActionId
-  RIGHT = "right".ActionId
+func generate_messages(entity: Entity; state: GameState): seq[Message] =
+  result = @[]
+  if state.action_map.isDown(brainlet_actions.left_click):
+    result.add(brainlet_messages.newLeftClickMessage())
 
-func get_move_direction(actions: ActionMap): Vector3 =
+func get_move_direction(action_map: ActionMap): Vector3 =
   result = Vector3()
-  if actions.isDown(UP):
+  if action_map.isDown(brainlet_actions.move_up):
     result += math.vector3.UP
-  if actions.isDown(DOWN):
+  if action_map.isDown(brainlet_actions.move_down):
     result += math.vector3.DOWN
   
-  if actions.isDown(LEFT):
+  if action_map.isDown(brainlet_actions.move_left):
     result += math.vector3.LEFT
-  if actions.isDown(RIGHT):
+  if action_map.isDown(brainlet_actions.move_right):
     result += math.vector3.RIGHT
 
-func update*(entity: Entity; state: GameState): Entity =
-  result = entity
+func on_message*(entity: Entity; state: GameState; message: Message): (Entity, seq[Message]) =
+  var (entity, messages) = (entity, newSeq[Message]())
+  case message.kind:
+  of brainlet_messages.left_click:
+    entity = newBrainlet(
+      data = entity.data.BrainletData,
+      position = Vector3(),
+    )
+  (entity, messages)
+
+func update*(entity: Entity; state: GameState): (Entity, seq[Message]) =
+  result = (entity, @[])
   if entity.has_brainlet_data():
     let data = entity.data.BrainletData
-    result = newEntity(
-      data = entity.data,
-      drawables = entity.drawables,
-      position = entity.position + state.actions.get_move_direction() * data.velocity,
+    let messages = entity.generate_messages(state)
+    result = (
+      newEntity(
+        data = entity.data,
+        drawables = entity.drawables,
+        position = entity.position + state.action_map.get_move_direction() * data.velocity,
+      ),
+      messages,
     )
-
+ 

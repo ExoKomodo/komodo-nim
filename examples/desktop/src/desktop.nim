@@ -6,25 +6,31 @@ import komodo/utils/[
 ]
 import ./data/brainlet
 
+from sugar import collect
+
 
 func pre_init(initial_state: GameState): GameState =
-  result = initial_state.actions <- newActionMap(
+  result = initial_state.action_map <- newActionMap(
     @[
       newAction(
         brainlet.actions.move_up,
-        @[Keys.Up, Keys.W]
+        keyInputs = @[Keys.Up, Keys.W]
       ),
       newAction(
         brainlet.actions.move_down,
-        @[Keys.Down, Keys.S],
+        keyInputs = @[Keys.Down, Keys.S],
       ),
       newAction(
         brainlet.actions.move_left,
-        @[Keys.Left, Keys.A],
+        keyInputs = @[Keys.Left, Keys.A],
       ),
       newAction(
         brainlet.actions.move_right,
-        @[Keys.Right, Keys.D],
+        keyInputs = @[Keys.Right, Keys.D],
+      ),
+      newAction(
+        brainlet.actions.left_click,
+        mouseInputs = @[MouseButtons.Left],
       ),
     ]
   )
@@ -38,18 +44,32 @@ func init(initial_state: GameState): GameState =
 
 func on_message(initial_state: GameState; message: Message): GameState =
   result = initial_state
+  case message.kind:
+  of brainlet.messages.left_click:
+    result.entities = block: collect(newSeq):
+      for entity in result.entities:
+        if entity.has_brainlet_data():
+          let (entity, messages) = brainlet.on_message(entity, result, message)
+          for message in messages:
+            result.messages.add(message)
+          entity
 
-func update(entity: Entity; state: GameState; delta: float): Entity =
-  result = entity
-  if result.has_brainlet_data():
-    result = brainlet.update(result, state)
+func update(entity: Entity; state: GameState; delta: float): (Entity, GameState) =
+  var (entity, state) = (entity, state)
+  if entity.has_brainlet_data():
+    var messages: seq[Message]
+    (entity, messages) = brainlet.update(entity, state)
+    for message in messages:
+      state.messages.add(message)
+  (entity, state)
 
 func update(initial_state: GameState; delta: float): GameState =
   result = initial_state
-  var entities = newSeq[Entity]()
-  for entity in result.entities:
-    entities.add(entity.update(result, delta))
-  result.entities = entities
+  result.entities = block: collect(newSeq):
+    for entity in result.entities:
+      var entity = entity
+      (entity, result) = entity.update(result, delta)
+      entity
 
 proc exit(initial_state: GameState) =
   logging.log_info("Exiting desktop example...")
@@ -61,7 +81,7 @@ proc main() =
     title = "Komodo",
     width = 800,
     height = 600,
-    actions = newActionMap(),
+    action_map = newActionMap(),
     entities = @[],
   )
   

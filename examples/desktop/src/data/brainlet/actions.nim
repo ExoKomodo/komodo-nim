@@ -5,4 +5,5 @@ const
   move_down* = "move_down".ActionId
   move_left* = "move_left".ActionId
   move_right* = "move_right".ActionId
+  left_click* = "left_click".ActionId
 

@@ -9,7 +9,7 @@ type
   GameState* = object
     screen_size*: math.Vector2
     title*: string
-    actions*: ActionMap
+    action_map*: ActionMap
     entities*: seq[Entity]
     messages*: seq[Message]
 
@@ -20,11 +20,12 @@ func newGameState*(
   title: string;
   width: Natural;
   height: Natural;
-  actions: ActionMap;
+  action_map: ActionMap;
   entities: seq[Entity] = @[];
   messages: seq[Message] = @[];
 ): auto =
   GameState(
+    action_map: action_map,
     screen_size: math.Vector2(
       x: width.float,
       y: height.float,

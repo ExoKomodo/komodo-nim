@@ -20,7 +20,7 @@ func kind*(self: Message): auto = self.kind
 
 func newMessage*(
   kind: MessageKind;
-  data: DataBag;
+  data: DataBag = DataBag();
 ): Message = Message(
   data: data,
   kind: kind,
