@@ -4,32 +4,26 @@ import komodo/utils/[
   logging,
   math,
 ]
-import ./brainlet
+import ./data/brainlet
 
-
-const
-  UP = "up".ActionId
-  DOWN = "down".ActionId
-  LEFT = "left".ActionId
-  RIGHT = "right".ActionId
 
 func pre_init(initial_state: GameState): GameState =
   result = initial_state.actions <- newActionMap(
     @[
       newAction(
-        UP,
+        brainlet.actions.move_up,
         @[Keys.Up, Keys.W]
       ),
       newAction(
-        DOWN,
+        brainlet.actions.move_down,
         @[Keys.Down, Keys.S],
       ),
       newAction(
-        LEFT,
+        brainlet.actions.move_left,
         @[Keys.Left, Keys.A],
       ),
       newAction(
-        RIGHT,
+        brainlet.actions.move_right,
         @[Keys.Right, Keys.D],
       ),
     ]
@@ -47,7 +41,7 @@ func on_message(initial_state: GameState; message: Message): GameState =
 
 func update(entity: Entity; state: GameState; delta: float): Entity =
   result = entity
-  if entity.has_brainlet_data():
+  if result.has_brainlet_data():
     result = brainlet.update(result, state)
 
 func update(initial_state: GameState; delta: float): GameState =
