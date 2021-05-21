@@ -1,5 +1,6 @@
 import komodo
 import komodo/rendering
+import komodo/utils/logging
 import komodo/utils/math
 
 import ./actions as brainlet_actions
@@ -45,7 +46,7 @@ func newBrainlet*(
 func generate_messages(entity: Entity; state: GameState): seq[Message] =
   result = @[]
   if state.action_map.isDown(brainlet_actions.left_click):
-    result.add(brainlet_messages.newLeftClickMessage())
+    result.add(brainlet_messages.newLeftClickMessage(state.delta))
 
 func get_move_direction(action_map: ActionMap): Vector3 =
   result = Vector3()
@@ -63,10 +64,7 @@ func on_message*(entity: Entity; state: GameState; message: Message): (Entity, s
   var (entity, messages) = (entity, newSeq[Message]())
   case message.kind:
   of brainlet_messages.left_click:
-    entity = newBrainlet(
-      data = entity.data.BrainletData,
-      position = Vector3(),
-    )
+    logging.log_info($(1.0 / message.data.TimeData.delta))
   (entity, messages)
 
 func update*(entity: Entity; state: GameState): (Entity, seq[Message]) =

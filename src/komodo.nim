@@ -54,7 +54,7 @@ proc run*(
   initial_state: GameState;
   pre_init: proc(state: GameState): GameState {.noSideEffect.};
   init: proc(state: GameState): GameState {.noSideEffect.};
-  update: proc(state: GameState; delta: float): GameState {.noSideEffect.};
+  update: proc(state: GameState): GameState {.noSideEffect.};
   on_message: proc(state: GameState; message: Message): GameState {.noSideEffect.};
   exit: proc(state: GameState);
 ): GameState =
@@ -76,7 +76,8 @@ proc run*(
     window.clear_screen(color.DarkGreen)
 
     result = result.handle_messages(on_message)
-    result = result.update(window.get_delta())
+    result.delta = window.get_delta()
+    result = result.update()
     
     window.begin_draw()
     result.draw(cache)

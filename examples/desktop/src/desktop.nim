@@ -54,7 +54,7 @@ func on_message(initial_state: GameState; message: Message): GameState =
             result.messages.add(message)
           entity
 
-func update(entity: Entity; state: GameState; delta: float): (Entity, GameState) =
+func update(entity: Entity; state: GameState): (Entity, GameState) =
   var (entity, state) = (entity, state)
   if entity.has_brainlet_data():
     var messages: seq[Message]
@@ -63,12 +63,12 @@ func update(entity: Entity; state: GameState; delta: float): (Entity, GameState)
       state.messages.add(message)
   (entity, state)
 
-func update(initial_state: GameState; delta: float): GameState =
+func update(initial_state: GameState): GameState =
   result = initial_state
   result.entities = block: collect(newSeq):
     for entity in result.entities:
       var entity = entity
-      (entity, result) = entity.update(result, delta)
+      (entity, result) = entity.update(result)
       entity
 
 proc exit(initial_state: GameState) =
@@ -83,6 +83,7 @@ proc main() =
     height = 600,
     action_map = newActionMap(),
     entities = @[],
+    delta = 0,
   )
   
   discard state.run(
