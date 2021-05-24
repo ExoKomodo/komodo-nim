@@ -4,8 +4,8 @@ import tables
 
 import ./drawable
 
-from ../utils/private/raylib import nil
-from ../utils/logging import nil
+from ../private/raylib import nil
+from ../logging import nil
 
 
 type

@@ -1,6 +1,6 @@
 import ./entity
-import ./utils/math/vector3
-import ./utils/logging
+import ./math/vector3
+import ./logging
 import ./rendering/[
   drawable,
   resource_cache,

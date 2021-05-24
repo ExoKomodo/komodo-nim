@@ -1,4 +1,4 @@
-from ../utils/private/raylib import nil
+from ../private/raylib import nil
 
 
 type MouseButtons* {.pure.} = enum

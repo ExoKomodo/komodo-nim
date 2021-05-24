@@ -3,10 +3,10 @@ import strformat
 
 from sugar import `=>`
 
-from komodo/utils/color import nil
-from komodo/utils/logging import nil
-from komodo/utils/math import nil
-from komodo/utils/window import nil
+from komodo/color import nil
+from komodo/logging import nil
+from komodo/math import nil
+from komodo/window import nil
 
 import komodo/actions
 import komodo/rendering

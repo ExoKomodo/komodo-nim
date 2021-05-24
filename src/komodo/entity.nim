@@ -2,7 +2,7 @@ import tables
 
 import ./data_bag
 import ./rendering/drawable
-import ./utils/math/vector3
+import ./math/vector3
 
 
 type

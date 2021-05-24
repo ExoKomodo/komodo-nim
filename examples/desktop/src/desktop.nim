@@ -1,6 +1,6 @@
 import komodo
 import komodo/macro_helpers
-import komodo/utils/[
+import komodo/[
   logging,
   math,
 ]

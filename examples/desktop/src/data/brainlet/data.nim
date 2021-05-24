@@ -1,7 +1,7 @@
 import komodo
+import komodo/logging
+import komodo/math
 import komodo/rendering
-import komodo/utils/logging
-import komodo/utils/math
 
 import ./actions as brainlet_actions
 import ./messages as brainlet_messages

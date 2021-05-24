@@ -1,4 +1,4 @@
-from ./utils/math import nil
+from ./math import nil
 
 import ./actions
 import ./entity

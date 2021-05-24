@@ -4,14 +4,14 @@ import strformat
 import ../drawable
 import ../resource_cache
 import ../../game_state
-import ../../utils/color
-import ../../utils/logging
-import ../../utils/math/[
+import ../../color
+import ../../logging
+import ../../math/[
   vector2,
   vector3,
 ]
 
-from ../../utils/private/raylib import nil
+from ../../private/raylib import nil
 
 
 proc draw*(

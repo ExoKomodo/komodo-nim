@@ -3,8 +3,8 @@ import strformat
 import ../drawable
 import ../resource_cache
 import ../../game_state
-import ../../utils/logging
-import ../../utils/math/vector3
+import ../../logging
+import ../../math/vector3
 
 
 proc draw*(
