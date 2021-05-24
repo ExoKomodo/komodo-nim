@@ -2,6 +2,7 @@ import ./math/[
   core,
   matrix,
   quaternion,
+  rectangle,
   vector2,
   vector3,
   vector4,
@@ -11,6 +12,7 @@ import ./math/[
 export core
 export matrix
 export quaternion
+export rectangle
 export vector2
 export vector3
 export vector4

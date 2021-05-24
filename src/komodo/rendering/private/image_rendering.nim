@@ -1,11 +1,8 @@
 import options
-import strformat
 
 import ../drawable
 import ../resource_cache
-import ../../game_state
 import ../../color
-import ../../logging
 import ../../math/[
   vector2,
   vector3,
@@ -19,11 +16,9 @@ proc draw*(
   cache: ResourceCache;
   root_position: Vector3 = Vector3();
 ) {.sideEffect.} =
-  case drawable.kind:
-    of DrawableKind.image:
-      let texture_opt = cache.load_texture(drawable)
-      if texture_opt.is_none:
-        return
+  if drawable.kind == DrawableKind.image:
+    let texture_opt = cache.load_texture(drawable)
+    if texture_opt.is_some:
       let texture = raylib.Texture(texture_opt.unsafe_get())
       raylib.DrawTextureV(
         texture,
@@ -33,5 +28,4 @@ proc draw*(
         ),
         White,
       )
-    of DrawableKind.text:
-      return
+

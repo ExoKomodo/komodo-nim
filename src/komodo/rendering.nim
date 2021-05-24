@@ -7,6 +7,7 @@ import ./rendering/[
 ]
 import ./rendering/private/[
   image_rendering,
+  shape_rendering,
   text_rendering,
 ]
 
@@ -33,6 +34,11 @@ proc draw*(
       text_rendering.draw(
         drawable,
         cache,
+        root_position=root_position,
+      )
+    of DrawableKind.shape:
+      shape_rendering.draw(
+        drawable,
         root_position=root_position,
       )
 

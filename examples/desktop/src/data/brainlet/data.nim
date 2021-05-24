@@ -1,4 +1,5 @@
 import komodo
+import komodo/color
 import komodo/logging
 import komodo/math
 import komodo/rendering
@@ -36,8 +37,19 @@ func newBrainlet*(
       ),
       Drawable(
         kind: DrawableKind.text,
-        font_path: "font path",
-        text: "Hello world!",
+        text: "Brainlet",
+        font_size: 48,
+        font_spacing: 1,
+        font_color: Red,
+      ),
+      Drawable(
+        kind: DrawableKind.shape,
+        shape: Shape(
+          kind: ShapeKind.circle,
+          radius: 50,
+          center: Vector2(x: 225, y: 50),
+          color: Blue,
+        )
       ),
     ],
     position = position,

@@ -24,8 +24,6 @@ func newResourceCache*(): ResourceCache =
 
 proc load_font*(self: ResourceCache; drawable: Drawable): Option[FontResource] =
   case drawable.kind:
-    of DrawableKind.image:
-      none[FontResource]()
     of DrawableKind.text:
       if drawable.font_path notin self.font_cache:
         let font = raylib.LoadFont(drawable.font_path)
@@ -33,6 +31,8 @@ proc load_font*(self: ResourceCache; drawable: Drawable): Option[FontResource] =
         some(font)
       else:
         some(self.font_cache[drawable.font_path])
+    else:
+      none[FontResource]()
 
 proc load_texture*(self: ResourceCache; drawable: Drawable): Option[TextureResource] =
   case drawable.kind:
@@ -45,7 +45,7 @@ proc load_texture*(self: ResourceCache; drawable: Drawable): Option[TextureResou
         some(texture)
       else:
         some(self.texture_cache[drawable.image_path])
-    of DrawableKind.text:
+    else:
       none[TextureResource]()
 
 proc load*(self: ResourceCache; drawable: Drawable): Option[Resource] =
@@ -62,6 +62,8 @@ proc load*(self: ResourceCache; drawable: Drawable): Option[Resource] =
         none[Resource]()
       else:
         some(font)
+    else:
+      none[Resource]()
 
 proc unload(self: ResourceCache; font: raylib.Font) =
   raylib.UnloadFont(font)
@@ -79,6 +81,8 @@ proc unload*(self: ResourceCache; drawable: Drawable) =
       let font = self.load_font(drawable)
       if font.is_some:
         self.unload(font.unsafe_get)
+    else:
+      discard
 
 proc unload*(self: ResourceCache) =
   for path, font_asset in self.font_cache.pairs:
