@@ -2,10 +2,10 @@ import options
 import strformat
 import tables
 
-import ./drawable
+import ../drawable
 
-from ../private/raylib import nil
-from ../logging import nil
+from ../../private/raylib import nil
+from ../../logging import nil
 
 
 type

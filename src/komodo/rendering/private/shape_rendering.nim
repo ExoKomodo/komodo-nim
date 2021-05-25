@@ -1,7 +1,7 @@
 import options
 
-import ../drawable
 import ../../color
+import ../drawable
 import ../../math/[
   vector2,
   vector3,

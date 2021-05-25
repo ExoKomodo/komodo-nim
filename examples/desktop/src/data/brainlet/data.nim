@@ -31,25 +31,20 @@ func newBrainlet*(
   newEntity(
     data = data,
     drawables = @[
-      Drawable(
-        kind: DrawableKind.image,
-        image_path: "img/brainlet.png",
+      newDrawableImage(
+        path="img/brainlet.png",
       ),
-      Drawable(
-        kind: DrawableKind.text,
-        text: "Brainlet",
-        font_size: 48,
-        font_spacing: 1,
-        font_color: Red,
+      newDrawableText(
+        text="Brainlet",
+        size=48,
+        color=Red,
       ),
-      Drawable(
-        kind: DrawableKind.shape,
-        shape: Shape(
-          kind: ShapeKind.circle,
-          radius: 50,
-          center: Vector2(x: 225, y: 50),
-          color: Blue,
-        )
+      newDrawableShape(
+        newCircle(
+          center=Vector2(x: 225, y: 50),
+          radius=50,
+          color=Blue,
+        ),
       ),
     ],
     position = position,

@@ -1,12 +1,10 @@
 import ./entity
 import ./math/vector3
 import ./logging
-import ./rendering/[
-  drawable,
-  resource_cache,
-]
+import ./rendering/drawable
 import ./rendering/private/[
   image_rendering,
+  resource_cache,
   shape_rendering,
   text_rendering,
 ]

@@ -2,8 +2,7 @@ import options
 import strformat
 
 import ../drawable
-import ../resource_cache
-import ../../logging
+import ./resource_cache
 import ../../math/[
   vector2,
   vector3,
@@ -34,7 +33,6 @@ proc draw*(
   cache: ResourceCache;
   root_position: Vector3 = Vector3();
 ) {.sideEffect.} =
-  logging.log_debug(fmt"Text: '{drawable.text}' with {drawable.font_path}")
   if drawable.kind == DrawableKind.text:
     let font_opt = cache.load_font(drawable)
     let font = if font_opt.is_some: raylib.Font(font_opt.unsafe_get()) else: raylib.GetFontDefault()

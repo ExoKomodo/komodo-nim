@@ -1,12 +1,12 @@
 import options
 
-import ../drawable
-import ../resource_cache
 import ../../color
+import ../drawable
 import ../../math/[
   vector2,
   vector3,
 ]
+import ./resource_cache
 
 from ../../private/raylib import nil
 

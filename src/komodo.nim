@@ -1,11 +1,13 @@
 import std/exitprocs
 import strformat
 
+from os import nil
 from sugar import `=>`
 
 from komodo/color import nil
 from komodo/logging import nil
 from komodo/math import nil
+from komodo/private/raylib import nil
 from komodo/window import nil
 
 import komodo/actions
@@ -83,3 +85,7 @@ proc run*(
     result.draw(cache)
     window.end_draw()
   exit_proc()
+
+proc set_working_directory*(working_directory: string) =
+  raylib.ChangeDirectory(working_directory)
+

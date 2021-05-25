@@ -27,3 +27,4 @@ template SkyBlue*: auto = Color(r: 102, g: 191, b: 255, a: 255)
 template Violet*: auto = Color(r: 135, g: 60, b: 190, a: 255)
 template White*: auto = Color(r: 255, g: 255, b: 255, a: 255)
 template Yellow*: auto = Color(r: 253, g: 249, b: 0, a: 255)
+

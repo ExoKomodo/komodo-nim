@@ -6,6 +6,7 @@ import komodo/[
 ]
 import ./data/brainlet
 
+from os import nil
 from sugar import collect
 
 
@@ -76,6 +77,8 @@ proc exit(initial_state: GameState) =
   logging.log_info("Exited desktop example!")
 
 proc main() =
+  komodo.set_working_directory(os.getAppDir())
+
   log_info("Welcome to the desktop example")
   let state = newGameState(
     title = "Komodo",
