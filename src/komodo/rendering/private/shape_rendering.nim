@@ -6,12 +6,14 @@ import ../../math/[
   vector2,
   vector3,
 ]
+import ../../resource_config
 
 from ../../private/raylib import nil
 
 
 proc draw*(
-  shape: Shape,
+  shape: Shape;
+  config: ResourceConfig;
   root_position: Vector3 = Vector3();
 ) {.sideEffect.} =
   let position = Vector2(
@@ -42,8 +44,9 @@ proc draw*(
 
 proc draw*(
   drawable: Drawable;
+  config: ResourceConfig;
   root_position: Vector3 = Vector3();
 ) {.sideEffect.} =
   if drawable.kind == DrawableKind.shape:
-    drawable.shape.draw(root_position)
+    drawable.shape.draw(config, root_position)
 

@@ -32,7 +32,7 @@ func newBrainlet*(
     data = data,
     drawables = @[
       newDrawableImage(
-        path="img/brainlet.png",
+        path="textures/brainlet.png",
       ),
       newDrawableText(
         text="Brainlet",

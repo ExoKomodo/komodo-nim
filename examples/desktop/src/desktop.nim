@@ -87,6 +87,9 @@ proc main() =
     action_map = newActionMap(),
     entities = @[],
     delta = 0,
+    resource_config = newResourceConfig(
+      directory = "resources",
+    )
   )
   
   discard state.run(

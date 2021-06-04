@@ -32,7 +32,7 @@ proc draw(
   cache: ResourceCache;
 ) {.sideEffect.} =
   for entity in state.entities:
-    rendering.draw(entity, cache)
+    rendering.draw(entity, cache, state.resource_config)
 
 proc handle_messages(
   initial_state: GameState;
@@ -44,7 +44,7 @@ proc handle_messages(
   result = result.messages <- @[]
 
 proc cleanup(state: ref GameState; exit: proc(state: GameState); cache: ResourceCache) {.noconv.} =
-  cache.unload()
+  cache.unload(state.resource_config)
   logging.log_info("Exiting Komodo...")
   state[].exit()
   logging.log_info("Exited Komodo!")

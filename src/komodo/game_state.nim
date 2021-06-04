@@ -3,9 +3,12 @@ from ./math import nil
 import ./actions
 import ./entity
 import ./message
+import ./resource_config
+
+export resource_config
 
 
-type
+type  
   GameState* = object
     screen_size*: math.Vector2
     title*: string
@@ -13,6 +16,7 @@ type
     entities*: seq[Entity]
     messages*: seq[Message]
     delta*: float32
+    resource_config*: ResourceConfig
 
 func height*(self: GameState): auto = self.screen_size.y.int
 func width*(self: GameState): auto = self.screen_size.x.int
@@ -23,6 +27,7 @@ func newGameState*(
   height: Natural;
   action_map: ActionMap;
   delta: float32;
+  resource_config: ResourceConfig;
   entities: seq[Entity] = @[];
   messages: seq[Message] = @[];
 ): auto =
@@ -36,5 +41,6 @@ func newGameState*(
     title: title,
     entities: entities,
     messages: messages,
+    resource_config: resource_config,
   )
 

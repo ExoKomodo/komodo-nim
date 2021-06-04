@@ -7,6 +7,7 @@ import ../../math/[
   vector3,
 ]
 import ./resource_cache
+import ../../resource_config
 
 from ../../private/raylib import nil
 
@@ -14,10 +15,11 @@ from ../../private/raylib import nil
 proc draw*(
   drawable: Drawable;
   cache: ResourceCache;
+  config: ResourceConfig;
   root_position: Vector3 = Vector3();
 ) {.sideEffect.} =
   if drawable.kind == DrawableKind.image:
-    let texture_opt = cache.load_texture(drawable)
+    let texture_opt = cache.load_texture(drawable, config)
     if texture_opt.is_some:
       let texture = raylib.Texture(texture_opt.unsafe_get())
       raylib.DrawTextureV(
