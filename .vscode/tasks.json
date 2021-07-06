@@ -2,19 +2,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build Komodo Desktop Example",
-            "type": "shell",
-            "command": "cd examples/desktop; nimble build",
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "dependsOn": [
-                "Clean Komodo Desktop Example"
-            ]
-        },
-        {
             "label": "Debug Komodo Desktop Example",
             "type": "shell",
             "command": "cd examples/desktop; nimble debug",
@@ -30,15 +17,6 @@
             "command": "cd examples/desktop; rm bin/*; echo \"Cleaned...\"",
             "problemMatcher": [],
             "group": "build"
-        },
-        {
-            "label": "Run Komodo Desktop Example",
-            "type": "shell",
-            "command": "cd examples/desktop; nimble run",
-            "problemMatcher": [],
-            "dependsOn": [
-                "Clean Komodo Desktop Example"
-            ]
         },
         {
             "label": "Format code",

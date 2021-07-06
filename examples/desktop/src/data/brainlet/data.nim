@@ -14,7 +14,8 @@ type
   BrainletData* = ref object of DataBag
     velocity: float32
 
-func has_brainlet_data*(entity: Entity): bool = entity.data.kind == brainlet_kind
+func has_brainlet_data*(entity: Entity): bool =
+  entity.data.kind == brainlet_kind
 
 func velocity*(self: BrainletData): auto = self.velocity
 
@@ -67,7 +68,11 @@ func get_move_direction(action_map: ActionMap): Vector3 =
   if action_map.isDown(brainlet_actions.move_right):
     result += math.vector3.RIGHT
 
-func on_message*(entity: Entity; state: GameState; message: Message): (Entity, seq[Message]) =
+func on_message*(
+  entity: Entity;
+  state: GameState;
+  message: Message;
+): (Entity, seq[Message]) =
   var (entity, messages) = (entity, newSeq[Message]())
   case message.kind:
   of brainlet_messages.left_click:
@@ -83,7 +88,11 @@ func update*(entity: Entity; state: GameState): (Entity, seq[Message]) =
       newEntity(
         data = entity.data,
         drawables = entity.drawables,
-        position = entity.position + state.action_map.get_move_direction() * data.velocity,
+        position = (
+          entity.position +
+          state.action_map.get_move_direction() *
+          data.velocity
+        )
       ),
       messages,
     )

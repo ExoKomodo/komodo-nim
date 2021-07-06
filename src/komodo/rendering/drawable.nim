@@ -12,11 +12,11 @@ type
   
   Drawable* = object
     case kind: DrawableKind
-    of image:
+    of DrawableKind.image:
       image_path: string
-    of shape:
+    of DrawableKind.shape:
       shape: Shape
-    of text:
+    of DrawableKind.text:
       font_color: Color
       font_path: string
       font_size: float
@@ -84,14 +84,14 @@ type
     color: Color
 
     case kind: ShapeKind
-    of circle:
+    of ShapeKind.circle:
       center: Vector2
       radius: float
-    of line:
+    of ShapeKind.line:
       end_point: Vector2
       start_point: Vector2
       thickness: float
-    of rectangle:
+    of ShapeKind.rectangle:
       rect: Rectangle
       rotation: float
 

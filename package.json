@@ -7,7 +7,7 @@
     "start": "npm run startDesktop",
     "watch": "npm run build & node_modules/.bin/npm-watch build",
     "buildDesktop": "cd examples/desktop && nimble devBuild",
-    "startDesktop": "cd examples/desktop & nimble devRun",
+    "startDesktop": "cd examples/desktop && nimble devRun",
     "watchDesktop": "npm run buildDesktop & node_modules/.bin/npm-watch build",
     "releaseDesktop": "cd examples/desktop && nimble releaseBuild"
   },
