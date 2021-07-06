@@ -5,7 +5,7 @@
   "scripts": {
     "build": "nimble build",
     "start": "nimble run",
-    "watch": "npm run build & node_modules/.bin/npm-watch"
+    "watch": "npm run build & node_modules/.bin/npm-watch build"
   },
   "watch": {
     "build": {
